@@ -1,6 +1,13 @@
 'use client'
 
-import { Alert, Button, Container, TextField, Typography } from '@mui/material'
+import {
+  Alert,
+  Button,
+  Container,
+  CircularProgress,
+  TextField,
+  Typography
+} from '@mui/material'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { signUpAction } from './SignUpAction'
@@ -10,17 +17,26 @@ const SignUp = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
+  const [success, setSuccess] = useState('')
+  const [loading, setLoading] = useState(false)
   const router = useRouter()
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     setError('')
+    setSuccess('')
+    setLoading(true)
 
     const formData = { username, email, password }
     try {
       await signUpAction(formData)
-      // Navigate to the landing page after successful signup
-      router.push('/landing')
+
+      setSuccess('Sign up successful! Redirecting to sign in page...')
+
+      setTimeout(() => {
+        setLoading(false)
+        router.push('/signin')
+      }, 3000) // Redirect after 3 seconds
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message) // Display specific error message
@@ -33,7 +49,8 @@ const SignUp = () => {
   return (
     <Container
       maxWidth='sm'
-      className='flex h-screen items-center justify-center'
+      className='mb-10 mt-10'
+      // className='flex h-screen items-center justify-center'
     >
       <div className='rounded-lg bg-white p-8 shadow-lg'>
         <Typography variant='h4' gutterBottom className='mb-4 text-center'>
@@ -41,6 +58,7 @@ const SignUp = () => {
         </Typography>
         <form onSubmit={handleSubmit} className='space-y-4'>
           {error && <Alert severity='error'>{error}</Alert>}
+          {success && <Alert severity='success'>{success}</Alert>}
           <TextField
             label='Username'
             type='text'
@@ -78,8 +96,19 @@ const SignUp = () => {
             fullWidth
             type='submit'
             className='py-2 transition duration-300'
+            disabled={loading}
           >
-            SignUp
+            {/* SignUp */}
+            {loading ? (
+              <CircularProgress
+                size={24}
+                style={{
+                  color: 'white'
+                }}
+              />
+            ) : (
+              'Sign Up'
+            )}
           </Button>
         </form>
       </div>
