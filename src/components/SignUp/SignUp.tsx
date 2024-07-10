@@ -43,6 +43,7 @@ const SignUp = () => {
       } else {
         setError('An unexpected error occurred. Please try again.') // Fallback for unexpected errors
       }
+      setLoading(false)
     }
   }
 
