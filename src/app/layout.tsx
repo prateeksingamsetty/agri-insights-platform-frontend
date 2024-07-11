@@ -17,7 +17,6 @@ export default function RootLayout({
   return (
     <AuthProvider>
       <html lang='en'>
-        {/* <body className={inter.className}> */}
         <body className={`${inter.className} flex min-h-screen flex-col`}>
           <UtilityBar />
           <Navbar />
@@ -25,11 +24,6 @@ export default function RootLayout({
             <Sidebar />
             <main className='flex-1 p-4'>{children}</main>
           </div>
-          {/* <main className='relative flex-1 overflow-hidden'> (this is main, remove this content)*/}
-          {/* <main className='relative overflow-hidden'> */}
-          {/* <main className='relative flex min-h-screen flex-col justify-center overflow-hidden'> */}
-          {/* {children} */}
-          {/* </main> */}
           <Footer />
         </body>
       </html>

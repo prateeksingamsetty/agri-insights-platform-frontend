@@ -14,18 +14,12 @@ export default function HomePage() {
         <AboutPlatform />
 
         <section className='mt-10'>
-          {/* <div className='grid grid-cols-1 gap-6 md:grid-cols-2'> */}
           <div
             className='grid gap-6 px-16'
             style={{
               gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))'
             }}
           >
-            {/* <Card
-              title='Enterprise'
-              imageSrc='/enterprise.jpg'
-              description='Enterprise data description'
-            /> */}
             <Card
               title='Dairy Models'
               imageSrc='/milkcan.jpg'

@@ -47,7 +47,6 @@ const DairyPrices = () => {
   })
 
   const [labels, setLabels] = useState<string[]>([])
-  const [view, setView] = useState<'1year' | '5years'>('1year')
 
   useEffect(() => {
     const fetchData = async () => {
@@ -85,25 +84,7 @@ const DairyPrices = () => {
     }
 
     fetchData()
-  }, [view])
-
-  const filterData = (data: DairyPriceRecord[]) => {
-    const now = new Date()
-    const cutoffDate = new Date()
-
-    if (view === '1year') {
-      cutoffDate.setFullYear(now.getFullYear() - 1)
-    } else if (view === '5years') {
-      cutoffDate.setFullYear(now.getFullYear() - 5)
-    }
-
-    return data.filter(record => {
-      const recordDate = new Date(
-        `${record.report_year}-${record.report_month}-01`
-      )
-      return recordDate >= cutoffDate
-    })
-  }
+  }, [])
 
   const createChart = (data: number[], label: string) => {
     return {
