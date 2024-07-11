@@ -56,7 +56,7 @@ const MailboxAppalachainPrices = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get<MailboxAppalachainPriceRecord[]>(
-          'http://localhost:3000/mailboxAppalachainPrices/allYears'
+          'http://localhost:3001/mailboxAppalachainPrices/allYears'
         )
         const data = response.data
 
