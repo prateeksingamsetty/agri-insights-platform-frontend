@@ -5,7 +5,8 @@ import {
   Button,
   Typography,
   Alert,
-  CircularProgress
+  CircularProgress,
+  Link
 } from '@mui/material'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
@@ -69,7 +70,7 @@ const SignIn = () => {
     >
       <div className='rounded-lg bg-white p-8 shadow-lg'>
         <Typography variant='h4' gutterBottom className='mb-4 text-center'>
-          Sign In
+          SignIn
         </Typography>
         <form onSubmit={handleSubmit} className='space-y-4'>
           {error && <Alert severity='error'>{error}</Alert>}
@@ -113,6 +114,11 @@ const SignIn = () => {
               'SignIn'
             )}
           </Button>
+          <div className='text-right'>
+            <Link href='/forgotPassword' underline='hover'>
+              Forgot Password?
+            </Link>
+          </div>
         </form>
       </div>
     </Container>
