@@ -65,8 +65,12 @@ const ResetPassword = () => {
 
   return (
     <Container maxWidth='sm' className='mb-10 mt-10'>
-      <div className='rounded-lg bg-white p-8 shadow-lg'>
-        <Typography variant='h4' gutterBottom className='mb-4 text-center'>
+      <div className='w-full rounded-lg bg-white p-8 shadow-xl'>
+        <Typography
+          variant='h4'
+          gutterBottom
+          className='mb-4 text-center font-bold text-red-600'
+        >
           Reset Password
         </Typography>
         <form onSubmit={handleSubmit} className='space-y-4'>
@@ -94,6 +98,9 @@ const ResetPassword = () => {
             value={password}
             onChange={event => setPassword(event.target.value)}
             className='w-full'
+            inputProps={{
+              style: { borderRadius: '8px' }
+            }}
           />
           <TextField
             label='Confirm Password'
@@ -104,13 +111,16 @@ const ResetPassword = () => {
             value={confirmPassword}
             onChange={event => setConfirmPassword(event.target.value)}
             className='w-full'
+            inputProps={{
+              style: { borderRadius: '8px' }
+            }}
           />
           <Button
             variant='contained'
             color='primary'
             fullWidth
             type='submit'
-            className='py-2 transition duration-300'
+            className='rounded-full bg-red-600 py-3 text-white shadow-md transition duration-300 hover:bg-red-700'
             disabled={loading}
           >
             {loading ? (

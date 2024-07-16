@@ -12,7 +12,6 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from 'src/context/AuthContext'
 import { signInAction } from './SignInAction'
-import '@styles/globals.css'
 import Cookies from 'js-cookie'
 
 const SignIn = () => {
@@ -42,7 +41,7 @@ const SignIn = () => {
         expires: 1 / 48
       }) // Expires in 30 mins
 
-      //Store user information in localStorage
+      // Store user information in localStorage
       localStorage.setItem('username', data.user.username)
       localStorage.setItem('useremail', data.user.email)
 
@@ -50,7 +49,7 @@ const SignIn = () => {
       console.log('username ', username)
 
       setLoading(false)
-      // Navigate to the landing page after successful signin
+      // Navigate to the landing page after successful sign-in
       signIn(data.user.username)
       router.push('/')
     } catch (error) {
@@ -68,11 +67,15 @@ const SignIn = () => {
       className='mb-10 mt-10'
       // className='flex min-h-screen flex-col items-center justify-center'
     >
-      <div className='rounded-lg bg-white p-8 shadow-lg'>
-        <Typography variant='h4' gutterBottom className='mb-4 text-center'>
-          SignIn
+      <div className='w-full rounded-lg bg-white p-8 shadow-xl'>
+        <Typography
+          variant='h4'
+          gutterBottom
+          className='mb-6 text-center font-bold text-red-600'
+        >
+          Sign In
         </Typography>
-        <form onSubmit={handleSubmit} className='space-y-4'>
+        <form onSubmit={handleSubmit} className='space-y-6'>
           {error && <Alert severity='error'>{error}</Alert>}
           <TextField
             label='Email'
@@ -83,6 +86,9 @@ const SignIn = () => {
             value={email}
             onChange={event => setEmail(event.target.value)}
             className='w-full'
+            inputProps={{
+              style: { borderRadius: '8px' }
+            }}
           />
           <TextField
             label='Password'
@@ -92,6 +98,7 @@ const SignIn = () => {
             required
             value={password}
             onChange={event => setPassword(event.target.value)}
+            inputProps={{ minLength: 6, style: { borderRadius: '8px' } }}
             className='w-full'
           />
           <Button
@@ -99,23 +106,26 @@ const SignIn = () => {
             color='primary'
             fullWidth
             type='submit'
-            className='py-2 transition duration-300'
+            className='rounded-full bg-red-600 py-3 text-white shadow-md transition duration-300 hover:bg-red-700'
             disabled={loading}
           >
-            {/* SignIn */}
             {loading ? (
               <CircularProgress
                 size={24}
                 style={{
                   color: 'white'
                 }}
-              ></CircularProgress>
+              />
             ) : (
-              'SignIn'
+              'Sign In'
             )}
           </Button>
           <div className='text-right'>
-            <Link href='/forgotPassword' underline='hover'>
+            <Link
+              href='/forgotPassword'
+              underline='none'
+              className='font-medium text-red-600 transition duration-300 hover:text-red-700'
+            >
               Forgot Password?
             </Link>
           </div>
