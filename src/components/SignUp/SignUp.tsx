@@ -53,11 +53,15 @@ const SignUp = () => {
       className='mb-10 mt-10'
       // className='flex h-screen items-center justify-center'
     >
-      <div className='rounded-lg bg-white p-8 shadow-lg'>
-        <Typography variant='h4' gutterBottom className='mb-4 text-center'>
-          SignUp
+      <div className='w-full rounded-lg bg-white p-8 shadow-xl'>
+        <Typography
+          variant='h4'
+          gutterBottom
+          className='mb-6 text-center font-bold text-red-600'
+        >
+          Sign Up
         </Typography>
-        <form onSubmit={handleSubmit} className='space-y-4'>
+        <form onSubmit={handleSubmit} className='space-y-6'>
           {error && <Alert severity='error'>{error}</Alert>}
           {success && <Alert severity='success'>{success}</Alert>}
           <TextField
@@ -69,6 +73,9 @@ const SignUp = () => {
             value={username}
             onChange={event => setUsername(event.target.value)}
             className='w-full'
+            inputProps={{
+              style: { borderRadius: '8px' }
+            }}
           />
           <TextField
             label='Email'
@@ -79,6 +86,9 @@ const SignUp = () => {
             value={email}
             onChange={event => setEmail(event.target.value)}
             className='w-full'
+            inputProps={{
+              style: { borderRadius: '8px' }
+            }}
           />
           <TextField
             label='Password'
@@ -88,7 +98,7 @@ const SignUp = () => {
             required
             value={password}
             onChange={event => setPassword(event.target.value)}
-            inputProps={{ minLength: 6 }}
+            inputProps={{ minLength: 6, style: { borderRadius: '8px' } }}
             className='w-full'
           />
           <Button
@@ -96,10 +106,9 @@ const SignUp = () => {
             color='primary'
             fullWidth
             type='submit'
-            className='py-2 transition duration-300'
+            className='rounded-full bg-red-600 py-3 text-white shadow-md transition duration-300 hover:bg-red-700'
             disabled={loading}
           >
-            {/* SignUp */}
             {loading ? (
               <CircularProgress
                 size={24}
