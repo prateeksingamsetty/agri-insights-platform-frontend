@@ -1,23 +1,64 @@
+import Link from 'next/link';
+import Image from 'next/image';
+import { Facebook, Twitter, LinkedIn, Instagram, YouTube } from '@mui/icons-material';
+
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-white py-6 mt-auto">
-      <div className="container mx-auto px-4 text-center">
-        <div className="text-lg font-bold mb-4">NC State University Department of Agriculture</div>
-        <div>
-          2024 | Address Here | Phone Number Here | Raleigh, NC | Zip Code Here
+    <footer className="bg-red-900 text-white py-8 relative z-30">
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-3 gap-8">
+          {/* Left Column */}
+          <div>
+            <h2 className="text-3xl font-bold mb-2 text-white">NC STATE</h2>
+            <h3 className="text-xl mb-4 text-white">Agricultural and Resource Economics</h3>
+            <address className="not-italic">
+              Nelson Hall<br />
+              Campus Box 8109<br />
+              2801 Founders Drive<br />
+              Raleigh, NC 27695
+            </address>
+            <p className="mt-4">
+              <Link href="#" className="underline">
+                NC State is an equal opportunity institution.
+              </Link>
+            </p>
+          </div>
+
+          {/* Middle Column */}
+          <div>
+            <nav>
+              <ul className="space-y-2">
+                <li><Link href="#" className="hover:underline">Subscribe to ARE Newsletter</Link></li>
+                <li><Link href="#" className="hover:underline">Subscribe to NC State Economist</Link></li>
+                <li><Link href="#" className="hover:underline">Department Directory</Link></li>
+                <li><Link href="#" className="hover:underline">Faculty and Staff Resources</Link></li>
+                <li><Link href="#" className="hover:underline">News</Link></li>
+                <li><Link href="#" className="hover:underline">Accessibility</Link></li>
+                <li><Link href="#" className="hover:underline">Diversity</Link></li>
+                <li><Link href="#" className="hover:underline">Employee Login</Link></li>
+              </ul>
+            </nav>
+          </div>
+
+          {/* Right Column */}
+          <div>
+            <h4 className="text-lg font-bold mb-4 text-white">CAMPUS MAP </h4>
+            <div className="mb-6">
+              <Image src="/map.jpg" alt="Campus Map" width={300} height={200} />
+            </div>
+            <h4 className="text-lg font-bold mb-4 text-white">CONNECT WITH US</h4>
+            <div className="flex space-x-4">
+              <Link href="#"><Facebook /></Link>
+              <Link href="#"><Twitter /></Link>
+              <Link href="#"><LinkedIn /></Link>
+              <Link href="#"><Instagram /></Link>
+              <Link href="#"><YouTube /></Link>
+            </div>
+          </div>
         </div>
-        <div className="mt-4">
-          <p>Accessibility Accommodation</p>
-          <p>
-            If you have a disability and experience difficulty accessing this
-            content, request accommodation here.
-          </p>
-          <p>Maintenance and Support</p>
-          <p>
-            This site designed and maintained by NC State University College of
-            Agriculture and Life Sciences (CALS) IT. For technical support
-            please contact the CALS IT Helpdesk.
-          </p>
+
+        <div className="mt-8 text-center">
+          <p>&copy; 2024 NC State University. All rights reserved.</p>
         </div>
       </div>
     </footer>

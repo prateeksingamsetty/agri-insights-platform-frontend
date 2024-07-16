@@ -9,7 +9,11 @@ import Header from '@components/Header'
 export default function HomePage() {
   return (
     <div className='min-h-screen bg-gray-100'>
-      <Header />
+            <Header 
+        imageSrc="/banner.jpg" 
+        headingText="Welcome to the Farm Analytics! We're your agricultural analytics advisory." 
+        subText="Providing comprehensive insights and solutions for your farming needs." 
+      />
       <main className='container mx-auto px-4 py-6'>
         <AboutPlatform />
 

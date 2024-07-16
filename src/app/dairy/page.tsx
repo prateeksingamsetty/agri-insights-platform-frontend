@@ -1,12 +1,12 @@
-import UnderConstructionImage from '@components/UnderConstructionImage'
+import DairyLandingPage from "@components/DairyLandingPage/DairyLandingPage"
 
-const DairyLandingPage = () => {
+const DairyLandingPagee = () => {
   return (
     <>
-      <h1 className='text-center text-xl text-blue-600'>Dairy Landing Page</h1>
-      <UnderConstructionImage />
+     
+      <DairyLandingPage />
     </>
   )
 }
 
-export default DairyLandingPage
+export default DairyLandingPagee

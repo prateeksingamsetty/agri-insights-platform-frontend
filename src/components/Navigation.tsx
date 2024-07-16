@@ -11,7 +11,7 @@ const Navbar = () => {
   const handleClick = () => setNav(!nav)
 
   return (
-    <div className='z-10 flex h-[60px] w-full items-center justify-center bg-white px-4 shadow-md'>
+    <div className='fixed top-8 left-0 right-0 z-20 flex h-[60px] w-full items-center justify-center bg-white px-4 shadow-md'>
       <div className='container mx-auto flex items-center justify-between'>
         <div className='space-x- mx-auto flex items-center justify-between'>
           {/* Home Icon */}

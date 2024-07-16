@@ -2,7 +2,7 @@ import SidebarLink from './SidebarLink'
 
 const Sidebar: React.FC = () => {
   return (
-    <div className='w-64 flex-shrink-0 bg-white p-4 text-red-800'>
+    <div className='fixed top-[108px] left-0 bottom-0 w-64 overflow-y-auto bg-white p-4 text-red-800 z-20'>
       <ul className='flex flex-col space-y-4'>
         <SidebarLink href='/dairy'>Dairy Landing Page</SidebarLink>
         <SidebarLink href='/tomato'>Tomato Landing Page</SidebarLink>

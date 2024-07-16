@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/swiper-bundle.css';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import { Navigation, Pagination } from 'swiper/modules';
 import CustomImage from './CustomImage'; // Adjust path as necessary
 
 const Carousel: React.FC = () => {
@@ -11,6 +14,7 @@ const Carousel: React.FC = () => {
 
   useEffect(() => {
     const fetchNews = async () => {
+      console.log("Fetching news...");
       try {
         const response = await axios.get('https://newsapi.org/v2/everything', {
           params: {
@@ -19,8 +23,10 @@ const Carousel: React.FC = () => {
             pageSize: 10
           }
         });
+        console.log("Response received:", response);
         setNews(response.data.articles);
       } catch (error) {
+        console.error("Error fetching news:", error);
         setError('Error fetching news');
       } finally {
         setLoading(false);
@@ -30,8 +36,14 @@ const Carousel: React.FC = () => {
     fetchNews();
   }, []);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
+  if (loading) {
+    console.log("Loading...");
+    return <p>Loading...</p>;
+  }
+  if (error) {
+    console.log("Error:", error);
+    return <p>Error: {error}</p>;
+  }
 
   return (
     <div className="max-w-6xl mx-auto p-6 bg-gray-100 shadow-lg rounded-lg">
@@ -40,6 +52,8 @@ const Carousel: React.FC = () => {
         spaceBetween={16}
         slidesPerView={4}
         navigation
+        pagination={{ clickable: true }}
+        modules={[Navigation, Pagination]}
         breakpoints={{
           1024: { slidesPerView: 4 },
           768: { slidesPerView: 2 },
