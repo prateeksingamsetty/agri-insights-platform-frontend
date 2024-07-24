@@ -3,6 +3,7 @@
 import { Typography } from '@mui/material'
 import ProductionDetails from './ProductionDetails/ProductionDetails'
 import ReceiptsAtExpectedOutputLevels from './ReceiptsAtExpectedOutputLevels/ReceiptsAtExpectedOutputLevels'
+import OperatingCosts from './OperatingCosts/OperatingCosts'
 
 const DairyEnterprise = () => {
   return (
@@ -16,6 +17,7 @@ const DairyEnterprise = () => {
       </Typography>
       <ProductionDetails />
       <ReceiptsAtExpectedOutputLevels />
+      <OperatingCosts />
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   Dialog,
   DialogActions,
@@ -8,6 +8,7 @@ import {
   TextField,
   Button
 } from '@mui/material'
+import axios from 'axios'
 
 interface InputDialogProps {
   open: boolean
@@ -15,28 +16,70 @@ interface InputDialogProps {
   handleSubmit: (inputs: any) => void
 }
 
+interface UserInputs {
+  milkPrice: number
+  cullCowsPrice: number
+  heifersPrice: number
+  bullCalvesPrice: number
+  beefCrossPrice: number
+  otherIncome1: number
+  otherIncome2: number
+}
+
 const InputDialog: React.FC<InputDialogProps> = ({
   open,
   handleClose,
   handleSubmit
 }) => {
-  const [userInputs, setUserInputs] = useState({
-    milk: '',
-    cullCows: '',
-    heifers: '',
-    bullCalves: '',
-    beefCross: '',
-    otherIncome1: '',
-    otherIncome2: '',
-    totalReceipts: ''
+  const email = 'prateek@gmail.com'
+
+  const [userInputs, setUserInputs] = useState<UserInputs>({
+    milkPrice: 0,
+    cullCowsPrice: 0,
+    heifersPrice: 0,
+    bullCalvesPrice: 0,
+    beefCrossPrice: 0,
+    otherIncome1: 0,
+    otherIncome2: 0
   })
+
+  useEffect(() => {
+    if (!open) return
+
+    const fetchUserInputRecord = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:3001/receipts/inputDetails/${email}`
+        )
+        if (response && response.data) {
+          setUserInputs({
+            milkPrice: response.data.milkPrice || 0,
+            cullCowsPrice: response.data.cullCowsPrice || 0,
+            heifersPrice: response.data.heifersPrice || 0,
+            bullCalvesPrice: response.data.bullCalvesPrice || 0,
+            beefCrossPrice: response.data.beefCrossPrice || 0,
+            otherIncome1: response.data.otherIncome1 || 0,
+            otherIncome2: response.data.otherIncome2 || 0
+          })
+        }
+      } catch (error) {
+        if (axios.isAxiosError(error) && error.response?.status === 404) {
+          console.warn('No user input record found for the given email')
+        } else {
+          console.error('Error fetching user input record:', error)
+        }
+      }
+    }
+
+    fetchUserInputRecord()
+  }, [email, open])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
-    setUserInputs({
-      ...userInputs,
+    setUserInputs(prev => ({
+      ...prev,
       [name]: value
-    })
+    }))
   }
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -44,6 +87,22 @@ const InputDialog: React.FC<InputDialogProps> = ({
     handleSubmit(userInputs)
     handleClose()
   }
+
+  const textFields = [
+    { name: 'milkPrice', label: 'Milk Price($/CWT)' },
+    { name: 'cullCowsPrice', label: 'Cull Cows Price($/Head)' },
+    { name: 'heifersPrice', label: 'Heifers Price($/Head)' },
+    { name: 'bullCalvesPrice', label: 'Bull Calves Price($/Head)' },
+    { name: 'beefCrossPrice', label: 'Beef Cross Price($/Head)' },
+    {
+      name: 'otherIncome1',
+      label: 'Other Income 1 (gov, payments, insurance, etc) ($)'
+    },
+    {
+      name: 'otherIncome2',
+      label: 'Other Income 2 (misc, crop, livestock, etc) ($)'
+    }
+  ]
 
   return (
     <Dialog
@@ -68,86 +127,19 @@ const InputDialog: React.FC<InputDialogProps> = ({
           onSubmit={onSubmit}
           style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}
         >
-          <TextField
-            margin='dense'
-            name='milk'
-            label='Milk ($)'
-            type='number'
-            fullWidth
-            required
-            value={userInputs.milk}
-            onChange={handleChange}
-          />
-          <TextField
-            margin='dense'
-            name='cullCows'
-            label='Cull Cows ($)'
-            type='number'
-            fullWidth
-            required
-            value={userInputs.cullCows}
-            onChange={handleChange}
-          />
-          <TextField
-            margin='dense'
-            name='heifers'
-            label='Heifers ($)'
-            type='number'
-            fullWidth
-            required
-            value={userInputs.heifers}
-            onChange={handleChange}
-          />
-          <TextField
-            margin='dense'
-            name='bullCalves'
-            label='Bull Calves ($)'
-            type='number'
-            fullWidth
-            required
-            value={userInputs.bullCalves}
-            onChange={handleChange}
-          />
-          <TextField
-            margin='dense'
-            name='beefCross'
-            label='Beef Cross ($)'
-            type='number'
-            fullWidth
-            required
-            value={userInputs.beefCross}
-            onChange={handleChange}
-          />
-          <TextField
-            margin='dense'
-            name='otherIncome1'
-            label='Other Income 1 (gov, payments, insurance, etc) ($)'
-            type='number'
-            fullWidth
-            required
-            value={userInputs.otherIncome1}
-            onChange={handleChange}
-          />
-          <TextField
-            margin='dense'
-            name='otherIncome2'
-            label='Other Income 2 (misc, crop, livestock, etc) ($)'
-            type='number'
-            fullWidth
-            required
-            value={userInputs.otherIncome2}
-            onChange={handleChange}
-          />
-          <TextField
-            margin='dense'
-            name='totalReceipts'
-            label='Total Receipts ($)'
-            type='number'
-            fullWidth
-            required
-            value={userInputs.totalReceipts}
-            onChange={handleChange}
-          />
+          {textFields.map(field => (
+            <TextField
+              key={field.name}
+              margin='dense'
+              name={field.name}
+              label={field.label}
+              type='number'
+              fullWidth
+              required
+              value={userInputs[field.name as keyof UserInputs]}
+              onChange={handleChange}
+            />
+          ))}
           <DialogActions>
             <Button onClick={handleClose} sx={{ color: '#c8102e' }}>
               Cancel
