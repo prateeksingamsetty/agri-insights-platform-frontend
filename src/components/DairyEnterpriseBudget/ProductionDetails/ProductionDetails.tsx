@@ -1,46 +1,46 @@
-// 'use client'
+'use client'
 
 import { Container, TextField, Typography, Button, Box } from '@mui/material'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import InputDialog from './InputDialog'
 
+interface ProductionDetailsType {
+  rollingHerdAverage: number
+  totalAnnualMilkProduction: number
+  expectedAnnualMilkSales: number
+  numberOfReplacementHeifersNeeded: number
+}
+
 const ProductionDetails = () => {
-  const [rollingHerdAverage, setRollingHerdAverage] = useState('')
-  const [totalAnnualMilkProduction, setTotalAnnualMilkProduction] = useState('')
-  const [expectedAnnualMilkSales, setExpectedAnnualMilkSales] = useState('')
-  const [
-    numberOfReplacementHeifersNeeded,
-    setNumberOfReplacementHeifersNeeded
-  ] = useState('')
+  const [details, setDetails] = useState<ProductionDetailsType>({
+    rollingHerdAverage: 0,
+    totalAnnualMilkProduction: 0,
+    expectedAnnualMilkSales: 0,
+    numberOfReplacementHeifersNeeded: 0
+  })
 
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
     const fetchUserOutputRecord = async () => {
-      console.log('Function called')
       try {
         const email = 'prateek@gmail.com'
         const response = await axios.get(
           `http://localhost:3001/production-details/outputDetails/${email}`
         )
         if (response && response.data) {
-          const {
-            rollingHerdAverage,
-            totalAnnualMilkProduction,
-            expectedAnnualMilkSales,
-            numberOfReplacementHeifersNeeded
-          } = response.data
-
-          setRollingHerdAverage(rollingHerdAverage || '')
-          setTotalAnnualMilkProduction(totalAnnualMilkProduction || '')
-          setExpectedAnnualMilkSales(expectedAnnualMilkSales || '')
-          setNumberOfReplacementHeifersNeeded(
-            numberOfReplacementHeifersNeeded || ''
-          )
+          setDetails({
+            rollingHerdAverage: response.data.rollingHerdAverage || 0,
+            totalAnnualMilkProduction:
+              response.data.totalAnnualMilkProduction || 0,
+            expectedAnnualMilkSales: response.data.expectedAnnualMilkSales || 0,
+            numberOfReplacementHeifersNeeded:
+              response.data.numberOfReplacementHeifersNeeded || 0
+          })
         }
       } catch (error: any) {
-        if (error.response && error.response.status === 404) {
+        if (error.response?.status === 404) {
           console.warn('No user output record found for the given email')
         } else {
           console.error('Error fetching user output record:', error)
@@ -51,20 +51,12 @@ const ProductionDetails = () => {
     fetchUserOutputRecord()
   }, [])
 
-  const handleClickOpen = () => {
-    setOpen(true)
-  }
-
-  const handleClose = () => {
-    setOpen(false)
-  }
+  const handleDialogOpen = () => setOpen(true)
+  const handleDialogClose = () => setOpen(false)
 
   const handleSubmit = async (userInputs: any) => {
     try {
       const email = 'prateek@gmail.com'
-      console.log('userInputs ', userInputs)
-
-      //modify the userInputs accordingly before making API call
       const transformedInputs = {
         milkProduction: {
           totalNumberOfCows: userInputs.totalNumberOfCows,
@@ -74,9 +66,18 @@ const ProductionDetails = () => {
         heiferProduction: {
           cullingRate: userInputs.cullingRate,
           cowDeathLossRate: userInputs.cowDeathLossRate,
-          heiferRaisingDeathLossRate: userInputs.heiferRaisingDeathLossRate
+          heiferRaisingDeathLossRate: userInputs.heiferRaisingDeathLossRate,
+          numberOfHeifersRaised: userInputs.numberOfHeifersRaised,
+          bullCalfDeath: userInputs.bullCalfDeath,
+          expectedPercentMaleWithSexedSemen:
+            userInputs.expectedPercentMaleWithSexedSemen,
+          expectedPercentMaleWithConventional:
+            userInputs.expectedPercentMaleWithConventional
         },
-        beefCrossDetails: {}
+        beefCrossDetails: {
+          beefCrossPercent: userInputs.beefCrossPercent,
+          beefCrossDeathRate: userInputs.beefCrossDeathRate
+        }
       }
 
       const response = await axios.patch(
@@ -84,24 +85,35 @@ const ProductionDetails = () => {
         transformedInputs
       )
       if (response && response.data) {
-        const {
-          rollingHerdAverage,
-          totalAnnualMilkProduction,
-          expectedAnnualMilkSales,
-          numberOfReplacementHeifersNeeded
-        } = response.data
-
-        setRollingHerdAverage(rollingHerdAverage || '')
-        setTotalAnnualMilkProduction(totalAnnualMilkProduction || '')
-        setExpectedAnnualMilkSales(expectedAnnualMilkSales || '')
-        setNumberOfReplacementHeifersNeeded(
-          numberOfReplacementHeifersNeeded || ''
-        )
+        setDetails({
+          rollingHerdAverage: response.data.rollingHerdAverage || 0,
+          totalAnnualMilkProduction:
+            response.data.totalAnnualMilkProduction || 0,
+          expectedAnnualMilkSales: response.data.expectedAnnualMilkSales || 0,
+          numberOfReplacementHeifersNeeded:
+            response.data.numberOfReplacementHeifersNeeded || 0
+        })
       }
     } catch (error) {
       console.error('Error updating user inputs:', error)
     }
   }
+
+  const textFields = [
+    { label: 'Rolling Herd Average(LBS)', value: details.rollingHerdAverage },
+    {
+      label: 'Total Annual Milk Production(CWT)',
+      value: details.totalAnnualMilkProduction
+    },
+    {
+      label: 'Expected Annual Milk Sales($)',
+      value: details.expectedAnnualMilkSales
+    },
+    {
+      label: 'Number of Replacement Heifers Needed',
+      value: details.numberOfReplacementHeifersNeeded
+    }
+  ]
 
   return (
     <div>
@@ -117,54 +129,21 @@ const ProductionDetails = () => {
           className='space-y-6'
           sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
         >
-          <TextField
-            label='Rolling Herd Average'
-            variant='outlined'
-            value={rollingHerdAverage}
-            InputProps={{
-              readOnly: true
-            }}
-            InputLabelProps={{
-              shrink: true
-            }}
-            fullWidth
-          />
-          <TextField
-            label='Total Annual Milk Production'
-            variant='outlined'
-            value={totalAnnualMilkProduction}
-            InputProps={{
-              readOnly: true
-            }}
-            InputLabelProps={{
-              shrink: true
-            }}
-            fullWidth
-          />
-          <TextField
-            label='Expected Annual Milk Sales'
-            variant='outlined'
-            value={expectedAnnualMilkSales}
-            InputProps={{
-              readOnly: true
-            }}
-            InputLabelProps={{
-              shrink: true
-            }}
-            fullWidth
-          />
-          <TextField
-            label='Number of Replacement Heifers Needed'
-            variant='outlined'
-            value={numberOfReplacementHeifersNeeded}
-            InputProps={{
-              readOnly: true
-            }}
-            InputLabelProps={{
-              shrink: true
-            }}
-            fullWidth
-          />
+          {textFields.map(field => (
+            <TextField
+              key={field.label}
+              label={field.label}
+              variant='outlined'
+              value={field.value}
+              InputProps={{
+                readOnly: true
+              }}
+              InputLabelProps={{
+                shrink: true
+              }}
+              fullWidth
+            />
+          ))}
           <Button
             variant='contained'
             sx={{
@@ -173,16 +152,15 @@ const ProductionDetails = () => {
               mt: 2,
               py: 1.5
             }}
-            onClick={handleClickOpen}
+            onClick={handleDialogOpen}
           >
             Input Production Details
           </Button>
         </Box>
       </Container>
-
       <InputDialog
         open={open}
-        handleClose={handleClose}
+        handleClose={handleDialogClose}
         handleSubmit={handleSubmit}
       />
     </div>

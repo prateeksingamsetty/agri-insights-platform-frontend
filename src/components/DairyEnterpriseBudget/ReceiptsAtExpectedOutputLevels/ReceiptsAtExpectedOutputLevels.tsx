@@ -1,27 +1,121 @@
-import { Box, Button, Container, TextField, Typography } from '@mui/material'
-import { useState } from 'react'
+'use client'
+
+import { Container, TextField, Typography, Button, Box } from '@mui/material'
+import axios from 'axios'
+import { useEffect, useState } from 'react'
 import InputDialog from './InputDialog'
 
+interface ReceiptsDataType {
+  milkSales: number
+  cullCowsSales: number
+  heifersSales: number
+  bullCalvesSales: number
+  beefCrossSales: number
+  otherIncome1: number
+  otherIncome2: number
+  totalReceipts: number
+}
+
 const ReceiptsAtExpectedOutputLevels = () => {
-  const [milkPrice, setMilkPrice] = useState('')
-  const [cullCowsPrice, setCullCowsPrice] = useState('')
-  const [heifersPrice, setHeifersPrice] = useState('')
-  const [bullCalvesPrice, setBullCalvesPrice] = useState('')
-  const [beefCrossPrice, setBeefCrossPrice] = useState('')
-  const [otherIncome1, setOtherIncome1] = useState('')
-  const [otherIncome2, setOtherIncome2] = useState('')
+  const [data, setData] = useState<ReceiptsDataType>({
+    milkSales: 0,
+    cullCowsSales: 0,
+    heifersSales: 0,
+    bullCalvesSales: 0,
+    beefCrossSales: 0,
+    otherIncome1: 0,
+    otherIncome2: 0,
+    totalReceipts: 0
+  })
 
   const [open, setOpen] = useState(false)
 
-  const handleClickOpen = () => {
-    setOpen(true)
+  useEffect(() => {
+    const fetchUserOutputRecord = async () => {
+      try {
+        const email = 'prateek@gmail.com'
+        const response = await axios.get(
+          `http://localhost:3001/receipts/outputDetails/${email}`
+        )
+        if (response?.data) {
+          setData({
+            milkSales: response.data.milkSales || 0,
+            cullCowsSales: response.data.cullCowsSales || 0,
+            heifersSales: response.data.heifersSales || 0,
+            bullCalvesSales: response.data.bullCalvesSales || 0,
+            beefCrossSales: response.data.beefCrossSales || 0,
+            otherIncome1: response.data.otherIncome1 || 0,
+            otherIncome2: response.data.otherIncome2 || 0,
+            totalReceipts: response.data.totalReceipts || 0
+          })
+        }
+      } catch (error: any) {
+        if (error.response?.status === 404) {
+          console.warn('No user output record found for the given email')
+        } else {
+          console.error('Error fetching user output record:', error)
+        }
+      }
+    }
+
+    fetchUserOutputRecord()
+  }, [])
+
+  const handleDialogOpen = () => setOpen(true)
+  const handleDialogClose = () => setOpen(false)
+
+  const handleSubmit = async (userInputs: any) => {
+    try {
+      const email = 'prateek@gmail.com'
+      const transformedInputs = {
+        milkPrice: Number(userInputs.milkPrice),
+        cullCowsPrice: Number(userInputs.cullCowsPrice),
+        heifersPrice: Number(userInputs.heifersPrice),
+        bullCalvesPrice: Number(userInputs.bullCalvesPrice),
+        beefCrossPrice: Number(userInputs.beefCrossPrice),
+        otherIncome1: Number(userInputs.otherIncome1),
+        otherIncome2: Number(userInputs.otherIncome2)
+      }
+
+      const response = await axios.patch(
+        `http://localhost:3001/receipts/updateInput/${email}`,
+        transformedInputs
+      )
+
+      if (response?.data) {
+        console.log('response ', response)
+        setData({
+          milkSales: response.data.milkSales || 0,
+          cullCowsSales: response.data.cullCowsSales || 0,
+          heifersSales: response.data.heifersSales || 0,
+          bullCalvesSales: response.data.bullCalvesSales || 0,
+          beefCrossSales: response.data.beefCrossSales || 0,
+          otherIncome1: response.data.otherIncome1 || 0,
+          otherIncome2: response.data.otherIncome2 || 0,
+          totalReceipts: response.data.totalReceipts || 0
+        })
+      }
+    } catch (error) {
+      console.error('Error updating user inputs:', error)
+    }
   }
 
-  const handleClose = () => {
-    setOpen(false)
-  }
-
-  const handleSubmit = () => {}
+  const textFields = [
+    { label: 'Milk Sales', value: data.milkSales },
+    { label: 'Cull Cows Sales', value: data.cullCowsSales },
+    { label: 'Heifers Sales', value: data.heifersSales },
+    { label: 'Bull Calves Sales', value: data.bullCalvesSales },
+    { label: 'Beef Cross Sales', value: data.beefCrossSales },
+    {
+      label: 'Other Income - Gov, Payments, Livestock, etc',
+      value: data.otherIncome1
+    },
+    {
+      label: 'Other Income - Misc, Crop or Livestock Sales, etc',
+      value: data.otherIncome2
+    },
+    { label: 'Total Receipts', value: data.totalReceipts }
+  ]
 
   return (
     <div>
@@ -37,90 +131,18 @@ const ReceiptsAtExpectedOutputLevels = () => {
           className='space-y-6'
           sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
         >
-          <TextField
-            label='Milk Price'
-            variant='outlined'
-            value={milkPrice}
-            InputProps={{
-              readOnly: true
-            }}
-            InputLabelProps={{
-              shrink: true
-            }}
-            fullWidth
-          />
-          <TextField
-            label='Cull Cows($)'
-            variant='outlined'
-            value={cullCowsPrice}
-            InputProps={{
-              readOnly: true
-            }}
-            InputLabelProps={{
-              shrink: true
-            }}
-            fullWidth
-          />
-          <TextField
-            label='Heifers($)'
-            variant='outlined'
-            value={heifersPrice}
-            InputProps={{
-              readOnly: true
-            }}
-            InputLabelProps={{
-              shrink: true
-            }}
-            fullWidth
-          />
-          <TextField
-            label='Bull Calves($)'
-            variant='outlined'
-            value={bullCalvesPrice}
-            InputProps={{
-              readOnly: true
-            }}
-            InputLabelProps={{
-              shrink: true
-            }}
-            fullWidth
-          />
-          <TextField
-            label='Beef Cross($)'
-            variant='outlined'
-            value={beefCrossPrice}
-            InputProps={{
-              readOnly: true
-            }}
-            InputLabelProps={{
-              shrink: true
-            }}
-            fullWidth
-          />
-          <TextField
-            label='Other Income - Gov,Payments,livestock,etc ($)'
-            variant='outlined'
-            value={otherIncome1}
-            InputProps={{
-              readOnly: true
-            }}
-            InputLabelProps={{
-              shrink: true
-            }}
-            fullWidth
-          />
-          <TextField
-            label='Other Income - misc, crop or livestock sales, etc($)'
-            variant='outlined'
-            value={otherIncome2}
-            InputProps={{
-              readOnly: true
-            }}
-            InputLabelProps={{
-              shrink: true
-            }}
-            fullWidth
-          />
+          {textFields.map(field => (
+            <TextField
+              key={field.label}
+              label={field.label}
+              variant='outlined'
+              type='number'
+              value={field.value}
+              InputProps={{ readOnly: true }}
+              InputLabelProps={{ shrink: true }}
+              fullWidth
+            />
+          ))}
           <Button
             variant='contained'
             sx={{
@@ -129,16 +151,15 @@ const ReceiptsAtExpectedOutputLevels = () => {
               mt: 2,
               py: 1.5
             }}
-            onClick={handleClickOpen}
+            onClick={handleDialogOpen}
           >
-            Input Production Details
+            Input Receipts at Expected Output Level
           </Button>
         </Box>
       </Container>
-
       <InputDialog
         open={open}
-        handleClose={handleClose}
+        handleClose={handleDialogClose}
         handleSubmit={handleSubmit}
       />
     </div>
