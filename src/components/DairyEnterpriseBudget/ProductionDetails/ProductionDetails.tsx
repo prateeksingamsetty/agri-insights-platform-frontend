@@ -4,6 +4,7 @@ import { Container, TextField, Typography, Button, Box } from '@mui/material'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import InputDialog from './InputDialog'
+import { useAuth } from 'src/context/AuthContext'
 
 interface ProductionDetailsType {
   rollingHerdAverage: number
@@ -13,6 +14,8 @@ interface ProductionDetailsType {
 }
 
 const ProductionDetails = () => {
+  const { email } = useAuth()
+
   const [details, setDetails] = useState<ProductionDetailsType>({
     rollingHerdAverage: 0,
     totalAnnualMilkProduction: 0,
@@ -25,7 +28,6 @@ const ProductionDetails = () => {
   useEffect(() => {
     const fetchUserOutputRecord = async () => {
       try {
-        const email = 'prateek@gmail.com'
         const response = await axios.get(
           `http://localhost:3001/production-details/outputDetails/${email}`
         )
@@ -56,7 +58,6 @@ const ProductionDetails = () => {
 
   const handleSubmit = async (userInputs: any) => {
     try {
-      const email = 'prateek@gmail.com'
       const transformedInputs = {
         milkProduction: {
           totalNumberOfCows: userInputs.totalNumberOfCows,

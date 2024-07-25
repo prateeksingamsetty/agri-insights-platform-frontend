@@ -9,8 +9,10 @@ import {
   Button
 } from '@mui/material'
 import axios from 'axios'
+import { useAuth } from 'src/context/AuthContext'
 
 interface InputDialogProps {
+  previoudDetailsFound: boolean
   open: boolean
   handleClose: () => void
   handleSubmit: (inputs: any) => void
@@ -27,11 +29,12 @@ interface UserInputs {
 }
 
 const InputDialog: React.FC<InputDialogProps> = ({
+  previoudDetailsFound,
   open,
   handleClose,
   handleSubmit
 }) => {
-  const email = 'prateek@gmail.com'
+  const { email } = useAuth()
 
   const [userInputs, setUserInputs] = useState<UserInputs>({
     milkPrice: 0,
@@ -119,36 +122,44 @@ const InputDialog: React.FC<InputDialogProps> = ({
         Enter Your Inputs
       </DialogTitle>
       <DialogContent>
-        <DialogContentText sx={{ mb: 2 }}>
-          Please enter your financial inputs for the Dairy Enterprise Budget
-          Model.
-        </DialogContentText>
-        <form
-          onSubmit={onSubmit}
-          style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}
-        >
-          {textFields.map(field => (
-            <TextField
-              key={field.name}
-              margin='dense'
-              name={field.name}
-              label={field.label}
-              type='number'
-              fullWidth
-              required
-              value={userInputs[field.name as keyof UserInputs]}
-              onChange={handleChange}
-            />
-          ))}
-          <DialogActions>
-            <Button onClick={handleClose} sx={{ color: '#c8102e' }}>
-              Cancel
-            </Button>
-            <Button type='submit' sx={{ color: '#c8102e' }}>
-              Submit
-            </Button>
-          </DialogActions>
-        </form>
+        {previoudDetailsFound ? (
+          <>
+            <DialogContentText sx={{ mb: 2 }}>
+              Please enter your financial inputs for the Dairy Enterprise Budget
+              Model.
+            </DialogContentText>
+            <form
+              onSubmit={onSubmit}
+              style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}
+            >
+              {textFields.map(field => (
+                <TextField
+                  key={field.name}
+                  margin='dense'
+                  name={field.name}
+                  label={field.label}
+                  type='number'
+                  fullWidth
+                  required
+                  value={userInputs[field.name as keyof UserInputs]}
+                  onChange={handleChange}
+                />
+              ))}
+              <DialogActions>
+                <Button onClick={handleClose} sx={{ color: '#c8102e' }}>
+                  Cancel
+                </Button>
+                <Button type='submit' sx={{ color: '#c8102e' }}>
+                  Submit
+                </Button>
+              </DialogActions>
+            </form>
+          </>
+        ) : (
+          <DialogContentText sx={{ mb: 2, color: 'red' }}>
+            Please fill in the previous details to proceed.
+          </DialogContentText>
+        )}
       </DialogContent>
     </Dialog>
   )

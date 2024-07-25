@@ -31,7 +31,6 @@ const SignIn = () => {
 
     try {
       const data = await signInAction(formData)
-
       console.log('data ', data)
 
       // Store the access token securely in an HttpOnly cookie
@@ -43,14 +42,16 @@ const SignIn = () => {
 
       // Store user information in localStorage
       localStorage.setItem('username', data.user.username)
-      localStorage.setItem('useremail', data.user.email)
+      localStorage.setItem('email', data.user.email)
 
       const username = localStorage.getItem('username')
+      const email = localStorage.getItem('email')
       console.log('username ', username)
+      console.log('email ', email)
 
       setLoading(false)
       // Navigate to the landing page after successful sign-in
-      signIn(data.user.username)
+      signIn(data.user.username, data.user.email)
       router.push('/')
     } catch (error) {
       console.error('Error while submitting form:', error)
