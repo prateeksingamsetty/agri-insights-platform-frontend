@@ -4,6 +4,7 @@ import { Container, TextField, Typography, Button, Box } from '@mui/material'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import InputDialog from './InputDialog'
+import { useAuth } from 'src/context/AuthContext'
 
 interface ReceiptsDataType {
   milkSales: number
@@ -17,6 +18,8 @@ interface ReceiptsDataType {
 }
 
 const ReceiptsAtExpectedOutputLevels = () => {
+  const { email } = useAuth()
+
   const [data, setData] = useState<ReceiptsDataType>({
     milkSales: 0,
     cullCowsSales: 0,
@@ -29,11 +32,28 @@ const ReceiptsAtExpectedOutputLevels = () => {
   })
 
   const [open, setOpen] = useState(false)
+  const [previoudDetailsFound, setDetailsFound] = useState(false)
 
   useEffect(() => {
+    const checkProductionDetailsPresent = async (): Promise<void> => {
+      try {
+        const response = await axios.get(
+          `http://localhost:3001/production-details/outputDetails/${email}`
+        )
+        if (response?.data) {
+          setDetailsFound(true)
+        }
+      } catch (error: any) {
+        if (error.response?.status === 404) {
+          console.warn('No user output record found for the given email')
+        } else {
+          console.error('Error fetching user output record:', error)
+        }
+      }
+    }
+
     const fetchUserOutputRecord = async () => {
       try {
-        const email = 'prateek@gmail.com'
         const response = await axios.get(
           `http://localhost:3001/receipts/outputDetails/${email}`
         )
@@ -58,6 +78,7 @@ const ReceiptsAtExpectedOutputLevels = () => {
       }
     }
 
+    checkProductionDetailsPresent()
     fetchUserOutputRecord()
   }, [])
 
@@ -66,7 +87,6 @@ const ReceiptsAtExpectedOutputLevels = () => {
 
   const handleSubmit = async (userInputs: any) => {
     try {
-      const email = 'prateek@gmail.com'
       const transformedInputs = {
         milkPrice: Number(userInputs.milkPrice),
         cullCowsPrice: Number(userInputs.cullCowsPrice),
@@ -158,6 +178,7 @@ const ReceiptsAtExpectedOutputLevels = () => {
         </Box>
       </Container>
       <InputDialog
+        previoudDetailsFound={previoudDetailsFound}
         open={open}
         handleClose={handleDialogClose}
         handleSubmit={handleSubmit}

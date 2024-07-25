@@ -9,6 +9,7 @@ import {
   Button
 } from '@mui/material'
 import axios from 'axios'
+import { useAuth } from 'src/context/AuthContext'
 
 interface UserInputs {
   expectedMilkProduction: number
@@ -36,7 +37,7 @@ const InputDialog: React.FC<InputDialogProps> = ({
   handleClose,
   handleSubmit
 }) => {
-  const email = 'prateek@gmail.com'
+  const { email } = useAuth()
 
   const [userInputs, setUserInputs] = useState<UserInputs>({
     expectedMilkProduction: 0,
