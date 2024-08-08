@@ -35,6 +35,8 @@ const ReceiptsAtExpectedOutputLevels = () => {
   const [previoudDetailsFound, setDetailsFound] = useState(false)
 
   useEffect(() => {
+    if (!email) return
+
     const checkProductionDetailsPresent = async (): Promise<void> => {
       try {
         const response = await axios.get(
@@ -80,7 +82,7 @@ const ReceiptsAtExpectedOutputLevels = () => {
 
     checkProductionDetailsPresent()
     fetchUserOutputRecord()
-  }, [])
+  }, [email])
 
   const handleDialogOpen = () => setOpen(true)
   const handleDialogClose = () => setOpen(false)

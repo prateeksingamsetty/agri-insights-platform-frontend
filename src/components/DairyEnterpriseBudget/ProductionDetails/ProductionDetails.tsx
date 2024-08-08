@@ -15,6 +15,7 @@ interface ProductionDetailsType {
 
 const ProductionDetails = () => {
   const { email } = useAuth()
+  console.log('email ', email)
 
   const [details, setDetails] = useState<ProductionDetailsType>({
     rollingHerdAverage: 0,
@@ -26,6 +27,8 @@ const ProductionDetails = () => {
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
+    if (!email) return
+
     const fetchUserOutputRecord = async () => {
       try {
         const response = await axios.get(
@@ -51,7 +54,7 @@ const ProductionDetails = () => {
     }
 
     fetchUserOutputRecord()
-  }, [])
+  }, [email])
 
   const handleDialogOpen = () => setOpen(true)
   const handleDialogClose = () => setOpen(false)

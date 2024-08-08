@@ -9,12 +9,15 @@ import {
   FormControlLabel,
   TextField
 } from '@mui/material'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useAuth } from 'src/context/AuthContext'
+import { myDetailedMachineryFixedCosts } from './DetailedMachineryCostsObject'
+import axios from 'axios'
 
 interface UserInputs {
   // Cattle Fixed Cost
   cowPurchaseValue: number
+  overheadCostPerCow: number
   numberOfBredHeifers: number
   bredHeiferPurchaseValue: number
   numberOfOneYearOldHeifers: number
@@ -23,14 +26,36 @@ interface UserInputs {
   weanedHeiferCalvesPurchaseValue: number
 
   // Facilities and Buildings Fixed Cost
-  farmShopAndGeneralRoadsInitialInvestement: number
+  farmShopAndGeneralRoadsInitialInvestment: number
   farmShopAndGeneralRoadsYearsOfUsefulLife: number
   milkingParlorAndEquipmentInitialInvestment: number
   milkingParlorAndEquipmentYearsOfUsefulLife: number
+  feedingEquipmentInitialInvestment: number
   feedingEquipmentYearsOfUsefulLife: number
-  FreestallHousingAndLanesYearsOfUsefulLife: number
-  ThreePhasePowerSupplyInitialInvestment: number
-  ThreePhasePowerSupplyYearsOfUsefulLife: number
+  freestallHousingAndLanesInitialInvestment: number
+  freestallHousingAndLanesYearsOfUsefulLife: number
+  threePhasePowerSupplyInitialInvestment: number
+  threePhasePowerSupplyYearsOfUsefulLife: number
+  waterSystemInitialInvestment: number
+  waterSystemYearsOfUsefulLife: number
+  hayShedInitialInvestment: number
+  hayShedYearsOfUsefulLife: number
+  trenchSilosInitialInvestment: number
+  trenchSilosYearsOfUsefulLife: number
+  fencesInitialInvestment: number
+  fencesYearsOfUsefulLife: number
+  commodityBarnInitialInvestment: number
+  commodityBarnYearsOfUsefulLife: number
+  calfOrHeiferBarnInitialInvestment: number
+  calfOrHeiferBarnYearsOfUsefulLife: number
+  tiltTableInitialInvestment: number
+  tiltTableYearsOfUsefulLife: number
+  cattleHandlingFacilitiesInitialInvestment: number
+  cattleHandlingFacilitiesYearsOfUsefulLife: number
+  otherFacilitiesAndBuildings1InitialInvestment: number
+  otherFacilitiesAndBuildings1YearsOfUsefulLife: number
+  otherFacilitiesAndBuildings2InitialInvestment: number
+  otherFacilitiesAndBuildings2YearsOfUsefulLife: number
 
   // Waste Management Fixed Costs
   wasteStoragePondInitialInvestment: number
@@ -42,13 +67,16 @@ interface UserInputs {
 
   // Machinery Fixed Costs
   machineryFixedCostTotalEstimate: number
-  machineryCost1: number
-  machineryCost2: number
-  machineryCost3: number
+
+  //Detailed Machinery Fixed Costs
+  detailedMachineryFixedCosts?: Record<string, number>
 
   // Land Fixed Costs
   acres: number
   rentalCost: number
+
+  // is Detailed Machinery Costs Boolean Value
+  isDetailedMachineryCosts: boolean
 }
 
 interface InputDialogProps {
@@ -68,21 +96,46 @@ const InputDialog: React.FC<InputDialogProps> = ({
   const [userInputs, setUserInputs] = useState<UserInputs>({
     // Cattle Fixed Cost
     cowPurchaseValue: 0,
+    overheadCostPerCow: 0,
     numberOfBredHeifers: 0,
     bredHeiferPurchaseValue: 0,
     numberOfOneYearOldHeifers: 0,
     OneYearOldHeiferPurchaseValue: 0,
     numberOfWeanedHeiferCalves: 0,
     weanedHeiferCalvesPurchaseValue: 0,
+
     // Facilities and Buildings Fixed Cost
-    farmShopAndGeneralRoadsInitialInvestement: 0,
+    farmShopAndGeneralRoadsInitialInvestment: 0,
     farmShopAndGeneralRoadsYearsOfUsefulLife: 0,
     milkingParlorAndEquipmentInitialInvestment: 0,
     milkingParlorAndEquipmentYearsOfUsefulLife: 0,
+    feedingEquipmentInitialInvestment: 0,
     feedingEquipmentYearsOfUsefulLife: 0,
-    FreestallHousingAndLanesYearsOfUsefulLife: 0,
-    ThreePhasePowerSupplyInitialInvestment: 0,
-    ThreePhasePowerSupplyYearsOfUsefulLife: 0,
+    freestallHousingAndLanesInitialInvestment: 0,
+    freestallHousingAndLanesYearsOfUsefulLife: 0,
+    threePhasePowerSupplyInitialInvestment: 0,
+    threePhasePowerSupplyYearsOfUsefulLife: 0,
+    waterSystemInitialInvestment: 0,
+    waterSystemYearsOfUsefulLife: 0,
+    hayShedInitialInvestment: 0,
+    hayShedYearsOfUsefulLife: 0,
+    trenchSilosInitialInvestment: 0,
+    trenchSilosYearsOfUsefulLife: 0,
+    fencesInitialInvestment: 0,
+    fencesYearsOfUsefulLife: 0,
+    commodityBarnInitialInvestment: 0,
+    commodityBarnYearsOfUsefulLife: 0,
+    calfOrHeiferBarnInitialInvestment: 0,
+    calfOrHeiferBarnYearsOfUsefulLife: 0,
+    tiltTableInitialInvestment: 0,
+    tiltTableYearsOfUsefulLife: 0,
+    cattleHandlingFacilitiesInitialInvestment: 0,
+    cattleHandlingFacilitiesYearsOfUsefulLife: 0,
+    otherFacilitiesAndBuildings1InitialInvestment: 0,
+    otherFacilitiesAndBuildings1YearsOfUsefulLife: 0,
+    otherFacilitiesAndBuildings2InitialInvestment: 0,
+    otherFacilitiesAndBuildings2YearsOfUsefulLife: 0,
+
     // Waste Management Fixed Costs
     wasteStoragePondInitialInvestment: 0,
     wasteStoragePondYearsOfUsefulLife: 0,
@@ -90,21 +143,202 @@ const InputDialog: React.FC<InputDialogProps> = ({
     compactClayLinerYearsOfUsefulLife: 0,
     monitoringWellsInitialInvestment: 0,
     monitoringWellsYearsOfUsefulLife: 0,
-    // Machinery Fixed Costs
+
+    // Machinery Fixed Costs(Example variables)
     machineryFixedCostTotalEstimate: 0,
-    machineryCost1: 0,
-    machineryCost2: 0,
-    machineryCost3: 0,
+
+    // Detailed machinery costs variables
+    detailedMachineryFixedCosts: Object.fromEntries(
+      myDetailedMachineryFixedCosts.map(field => [field.name, 1])
+    ),
+
     // Land Fixed Costs
     acres: 0,
-    rentalCost: 0
+    rentalCost: 0,
+
+    // is Detailed Machinery Costs Boolean
+    isDetailedMachineryCosts: false
   })
+
+  useEffect(() => {
+    if (!open) return
+
+    const fetchUserInputRecord = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:3001/fixed-costs/inputDetails/${email}`
+        )
+        if (response && response.data) {
+          setUserInputs({
+            cowPurchaseValue:
+              response.data.cattleFixedCost.cowPurchaseValue || 0,
+            overheadCostPerCow:
+              response.data.cattleFixedCost.overheadCostPerCow || 0,
+            numberOfBredHeifers:
+              response.data.cattleFixedCost.numberOfBredHeifers || 0,
+            bredHeiferPurchaseValue:
+              response.data.cattleFixedCost.bredHeiferPurchaseValue || 0,
+            numberOfOneYearOldHeifers:
+              response.data.cattleFixedCost.numberOfOneYearOldHeifers || 0,
+            OneYearOldHeiferPurchaseValue:
+              response.data.cattleFixedCost.OneYearOldHeiferPurchaseValue || 0,
+            numberOfWeanedHeiferCalves:
+              response.data.cattleFixedCost.numberOfWeanedHeiferCalves || 0,
+            weanedHeiferCalvesPurchaseValue:
+              response.data.cattleFixedCost.weanedHeiferCalvesPurchaseValue ||
+              0,
+
+            farmShopAndGeneralRoadsInitialInvestment:
+              response.data.facilitiesAndBuildingsFixedCost
+                .farmShopAndGeneralRoadsInitialInvestment || 0,
+            farmShopAndGeneralRoadsYearsOfUsefulLife:
+              response.data.facilitiesAndBuildingsFixedCost
+                .farmShopAndGeneralRoadsYearsOfUsefulLife || 0,
+            milkingParlorAndEquipmentInitialInvestment:
+              response.data.facilitiesAndBuildingsFixedCost
+                .milkingParlorAndEquipmentInitialInvestment || 0,
+            milkingParlorAndEquipmentYearsOfUsefulLife:
+              response.data.facilitiesAndBuildingsFixedCost
+                .milkingParlorAndEquipmentYearsOfUsefulLife || 0,
+            feedingEquipmentInitialInvestment:
+              response.data.facilitiesAndBuildingsFixedCost
+                .feedingEquipmentInitialInvestment || 0,
+            feedingEquipmentYearsOfUsefulLife:
+              response.data.facilitiesAndBuildingsFixedCost
+                .feedingEquipmentYearsOfUsefulLife || 0,
+            freestallHousingAndLanesInitialInvestment:
+              response.data.facilitiesAndBuildingsFixedCost
+                .freestallHousingAndLanesInitialInvestment || 0,
+            freestallHousingAndLanesYearsOfUsefulLife:
+              response.data.facilitiesAndBuildingsFixedCost
+                .freestallHousingAndLanesYearsOfUsefulLife || 0,
+            threePhasePowerSupplyInitialInvestment:
+              response.data.facilitiesAndBuildingsFixedCost
+                .threePhasePowerSupplyInitialInvestment || 0,
+            threePhasePowerSupplyYearsOfUsefulLife:
+              response.data.facilitiesAndBuildingsFixedCost
+                .threePhasePowerSupplyYearsOfUsefulLife || 0,
+            waterSystemInitialInvestment:
+              response.data.facilitiesAndBuildingsFixedCost
+                .waterSystemInitialInvestment || 0,
+            waterSystemYearsOfUsefulLife:
+              response.data.facilitiesAndBuildingsFixedCost
+                .waterSystemYearsOfUsefulLife || 0,
+            hayShedInitialInvestment:
+              response.data.facilitiesAndBuildingsFixedCost
+                .hayShedInitialInvestment || 0,
+            hayShedYearsOfUsefulLife:
+              response.data.facilitiesAndBuildingsFixedCost
+                .hayShedYearsOfUsefulLife || 0,
+            trenchSilosInitialInvestment:
+              response.data.facilitiesAndBuildingsFixedCost
+                .trenchSilosInitialInvestment || 0,
+            trenchSilosYearsOfUsefulLife:
+              response.data.facilitiesAndBuildingsFixedCost
+                .trenchSilosYearsOfUsefulLife || 0,
+            fencesInitialInvestment:
+              response.data.facilitiesAndBuildingsFixedCost
+                .fencesInitialInvestment || 0,
+            fencesYearsOfUsefulLife:
+              response.data.facilitiesAndBuildingsFixedCost
+                .fencesYearsOfUsefulLife || 0,
+            commodityBarnInitialInvestment:
+              response.data.facilitiesAndBuildingsFixedCost
+                .commodityBarnInitialInvestment || 0,
+            commodityBarnYearsOfUsefulLife:
+              response.data.facilitiesAndBuildingsFixedCost
+                .commodityBarnYearsOfUsefulLife || 0,
+            calfOrHeiferBarnInitialInvestment:
+              response.data.facilitiesAndBuildingsFixedCost
+                .calfOrHeiferBarnInitialInvestment || 0,
+            calfOrHeiferBarnYearsOfUsefulLife:
+              response.data.facilitiesAndBuildingsFixedCost
+                .calfOrHeiferBarnYearsOfUsefulLife || 0,
+            tiltTableInitialInvestment:
+              response.data.facilitiesAndBuildingsFixedCost
+                .tiltTableInitialInvestment || 0,
+            tiltTableYearsOfUsefulLife:
+              response.data.facilitiesAndBuildingsFixedCost
+                .tiltTableYearsOfUsefulLife || 0,
+            cattleHandlingFacilitiesInitialInvestment:
+              response.data.facilitiesAndBuildingsFixedCost
+                .cattleHandlingFacilitiesInitialInvestment || 0,
+            cattleHandlingFacilitiesYearsOfUsefulLife:
+              response.data.facilitiesAndBuildingsFixedCost
+                .cattleHandlingFacilitiesYearsOfUsefulLife || 0,
+            otherFacilitiesAndBuildings1InitialInvestment:
+              response.data.otherFacilitiesAndBuildings1InitialInvestment || 0,
+            otherFacilitiesAndBuildings1YearsOfUsefulLife:
+              response.data.otherFacilitiesAndBuildings1YearsOfUsefulLife || 0,
+            otherFacilitiesAndBuildings2InitialInvestment:
+              response.data.otherFacilitiesAndBuildings2InitialInvestment || 0,
+            otherFacilitiesAndBuildings2YearsOfUsefulLife:
+              response.data.otherFacilitiesAndBuildings2YearsOfUsefulLife || 0,
+
+            wasteStoragePondInitialInvestment:
+              response.data.wasteManagementFixedCosts
+                .wasteStoragePondInitialInvestment || 0,
+            wasteStoragePondYearsOfUsefulLife:
+              response.data.wasteManagementFixedCosts
+                .wasteStoragePondYearsOfUsefulLife || 0,
+            compactClayLinerInitialInvestment:
+              response.data.wasteManagementFixedCosts
+                .compactClayLinerInitialInvestment || 0,
+            compactClayLinerYearsOfUsefulLife:
+              response.data.wasteManagementFixedCosts
+                .compactClayLinerYearsOfUsefulLife || 0,
+            monitoringWellsInitialInvestment:
+              response.data.wasteManagementFixedCosts
+                .monitoringWellsInitialInvestment || 0,
+            monitoringWellsYearsOfUsefulLife:
+              response.data.wasteManagementFixedCosts
+                .monitoringWellsYearsOfUsefulLife || 0,
+
+            machineryFixedCostTotalEstimate:
+              response.data.machineryFixedCosts
+                .machineryFixedCostTotalEstimate || 0,
+            detailedMachineryFixedCosts:
+              response.data.detailedMachineryFixedCosts || {},
+
+            acres: response.data.landFixedCosts.acres || 0,
+            rentalCost: response.data.landFixedCosts.rentalCost || 0,
+
+            isDetailedMachineryCosts:
+              response.data.isDetailedMachineryCosts || !useTotalEstimate
+          })
+        }
+      } catch (error) {
+        if (axios.isAxiosError(error) && error.response?.status === 404) {
+          console.warn('No user input record found for the given email')
+        } else {
+          console.error('Error fetching user input record:', error)
+        }
+      }
+    }
+
+    fetchUserInputRecord()
+  }, [open, email, useTotalEstimate])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     setUserInputs(prev => ({
       ...prev,
-      [name]: value
+      [name]: value === '' ? 0 : parseFloat(value) // Ensure value is always a number
+    }))
+  }
+
+  const handleDetailedChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target
+
+    // If the value is empty, set it to null, otherwise parse it as a number
+    const parsedValue = value === '' ? 1 : parseFloat(value)
+
+    setUserInputs(prev => ({
+      ...prev,
+      detailedMachineryFixedCosts: {
+        ...prev.detailedMachineryFixedCosts,
+        [name]: parsedValue
+      }
     }))
   }
 
@@ -117,6 +351,7 @@ const InputDialog: React.FC<InputDialogProps> = ({
   const textFields = [
     // Cattle Fixed Cost
     { name: 'cowPurchaseValue', label: 'Cow Purchase Value' },
+    { name: 'overheadCostPerCow', label: 'Overhead Cost Per Cow' },
     { name: 'numberOfBredHeifers', label: 'Number of Bred Heifers' },
     { name: 'bredHeiferPurchaseValue', label: 'Bred Heifer Purchase Value' },
     {
@@ -138,7 +373,7 @@ const InputDialog: React.FC<InputDialogProps> = ({
 
     // Facilities and Buildings Fixed Cost
     {
-      name: 'farmShopAndGeneralRoadsInitialInvestement',
+      name: 'farmShopAndGeneralRoadsInitialInvestment',
       label: 'Farm Shop and General Roads Initial Investment'
     },
     {
@@ -154,20 +389,108 @@ const InputDialog: React.FC<InputDialogProps> = ({
       label: 'Milking Parlor and Equipment Years of Useful Life'
     },
     {
+      name: 'feedingEquipmentInitialInvestment',
+      label: 'Feeding Equipment Initial Investment'
+    },
+    {
       name: 'feedingEquipmentYearsOfUsefulLife',
       label: 'Feeding Equipment Years of Useful Life'
     },
     {
-      name: 'FreestallHousingAndLanesYearsOfUsefulLife',
+      name: 'freestallHousingAndLanesInitialInvestment',
+      label: 'Freestall Housing and Lanes Initial Investment'
+    },
+    {
+      name: 'freestallHousingAndLanesYearsOfUsefulLife',
       label: 'Freestall Housing and Lanes Years of Useful Life'
     },
     {
-      name: 'ThreePhasePowerSupplyInitialInvestment',
+      name: 'threePhasePowerSupplyInitialInvestment',
       label: 'Three-Phase Power Supply Initial Investment'
     },
     {
-      name: 'ThreePhasePowerSupplyYearsOfUsefulLife',
+      name: 'threePhasePowerSupplyYearsOfUsefulLife',
       label: 'Three-Phase Power Supply Years of Useful Life'
+    },
+    {
+      name: 'waterSystemInitialInvestment',
+      label: 'Water System Initial Investment'
+    },
+    {
+      name: 'waterSystemYearsOfUsefulLife',
+      label: 'Water System Years of Useful Life'
+    },
+    {
+      name: 'hayShedInitialInvestment',
+      label: 'Hay Shed Initial Investment'
+    },
+    {
+      name: 'hayShedYearsOfUsefulLife',
+      label: 'Hay Shed Years of Useful Life'
+    },
+    {
+      name: 'trenchSilosInitialInvestment',
+      label: 'Trench Silos Initial Investment'
+    },
+    {
+      name: 'trenchSilosYearsOfUsefulLife',
+      label: 'Trench Silos Years of Useful Life'
+    },
+    {
+      name: 'fencesInitialInvestment',
+      label: 'Fences Initial Investment'
+    },
+    {
+      name: 'fencesYearsOfUsefulLife',
+      label: 'Fences Years of Useful Life'
+    },
+    {
+      name: 'commodityBarnInitialInvestment',
+      label: 'Commodity Barn Initial Investment'
+    },
+    {
+      name: 'commodityBarnYearsOfUsefulLife',
+      label: 'Commodity Barn Years of Useful Life'
+    },
+    {
+      name: 'calfOrHeiferBarnInitialInvestment',
+      label: 'Calf or Heifer Barn Initial Investment'
+    },
+    {
+      name: 'calfOrHeiferBarnYearsOfUsefulLife',
+      label: 'Calf or Heifer Barn Years of Useful Life'
+    },
+    {
+      name: 'tiltTableInitialInvestment',
+      label: 'Tilt Table Initial Investment'
+    },
+    {
+      name: 'tiltTableYearsOfUsefulLife',
+      label: 'Tilt Table Years of Useful Life'
+    },
+    {
+      name: 'cattleHandlingFacilitiesInitialInvestment',
+      label: 'Cattle Handling Facilities Initial Investment'
+    },
+    {
+      name: 'cattleHandlingFacilitiesYearsOfUsefulLife',
+      label: 'Cattle Handling Facilities Years of Useful Life'
+    },
+    {
+      name: 'otherFacilitiesAndBuildings1InitialInvestment',
+      label: 'Other Facilities and Buildings 1 Initial Investment'
+    },
+    {
+      name: 'otherFacilitiesAndBuildings1YearsOfUsefulLife',
+      label: 'Other Facilities and Buildings 1 Years of Useful Life'
+    },
+    {
+      name: 'otherFacilitiesAndBuildings2InitialInvestment',
+      label: 'Other Facilities and Buildings 2 Initial Investment'
+    },
+    {
+      name: 'otherFacilitiesAndBuildings2YearsOfUsefulLife',
+      label: 'Other Facilities and Buildings 2 Years of Useful Life'
     },
 
     // Waste Management Fixed Costs
@@ -201,11 +524,7 @@ const InputDialog: React.FC<InputDialogProps> = ({
     { name: 'rentalCost', label: 'Rental Cost' }
   ]
 
-  const machineryFields = [
-    { name: 'machineryCost1', label: 'Machinery Cost 1' },
-    { name: 'machineryCost2', label: 'Machinery Cost 2' },
-    { name: 'machineryCost3', label: 'Machinery Cost 3' }
-  ]
+  const detailedMachineryFixedCosts = myDetailedMachineryFixedCosts
 
   return (
     <Dialog open={open} onClose={handleClose} maxWidth='sm' fullWidth>
@@ -236,7 +555,16 @@ const InputDialog: React.FC<InputDialogProps> = ({
             control={
               <Checkbox
                 checked={useTotalEstimate}
-                onChange={() => setUseTotalEstimate(prev => !prev)}
+                onChange={() => {
+                  setUseTotalEstimate(prev => {
+                    const newValue = !prev
+                    setUserInputs(prevInputs => ({
+                      ...prevInputs,
+                      isDetailedMachineryCosts: !newValue // Toggle isDetailedMachineryCosts
+                    }))
+                    return newValue
+                  })
+                }}
                 color='primary'
               />
             }
@@ -256,7 +584,7 @@ const InputDialog: React.FC<InputDialogProps> = ({
               onChange={handleChange}
             />
           ) : (
-            machineryFields.map(field => (
+            detailedMachineryFixedCosts.map(field => (
               <TextField
                 key={field.name}
                 margin='dense'
@@ -265,8 +593,12 @@ const InputDialog: React.FC<InputDialogProps> = ({
                 type='number'
                 fullWidth
                 required
-                value={userInputs[field.name as keyof UserInputs]}
-                onChange={handleChange}
+                // value={userInputs[field.name as keyof UserInputs]}
+                value={
+                  userInputs.detailedMachineryFixedCosts?.[field.name] ?? 0
+                }
+                // onChange={handleChange}
+                onChange={handleDetailedChange}
               />
             ))
           )}

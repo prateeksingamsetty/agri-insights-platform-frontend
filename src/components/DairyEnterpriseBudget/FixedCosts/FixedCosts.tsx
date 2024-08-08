@@ -1,6 +1,6 @@
 import { Box, Button, Container, TextField, Typography } from '@mui/material'
 import InputDialog from './InputDialog'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useAuth } from 'src/context/AuthContext'
 import axios from 'axios'
 
@@ -15,7 +15,8 @@ interface FixedCostsType {
 }
 
 const FixedCosts = () => {
-  const { email } = useAuth()
+  //   const { email } = useAuth()
+  const email = 'prateek@gmail.com'
 
   const [details, setDetails] = useState<FixedCostsType>({
     totalCattleFixedCost: 0,
@@ -28,14 +29,50 @@ const FixedCosts = () => {
   })
   const [open, setOpen] = useState(false)
 
+  useEffect(() => {
+    const fetchUserOutputRecord = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:3001/fixed-costs/outputDetails/${email}`
+        )
+        if (response && response.data) {
+          setDetails({
+            totalCattleFixedCost: response.data.totalCattleFixedCost || 0,
+            totalFacilitiesAndBuildingsFixedCost:
+              response.data.totalFacilitiesAndBuildingsFixedCost || 0,
+            totalWasteManagementSystemsFixedCost:
+              response.data.totalWasteManagementSystemsFixedCost || 0,
+            totalMachineryFixedCost: response.data.totalMachineryFixedCost || 0,
+            totalLandFixedCost: response.data.totalLandFixedCost || 0,
+            overheadCost: response.data.overheadCost || 0,
+            totalDairyFixedCost: response.data.totalDairyFixedCost || 0
+          })
+        }
+      } catch (error: any) {
+        if (error.response?.status === 404) {
+          console.warn('No user output record found for the given email')
+        } else {
+          console.error('Error fetching user output record:', error)
+        }
+      }
+    }
+
+    fetchUserOutputRecord()
+  }, [])
+
   const handleDialogOpen = () => setOpen(true)
   const handleDialogClose = () => setOpen(false)
 
   const handleSubmit = async (userInputs: any) => {
     try {
+      console.log(
+        'userInputs.detailedMachineryFixedCosts ',
+        userInputs.detailedMachineryFixedCosts
+      )
       const transformedInputs = {
         cattleFixedCost: {
           cowPurchaseValue: userInputs.cowPurchaseValue,
+          overheadCostPerCow: userInputs.overheadCostPerCow,
           numberOfBredHeifers: userInputs.numberOfBredHeifers,
           bredHeiferPurchaseValue: userInputs.bredHeiferPurchaseValue,
           numberOfOneYearOldHeifers: userInputs.numberOfOneYearOldHeifers,
@@ -46,22 +83,56 @@ const FixedCosts = () => {
             userInputs.weanedHeiferCalvesPurchaseValue
         },
         facilitiesAndBuildingsFixedCost: {
-          farmShopAndGeneralRoadsInitialInvestement:
-            userInputs.farmShopAndGeneralRoadsInitialInvestement,
+          farmShopAndGeneralRoadsInitialInvestment:
+            userInputs.farmShopAndGeneralRoadsInitialInvestment,
           farmShopAndGeneralRoadsYearsOfUsefulLife:
             userInputs.farmShopAndGeneralRoadsYearsOfUsefulLife,
           milkingParlorAndEquipmentInitialInvestment:
             userInputs.milkingParlorAndEquipmentInitialInvestment,
           milkingParlorAndEquipmentYearsOfUsefulLife:
             userInputs.milkingParlorAndEquipmentYearsOfUsefulLife,
+          feedingEquipmentInitialInvestment:
+            userInputs.feedingEquipmentInitialInvestment,
           feedingEquipmentYearsOfUsefulLife:
             userInputs.feedingEquipmentYearsOfUsefulLife,
+          freestallHousingAndLanesInitialInvestment:
+            userInputs.freestallHousingAndLanesInitialInvestment,
           freestallHousingAndLanesYearsOfUsefulLife:
-            userInputs.FreestallHousingAndLanesYearsOfUsefulLife,
+            userInputs.freestallHousingAndLanesYearsOfUsefulLife,
           threePhasePowerSupplyInitialInvestment:
-            userInputs.ThreePhasePowerSupplyInitialInvestment,
+            userInputs.threePhasePowerSupplyInitialInvestment,
           threePhasePowerSupplyYearsOfUsefulLife:
-            userInputs.ThreePhasePowerSupplyYearsOfUsefulLife
+            userInputs.threePhasePowerSupplyYearsOfUsefulLife,
+          waterSystemInitialInvestment: userInputs.waterSystemInitialInvestment,
+          waterSystemYearsOfUsefulLife: userInputs.waterSystemYearsOfUsefulLife,
+          hayShedInitialInvestment: userInputs.hayShedInitialInvestment,
+          hayShedYearsOfUsefulLife: userInputs.hayShedYearsOfUsefulLife,
+          trenchSilosInitialInvestment: userInputs.trenchSilosInitialInvestment,
+          trenchSilosYearsOfUsefulLife: userInputs.trenchSilosYearsOfUsefulLife,
+          fencesInitialInvestment: userInputs.fencesInitialInvestment,
+          fencesYearsOfUsefulLife: userInputs.fencesYearsOfUsefulLife,
+          commodityBarnInitialInvestment:
+            userInputs.commodityBarnInitialInvestment,
+          commodityBarnYearsOfUsefulLife:
+            userInputs.commodityBarnYearsOfUsefulLife,
+          calfOrHeiferBarnInitialInvestment:
+            userInputs.calfOrHeiferBarnInitialInvestment,
+          calfOrHeiferBarnYearsOfUsefulLife:
+            userInputs.calfOrHeiferBarnYearsOfUsefulLife,
+          tiltTableInitialInvestment: userInputs.tiltTableInitialInvestment,
+          tiltTableYearsOfUsefulLife: userInputs.tiltTableYearsOfUsefulLife,
+          cattleHandlingFacilitiesInitialInvestment:
+            userInputs.cattleHandlingFacilitiesInitialInvestment,
+          cattleHandlingFacilitiesYearsOfUsefulLife:
+            userInputs.cattleHandlingFacilitiesYearsOfUsefulLife,
+          otherFacilitiesAndBuildings1InitialInvestment:
+            userInputs.otherFacilitiesAndBuildings1InitialInvestment,
+          otherFacilitiesAndBuildings1YearsOfUsefulLife:
+            userInputs.otherFacilitiesAndBuildings1YearsOfUsefulLife,
+          otherFacilitiesAndBuildings2InitialInvestment:
+            userInputs.otherFacilitiesAndBuildings2InitialInvestment,
+          otherFacilitiesAndBuildings2YearsOfUsefulLife:
+            userInputs.otherFacilitiesAndBuildings2YearsOfUsefulLife
         },
         wasteManagementFixedCosts: {
           wasteStoragePondInitialInvestment:
@@ -81,10 +152,12 @@ const FixedCosts = () => {
           machineryFixedCostTotalEstimate:
             userInputs.machineryFixedCostTotalEstimate
         },
+        detailedMachineryFixedCosts: userInputs.detailedMachineryFixedCosts,
         landFixedCosts: {
           acres: userInputs.acres,
           rentalCost: userInputs.rentalCost
-        }
+        },
+        isDetailedMachineryCosts: userInputs.isDetailedMachineryCosts
       }
 
       const response = await axios.patch(
