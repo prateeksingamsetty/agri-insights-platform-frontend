@@ -14,8 +14,7 @@ interface ProductionDetailsType {
 }
 
 const ProductionDetails = () => {
-  const { email } = useAuth()
-  console.log('email ', email)
+  const { email,loggedIn } = useAuth()
 
   const [details, setDetails] = useState<ProductionDetailsType>({
     rollingHerdAverage: 0,
@@ -27,10 +26,26 @@ const ProductionDetails = () => {
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
-    if (!email) return
+
+    // This checks if the user is alredy logged in or if not then it checks stored session storage and calculat ouput and display
+    if (loggedIn && email!=null) {
+     
+      fetchUserOutputRecord()
+    } else {
+      console.log('User not logged in')
+      const storedInputs = localStorage.getItem('productionInputs')
+      if (storedInputs) {
+        const parsedInputs = JSON.parse(storedInputs)
+        handleSubmit(parsedInputs)
+      }
+    }
+  }, [loggedIn, email])
+
+
 
     const fetchUserOutputRecord = async () => {
       try {
+     
         const response = await axios.get(
           `http://localhost:3001/production-details/outputDetails/${email}`
         )
@@ -53,13 +68,12 @@ const ProductionDetails = () => {
       }
     }
 
-    fetchUserOutputRecord()
-  }, [email])
 
   const handleDialogOpen = () => setOpen(true)
   const handleDialogClose = () => setOpen(false)
 
   const handleSubmit = async (userInputs: any) => {
+    console.log('Production details userInputs ', userInputs)
     try {
       const transformedInputs = {
         milkProduction: {
@@ -84,10 +98,20 @@ const ProductionDetails = () => {
         }
       }
 
-      const response = await axios.patch(
-        `http://localhost:3001/production-details/updateInput/${email}`,
-        transformedInputs
-      )
+      let response;
+      if (loggedIn && email) {
+        response = await axios.patch(
+          `http://localhost:3001/production-details/updateInput/${email}`,
+          transformedInputs
+        )
+      } else {
+        response = await axios.post(
+          `http://localhost:3001/production-details/calculateProductionDetails`,
+          transformedInputs
+        )
+        localStorage.setItem('productionInputs', JSON.stringify(userInputs))
+      }
+      
       if (response && response.data) {
         setDetails({
           rollingHerdAverage: response.data.rollingHerdAverage || 0,

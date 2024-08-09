@@ -29,7 +29,7 @@ interface UserInputs {
 interface InputDialogProps {
   open: boolean
   handleClose: () => void
-  handleSubmit: (inputs: any) => void
+  handleSubmit: (inputs: UserInputs) => void
 }
 
 const InputDialog: React.FC<InputDialogProps> = ({
@@ -37,9 +37,9 @@ const InputDialog: React.FC<InputDialogProps> = ({
   handleClose,
   handleSubmit
 }) => {
-  const { email } = useAuth()
+  const { email, loggedIn } = useAuth()
 
-  const [userInputs, setUserInputs] = useState<UserInputs>({
+  const defaultInputs: UserInputs = {
     expectedMilkProduction: 0,
     calvingInterval: 0,
     totalNumberOfCows: 0,
@@ -52,61 +52,83 @@ const InputDialog: React.FC<InputDialogProps> = ({
     expectedPercentMaleWithConventional: 0,
     beefCrossPercent: 0,
     beefCrossDeathRate: 0
-  })
+  }
+
+  const [userInputs, setUserInputs] = useState<UserInputs>(defaultInputs)
 
   useEffect(() => {
     if (!open) return
 
-    const fetchUserInputRecord = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:3001/production-details/inputDetails/${email}`
-        )
-        if (response && response.data) {
-          setUserInputs({
-            expectedMilkProduction:
-              response.data.milkProduction.expectedMilkProduction || 0,
-            calvingInterval: response.data.milkProduction.calvingInterval || 0,
-            totalNumberOfCows:
-              response.data.milkProduction.totalNumberOfCows || 0,
-            cullingRate: response.data.heiferProduction.cullingRate || 0,
-            cowDeathLossRate:
-              response.data.heiferProduction.cowDeathLossRate || 0,
-            heiferRaisingDeathLossRate:
-              response.data.heiferProduction.heiferRaisingDeathLossRate || 0,
-            numberOfHeifersRaised:
-              response.data.heiferProduction.numberOfHeifersRaised || 0,
-            bullCalfDeath: response.data.heiferProduction.bullCalfDeath || 0,
-            expectedPercentMaleWithSexedSemen:
-              response.data.heiferProduction
-                .expectedPercentMaleWithSexedSemen || 0,
-            expectedPercentMaleWithConventional:
-              response.data.heiferProduction
-                .expectedPercentMaleWithConventional || 0,
-            beefCrossPercent:
-              response.data.beefCrossDetails.beefCrossPercent || 0,
-            beefCrossDeathRate:
-              response.data.beefCrossDetails.beefCrossDeathRate || 0
-          })
-        }
-      } catch (error) {
-        if (axios.isAxiosError(error) && error.response?.status === 404) {
-          console.warn('No user input record found for the given email')
-        } else {
-          console.error('Error fetching user input record:', error)
-        }
-      }
+    if (loggedIn) {
+      fetchUserInputRecord()
+    } else {
+      loadFromSessionStorage()
     }
+  }, [email, open, loggedIn])
 
-    fetchUserInputRecord()
-  }, [email, open])
+  const fetchUserInputRecord = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/production-details/inputDetails/${email}`
+      )
+      if (response && response.data) {
+        setUserInputs({
+          expectedMilkProduction:
+            response.data.milkProduction.expectedMilkProduction || 0,
+          calvingInterval: response.data.milkProduction.calvingInterval || 0,
+          totalNumberOfCows:
+            response.data.milkProduction.totalNumberOfCows || 0,
+          cullingRate: response.data.heiferProduction.cullingRate || 0,
+          cowDeathLossRate:
+            response.data.heiferProduction.cowDeathLossRate || 0,
+          heiferRaisingDeathLossRate:
+            response.data.heiferProduction.heiferRaisingDeathLossRate || 0,
+          numberOfHeifersRaised:
+            response.data.heiferProduction.numberOfHeifersRaised || 0,
+          bullCalfDeath: response.data.heiferProduction.bullCalfDeath || 0,
+          expectedPercentMaleWithSexedSemen:
+            response.data.heiferProduction
+              .expectedPercentMaleWithSexedSemen || 0,
+          expectedPercentMaleWithConventional:
+            response.data.heiferProduction
+              .expectedPercentMaleWithConventional || 0,
+          beefCrossPercent:
+            response.data.beefCrossDetails.beefCrossPercent || 0,
+          beefCrossDeathRate:
+            response.data.beefCrossDetails.beefCrossDeathRate || 0
+        })
+      }
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response?.status === 404) {
+        console.warn('No user input record found for the given email')
+      } else {
+        console.error('Error fetching user input record:', error)
+      }
+      setUserInputs(defaultInputs)
+    }
+  }
+
+  const loadFromSessionStorage = () => {
+    const storedInputs = localStorage.getItem('productionInputs')
+    if (storedInputs) {
+      setUserInputs(JSON.parse(storedInputs))
+    } else {
+      setUserInputs(defaultInputs)
+    }
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
-    setUserInputs(prev => ({
-      ...prev,
-      [name]: value
-    }))
+    setUserInputs(prev => {
+      const newInputs = {
+        ...prev,
+        [name]: value
+      }
+      if (!loggedIn) {
+        localStorage.setItem('productionInputs', JSON.stringify(newInputs))
+      }
+      return newInputs
+    })
   }
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {

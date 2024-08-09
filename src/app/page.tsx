@@ -7,6 +7,7 @@ import Carousel from '../components/Carousel'
 import Header from '@components/Header'
 
 export default function HomePage() {
+  console.log("I am always rendered")
   return (
     <div className='min-h-screen bg-gray-100'>
             <Header 

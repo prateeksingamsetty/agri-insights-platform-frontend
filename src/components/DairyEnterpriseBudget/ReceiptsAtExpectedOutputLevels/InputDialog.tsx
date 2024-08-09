@@ -34,9 +34,9 @@ const InputDialog: React.FC<InputDialogProps> = ({
   handleClose,
   handleSubmit
 }) => {
-  const { email } = useAuth()
+  const { email,loggedIn } = useAuth()
 
-  const [userInputs, setUserInputs] = useState<UserInputs>({
+  const defaultInputs: UserInputs={
     milkPrice: 0,
     cullCowsPrice: 0,
     heifersPrice: 0,
@@ -44,45 +44,66 @@ const InputDialog: React.FC<InputDialogProps> = ({
     beefCrossPrice: 0,
     otherIncome1: 0,
     otherIncome2: 0
-  })
+  }
+
+  const [userInputs, setUserInputs] = useState<UserInputs>(defaultInputs)
 
   useEffect(() => {
     if (!open) return
+    if (loggedIn) {
+      fetchUserInputRecord()
+    } else {
+      loadFromSessionStorage()
+    }
+   
+  }, [email, open,loggedIn])
 
-    const fetchUserInputRecord = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:3001/receipts/inputDetails/${email}`
-        )
-        if (response && response.data) {
-          setUserInputs({
-            milkPrice: response.data.milkPrice || 0,
-            cullCowsPrice: response.data.cullCowsPrice || 0,
-            heifersPrice: response.data.heifersPrice || 0,
-            bullCalvesPrice: response.data.bullCalvesPrice || 0,
-            beefCrossPrice: response.data.beefCrossPrice || 0,
-            otherIncome1: response.data.otherIncome1 || 0,
-            otherIncome2: response.data.otherIncome2 || 0
-          })
-        }
-      } catch (error) {
-        if (axios.isAxiosError(error) && error.response?.status === 404) {
-          console.warn('No user input record found for the given email')
-        } else {
-          console.error('Error fetching user input record:', error)
-        }
+  const fetchUserInputRecord = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/receipts/inputDetails/${email}`
+      )
+      if (response && response.data) {
+        setUserInputs({
+          milkPrice: response.data.milkPrice || 0,
+          cullCowsPrice: response.data.cullCowsPrice || 0,
+          heifersPrice: response.data.heifersPrice || 0,
+          bullCalvesPrice: response.data.bullCalvesPrice || 0,
+          beefCrossPrice: response.data.beefCrossPrice || 0,
+          otherIncome1: response.data.otherIncome1 || 0,
+          otherIncome2: response.data.otherIncome2 || 0
+        })
+      }
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response?.status === 404) {
+        console.warn('No user input record found for the given email')
+      } else {
+        console.error('Error fetching user input record:', error)
       }
     }
+  }
 
-    fetchUserInputRecord()
-  }, [email, open])
+  const loadFromSessionStorage = () => {
+    const storedInputs = localStorage.getItem('ReciptsInputs')
+    if (storedInputs) {
+      setUserInputs(JSON.parse(storedInputs))
+    } else {
+      setUserInputs(defaultInputs)
+    }
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
-    setUserInputs(prev => ({
-      ...prev,
-      [name]: value
-    }))
+    setUserInputs(prev => {
+      const newInputs = {
+        ...prev,
+        [name]: value
+      }
+      if (!loggedIn) {
+        localStorage.setItem('ReciptsInputs', JSON.stringify(newInputs))
+      }
+      return newInputs
+    })
   }
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {

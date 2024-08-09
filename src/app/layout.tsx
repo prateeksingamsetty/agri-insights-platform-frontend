@@ -22,7 +22,9 @@ export default function RootLayout({
           <Navbar />
           <div className='flex flex-1 pt-[108px]'> {/* Adjusted padding-top */}
           <Sidebar />
-            <main className='flex-1 p-4 ml-64'>{children}
+            <main className='flex-1 p-4 ml-64'>
+            
+              {children}
              
             </main>
           </div>

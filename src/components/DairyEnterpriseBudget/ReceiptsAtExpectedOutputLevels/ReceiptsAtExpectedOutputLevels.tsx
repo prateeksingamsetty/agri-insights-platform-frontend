@@ -5,6 +5,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import InputDialog from './InputDialog'
 import { useAuth } from 'src/context/AuthContext'
+import { Email } from '@mui/icons-material'
 
 interface ReceiptsDataType {
   milkSales: number
@@ -18,7 +19,7 @@ interface ReceiptsDataType {
 }
 
 const ReceiptsAtExpectedOutputLevels = () => {
-  const { email } = useAuth()
+  const { email,loggedIn } = useAuth()
 
   const [data, setData] = useState<ReceiptsDataType>({
     milkSales: 0,
@@ -35,24 +36,49 @@ const ReceiptsAtExpectedOutputLevels = () => {
   const [previoudDetailsFound, setDetailsFound] = useState(false)
 
   useEffect(() => {
-    if (!email) return
-
-    const checkProductionDetailsPresent = async (): Promise<void> => {
-      try {
-        const response = await axios.get(
-          `http://localhost:3001/production-details/outputDetails/${email}`
-        )
-        if (response?.data) {
-          setDetailsFound(true)
-        }
-      } catch (error: any) {
-        if (error.response?.status === 404) {
-          console.warn('No user output record found for the given email')
-        } else {
-          console.error('Error fetching user output record:', error)
-        }
-      }
+    checkProductionDetailsPresent()
+    if (loggedIn && email!=null) {
+      
+      fetchUserOutputRecord()
     }
+    else{
+      console.log('User not logged in')
+      
+
+    }
+  },[loggedIn,Email])
+
+
+    const checkProductionDetailsPresent = async (): Promise<void> => 
+    {
+
+      console.log("Checking if production inputs filled....")
+      try {
+        if (loggedIn && email!=null)
+        {
+          const response = await axios.get(
+            `http://localhost:3001/production-details/outputDetails/${email}`
+          )
+          if (response?.data) {
+            setDetailsFound(true)
+          }
+        }
+        else{
+          const storedInputs = localStorage.getItem('productionInputs')
+          if (storedInputs) {
+            setDetailsFound(true) 
+          }
+        }
+       } catch (error: any) {
+          if (error.response?.status === 404) {
+            console.warn('No user output record found for the given email')
+          } else {
+            console.error('Error fetching user output record:', error)
+          }
+        }
+    
+      }
+    
 
     const fetchUserOutputRecord = async () => {
       try {
@@ -80,15 +106,20 @@ const ReceiptsAtExpectedOutputLevels = () => {
       }
     }
 
-    checkProductionDetailsPresent()
-    fetchUserOutputRecord()
-  }, [email])
+    
+  
 
-  const handleDialogOpen = () => setOpen(true)
+
+    const handleDialogOpen = () => {
+      checkProductionDetailsPresent();
+      setOpen(true);
+    };
   const handleDialogClose = () => setOpen(false)
 
   const handleSubmit = async (userInputs: any) => {
+    
     try {
+      let response;
       const transformedInputs = {
         milkPrice: Number(userInputs.milkPrice),
         cullCowsPrice: Number(userInputs.cullCowsPrice),
@@ -97,12 +128,63 @@ const ReceiptsAtExpectedOutputLevels = () => {
         beefCrossPrice: Number(userInputs.beefCrossPrice),
         otherIncome1: Number(userInputs.otherIncome1),
         otherIncome2: Number(userInputs.otherIncome2)
+      };
+  
+      if (loggedIn && email != null) {
+        // User is logged in
+        response = await axios.patch(
+          `http://localhost:3001/receipts/updateInput/${email}`,
+          transformedInputs
+        );
+      } else {
+        // User is not logged in, fetch production details from local storage
+       
+        const storedInputs = localStorage.getItem('productionInputs');
+        let productionDetails; 
+        let productionDetailTransformedInput;
+        if (storedInputs !== null) {
+          try {
+              // Parse the string into an object
+              productionDetails = JSON.parse(storedInputs);
+              productionDetailTransformedInput = {
+                milkProduction: {
+                  totalNumberOfCows: productionDetails.totalNumberOfCows,
+                  calvingInterval: productionDetails.calvingInterval,
+                  expectedMilkProduction: productionDetails.expectedMilkProduction
+                },
+                heiferProduction: {
+                  cullingRate: productionDetails.cullingRate,
+                  cowDeathLossRate: productionDetails.cowDeathLossRate,
+                  heiferRaisingDeathLossRate: productionDetails.heiferRaisingDeathLossRate,
+                  numberOfHeifersRaised: productionDetails.numberOfHeifersRaised,
+                  bullCalfDeath: productionDetails.bullCalfDeath,
+                  expectedPercentMaleWithSexedSemen:
+                  productionDetails.expectedPercentMaleWithSexedSemen,
+                  expectedPercentMaleWithConventional:
+                  productionDetails.expectedPercentMaleWithConventional
+                },
+                beefCrossDetails: {
+                  beefCrossPercent: productionDetails.beefCrossPercent,
+                  beefCrossDeathRate: productionDetails.beefCrossDeathRate
+                }
+              }
+              
+          } catch (error) {
+              console.error('Failed to parse storedInputs as JSON:', error);
+          }
+        console.log("Here are the saved production inputs",productionDetailTransformedInput)
+        }
+        
+  
+        response = await axios.post(
+          `http://localhost:3001/receipts/calculateReciptsOutput`,
+          {
+            inputs: transformedInputs,
+            productionDetails: productionDetailTransformedInput,
+          }
+        );
       }
-
-      const response = await axios.patch(
-        `http://localhost:3001/receipts/updateInput/${email}`,
-        transformedInputs
-      )
+    
 
       if (response?.data) {
         console.log('response ', response)
