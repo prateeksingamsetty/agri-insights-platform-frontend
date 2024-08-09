@@ -11,7 +11,11 @@ import {
 } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useAuth } from 'src/context/AuthContext'
-import { myDetailedMachineryFixedCosts } from './DetailedMachineryCostsObject'
+import {
+  facilitiesAndBuildingsFields,
+  machineryFields,
+  myDetailedMachineryFixedCosts
+} from './FixedCostsVariables'
 import axios from 'axios'
 
 interface UserInputs {
@@ -69,7 +73,7 @@ interface UserInputs {
   machineryFixedCostTotalEstimate: number
 
   //Detailed Machinery Fixed Costs
-  detailedMachineryFixedCosts?: Record<string, number>
+  detailedMachineryFixedCosts?: Record<string, number | null>
 
   // Land Fixed Costs
   acres: number
@@ -92,6 +96,7 @@ const InputDialog: React.FC<InputDialogProps> = ({
 }) => {
   const { email } = useAuth()
   const [useTotalEstimate, setUseTotalEstimate] = useState<boolean>(true)
+  const [errors, setErrors] = useState<{ [key: string]: string }>({})
 
   const [userInputs, setUserInputs] = useState<UserInputs>({
     // Cattle Fixed Cost
@@ -163,6 +168,11 @@ const InputDialog: React.FC<InputDialogProps> = ({
   useEffect(() => {
     if (!open) return
 
+    console.log(
+      'User Inputs State isDetailed:',
+      userInputs.isDetailedMachineryCosts
+    )
+
     const fetchUserInputRecord = async () => {
       try {
         const response = await axios.get(
@@ -181,7 +191,7 @@ const InputDialog: React.FC<InputDialogProps> = ({
             numberOfOneYearOldHeifers:
               response.data.cattleFixedCost.numberOfOneYearOldHeifers || 0,
             OneYearOldHeiferPurchaseValue:
-              response.data.cattleFixedCost.OneYearOldHeiferPurchaseValue || 0,
+              response.data.cattleFixedCost.oneYearOldHeiferPurchaseValue || 0,
             numberOfWeanedHeiferCalves:
               response.data.cattleFixedCost.numberOfWeanedHeiferCalves || 0,
             weanedHeiferCalvesPurchaseValue:
@@ -267,13 +277,17 @@ const InputDialog: React.FC<InputDialogProps> = ({
               response.data.facilitiesAndBuildingsFixedCost
                 .cattleHandlingFacilitiesYearsOfUsefulLife || 0,
             otherFacilitiesAndBuildings1InitialInvestment:
-              response.data.otherFacilitiesAndBuildings1InitialInvestment || 0,
+              response.data.facilitiesAndBuildingsFixedCost
+                .otherFacilitiesAndBuildings1InitialInvestment || 0,
             otherFacilitiesAndBuildings1YearsOfUsefulLife:
-              response.data.otherFacilitiesAndBuildings1YearsOfUsefulLife || 0,
+              response.data.facilitiesAndBuildingsFixedCost
+                .otherFacilitiesAndBuildings1YearsOfUsefulLife || 0,
             otherFacilitiesAndBuildings2InitialInvestment:
-              response.data.otherFacilitiesAndBuildings2InitialInvestment || 0,
+              response.data.facilitiesAndBuildingsFixedCost
+                .otherFacilitiesAndBuildings2InitialInvestment || 0,
             otherFacilitiesAndBuildings2YearsOfUsefulLife:
-              response.data.otherFacilitiesAndBuildings2YearsOfUsefulLife || 0,
+              response.data.facilitiesAndBuildingsFixedCost
+                .otherFacilitiesAndBuildings2YearsOfUsefulLife || 0,
 
             wasteStoragePondInitialInvestment:
               response.data.wasteManagementFixedCosts
@@ -304,7 +318,8 @@ const InputDialog: React.FC<InputDialogProps> = ({
             rentalCost: response.data.landFixedCosts.rentalCost || 0,
 
             isDetailedMachineryCosts:
-              response.data.isDetailedMachineryCosts || !useTotalEstimate
+              response.data.isDetailedMachineryCosts ?? false
+            // response.data.isDetailedMachineryCosts || !useTotalEstimate
           })
         }
       } catch (error) {
@@ -317,33 +332,135 @@ const InputDialog: React.FC<InputDialogProps> = ({
     }
 
     fetchUserInputRecord()
-  }, [open, email, useTotalEstimate])
+  }, [open, email])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
+    const numericValue = Number(value)
+    console.log('name ', name)
+
+    // Check if the field is part of the facilities and buildings
+    if (facilitiesAndBuildingsFixedCostFields.includes(name)) {
+      let error = ''
+
+      // Handle empty input separately
+      if (value === '') {
+        error = ''
+      } else if (numericValue < 1 || numericValue > 12) {
+        error = `${name.replace(/([A-Z])/g, ' $1')} must be between 1 and 12.`
+      }
+
+      // Update the errors state
+      setErrors(prevErrors => ({
+        ...prevErrors,
+        [name]: error
+      }))
+
+      // If there's an error, return early
+      if (error) {
+        return
+      }
+    }
+
+    // Update the userInputs state
     setUserInputs(prev => ({
       ...prev,
-      [name]: value === '' ? 0 : parseFloat(value) // Ensure value is always a number
+      [name]: value === '' ? '' : parseFloat(value) // Ensure value is always a number, but allow empty string
     }))
   }
 
+  // const handleDetailedChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const { name, value } = e.target
+  //   console.log('name ', name)
+
+  //   let error = ''
+  //   let parsedValue: number | null = null
+
+  //   // Handle empty input separately
+  //   if (value === '') {
+  //     error = ''
+  //     parsedValue = null // Keep the field empty
+  //   } else {
+  //     const numericValue = Number(value)
+
+  //     if (numericValue < 1 || numericValue > 12) {
+  //       error = `${name.replace(/([A-Z])/g, ' $1')} must be between 1 and 12.`
+  //     } else {
+  //       parsedValue = numericValue
+  //     }
+  //   }
+
+  //   // Update the errors state
+  //   setErrors(prevErrors => ({
+  //     ...prevErrors,
+  //     [name]: error
+  //   }))
+
+  //   // If there's an error, return early
+  //   if (error) {
+  //     return
+  //   }
+
+  //   // Update the userInputs state
+  //   setUserInputs(prev => ({
+  //     ...prev,
+  //     detailedMachineryFixedCosts: {
+  //       ...prev.detailedMachineryFixedCosts,
+  //       [name]: parsedValue // This will be null if the input is empty
+  //     }
+  //   }))
+  // }
+
   const handleDetailedChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
+    let error = ''
+    let parsedValue: number | null = value === '' ? null : Number(value) // Handle empty input by setting parsedValue to null
 
-    // If the value is empty, set it to null, otherwise parse it as a number
-    const parsedValue = value === '' ? 1 : parseFloat(value)
+    // Check if the field is part of the detailedMachineryFixedCostsFields
+    if (detailedMachineryFixedCostsFields.includes(name)) {
+      console.log('Hi1')
 
+      // Handle empty input separately
+      if (value === '') {
+        error = ''
+        parsedValue = null // Keep the field empty
+      } else {
+        const numericValue = Number(value)
+
+        if (numericValue < 1 || numericValue > 12) {
+          error = `${name.replace(/([A-Z])/g, ' $1')} must be between 1 and 12.`
+        } else {
+          parsedValue = numericValue
+        }
+      }
+
+      // Update the errors state
+      setErrors(prevErrors => ({
+        ...prevErrors,
+        [name]: error
+      }))
+
+      // If there's an error, return early
+      if (error) {
+        return
+      }
+    }
+
+    console.log('Hi2')
+
+    // Update the userInputs state
     setUserInputs(prev => ({
       ...prev,
       detailedMachineryFixedCosts: {
         ...prev.detailedMachineryFixedCosts,
-        [name]: parsedValue
+        [name]: parsedValue // This will be null if the input is empty or outside valid range
       }
     }))
   }
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+    console.log(userInputs.isDetailedMachineryCosts)
     handleSubmit(userInputs)
     handleClose()
   }
@@ -524,7 +641,9 @@ const InputDialog: React.FC<InputDialogProps> = ({
     { name: 'rentalCost', label: 'Rental Cost' }
   ]
 
+  const detailedMachineryFixedCostsFields = machineryFields
   const detailedMachineryFixedCosts = myDetailedMachineryFixedCosts
+  const facilitiesAndBuildingsFixedCostFields = facilitiesAndBuildingsFields
 
   return (
     <Dialog open={open} onClose={handleClose} maxWidth='sm' fullWidth>
@@ -538,32 +657,43 @@ const InputDialog: React.FC<InputDialogProps> = ({
           style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}
         >
           {textFields.map(field => (
-            <TextField
-              key={field.name}
-              margin='dense'
-              name={field.name}
-              label={field.label}
-              type='number'
-              fullWidth
-              required
-              value={userInputs[field.name as keyof UserInputs]}
-              onChange={handleChange}
-            />
+            <div key={field.name}>
+              {/* Display the error message if it exists */}
+              {errors[field.name] && (
+                <div style={{ color: 'red', marginBottom: '4px' }}>
+                  {errors[field.name]}
+                </div>
+              )}
+
+              <TextField
+                margin='dense'
+                name={field.name}
+                label={field.label}
+                type='number'
+                fullWidth
+                required
+                value={userInputs[field.name as keyof UserInputs]}
+                onChange={handleChange}
+                inputProps={
+                  detailedMachineryFixedCostsFields.includes(field.name)
+                    ? { min: 1, max: 12 }
+                    : {}
+                }
+              />
+            </div>
           ))}
 
           <FormControlLabel
             control={
               <Checkbox
                 checked={useTotalEstimate}
-                onChange={() => {
-                  setUseTotalEstimate(prev => {
-                    const newValue = !prev
-                    setUserInputs(prevInputs => ({
-                      ...prevInputs,
-                      isDetailedMachineryCosts: !newValue // Toggle isDetailedMachineryCosts
-                    }))
-                    return newValue
-                  })
+                onChange={event => {
+                  const isChecked = event.target.checked
+                  setUseTotalEstimate(isChecked)
+                  setUserInputs(prevInputs => ({
+                    ...prevInputs,
+                    isDetailedMachineryCosts: !isChecked // Toggle based on checkbox
+                  }))
                 }}
                 color='primary'
               />
@@ -585,21 +715,27 @@ const InputDialog: React.FC<InputDialogProps> = ({
             />
           ) : (
             detailedMachineryFixedCosts.map(field => (
-              <TextField
-                key={field.name}
-                margin='dense'
-                name={field.name}
-                label={field.label}
-                type='number'
-                fullWidth
-                required
-                // value={userInputs[field.name as keyof UserInputs]}
-                value={
-                  userInputs.detailedMachineryFixedCosts?.[field.name] ?? 0
-                }
-                // onChange={handleChange}
-                onChange={handleDetailedChange}
-              />
+              <div key={field.name}>
+                {/* Display the error message if it exists */}
+                {errors[field.name] && (
+                  <div style={{ color: 'red', marginBottom: '4px' }}>
+                    {errors[field.name]}
+                  </div>
+                )}
+
+                <TextField
+                  margin='dense'
+                  name={field.name}
+                  label={field.label}
+                  type='number'
+                  fullWidth
+                  required
+                  value={
+                    userInputs.detailedMachineryFixedCosts?.[field.name] ?? ''
+                  }
+                  onChange={handleDetailedChange}
+                />
+              </div>
             ))
           )}
 
