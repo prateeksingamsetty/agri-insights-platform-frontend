@@ -47,7 +47,7 @@ const ResetPassword = () => {
       }
       console.log('Token ', token)
 
-      await axios.post('http://localhost:3001/auth/reset-password', {
+      await axios.post(`${process.env.BACKEND_URL}/auth/reset-password`, {
         token,
         password
       })

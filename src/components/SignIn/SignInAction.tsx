@@ -6,7 +6,7 @@ export async function signInAction(formData: {
   password: string
 }) {
   try {
-    const response = await fetch('http://localhost:3001/auth/signin', {
+    const response = await fetch(`${process.env.BACKEND_URL}/auth/signin`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

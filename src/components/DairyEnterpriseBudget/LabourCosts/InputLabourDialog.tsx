@@ -102,7 +102,8 @@ const InputLabourDialog: React.FC<LaborCostInputDialogProps> = ({
     otherEmployeeBenefits: 0
   }
 
-  const [laborCostInputs, setLaborCostInputs] = useState<LaborCostInputs>(defaultInputs)
+  const [laborCostInputs, setLaborCostInputs] =
+    useState<LaborCostInputs>(defaultInputs)
 
   useEffect(() => {
     if (!open) return
@@ -119,7 +120,7 @@ const InputLabourDialog: React.FC<LaborCostInputDialogProps> = ({
   const fetchLaborCostInputRecord = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/labour-cost/inputDetails/${email}`
+        `${process.env.BACKEND_URL}/labour-cost/inputDetails/${email}`
       )
       if (response && response.data) {
         setLaborCostInputs(response.data)
@@ -162,14 +163,13 @@ const InputLabourDialog: React.FC<LaborCostInputDialogProps> = ({
     if (loggedIn && email) {
       try {
         await axios.patch(
-          `http://localhost:3001/labour-cost/updateInput/${email}`,
+          `${process.env.BACKEND_URL}/labour-cost/updateInput/${email}`,
           laborCostInputs
         )
       } catch (error) {
         console.error('Error saving labor cost inputs:', error)
       }
     } else {
-      
       localStorage.setItem('laborCostInputs', JSON.stringify(laborCostInputs))
     }
     handleSubmit()
@@ -182,40 +182,144 @@ const InputLabourDialog: React.FC<LaborCostInputDialogProps> = ({
       { name: 'ownerBenefits', label: 'Owner Benefits', unit: '$/Year' },
       { name: 'numberOfManagers', label: 'Number of Managers', unit: '' },
       { name: 'managerSalary', label: 'Manager Salary', unit: '$/Year' },
-      { name: 'managerBenefits', label: 'Manager Benefits', unit: '$/Year' },
+      { name: 'managerBenefits', label: 'Manager Benefits', unit: '$/Year' }
     ],
     [
-      { name: 'numberOfHerdHealthEmployees', label: 'Number of Herd Health and Maintenance Employees', unit: '' },
-      { name: 'herdHealthEmployeeTime', label: 'Herd Health and Maintenance Employee Time', unit: 'Hours/Year/Person' },
-      { name: 'herdHealthEmployeeWage', label: 'Herd Health and Maintenance Employee Wage', unit: '$/Hour' },
-      { name: 'herdHealthEmployeeBenefits', label: 'Herd Health and Maintenance Employee Benefits', unit: '$/Hour' },
-      { name: 'numberOfFeederEmployees', label: 'Number of Feeder Employees', unit: '' },
-      { name: 'feederEmployeeTime', label: 'Feeder Employee Time', unit: 'Hours/Year/Person' },
-      { name: 'feederEmployeeWage', label: 'Feeder Employee Wage', unit: '$/Hour' },
-      { name: 'feederEmployeeBenefits', label: 'Feeder Employee Benefits', unit: '$/Hour' },
-      { name: 'numberOfCropEmployees', label: 'Number of Crop Employees', unit: '' },
-      { name: 'cropEmployeeTime', label: 'Crop Employee Time', unit: 'Hours/Year/Person' },
+      {
+        name: 'numberOfHerdHealthEmployees',
+        label: 'Number of Herd Health and Maintenance Employees',
+        unit: ''
+      },
+      {
+        name: 'herdHealthEmployeeTime',
+        label: 'Herd Health and Maintenance Employee Time',
+        unit: 'Hours/Year/Person'
+      },
+      {
+        name: 'herdHealthEmployeeWage',
+        label: 'Herd Health and Maintenance Employee Wage',
+        unit: '$/Hour'
+      },
+      {
+        name: 'herdHealthEmployeeBenefits',
+        label: 'Herd Health and Maintenance Employee Benefits',
+        unit: '$/Hour'
+      },
+      {
+        name: 'numberOfFeederEmployees',
+        label: 'Number of Feeder Employees',
+        unit: ''
+      },
+      {
+        name: 'feederEmployeeTime',
+        label: 'Feeder Employee Time',
+        unit: 'Hours/Year/Person'
+      },
+      {
+        name: 'feederEmployeeWage',
+        label: 'Feeder Employee Wage',
+        unit: '$/Hour'
+      },
+      {
+        name: 'feederEmployeeBenefits',
+        label: 'Feeder Employee Benefits',
+        unit: '$/Hour'
+      },
+      {
+        name: 'numberOfCropEmployees',
+        label: 'Number of Crop Employees',
+        unit: ''
+      },
+      {
+        name: 'cropEmployeeTime',
+        label: 'Crop Employee Time',
+        unit: 'Hours/Year/Person'
+      },
       { name: 'cropEmployeeWage', label: 'Crop Employee Wage', unit: '$/Hour' },
-      { name: 'cropEmployeeBenefits', label: 'Crop Employee Benefits', unit: '$/Hour' },
+      {
+        name: 'cropEmployeeBenefits',
+        label: 'Crop Employee Benefits',
+        unit: '$/Hour'
+      }
     ],
     [
-      { name: 'numberOfMilkerEmployees', label: 'Number of Milker Employees', unit: '' },
-      { name: 'milkerEmployeeTime', label: 'Milker Employee Time', unit: 'Hours/Year/Person' },
-      { name: 'milkerEmployeeWage', label: 'Milker Employee Wage', unit: '$/Hour' },
-      { name: 'milkerEmployeeBenefits', label: 'Milker Employee Benefits', unit: '$/Hour' },
-      { name: 'replacementEmployees', label: 'Replacement Employees', unit: '' },
-      { name: 'replacementEmployeeTime', label: 'Replacement Employee Time', unit: 'Hours/Year/Person' },
-      { name: 'replacementEmployeeWage', label: 'Replacement Employee Wage', unit: '$/Hour' },
-      { name: 'replacementEmployeeBenefits', label: 'Replacement Employee Benefits', unit: '$/Hour' },
-      { name: 'facilitiesEmployees', label: 'Facilities and Equipment Employees', unit: '' },
-      { name: 'facilitiesEmployeeTime', label: 'Facilities and Equipment Employee Time', unit: 'Hours/Year/Person' },
-      { name: 'facilitiesEmployeeWage', label: 'Facilities and Equipment Employee Wage', unit: '$/Hour' },
-      { name: 'facilitiesEmployeeBenefits', label: 'Facilities and Equipment Employee Benefits', unit: '$/Hour' },
+      {
+        name: 'numberOfMilkerEmployees',
+        label: 'Number of Milker Employees',
+        unit: ''
+      },
+      {
+        name: 'milkerEmployeeTime',
+        label: 'Milker Employee Time',
+        unit: 'Hours/Year/Person'
+      },
+      {
+        name: 'milkerEmployeeWage',
+        label: 'Milker Employee Wage',
+        unit: '$/Hour'
+      },
+      {
+        name: 'milkerEmployeeBenefits',
+        label: 'Milker Employee Benefits',
+        unit: '$/Hour'
+      },
+      {
+        name: 'replacementEmployees',
+        label: 'Replacement Employees',
+        unit: ''
+      },
+      {
+        name: 'replacementEmployeeTime',
+        label: 'Replacement Employee Time',
+        unit: 'Hours/Year/Person'
+      },
+      {
+        name: 'replacementEmployeeWage',
+        label: 'Replacement Employee Wage',
+        unit: '$/Hour'
+      },
+      {
+        name: 'replacementEmployeeBenefits',
+        label: 'Replacement Employee Benefits',
+        unit: '$/Hour'
+      },
+      {
+        name: 'facilitiesEmployees',
+        label: 'Facilities and Equipment Employees',
+        unit: ''
+      },
+      {
+        name: 'facilitiesEmployeeTime',
+        label: 'Facilities and Equipment Employee Time',
+        unit: 'Hours/Year/Person'
+      },
+      {
+        name: 'facilitiesEmployeeWage',
+        label: 'Facilities and Equipment Employee Wage',
+        unit: '$/Hour'
+      },
+      {
+        name: 'facilitiesEmployeeBenefits',
+        label: 'Facilities and Equipment Employee Benefits',
+        unit: '$/Hour'
+      },
       { name: 'otherEmployees', label: 'Other Employees', unit: '' },
-      { name: 'otherEmployeeTime', label: 'Other Employee Time', unit: 'Hours/Year/Person' },
-      { name: 'otherEmployeeWage', label: 'Other Employee Wage', unit: '$/Hour' },
-      { name: 'otherEmployeeBenefits', label: 'Other Employee Benefits', unit: '$/Hour' },
-    ],
+      {
+        name: 'otherEmployeeTime',
+        label: 'Other Employee Time',
+        unit: 'Hours/Year/Person'
+      },
+      {
+        name: 'otherEmployeeWage',
+        label: 'Other Employee Wage',
+        unit: '$/Hour'
+      },
+      {
+        name: 'otherEmployeeBenefits',
+        label: 'Other Employee Benefits',
+        unit: '$/Hour'
+      }
+    ]
   ]
 
   const sections = [
@@ -228,19 +332,20 @@ const InputLabourDialog: React.FC<LaborCostInputDialogProps> = ({
     <Dialog
       open={open}
       onClose={handleClose}
-      aria-labelledby="form-dialog-title"
-      maxWidth="md"
+      aria-labelledby='form-dialog-title'
+      maxWidth='md'
       fullWidth
     >
       <DialogTitle
-        id="form-dialog-title"
+        id='form-dialog-title'
         sx={{ bgcolor: '#c8102e', color: 'white' }}
       >
         Enter Labor Cost Inputs
       </DialogTitle>
       <DialogContent>
         <DialogContentText sx={{ mb: 2 }}>
-          Please enter your labor cost inputs for the Dairy Enterprise Budget Model.
+          Please enter your labor cost inputs for the Dairy Enterprise Budget
+          Model.
         </DialogContentText>
         <form
           onSubmit={onSubmit}
@@ -248,32 +353,38 @@ const InputLabourDialog: React.FC<LaborCostInputDialogProps> = ({
         >
           {sections.map((section, sectionIndex) => (
             <React.Fragment key={section}>
-              <Typography variant="h6" sx={{ mt: 2, mb: 1 }}>{section}</Typography>
+              <Typography variant='h6' sx={{ mt: 2, mb: 1 }}>
+                {section}
+              </Typography>
               <Grid container spacing={2}>
                 {inputFields[sectionIndex].map(field => (
                   <Grid item xs={12} sm={6} key={field.name}>
                     <Grid container spacing={1}>
                       <Grid item xs={8}>
                         <TextField
-                          margin="dense"
+                          margin='dense'
                           name={field.name}
                           label={`${field.label} ${field.unit ? `(${field.unit})` : ''}`}
-                          type="number"
+                          type='number'
                           fullWidth
                           required
-                          value={laborCostInputs[field.name as keyof LaborCostInputs]}
+                          value={
+                            laborCostInputs[field.name as keyof LaborCostInputs]
+                          }
                           onChange={handleChange}
                         />
                       </Grid>
                       <Grid item xs={4}>
                         <TextField
-                          margin="dense"
-                          label="Default"
-                          type="number"
+                          margin='dense'
+                          label='Default'
+                          type='number'
                           fullWidth
-                          value={defaultInputs[field.name as keyof LaborCostInputs]}
+                          value={
+                            defaultInputs[field.name as keyof LaborCostInputs]
+                          }
                           InputProps={{
-                            readOnly: true,
+                            readOnly: true
                           }}
                         />
                       </Grid>
@@ -287,7 +398,7 @@ const InputLabourDialog: React.FC<LaborCostInputDialogProps> = ({
             <Button onClick={handleClose} sx={{ color: '#c8102e' }}>
               Cancel
             </Button>
-            <Button type="submit" sx={{ color: '#c8102e' }}>
+            <Button type='submit' sx={{ color: '#c8102e' }}>
               Submit
             </Button>
           </DialogActions>

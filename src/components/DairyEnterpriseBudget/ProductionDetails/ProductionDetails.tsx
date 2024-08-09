@@ -14,7 +14,8 @@ interface ProductionDetailsType {
 }
 
 const ProductionDetails = () => {
-  const { email,loggedIn } = useAuth()
+  const { email, loggedIn } = useAuth()
+  const BASE_URL = process.env.BACKEND_URL
 
   const [details, setDetails] = useState<ProductionDetailsType>({
     rollingHerdAverage: 0,
@@ -26,10 +27,8 @@ const ProductionDetails = () => {
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
-
     // This checks if the user is alredy logged in or if not then it checks stored session storage and calculat ouput and display
-    if (loggedIn && email!=null) {
-     
+    if (loggedIn && email != null) {
       fetchUserOutputRecord()
     } else {
       console.log('User not logged in')
@@ -41,33 +40,29 @@ const ProductionDetails = () => {
     }
   }, [loggedIn, email])
 
-
-
-    const fetchUserOutputRecord = async () => {
-      try {
-     
-        const response = await axios.get(
-          `http://localhost:3001/production-details/outputDetails/${email}`
-        )
-        if (response && response.data) {
-          setDetails({
-            rollingHerdAverage: response.data.rollingHerdAverage || 0,
-            totalAnnualMilkProduction:
-              response.data.totalAnnualMilkProduction || 0,
-            expectedAnnualMilkSales: response.data.expectedAnnualMilkSales || 0,
-            numberOfReplacementHeifersNeeded:
-              response.data.numberOfReplacementHeifersNeeded || 0
-          })
-        }
-      } catch (error: any) {
-        if (error.response?.status === 404) {
-          console.warn('No user output record found for the given email')
-        } else {
-          console.error('Error fetching user output record:', error)
-        }
+  const fetchUserOutputRecord = async () => {
+    try {
+      const response = await axios.get(
+        `${BASE_URL}/production-details/outputDetails/${email}`
+      )
+      if (response && response.data) {
+        setDetails({
+          rollingHerdAverage: response.data.rollingHerdAverage || 0,
+          totalAnnualMilkProduction:
+            response.data.totalAnnualMilkProduction || 0,
+          expectedAnnualMilkSales: response.data.expectedAnnualMilkSales || 0,
+          numberOfReplacementHeifersNeeded:
+            response.data.numberOfReplacementHeifersNeeded || 0
+        })
+      }
+    } catch (error: any) {
+      if (error.response?.status === 404) {
+        console.warn('No user output record found for the given email')
+      } else {
+        console.error('Error fetching user output record:', error)
       }
     }
-
+  }
 
   const handleDialogOpen = () => setOpen(true)
   const handleDialogClose = () => setOpen(false)
@@ -98,20 +93,20 @@ const ProductionDetails = () => {
         }
       }
 
-      let response;
+      let response
       if (loggedIn && email) {
         response = await axios.patch(
-          `http://localhost:3001/production-details/updateInput/${email}`,
+          `${BASE_URL}/production-details/updateInput/${email}`,
           transformedInputs
         )
       } else {
         response = await axios.post(
-          `http://localhost:3001/production-details/calculateProductionDetails`,
+          `${BASE_URL}/production-details/calculateProductionDetails`,
           transformedInputs
         )
         localStorage.setItem('productionInputs', JSON.stringify(userInputs))
       }
-      
+
       if (response && response.data) {
         setDetails({
           rollingHerdAverage: response.data.rollingHerdAverage || 0,

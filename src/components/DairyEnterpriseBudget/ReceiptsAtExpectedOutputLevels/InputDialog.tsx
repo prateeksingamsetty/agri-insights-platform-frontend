@@ -34,9 +34,9 @@ const InputDialog: React.FC<InputDialogProps> = ({
   handleClose,
   handleSubmit
 }) => {
-  const { email,loggedIn } = useAuth()
+  const { email, loggedIn } = useAuth()
 
-  const defaultInputs: UserInputs={
+  const defaultInputs: UserInputs = {
     milkPrice: 0,
     cullCowsPrice: 0,
     heifersPrice: 0,
@@ -55,13 +55,12 @@ const InputDialog: React.FC<InputDialogProps> = ({
     } else {
       loadFromSessionStorage()
     }
-   
-  }, [email, open,loggedIn])
+  }, [email, open, loggedIn])
 
   const fetchUserInputRecord = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/receipts/inputDetails/${email}`
+        `${process.env.BACKEND_URL}/receipts/inputDetails/${email}`
       )
       if (response && response.data) {
         setUserInputs({
