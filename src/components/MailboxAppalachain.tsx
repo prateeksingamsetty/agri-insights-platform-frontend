@@ -58,8 +58,18 @@ const initialFilterState: FilterState = {
 }
 
 const months: (keyof MailboxAppalachainPriceRecord)[] = [
-  'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-  'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec'
 ]
 
 const MailboxAppalachainPrices = () => {
@@ -74,7 +84,7 @@ const MailboxAppalachainPrices = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get<MailboxAppalachainPriceRecord[]>(
-          'http://localhost:3001/mailboxAppalachainPrices/allYears'
+          `${process.env.BACKEND_URL}/mailboxAppalachainPrices/allYears`
         )
         setAllData(response.data)
       } catch (error) {
@@ -93,12 +103,16 @@ const MailboxAppalachainPrices = () => {
     let filteredData = data
 
     if (filters.year !== 'All') {
-      filteredData = filteredData.filter(record => record.report_year.toString() === filters.year)
+      filteredData = filteredData.filter(
+        record => record.report_year.toString() === filters.year
+      )
     }
 
     if (filters.timeRange > 0) {
       const currentYear = new Date().getFullYear()
-      filteredData = filteredData.filter(record => currentYear - record.report_year < filters.timeRange)
+      filteredData = filteredData.filter(
+        record => currentYear - record.report_year < filters.timeRange
+      )
     }
 
     return filteredData
@@ -119,7 +133,10 @@ const MailboxAppalachainPrices = () => {
     setChartData({ labels, data: prices })
   }
 
-  const handleFilterChange = (filterType: keyof FilterState, value: string | number) => {
+  const handleFilterChange = (
+    filterType: keyof FilterState,
+    value: string | number
+  ) => {
     setFilters(prev => ({
       ...prev,
       [filterType]: value,
@@ -143,36 +160,45 @@ const MailboxAppalachainPrices = () => {
     }
   }
 
-  const years = Array.from(new Set(allData.map(record => record.report_year.toString())))
-    .sort((a, b) => parseInt(b) - parseInt(a))
+  const years = Array.from(
+    new Set(allData.map(record => record.report_year.toString()))
+  ).sort((a, b) => parseInt(b) - parseInt(a))
 
   return (
     <div className='rounded-lg bg-gray-100 p-6 shadow-md'>
-      <h1 className='mb-6 text-center text-2xl font-bold text-red-700'>Mailbox Appalachian Prices</h1>
+      <h1 className='mb-6 text-center text-2xl font-bold text-red-700'>
+        Mailbox Appalachian Prices
+      </h1>
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 2, mb: 2 }}>
-        <FormControl size="small" sx={{ minWidth: 120 }}>
+        <FormControl size='small' sx={{ minWidth: 120 }}>
           <InputLabel>Year</InputLabel>
           <Select
             value={filters.year}
-            onChange={(e) => handleFilterChange('year', e.target.value)}
-            label="Year"
+            onChange={e => handleFilterChange('year', e.target.value)}
+            label='Year'
           >
-            <MenuItem value="All">All Years</MenuItem>
+            <MenuItem value='All'>All Years</MenuItem>
             {years.map(year => (
-              <MenuItem key={year} value={year}>{year}</MenuItem>
+              <MenuItem key={year} value={year}>
+                {year}
+              </MenuItem>
             ))}
           </Select>
         </FormControl>
-        <FormControl size="small" sx={{ minWidth: 120 }}>
+        <FormControl size='small' sx={{ minWidth: 120 }}>
           <InputLabel>Time Range</InputLabel>
           <Select
             value={filters.timeRange}
-            onChange={(e) => handleFilterChange('timeRange', Number(e.target.value))}
-            label="Time Range"
+            onChange={e =>
+              handleFilterChange('timeRange', Number(e.target.value))
+            }
+            label='Time Range'
           >
             <MenuItem value={0}>All Time</MenuItem>
             {[1, 2, 3, 4, 5].map(year => (
-              <MenuItem key={year} value={year}>Last {year} Year{year > 1 ? 's' : ''}</MenuItem>
+              <MenuItem key={year} value={year}>
+                Last {year} Year{year > 1 ? 's' : ''}
+              </MenuItem>
             ))}
           </Select>
         </FormControl>
