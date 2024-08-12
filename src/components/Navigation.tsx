@@ -24,21 +24,32 @@ const Navbar = () => {
           {/* Desktop Menu */}
           <ul className='hidden space-x-6 md:flex'>
             <li>
-              <Link href='/about'>
-                <div className='cursor-pointer text-red-600'>About Us</div>
+              <Link href='/'>
+                <div className='cursor-pointer text-red-600'>Home</div>
               </Link>
             </li>
             <li>
-              <Link href='/enterprises'>
-                <div className='cursor-pointer text-red-600'>Enterprises</div>
+              <Link href='/dairy'>
+                <div className='cursor-pointer text-red-600'>Dairy</div>
               </Link>
             </li>
             <li>
-              <Link href='/resources'>
-                <div className='cursor-pointer text-red-600'>Resources</div>
+              <a
+                href='https://cals.ncsu.edu/are-extension/'
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                <div className='cursor-pointer text-red-600'>
+                  NCSU Ag&Resource Economics Extension
+                </div>
+              </a>
+            </li>
+            <li>
+              <Link href='/tomato'>
+                <div className='cursor-pointer text-red-600'>Tomatoes</div>
               </Link>
             </li>
-            {!loggedIn && (
+            {/* {!loggedIn && (
               <li>
                 <Link href='/signup'>
                   <div className='cursor-pointer text-red-600'>Sign Up</div>
@@ -54,6 +65,29 @@ const Navbar = () => {
                   {loggedIn ? 'Sign Out' : 'Sign In'}
                 </div>
               </Link>
+            </li> */}
+            <li>
+              {loggedIn ? (
+                <div className='flex space-x-4'>
+                  <Link href='/'>
+                    <div
+                      className='cursor-pointer text-red-600'
+                      onClick={signOut}
+                    >
+                      Sign Out
+                    </div>
+                  </Link>
+                </div>
+              ) : (
+                <div className='flex space-x-4'>
+                  <Link href='/signin'>
+                    <div className='cursor-pointer text-red-600'>Sign In</div>
+                  </Link>
+                  <Link href='/signup'>
+                    <div className='cursor-pointer text-red-600'>Sign Up</div>
+                  </Link>
+                </div>
+              )}
             </li>
             {/* <li className='text-gray-800'>{username || 'Guest'}</li> */}
           </ul>
@@ -61,7 +95,7 @@ const Navbar = () => {
 
         {/* Username Display */}
         <div className='hidden items-center space-x-4 md:flex'>
-          {username && (
+          {loggedIn && (
             <div className='flex items-center space-x-2 rounded-full bg-gray-200 p-2'>
               <FaUserCircle className='text-xl text-gray-700' />
               <span className='text-lg font-semibold text-gray-800'>

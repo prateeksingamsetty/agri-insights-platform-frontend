@@ -69,7 +69,7 @@ const InputDialog: React.FC<InputDialogProps> = ({
   const fetchUserInputRecord = async () => {
     try {
       const response = await axios.get(
-        `${process.env.BACKEND_URL}/production-details/inputDetails/${email}`
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/production-details/inputDetails/${email}`
       )
       if (response && response.data) {
         setUserInputs({
@@ -87,8 +87,8 @@ const InputDialog: React.FC<InputDialogProps> = ({
             response.data.heiferProduction.numberOfHeifersRaised || 0,
           bullCalfDeath: response.data.heiferProduction.bullCalfDeath || 0,
           expectedPercentMaleWithSexedSemen:
-            response.data.heiferProduction
-              .expectedPercentMaleWithSexedSemen || 0,
+            response.data.heiferProduction.expectedPercentMaleWithSexedSemen ||
+            0,
           expectedPercentMaleWithConventional:
             response.data.heiferProduction
               .expectedPercentMaleWithConventional || 0,

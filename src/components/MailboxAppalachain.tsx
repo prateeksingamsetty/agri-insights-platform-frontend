@@ -84,7 +84,7 @@ const MailboxAppalachainPrices = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get<MailboxAppalachainPriceRecord[]>(
-          `${process.env.BACKEND_URL}/mailboxAppalachainPrices/allYears`
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/mailboxAppalachainPrices/allYears`
         )
         setAllData(response.data)
       } catch (error) {

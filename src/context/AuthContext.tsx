@@ -42,7 +42,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setLoggedIn(true)
     setUsername(username)
     setEmail(email)
-    localStorage.setItem('username', username) // Ensure this is set in localStorage
+    localStorage.setItem('username', username)
+    localStorage.setItem('email', email)
   }
 
   const signOut = () => {

@@ -15,7 +15,7 @@ interface ProductionDetailsType {
 
 const ProductionDetails = () => {
   const { email, loggedIn } = useAuth()
-  const BASE_URL = process.env.BACKEND_URL
+  const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL
 
   const [details, setDetails] = useState<ProductionDetailsType>({
     rollingHerdAverage: 0,
@@ -27,6 +27,12 @@ const ProductionDetails = () => {
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
+    console.log('BASE_URL ', BASE_URL)
+    console.log(
+      'process.env.NEXT_PUBLIC_BACKEND_URL ',
+      process.env.NEXT_PUBLIC_BACKEND_URL
+    )
+
     // This checks if the user is alredy logged in or if not then it checks stored session storage and calculat ouput and display
     if (loggedIn && email != null) {
       fetchUserOutputRecord()
@@ -43,7 +49,8 @@ const ProductionDetails = () => {
   const fetchUserOutputRecord = async () => {
     try {
       const response = await axios.get(
-        `${BASE_URL}/production-details/outputDetails/${email}`
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/production-details/outputDetails/${email}`
+        // `http://localhost:3001/production-details/outputDetails/${email}`
       )
       if (response && response.data) {
         setDetails({

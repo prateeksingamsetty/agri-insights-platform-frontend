@@ -176,7 +176,7 @@ const InputDialog: React.FC<InputDialogProps> = ({
     const fetchUserInputRecord = async () => {
       try {
         const response = await axios.get(
-          `${process.env.BACKEND_URL}/fixed-costs/inputDetails/${email}`
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/fixed-costs/inputDetails/${email}`
         )
         if (response && response.data) {
           setUserInputs({
@@ -369,48 +369,6 @@ const InputDialog: React.FC<InputDialogProps> = ({
     }))
   }
 
-  // const handleDetailedChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const { name, value } = e.target
-  //   console.log('name ', name)
-
-  //   let error = ''
-  //   let parsedValue: number | null = null
-
-  //   // Handle empty input separately
-  //   if (value === '') {
-  //     error = ''
-  //     parsedValue = null // Keep the field empty
-  //   } else {
-  //     const numericValue = Number(value)
-
-  //     if (numericValue < 1 || numericValue > 12) {
-  //       error = `${name.replace(/([A-Z])/g, ' $1')} must be between 1 and 12.`
-  //     } else {
-  //       parsedValue = numericValue
-  //     }
-  //   }
-
-  //   // Update the errors state
-  //   setErrors(prevErrors => ({
-  //     ...prevErrors,
-  //     [name]: error
-  //   }))
-
-  //   // If there's an error, return early
-  //   if (error) {
-  //     return
-  //   }
-
-  //   // Update the userInputs state
-  //   setUserInputs(prev => ({
-  //     ...prev,
-  //     detailedMachineryFixedCosts: {
-  //       ...prev.detailedMachineryFixedCosts,
-  //       [name]: parsedValue // This will be null if the input is empty
-  //     }
-  //   }))
-  // }
-
   const handleDetailedChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     let error = ''
@@ -418,8 +376,6 @@ const InputDialog: React.FC<InputDialogProps> = ({
 
     // Check if the field is part of the detailedMachineryFixedCostsFields
     if (detailedMachineryFixedCostsFields.includes(name)) {
-      console.log('Hi1')
-
       // Handle empty input separately
       if (value === '') {
         error = ''
@@ -446,8 +402,6 @@ const InputDialog: React.FC<InputDialogProps> = ({
       }
     }
 
-    console.log('Hi2')
-
     // Update the userInputs state
     setUserInputs(prev => ({
       ...prev,
@@ -467,17 +421,20 @@ const InputDialog: React.FC<InputDialogProps> = ({
 
   const textFields = [
     // Cattle Fixed Cost
-    { name: 'cowPurchaseValue', label: 'Cow Purchase Value' },
+    { name: 'cowPurchaseValue', label: 'Cow Purchase Value($/Head)' },
     { name: 'overheadCostPerCow', label: 'Overhead Cost Per Cow' },
     { name: 'numberOfBredHeifers', label: 'Number of Bred Heifers' },
-    { name: 'bredHeiferPurchaseValue', label: 'Bred Heifer Purchase Value' },
+    {
+      name: 'bredHeiferPurchaseValue',
+      label: 'Bred Heifer Purchase Value($/Head)'
+    },
     {
       name: 'numberOfOneYearOldHeifers',
       label: 'Number of One-Year-Old Heifers'
     },
     {
       name: 'OneYearOldHeiferPurchaseValue',
-      label: 'One-Year-Old Heifer Purchase Value'
+      label: 'One-Year-Old Heifer Purchase Value($/Head)'
     },
     {
       name: 'numberOfWeanedHeiferCalves',
@@ -485,160 +442,160 @@ const InputDialog: React.FC<InputDialogProps> = ({
     },
     {
       name: 'weanedHeiferCalvesPurchaseValue',
-      label: 'Weaned Heifer Calves Purchase Value'
+      label: 'Weaned Heifer Calves Purchase Value($/Head)'
     },
 
     // Facilities and Buildings Fixed Cost
     {
       name: 'farmShopAndGeneralRoadsInitialInvestment',
-      label: 'Farm Shop and General Roads Initial Investment'
+      label: 'Farm Shop and General Roads Initial Investment($)'
     },
     {
       name: 'farmShopAndGeneralRoadsYearsOfUsefulLife',
-      label: 'Farm Shop and General Roads Years of Useful Life'
+      label: 'Farm Shop and General Roads Years of Useful Life(years)'
     },
     {
       name: 'milkingParlorAndEquipmentInitialInvestment',
-      label: 'Milking Parlor and Equipment Initial Investment'
+      label: 'Milking Parlor and Equipment Initial Investment($)'
     },
     {
       name: 'milkingParlorAndEquipmentYearsOfUsefulLife',
-      label: 'Milking Parlor and Equipment Years of Useful Life'
+      label: 'Milking Parlor and Equipment Years of Useful Life(years)'
     },
     {
       name: 'feedingEquipmentInitialInvestment',
-      label: 'Feeding Equipment Initial Investment'
+      label: 'Feeding Equipment Initial Investment($)'
     },
     {
       name: 'feedingEquipmentYearsOfUsefulLife',
-      label: 'Feeding Equipment Years of Useful Life'
+      label: 'Feeding Equipment Years of Useful Life(years)'
     },
     {
       name: 'freestallHousingAndLanesInitialInvestment',
-      label: 'Freestall Housing and Lanes Initial Investment'
+      label: 'Freestall Housing and Lanes Initial Investment($)'
     },
     {
       name: 'freestallHousingAndLanesYearsOfUsefulLife',
-      label: 'Freestall Housing and Lanes Years of Useful Life'
+      label: 'Freestall Housing and Lanes Years of Useful Life(years)'
     },
     {
       name: 'threePhasePowerSupplyInitialInvestment',
-      label: 'Three-Phase Power Supply Initial Investment'
+      label: 'Three-Phase Power Supply Initial Investment($)'
     },
     {
       name: 'threePhasePowerSupplyYearsOfUsefulLife',
-      label: 'Three-Phase Power Supply Years of Useful Life'
+      label: 'Three-Phase Power Supply Years of Useful Life(years)'
     },
     {
       name: 'waterSystemInitialInvestment',
-      label: 'Water System Initial Investment'
+      label: 'Water System Initial Investment($)'
     },
     {
       name: 'waterSystemYearsOfUsefulLife',
-      label: 'Water System Years of Useful Life'
+      label: 'Water System Years of Useful Life(years)'
     },
     {
       name: 'hayShedInitialInvestment',
-      label: 'Hay Shed Initial Investment'
+      label: 'Hay Shed Initial Investment($)'
     },
     {
       name: 'hayShedYearsOfUsefulLife',
-      label: 'Hay Shed Years of Useful Life'
+      label: 'Hay Shed Years of Useful Life(years)'
     },
     {
       name: 'trenchSilosInitialInvestment',
-      label: 'Trench Silos Initial Investment'
+      label: 'Trench Silos Initial Investment($)'
     },
     {
       name: 'trenchSilosYearsOfUsefulLife',
-      label: 'Trench Silos Years of Useful Life'
+      label: 'Trench Silos Years of Useful Life(years)'
     },
     {
       name: 'fencesInitialInvestment',
-      label: 'Fences Initial Investment'
+      label: 'Fences Initial Investment($)'
     },
     {
       name: 'fencesYearsOfUsefulLife',
-      label: 'Fences Years of Useful Life'
+      label: 'Fences Years of Useful Life(years)'
     },
     {
       name: 'commodityBarnInitialInvestment',
-      label: 'Commodity Barn Initial Investment'
+      label: 'Commodity Barn Initial Investment($)'
     },
     {
       name: 'commodityBarnYearsOfUsefulLife',
-      label: 'Commodity Barn Years of Useful Life'
+      label: 'Commodity Barn Years of Useful Life(years)'
     },
     {
       name: 'calfOrHeiferBarnInitialInvestment',
-      label: 'Calf or Heifer Barn Initial Investment'
+      label: 'Calf or Heifer Barn Initial Investment($)'
     },
     {
       name: 'calfOrHeiferBarnYearsOfUsefulLife',
-      label: 'Calf or Heifer Barn Years of Useful Life'
+      label: 'Calf or Heifer Barn Years of Useful Life(years)'
     },
     {
       name: 'tiltTableInitialInvestment',
-      label: 'Tilt Table Initial Investment'
+      label: 'Tilt Table Initial Investment($)'
     },
     {
       name: 'tiltTableYearsOfUsefulLife',
-      label: 'Tilt Table Years of Useful Life'
+      label: 'Tilt Table Years of Useful Life(years)'
     },
     {
       name: 'cattleHandlingFacilitiesInitialInvestment',
-      label: 'Cattle Handling Facilities Initial Investment'
+      label: 'Cattle Handling Facilities Initial Investment($)'
     },
     {
       name: 'cattleHandlingFacilitiesYearsOfUsefulLife',
-      label: 'Cattle Handling Facilities Years of Useful Life'
+      label: 'Cattle Handling Facilities Years of Useful Life(years)'
     },
     {
       name: 'otherFacilitiesAndBuildings1InitialInvestment',
-      label: 'Other Facilities and Buildings 1 Initial Investment'
+      label: 'Other Facilities and Buildings 1 Initial Investment($)'
     },
     {
       name: 'otherFacilitiesAndBuildings1YearsOfUsefulLife',
-      label: 'Other Facilities and Buildings 1 Years of Useful Life'
+      label: 'Other Facilities and Buildings 1 Years of Useful Life(years)'
     },
     {
       name: 'otherFacilitiesAndBuildings2InitialInvestment',
-      label: 'Other Facilities and Buildings 2 Initial Investment'
+      label: 'Other Facilities and Buildings 2 Initial Investment($)'
     },
     {
       name: 'otherFacilitiesAndBuildings2YearsOfUsefulLife',
-      label: 'Other Facilities and Buildings 2 Years of Useful Life'
+      label: 'Other Facilities and Buildings 2 Years of Useful Life(years)'
     },
 
     // Waste Management Fixed Costs
     {
       name: 'wasteStoragePondInitialInvestment',
-      label: 'Waste Storage Pond Initial Investment'
+      label: 'Waste Storage Pond Initial Investment($)'
     },
     {
       name: 'wasteStoragePondYearsOfUsefulLife',
-      label: 'Waste Storage Pond Years of Useful Life'
+      label: 'Waste Storage Pond Years of Useful Life(years)'
     },
     {
       name: 'compactClayLinerInitialInvestment',
-      label: 'Compact Clay Liner Initial Investment'
+      label: 'Compact Clay Liner Initial Investment($)'
     },
     {
       name: 'compactClayLinerYearsOfUsefulLife',
-      label: 'Compact Clay Liner Years of Useful Life'
+      label: 'Compact Clay Liner Years of Useful Life(years)'
     },
     {
       name: 'monitoringWellsInitialInvestment',
-      label: 'Monitoring Wells Initial Investment'
+      label: 'Monitoring Wells Initial Investment($)'
     },
     {
       name: 'monitoringWellsYearsOfUsefulLife',
-      label: 'Monitoring Wells Years of Useful Life'
+      label: 'Monitoring Wells Years of Useful Life(years)'
     },
 
     // Land Fixed Costs
     { name: 'acres', label: 'Acres' },
-    { name: 'rentalCost', label: 'Rental Cost' }
+    { name: 'rentalCost', label: 'Rental Cost($/Acre)' }
   ]
 
   const detailedMachineryFixedCostsFields = machineryFields

@@ -120,7 +120,7 @@ const InputLabourDialog: React.FC<LaborCostInputDialogProps> = ({
   const fetchLaborCostInputRecord = async () => {
     try {
       const response = await axios.get(
-        `${process.env.BACKEND_URL}/labour-cost/inputDetails/${email}`
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/labour-cost/inputDetails/${email}`
       )
       if (response && response.data) {
         setLaborCostInputs(response.data)
@@ -163,7 +163,7 @@ const InputLabourDialog: React.FC<LaborCostInputDialogProps> = ({
     if (loggedIn && email) {
       try {
         await axios.patch(
-          `${process.env.BACKEND_URL}/labour-cost/updateInput/${email}`,
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/labour-cost/updateInput/${email}`,
           laborCostInputs
         )
       } catch (error) {

@@ -1,8 +1,11 @@
 import SidebarLink from './SidebarLink'
+import '@styles/globals.css'
 
 const Sidebar: React.FC = () => {
   return (
-    <div className='fixed bottom-0 left-0 top-[108px] z-30 w-64 overflow-y-auto bg-white p-4 text-red-800'>
+    // <div className='fixed bottom-0 left-0 top-[108px] z-30 w-64 overflow-y-auto bg-white p-4 text-red-800'>
+    <div className='sidebar w-64 flex-shrink-0 bg-white p-4 text-red-800'>
+      {/* <div className='max-h-screen w-64 flex-shrink-0 overflow-y-auto bg-white p-4 text-red-800'> */}
       <ul className='flex flex-col space-y-4'>
         <SidebarLink href='/dairy'>Dairy Landing Page</SidebarLink>
         <SidebarLink href='/tomato'>Tomato Landing Page</SidebarLink>
@@ -22,10 +25,6 @@ const Sidebar: React.FC = () => {
           Digestor Feasibility
         </SidebarLink>
         <SidebarLink href='/resources'>Resources</SidebarLink>
-        {/* <SidebarLink href='/financialAssumptions'>
-          Financial Assumptions
-        </SidebarLink>
-        <SidebarLink href='/operatingCosts'>Operating Costs</SidebarLink> */}
         <SidebarLink href='/'>Enterprise Budget Analysis</SidebarLink>
         <SidebarLink href='/about'>Disease Management Model</SidebarLink>
       </ul>

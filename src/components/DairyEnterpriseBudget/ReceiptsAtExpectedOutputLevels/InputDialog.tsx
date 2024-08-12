@@ -60,7 +60,7 @@ const InputDialog: React.FC<InputDialogProps> = ({
   const fetchUserInputRecord = async () => {
     try {
       const response = await axios.get(
-        `${process.env.BACKEND_URL}/receipts/inputDetails/${email}`
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/receipts/inputDetails/${email}`
       )
       if (response && response.data) {
         setUserInputs({
