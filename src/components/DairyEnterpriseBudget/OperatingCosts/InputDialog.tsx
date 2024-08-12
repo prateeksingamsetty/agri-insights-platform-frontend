@@ -55,7 +55,7 @@ const InputDialog: React.FC<InputDialogProps> = ({
 
   const defaultInputs: UserInputs = {
     haulingFees: 1,
-    organizationalFees: 0.10,
+    organizationalFees: 0.1,
     dhiaFees: 16.25,
     vetExpenses: 30,
     insurance: 15000,
@@ -88,7 +88,7 @@ const InputDialog: React.FC<InputDialogProps> = ({
   const fetchUserInputRecord = async () => {
     try {
       const response = await axios.get(
-        `${process.env.BACKEND_URL}/operating-costs/OperatingCostinputDetails/${email}`
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/operating-costs/OperatingCostinputDetails/${email}`
       )
       if (response && response.data) {
         setUserInputs(response.data)
@@ -129,7 +129,9 @@ const InputDialog: React.FC<InputDialogProps> = ({
     })
   }
 
-  const handleLaborCostCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleLaborCostCheckbox = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setCalculateLaborCost(event.target.checked)
     if (event.target.checked) {
       setOpenLaborDialog(true)
@@ -162,7 +164,9 @@ const InputDialog: React.FC<InputDialogProps> = ({
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     if (!isLaborInputValid) {
-      alert("Please either provide an estimated labor cost or complete the labor cost form.")
+      alert(
+        'Please either provide an estimated labor cost or complete the labor cost form.'
+      )
       return
     }
     handleSubmit(userInputs, calculateLaborCost)
@@ -174,16 +178,36 @@ const InputDialog: React.FC<InputDialogProps> = ({
     { name: 'organizationalFees', label: 'Organizational Fees', unit: '$/CWT' },
     { name: 'dhiaFees', label: 'DHIA Fees', unit: '$/Head' },
     { name: 'vetExpenses', label: 'Vet Expenses', unit: '$/Head' },
-    { name: 'insurance', label: 'Insurance (Liability, Dairy Margin, etc.)', unit: '$/Farm' },
+    {
+      name: 'insurance',
+      label: 'Insurance (Liability, Dairy Margin, etc.)',
+      unit: '$/Farm'
+    },
     { name: 'utilities', label: 'Utilities', unit: '$/Head' },
-    { name: 'inseminationSexedFees', label: 'Insemination Fees (Sexed Semen)', unit: '$/Straw' },
-    { name: 'inseminationConventionalFees', label: 'Insemination Fees (Conventional Semen)', unit: '$/Straw' },
-    { name: 'inseminationConventionalBeefFees', label: 'Insemination Fees (Beef Conventional Semen)', unit: '$/Straw' },
+    {
+      name: 'inseminationSexedFees',
+      label: 'Insemination Fees (Sexed Semen)',
+      unit: '$/Straw'
+    },
+    {
+      name: 'inseminationConventionalFees',
+      label: 'Insemination Fees (Conventional Semen)',
+      unit: '$/Straw'
+    },
+    {
+      name: 'inseminationConventionalBeefFees',
+      label: 'Insemination Fees (Beef Conventional Semen)',
+      unit: '$/Straw'
+    },
     { name: 'wasteManagement', label: 'Waste Management', unit: '$/Head' },
     { name: 'bedding', label: 'Bedding', unit: '$/Head' },
     { name: 'raisedForageCost', label: 'Raised Forage Cost', unit: '$/Head' },
     { name: 'purchasedFeedCost', label: 'Purchased Feed Cost', unit: '$/Head' },
-    { name: 'additionalManagementCostsPercentage', label: 'Additional Management Costs', unit: '% of Production Value' },
+    {
+      name: 'additionalManagementCostsPercentage',
+      label: 'Additional Management Costs',
+      unit: '% of Production Value'
+    }
   ]
 
   // Function to open the labor input dialog
@@ -195,12 +219,12 @@ const InputDialog: React.FC<InputDialogProps> = ({
     <Dialog
       open={open}
       onClose={handleClose}
-      aria-labelledby="form-dialog-title"
-      maxWidth="md"
+      aria-labelledby='form-dialog-title'
+      maxWidth='md'
       fullWidth
     >
       <DialogTitle
-        id="form-dialog-title"
+        id='form-dialog-title'
         sx={{ bgcolor: '#c8102e', color: 'white' }}
       >
         Enter Your Inputs
@@ -209,23 +233,26 @@ const InputDialog: React.FC<InputDialogProps> = ({
         {previoudDetailsFound ? (
           <>
             <DialogContentText sx={{ mb: 2 }}>
-              Please enter your expense inputs for the Dairy Enterprise Budget Model.
+              Please enter your expense inputs for the Dairy Enterprise Budget
+              Model.
             </DialogContentText>
             <form
               onSubmit={onSubmit}
               style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}
             >
-              <Typography variant="h6" sx={{ mt: 2, mb: 1 }}>Expense Inputs</Typography>
+              <Typography variant='h6' sx={{ mt: 2, mb: 1 }}>
+                Expense Inputs
+              </Typography>
               <Grid container spacing={2}>
                 {inputFields.map(field => (
                   <Grid item xs={12} sm={6} key={field.name}>
                     <Grid container spacing={1}>
                       <Grid item xs={8}>
                         <TextField
-                          margin="dense"
+                          margin='dense'
                           name={field.name}
                           label={`${field.label} (${field.unit})`}
-                          type="number"
+                          type='number'
                           fullWidth
                           required
                           value={userInputs[field.name as keyof UserInputs]}
@@ -234,13 +261,13 @@ const InputDialog: React.FC<InputDialogProps> = ({
                       </Grid>
                       <Grid item xs={4}>
                         <TextField
-                          margin="dense"
-                          label="Default"
-                          type="number"
+                          margin='dense'
+                          label='Default'
+                          type='number'
                           fullWidth
                           value={defaultInputs[field.name as keyof UserInputs]}
                           InputProps={{
-                            readOnly: true,
+                            readOnly: true
                           }}
                         />
                       </Grid>
@@ -253,14 +280,14 @@ const InputDialog: React.FC<InputDialogProps> = ({
                       <Checkbox
                         checked={calculateLaborCost}
                         onChange={handleLaborCostCheckbox}
-                        name="calculateLaborCost"
+                        name='calculateLaborCost'
                       />
                     }
-                    label="Calculate Detailed Labor Cost"
+                    label='Calculate Detailed Labor Cost'
                   />
                   <Button
                     onClick={openLaborDialogHandler}
-                    variant="contained"
+                    variant='contained'
                     sx={{ ml: 2 }}
                   >
                     Open Labor Input Dialog
@@ -268,13 +295,13 @@ const InputDialog: React.FC<InputDialogProps> = ({
                 </Grid>
                 <Grid item xs={12}>
                   <Collapse in={!calculateLaborCost}>
-                    <Grid container alignItems="center">
+                    <Grid container alignItems='center'>
                       <Grid item xs={11}>
                         <TextField
-                          margin="dense"
-                          name="estimatedLabourCost"
-                          label="Estimated Labour Cost ($/Head)"
-                          type="number"
+                          margin='dense'
+                          name='estimatedLabourCost'
+                          label='Estimated Labour Cost ($/Head)'
+                          type='number'
                           fullWidth
                           required={!calculateLaborCost}
                           value={userInputs.estimatedLabourCost}
@@ -284,7 +311,7 @@ const InputDialog: React.FC<InputDialogProps> = ({
                       </Grid>
                       <Grid item xs={1}>
                         <Tooltip
-                          title="Please provide an Estimated Labour cost Input or calculate detailed Labour cost"
+                          title='Please provide an Estimated Labour cost Input or calculate detailed Labour cost'
                           arrow
                         >
                           <IconButton>
@@ -300,7 +327,11 @@ const InputDialog: React.FC<InputDialogProps> = ({
                 <Button onClick={handleClose} sx={{ color: '#c8102e' }}>
                   Cancel
                 </Button>
-                <Button type="submit" sx={{ color: '#c8102e' }} disabled={!isLaborInputValid}>
+                <Button
+                  type='submit'
+                  sx={{ color: '#c8102e' }}
+                  disabled={!isLaborInputValid}
+                >
                   Submit
                 </Button>
               </DialogActions>

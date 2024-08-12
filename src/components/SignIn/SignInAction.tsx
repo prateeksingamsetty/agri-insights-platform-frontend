@@ -6,13 +6,16 @@ export async function signInAction(formData: {
   password: string
 }) {
   try {
-    const response = await fetch(`${process.env.BACKEND_URL}/auth/signin`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(formData)
-    })
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/signin`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      }
+    )
 
     if (!response.ok) {
       const errorText = await response.text()

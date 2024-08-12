@@ -20,13 +20,15 @@ export default function RootLayout({
         <body className={`${inter.className} flex min-h-screen flex-col`}>
           <UtilityBar />
           <Navbar />
-          <div className='flex flex-1 pt-[108px]'> {/* Adjusted padding-top */}
-          <Sidebar />
-            <main className='flex-1 p-4 ml-64'>
-            
-              {children}
-             
-            </main>
+          {/* <div className='flex flex-1 pt-[108px]'>
+            <Sidebar />
+            <main className='ml-64 flex-1 p-4'>{children}</main>
+          </div> */}
+          <div className='mt-20 flex h-full flex-1 p-2'>
+            <div className='sticky top-0 h-screen w-64 overflow-y-auto bg-white'>
+              <Sidebar />
+            </div>
+            <main className='flex-1 overflow-y-auto p-4'>{children}</main>
           </div>
           <Footer />
         </body>

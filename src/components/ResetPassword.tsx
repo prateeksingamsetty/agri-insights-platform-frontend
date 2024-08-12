@@ -47,10 +47,13 @@ const ResetPassword = () => {
       }
       console.log('Token ', token)
 
-      await axios.post(`${process.env.BACKEND_URL}/auth/reset-password`, {
-        token,
-        password
-      })
+      await axios.post(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/reset-password`,
+        {
+          token,
+          password
+        }
+      )
       setLoading(false)
       setSuccess('Password reset successfully')
       setRedirecting(true) // Trigger redirect

@@ -62,7 +62,7 @@ const DairyPrices = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get<DairyPriceRecord[]>(
-          `${process.env.BACKEND_URL}/dairyPrices/allPrices`
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/dairyPrices/allPrices`
         )
         setAllData(response.data)
       } catch (error) {

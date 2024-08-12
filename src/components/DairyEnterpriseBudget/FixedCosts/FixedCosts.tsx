@@ -33,7 +33,7 @@ const FixedCosts = () => {
     const fetchUserOutputRecord = async () => {
       try {
         const response = await axios.get(
-          `${process.env.BACKEND_URL}/fixed-costs/outputDetails/${email}`
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/fixed-costs/outputDetails/${email}`
         )
         if (response && response.data) {
           setDetails({
@@ -161,7 +161,7 @@ const FixedCosts = () => {
       }
 
       const response = await axios.patch(
-        `${process.env.BACKEND_URL}/fixed-costs/updateInput/${email}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/fixed-costs/updateInput/${email}`,
         transformedInputs
       )
       if (response && response.data) {

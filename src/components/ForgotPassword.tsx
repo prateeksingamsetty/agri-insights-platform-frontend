@@ -26,9 +26,12 @@ const ForgotPassword = () => {
     setLoading(true)
 
     try {
-      await axios.post(`${process.env.BACKEND_URL}/auth/forgot-password`, {
-        email
-      })
+      await axios.post(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/forgot-password`,
+        {
+          email
+        }
+      )
       setLoading(false)
       setSuccess('Password reset link has been sent to your email')
     } catch (error) {

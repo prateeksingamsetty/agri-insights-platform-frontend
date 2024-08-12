@@ -20,7 +20,7 @@ interface ReceiptsDataType {
 
 const ReceiptsAtExpectedOutputLevels = () => {
   const { email, loggedIn } = useAuth()
-  const BASE_URL = process.env.BACKEND_URL
+  const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL
 
   const [data, setData] = useState<ReceiptsDataType>({
     milkSales: 0,
@@ -191,17 +191,17 @@ const ReceiptsAtExpectedOutputLevels = () => {
   }
 
   const textFields = [
-    { label: 'Milk Sales', value: data.milkSales },
-    { label: 'Cull Cows Sales', value: data.cullCowsSales },
-    { label: 'Heifers Sales', value: data.heifersSales },
-    { label: 'Bull Calves Sales', value: data.bullCalvesSales },
-    { label: 'Beef Cross Sales', value: data.beefCrossSales },
+    { label: 'Milk Sales($)', value: data.milkSales },
+    { label: 'Cull Cows Sales($)', value: data.cullCowsSales },
+    { label: 'Heifers Sales($)', value: data.heifersSales },
+    { label: 'Bull Calves Sales($)', value: data.bullCalvesSales },
+    { label: 'Beef Cross Sales($)', value: data.beefCrossSales },
     {
-      label: 'Other Income - Gov, Payments, Livestock, etc',
+      label: 'Other Income - Gov, Payments, Livestock, etc($)',
       value: data.otherIncome1
     },
     {
-      label: 'Other Income - Misc, Crop or Livestock Sales, etc',
+      label: 'Other Income - Misc, Crop or Livestock Sales, etc($)',
       value: data.otherIncome2
     },
     { label: 'Total Receipts', value: data.totalReceipts }

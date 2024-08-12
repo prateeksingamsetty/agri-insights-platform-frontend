@@ -36,7 +36,7 @@ interface UserInputs {
 
 const OperatingCosts = () => {
   const { email, loggedIn } = useAuth()
-  const BASE_URL = process.env.BACKEND_URL
+  const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL
 
   const [operatingCosts, setOperatingCosts] = useState<OperatingCostsType>({
     totalFeedCost: 0,
