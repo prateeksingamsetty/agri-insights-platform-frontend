@@ -59,8 +59,8 @@ a:hover {
 .sidebar {
   position: sticky;
   top: 0; /* Stick to the top of the viewport */
-  height: calc(100vh - 4rem); /* Full viewport height */
-  /*max-height: 100vh; /* Ensure the height doesn't exceed the viewport */
+  height: 100vh; /* Full viewport height */
+  max-height: 100vh; /* Ensure the height doesn't exceed the viewport */
   overflow-y: auto; /* Enable scrolling if content exceeds the height */
   background: #fff; /* Background color for the sidebar */
   padding: 1rem; /* Padding for the content inside the sidebar */
