@@ -5,6 +5,8 @@ import '../styles/globals.css'
 import AboutPlatform from '../components/AboutPlatform'
 import Carousel from '../components/Carousel'
 import Header from '@components/Header'
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 export default function HomePage() {
   console.log('I am always rendered')

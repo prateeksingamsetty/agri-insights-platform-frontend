@@ -1,8 +1,20 @@
 import { Box, Button, Container, TextField, Typography } from '@mui/material'
-import InputDialog from './InputDialog'
+import InputDialog from './InputDialog';
+import InputFinancialAssumption from '../FinancialAssumptions/InputFinancialAssumption';
+
 import { useEffect, useState } from 'react'
 import { useAuth } from 'src/context/AuthContext'
 import axios from 'axios'
+
+interface FinancialAssumptionInputs {
+  shortTermInterestRate: number
+  longTermInterestRate: number
+  propertyTaxRate: number
+  livestockInsuranceRate: number
+  propertyInsuranceRate: number
+  machineryEquipmentInsuranceRate: number
+  buildingStructuresInsuranceCoverage: number
+}
 
 interface FixedCostsType {
   totalCattleFixedCost: number
@@ -28,7 +40,8 @@ const FixedCosts = () => {
     totalDairyFixedCost: 0
   })
   const [open, setOpen] = useState(false)
-
+  
+  const [openFinancialAssumption, setOpenFinancialAssumption] = useState(false)
   useEffect(() => {
     const fetchUserOutputRecord = async () => {
       try {
@@ -62,6 +75,8 @@ const FixedCosts = () => {
 
   const handleDialogOpen = () => setOpen(true)
   const handleDialogClose = () => setOpen(false)
+  const handleFinancialAssumptionOpen = () => setOpenFinancialAssumption(true)
+const handleFinancialAssumptionClose = () => setOpenFinancialAssumption(false)
 
   const handleSubmit = async (userInputs: any) => {
     try {
@@ -182,6 +197,12 @@ const FixedCosts = () => {
     }
   }
 
+  const handleFinancialAssumptionSubmit = (inputs: FinancialAssumptionInputs) => {
+    // Handle the submission of financial assumption inputs here
+    console.log('Financial Assumption Inputs:', inputs)
+    handleFinancialAssumptionClose()
+  }
+
   const textFields = [
     {
       label: 'Total Cattle Fixed Cost($)',
@@ -248,6 +269,19 @@ const FixedCosts = () => {
           >
             Input Fixed Costs
           </Button>
+
+          <Button
+  variant='contained'
+  sx={{
+    bgcolor: '#c8102e',
+    '&:hover': { bgcolor: '#a50f2e' },
+    mt: 2,
+    py: 1.5
+  }}
+  onClick={handleFinancialAssumptionOpen}
+>
+  Input Financial Assumptions
+</Button>
         </Box>
       </Container>
       <InputDialog
@@ -255,6 +289,12 @@ const FixedCosts = () => {
         handleClose={handleDialogClose}
         handleSubmit={handleSubmit}
       />
+      <InputFinancialAssumption
+        open={openFinancialAssumption}
+        handleClose={handleFinancialAssumptionClose}
+        handleSubmit={handleFinancialAssumptionSubmit}
+        initialInputs={null}
+/>
     </div>
   )
 }
