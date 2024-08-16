@@ -35,11 +35,13 @@ const ProductionDetails = () => {
 
     // This checks if the user is alredy logged in or if not then it checks stored session storage and calculat ouput and display
     if (loggedIn && email != null) {
+      console.log('Called because user logged in ', email)
       fetchUserOutputRecord()
     } else {
       console.log('User not logged in')
       const storedInputs = localStorage.getItem('productionInputs')
       if (storedInputs) {
+        console.log('Stored inputs true')
         const parsedInputs = JSON.parse(storedInputs)
         handleSubmit(parsedInputs)
       }
