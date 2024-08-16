@@ -10,8 +10,14 @@ const Sidebar: React.FC = () => {
     <div className='sidebar w-64 flex-shrink-0 bg-white p-4 text-red-800'>
       <ul className='flex flex-col space-y-4'>
         {pathname !== '/' && <SidebarLink href='/'>Home</SidebarLink>}
-        <SidebarLink href='/dairy'>Dairy Landing Page</SidebarLink>
-        {(pathname === '/' || pathname === '/dairyEnterprise') && (
+        {(pathname === '/' ||
+          pathname === '/prices/dairy' ||
+          pathname === '/dairyEnterprise') && (
+          <SidebarLink href='/dairy'>Dairy Landing Page</SidebarLink>
+        )}
+        {(pathname === '/' ||
+          pathname === '/dairyEnterprise' ||
+          pathname === '/dairy') && (
           <SidebarLink href='/prices/dairy'>Dairy Price Data</SidebarLink>
         )}
         <SidebarLink href='/prices/mailbox_appalachian'>
