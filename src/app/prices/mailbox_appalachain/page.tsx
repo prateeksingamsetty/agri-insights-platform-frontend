@@ -1,6 +1,6 @@
-import MailboxAppalachianPrices from '@components/MailboxAppalachain'
+import MailboxAppalachianPrices from '@components/MailboxAppalachian'
 
-const MailboxAppalachainPage = () => {
+const MailboxAppalachianPage = () => {
   return (
     <>
       <MailboxAppalachianPrices />
@@ -8,4 +8,4 @@ const MailboxAppalachainPage = () => {
   )
 }
 
-export default MailboxAppalachainPage
+export default MailboxAppalachianPage

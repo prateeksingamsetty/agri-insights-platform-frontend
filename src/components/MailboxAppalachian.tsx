@@ -25,7 +25,7 @@ ChartJS.register(
   Legend
 )
 
-interface MailboxAppalachainPriceRecord {
+interface MailboxAppalachianPriceRecord {
   _id: string
   report_month: string
   report_year: number
@@ -57,7 +57,7 @@ const initialFilterState: FilterState = {
   timeRange: 0
 }
 
-const months: (keyof MailboxAppalachainPriceRecord)[] = [
+const months: (keyof MailboxAppalachianPriceRecord)[] = [
   'Jan',
   'Feb',
   'Mar',
@@ -72,8 +72,8 @@ const months: (keyof MailboxAppalachainPriceRecord)[] = [
   'Dec'
 ]
 
-const MailboxAppalachainPrices = () => {
-  const [allData, setAllData] = useState<MailboxAppalachainPriceRecord[]>([])
+const MailboxAppalachianPrices = () => {
+  const [allData, setAllData] = useState<MailboxAppalachianPriceRecord[]>([])
   const [filters, setFilters] = useState<FilterState>(initialFilterState)
   const [chartData, setChartData] = useState<{
     labels: string[]
@@ -83,8 +83,8 @@ const MailboxAppalachainPrices = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get<MailboxAppalachainPriceRecord[]>(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/mailboxAppalachainPrices/allYears`
+        const response = await axios.get<MailboxAppalachianPriceRecord[]>(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/mailboxAppalachianPrices/allYears`
         )
         setAllData(response.data)
       } catch (error) {
@@ -99,7 +99,7 @@ const MailboxAppalachainPrices = () => {
     updateChartData()
   }, [allData, filters])
 
-  const filterData = (data: MailboxAppalachainPriceRecord[]) => {
+  const filterData = (data: MailboxAppalachianPriceRecord[]) => {
     let filteredData = data
 
     if (filters.year !== 'All') {
@@ -215,4 +215,4 @@ const MailboxAppalachainPrices = () => {
   )
 }
 
-export default MailboxAppalachainPrices
+export default MailboxAppalachianPrices
