@@ -119,7 +119,7 @@ const InputDialog: React.FC<InputDialogProps> = ({
     { name: 'beefCrossPrice', label: 'Beef Cross Price($/Head)' },
     {
       name: 'otherIncome1',
-      label: 'Other Income 1 (gov, payments, insurance, etc) ($)'
+      label: 'Other Income 1 (gov. payments, insurance, etc) ($)'
     },
     {
       name: 'otherIncome2',

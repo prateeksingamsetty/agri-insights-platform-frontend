@@ -130,13 +130,16 @@ const ProductionDetails = () => {
   }
 
   const textFields = [
-    { label: 'Rolling Herd Average(LBS)', value: details.rollingHerdAverage },
     {
-      label: 'Total Annual Milk Production(CWT)',
+      label: 'Rolling Herd Average(LBS/year)',
+      value: details.rollingHerdAverage
+    },
+    {
+      label: 'Total Annual Milk Production(CWT/year)',
       value: details.totalAnnualMilkProduction
     },
     {
-      label: 'Expected Annual Milk Sales($)',
+      label: 'Expected Annual Milk Sales($/year)',
       value: details.expectedAnnualMilkSales
     },
     {

@@ -148,7 +148,7 @@ const InputDialog: React.FC<InputDialogProps> = ({
     { name: 'cowDeathLossRate', label: 'Cow Death Loss Rate(%)' },
     {
       name: 'heiferRaisingDeathLossRate',
-      label: 'Heifer Raising Death Loss Rate(upto 24 months - %)'
+      label: 'Heifer Raising Death Loss Rate(up to 24 months - %)'
     },
     { name: 'numberOfHeifersRaised', label: 'Number Of Heifers Raised(#)' },
     { name: 'bullCalfDeath', label: 'Bull Calf Death(%)' },
