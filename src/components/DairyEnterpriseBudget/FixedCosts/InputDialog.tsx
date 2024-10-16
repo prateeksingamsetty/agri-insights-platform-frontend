@@ -343,11 +343,13 @@ const InputDialog: React.FC<InputDialogProps> = ({
     if (facilitiesAndBuildingsFixedCostFields.includes(name)) {
       let error = ''
 
-      // Handle empty input separately
-      if (value === '') {
-        error = ''
-      } else if (numericValue < 1 || numericValue > 12) {
-        error = `${name.replace(/([A-Z])/g, ' $1')} must be between 1 and 12.`
+      if (/YearsOfUsefulLife$/.test(name)) {
+        // Handle empty input separately
+        if (value === '') {
+          error = ''
+        } else if (numericValue < 1 || numericValue > 12) {
+          error = `${name.replace(/([A-Z])/g, ' $1')} must be between 1 and 12.`
+        }
       }
 
       // Update the errors state
