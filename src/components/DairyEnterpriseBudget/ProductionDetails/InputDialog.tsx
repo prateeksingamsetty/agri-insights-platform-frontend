@@ -15,6 +15,7 @@ interface UserInputs {
   expectedMilkProduction: number
   calvingInterval: number
   totalNumberOfCows: number
+  expectedMilkPrice: number
   cullingRate: number
   cowDeathLossRate: number
   heiferRaisingDeathLossRate: number
@@ -43,6 +44,7 @@ const InputDialog: React.FC<InputDialogProps> = ({
     expectedMilkProduction: 0,
     calvingInterval: 0,
     totalNumberOfCows: 0,
+    expectedMilkPrice: 0,
     cullingRate: 0,
     cowDeathLossRate: 0,
     heiferRaisingDeathLossRate: 0,
@@ -78,6 +80,8 @@ const InputDialog: React.FC<InputDialogProps> = ({
           calvingInterval: response.data.milkProduction.calvingInterval || 0,
           totalNumberOfCows:
             response.data.milkProduction.totalNumberOfCows || 0,
+          expectedMilkPrice:
+            response.data.milkProduction.expectedMilkPrice || 0,
           cullingRate: response.data.heiferProduction.cullingRate || 0,
           cowDeathLossRate:
             response.data.heiferProduction.cowDeathLossRate || 0,
@@ -139,6 +143,7 @@ const InputDialog: React.FC<InputDialogProps> = ({
 
   const textFields = [
     { name: 'totalNumberOfCows', label: 'Total Number of Cows' },
+    { name: 'expectedMilkPrice', label: 'Expected Milk Price($)' },
     { name: 'calvingInterval', label: 'Calving Interval(Months)' },
     {
       name: 'expectedMilkProduction',

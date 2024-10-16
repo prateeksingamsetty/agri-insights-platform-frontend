@@ -19,7 +19,6 @@ interface InputDialogProps {
 }
 
 interface UserInputs {
-  milkPrice: number
   cullCowsPrice: number
   heifersPrice: number
   bullCalvesPrice: number
@@ -37,7 +36,6 @@ const InputDialog: React.FC<InputDialogProps> = ({
   const { email, loggedIn } = useAuth()
 
   const defaultInputs: UserInputs = {
-    milkPrice: 0,
     cullCowsPrice: 0,
     heifersPrice: 0,
     bullCalvesPrice: 0,
@@ -64,7 +62,6 @@ const InputDialog: React.FC<InputDialogProps> = ({
       )
       if (response && response.data) {
         setUserInputs({
-          milkPrice: response.data.milkPrice || 0,
           cullCowsPrice: response.data.cullCowsPrice || 0,
           heifersPrice: response.data.heifersPrice || 0,
           bullCalvesPrice: response.data.bullCalvesPrice || 0,
@@ -112,7 +109,6 @@ const InputDialog: React.FC<InputDialogProps> = ({
   }
 
   const textFields = [
-    { name: 'milkPrice', label: 'Milk Price($/CWT)' },
     { name: 'cullCowsPrice', label: 'Cull Cows Price($/Head)' },
     { name: 'heifersPrice', label: 'Heifers Price($/Head)' },
     { name: 'bullCalvesPrice', label: 'Bull Calves Price($/Head)' },
