@@ -186,7 +186,6 @@ const OperatingCosts = () => {
             console.log('here are productiondetails : productionDetails')
 
             receiptsTransformedInputs = {
-              milkPrice: Number(reciptsInputs.milkPrice),
               cullCowsPrice: Number(reciptsInputs.cullCowsPrice),
               heifersPrice: Number(reciptsInputs.heifersPrice),
               bullCalvesPrice: Number(reciptsInputs.bullCalvesPrice),
@@ -270,6 +269,7 @@ const OperatingCosts = () => {
             productionDetailTransformedInput = {
               milkProduction: {
                 totalNumberOfCows: productionDetails.totalNumberOfCows,
+                expectedMilkPrice: productionDetails.expectedMilkPrice,
                 calvingInterval: productionDetails.calvingInterval,
                 expectedMilkProduction: productionDetails.expectedMilkProduction
               },

@@ -106,7 +106,6 @@ const ReceiptsAtExpectedOutputLevels = () => {
     try {
       let response
       const transformedInputs = {
-        milkPrice: Number(userInputs.milkPrice),
         cullCowsPrice: Number(userInputs.cullCowsPrice),
         heifersPrice: Number(userInputs.heifersPrice),
         bullCalvesPrice: Number(userInputs.bullCalvesPrice),

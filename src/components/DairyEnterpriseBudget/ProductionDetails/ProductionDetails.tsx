@@ -82,6 +82,7 @@ const ProductionDetails = () => {
       const transformedInputs = {
         milkProduction: {
           totalNumberOfCows: userInputs.totalNumberOfCows,
+          expectedMilkPrice: userInputs.expectedMilkPrice,
           calvingInterval: userInputs.calvingInterval,
           expectedMilkProduction: userInputs.expectedMilkProduction
         },
