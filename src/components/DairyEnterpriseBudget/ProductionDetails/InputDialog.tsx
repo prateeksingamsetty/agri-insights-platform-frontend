@@ -41,19 +41,19 @@ const InputDialog: React.FC<InputDialogProps> = ({
   const { email, loggedIn } = useAuth()
 
   const defaultInputs: UserInputs = {
-    expectedMilkProduction: 0,
-    calvingInterval: 0,
-    totalNumberOfCows: 0,
+    expectedMilkProduction: 25000,
+    calvingInterval: 13.3,
+    totalNumberOfCows: 500,
     expectedMilkPrice: 0,
-    cullingRate: 0,
-    cowDeathLossRate: 0,
-    heiferRaisingDeathLossRate: 0,
-    numberOfHeifersRaised: 0,
-    bullCalfDeath: 0,
-    expectedPercentMaleWithSexedSemen: 0,
-    expectedPercentMaleWithConventional: 0,
-    beefCrossPercent: 0,
-    beefCrossDeathRate: 0
+    cullingRate: 35,
+    cowDeathLossRate: 7.5,
+    heiferRaisingDeathLossRate: 12,
+    numberOfHeifersRaised: 300,
+    bullCalfDeath: 5,
+    expectedPercentMaleWithSexedSemen: 90,
+    expectedPercentMaleWithConventional: 50,
+    beefCrossPercent: 90,
+    beefCrossDeathRate: 8.5
   }
 
   const [userInputs, setUserInputs] = useState<UserInputs>(defaultInputs)
@@ -73,33 +73,29 @@ const InputDialog: React.FC<InputDialogProps> = ({
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/production-details/inputDetails/${email}`
       )
+      console.log('response in prod details ', response)
+
       if (response && response.data) {
+        console.log('Entereddd')
         setUserInputs({
           expectedMilkProduction:
-            response.data.milkProduction.expectedMilkProduction || 0,
-          calvingInterval: response.data.milkProduction.calvingInterval || 0,
-          totalNumberOfCows:
-            response.data.milkProduction.totalNumberOfCows || 0,
-          expectedMilkPrice:
-            response.data.milkProduction.expectedMilkPrice || 0,
-          cullingRate: response.data.heiferProduction.cullingRate || 0,
-          cowDeathLossRate:
-            response.data.heiferProduction.cowDeathLossRate || 0,
+            response.data.milkProduction.expectedMilkProduction,
+          calvingInterval: response.data.milkProduction.calvingInterval,
+          totalNumberOfCows: response.data.milkProduction.totalNumberOfCows,
+          expectedMilkPrice: response.data.milkProduction.expectedMilkPrice,
+          cullingRate: response.data.heiferProduction.cullingRate,
+          cowDeathLossRate: response.data.heiferProduction.cowDeathLossRate,
           heiferRaisingDeathLossRate:
-            response.data.heiferProduction.heiferRaisingDeathLossRate || 0,
+            response.data.heiferProduction.heiferRaisingDeathLossRate,
           numberOfHeifersRaised:
-            response.data.heiferProduction.numberOfHeifersRaised || 0,
-          bullCalfDeath: response.data.heiferProduction.bullCalfDeath || 0,
+            response.data.heiferProduction.numberOfHeifersRaised,
+          bullCalfDeath: response.data.heiferProduction.bullCalfDeath,
           expectedPercentMaleWithSexedSemen:
-            response.data.heiferProduction.expectedPercentMaleWithSexedSemen ||
-            0,
+            response.data.heiferProduction.expectedPercentMaleWithSexedSemen,
           expectedPercentMaleWithConventional:
-            response.data.heiferProduction
-              .expectedPercentMaleWithConventional || 0,
-          beefCrossPercent:
-            response.data.beefCrossDetails.beefCrossPercent || 0,
-          beefCrossDeathRate:
-            response.data.beefCrossDetails.beefCrossDeathRate || 0
+            response.data.heiferProduction.expectedPercentMaleWithConventional,
+          beefCrossPercent: response.data.beefCrossDetails.beefCrossPercent,
+          beefCrossDeathRate: response.data.beefCrossDetails.beefCrossDeathRate
         })
       }
     } catch (error) {

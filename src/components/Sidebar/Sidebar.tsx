@@ -4,7 +4,6 @@ import { usePathname } from 'next/navigation'
 
 const Sidebar: React.FC = () => {
   const pathname = usePathname()
-  console.log('pathname ', pathname)
 
   return (
     <div className='sidebar w-64 flex-shrink-0 bg-white p-4 text-red-800'>

@@ -36,10 +36,10 @@ const InputDialog: React.FC<InputDialogProps> = ({
   const { email, loggedIn } = useAuth()
 
   const defaultInputs: UserInputs = {
-    cullCowsPrice: 0,
-    heifersPrice: 0,
-    bullCalvesPrice: 0,
-    beefCrossPrice: 0,
+    cullCowsPrice: 870.0,
+    heifersPrice: 455.0,
+    bullCalvesPrice: 575.0,
+    beefCrossPrice: 850.0,
     otherIncome1: 0,
     otherIncome2: 0
   }
@@ -62,12 +62,12 @@ const InputDialog: React.FC<InputDialogProps> = ({
       )
       if (response && response.data) {
         setUserInputs({
-          cullCowsPrice: response.data.cullCowsPrice || 0,
-          heifersPrice: response.data.heifersPrice || 0,
-          bullCalvesPrice: response.data.bullCalvesPrice || 0,
-          beefCrossPrice: response.data.beefCrossPrice || 0,
-          otherIncome1: response.data.otherIncome1 || 0,
-          otherIncome2: response.data.otherIncome2 || 0
+          cullCowsPrice: response.data.cullCowsPrice,
+          heifersPrice: response.data.heifersPrice,
+          bullCalvesPrice: response.data.bullCalvesPrice,
+          beefCrossPrice: response.data.beefCrossPrice,
+          otherIncome1: response.data.otherIncome1,
+          otherIncome2: response.data.otherIncome2
         })
       }
     } catch (error) {
@@ -96,7 +96,7 @@ const InputDialog: React.FC<InputDialogProps> = ({
         [name]: value
       }
       if (!loggedIn) {
-        localStorage.setItem('ReciptsInputs', JSON.stringify(newInputs))
+        localStorage.setItem('ReceiptsInputs', JSON.stringify(newInputs))
       }
       return newInputs
     })

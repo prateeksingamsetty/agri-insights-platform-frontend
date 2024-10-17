@@ -1,6 +1,6 @@
 import { Box, Button, Container, TextField, Typography } from '@mui/material'
-import InputDialog from './InputDialog';
-import InputFinancialAssumption from '../FinancialAssumptions/InputFinancialAssumption';
+import InputDialog from './InputDialog'
+import InputFinancialAssumption from '../FinancialAssumptions/InputFinancialAssumption'
 
 import { useEffect, useState } from 'react'
 import { useAuth } from 'src/context/AuthContext'
@@ -40,7 +40,7 @@ const FixedCosts = () => {
     totalDairyFixedCost: 0
   })
   const [open, setOpen] = useState(false)
-  
+
   const [openFinancialAssumption, setOpenFinancialAssumption] = useState(false)
   useEffect(() => {
     const fetchUserOutputRecord = async () => {
@@ -76,7 +76,7 @@ const FixedCosts = () => {
   const handleDialogOpen = () => setOpen(true)
   const handleDialogClose = () => setOpen(false)
   const handleFinancialAssumptionOpen = () => setOpenFinancialAssumption(true)
-const handleFinancialAssumptionClose = () => setOpenFinancialAssumption(false)
+  const handleFinancialAssumptionClose = () => setOpenFinancialAssumption(false)
 
   const handleSubmit = async (userInputs: any) => {
     try {
@@ -161,7 +161,35 @@ const handleFinancialAssumptionClose = () => setOpenFinancialAssumption(false)
           monitoringWellsInitialInvestment:
             userInputs.monitoringWellsInitialInvestment,
           monitoringWellsYearsOfUsefulLife:
-            userInputs.monitoringWellsYearsOfUsefulLife
+            userInputs.monitoringWellsYearsOfUsefulLife,
+          solidsSeparatorInitialInvestment:
+            userInputs.solidsSeparatorInitialInvestment,
+          solidsSeparatorYearsOfUsefulLife:
+            userInputs.solidsSeparatorYearsOfUsefulLife,
+          lagoonPumpInitialInvestment: userInputs.lagoonPumpInitialInvestment,
+          lagoonPumpYearsOfUsefulLife: userInputs.lagoonPumpYearsOfUsefulLife,
+          pipesInitialInvestment: userInputs.pipesInitialInvestment,
+          pipesYearsOfUsefulLife: userInputs.pipesYearsOfUsefulLife,
+          powerUnitInitialInvestment: userInputs.powerUnitInitialInvestment,
+          powerUnitYearsOfUsefulLife: userInputs.powerUnitYearsOfUsefulLife,
+          irrigationSystemInitialInvestment:
+            userInputs.irrigationSystemInitialInvestment,
+          irrigationSystemYearsOfUsefulLife:
+            userInputs.irrigationSystemYearsOfUsefulLife,
+          agitatorInitialInvestment: userInputs.agitatorInitialInvestment,
+          agitatorYearsOfUsefulLife: userInputs.agitatorYearsOfUsefulLife,
+          manureSpreaderInitialInvestment:
+            userInputs.manureSpreaderInitialInvestment,
+          manureSpreaderYearsOfUsefulLife:
+            userInputs.manureSpreaderYearsOfUsefulLife,
+          otherManureManagement1InitialInvestment:
+            userInputs.otherManureManagement1InitialInvestment,
+          otherManureManagement1YearsOfUsefulLife:
+            userInputs.otherManureManagement1YearsOfUsefulLife,
+          otherManureManagement2InitialInvestment:
+            userInputs.otherManureManagement2InitialInvestment,
+          otherManureManagement2YearsOfUsefulLife:
+            userInputs.otherManureManagement2YearsOfUsefulLife
         },
         machineryFixedCosts: {
           machineryFixedCostTotalEstimate:
@@ -197,7 +225,9 @@ const handleFinancialAssumptionClose = () => setOpenFinancialAssumption(false)
     }
   }
 
-  const handleFinancialAssumptionSubmit = (inputs: FinancialAssumptionInputs) => {
+  const handleFinancialAssumptionSubmit = (
+    inputs: FinancialAssumptionInputs
+  ) => {
     // Handle the submission of financial assumption inputs here
     console.log('Financial Assumption Inputs:', inputs)
     handleFinancialAssumptionClose()
@@ -271,17 +301,17 @@ const handleFinancialAssumptionClose = () => setOpenFinancialAssumption(false)
           </Button>
 
           <Button
-  variant='contained'
-  sx={{
-    bgcolor: '#c8102e',
-    '&:hover': { bgcolor: '#a50f2e' },
-    mt: 2,
-    py: 1.5
-  }}
-  onClick={handleFinancialAssumptionOpen}
->
-  Input Financial Assumptions
-</Button>
+            variant='contained'
+            sx={{
+              bgcolor: '#c8102e',
+              '&:hover': { bgcolor: '#a50f2e' },
+              mt: 2,
+              py: 1.5
+            }}
+            onClick={handleFinancialAssumptionOpen}
+          >
+            Input Financial Assumptions
+          </Button>
         </Box>
       </Container>
       <InputDialog
@@ -294,7 +324,7 @@ const handleFinancialAssumptionClose = () => setOpenFinancialAssumption(false)
         handleClose={handleFinancialAssumptionClose}
         handleSubmit={handleFinancialAssumptionSubmit}
         initialInputs={null}
-/>
+      />
     </div>
   )
 }
