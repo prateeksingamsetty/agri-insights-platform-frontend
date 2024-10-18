@@ -82,10 +82,10 @@ interface UserInputs {
   agitatorYearsOfUsefulLife: number
   manureSpreaderInitialInvestment: number
   manureSpreaderYearsOfUsefulLife: number
-  otherManureManagement1InitialInvestment: number
-  otherManureManagement1YearsOfUsefulLife: number
-  otherManureManagement2InitialInvestment: number
-  otherManureManagement2YearsOfUsefulLife: number
+  otherManureManagementStructure1InitialInvestment: number
+  otherManureManagementStructure1YearsOfUsefulLife: number
+  otherManureManagementStructure2InitialInvestment: number
+  otherManureManagementStructure2YearsOfUsefulLife: number
 
   // Machinery Fixed Costs
   machineryFixedCostTotalEstimate: number
@@ -180,10 +180,10 @@ const InputDialog: React.FC<InputDialogProps> = ({
     agitatorYearsOfUsefulLife: 15,
     manureSpreaderInitialInvestment: 40000,
     manureSpreaderYearsOfUsefulLife: 15,
-    otherManureManagement1InitialInvestment: 0,
-    otherManureManagement1YearsOfUsefulLife: 15,
-    otherManureManagement2InitialInvestment: 0,
-    otherManureManagement2YearsOfUsefulLife: 15,
+    otherManureManagementStructure1InitialInvestment: 0,
+    otherManureManagementStructure1YearsOfUsefulLife: 15,
+    otherManureManagementStructure2InitialInvestment: 0,
+    otherManureManagementStructure2YearsOfUsefulLife: 15,
 
     // Machinery Fixed Costs(Example variables)
     machineryFixedCostTotalEstimate: 0,
@@ -379,18 +379,18 @@ const InputDialog: React.FC<InputDialogProps> = ({
             manureSpreaderYearsOfUsefulLife:
               response.data.wasteManagementFixedCosts
                 .manureSpreaderYearsOfUsefulLife,
-            otherManureManagement1InitialInvestment:
+            otherManureManagementStructure1InitialInvestment:
               response.data.wasteManagementFixedCosts
-                .otherManureManagement1InitialInvestment,
-            otherManureManagement1YearsOfUsefulLife:
+                .otherManureManagementStructure1InitialInvestment,
+            otherManureManagementStructure1YearsOfUsefulLife:
               response.data.wasteManagementFixedCosts
-                .otherManureManagement1YearsOfUsefulLife,
-            otherManureManagement2InitialInvestment:
+                .otherManureManagementStructure1YearsOfUsefulLife,
+            otherManureManagementStructure2InitialInvestment:
               response.data.wasteManagementFixedCosts
-                .otherManureManagement2InitialInvestment,
-            otherManureManagement2YearsOfUsefulLife:
+                .otherManureManagementStructure2InitialInvestment,
+            otherManureManagementStructure2YearsOfUsefulLife:
               response.data.wasteManagementFixedCosts
-                .otherManureManagement2YearsOfUsefulLife,
+                .otherManureManagementStructure2YearsOfUsefulLife,
 
             machineryFixedCostTotalEstimate:
               response.data.machineryFixedCosts.machineryFixedCostTotalEstimate,
@@ -744,20 +744,20 @@ const InputDialog: React.FC<InputDialogProps> = ({
       label: 'Manure Spreader Years of Useful Life(years)'
     },
     {
-      name: 'otherManureManagement1InitialInvestment',
-      label: 'Other Manure Management 1 Initial Investment($)'
+      name: 'otherManureManagementStructure1InitialInvestment',
+      label: 'Other Manure Management Structure 1 Initial Investment($)'
     },
     {
-      name: 'otherManureManagemen1YearsOfUsefulLife',
-      label: 'Other Manure Management 1 Years of Useful Life(years)'
+      name: 'otherManureManagementStructure1YearsOfUsefulLife',
+      label: 'Other Manure Management Structure 1 Years of Useful Life(years)'
     },
     {
-      name: 'otherManureManagemen2InitialInvestment',
-      label: 'Other Manure Management 2 Initial Investment($)'
+      name: 'otherManureManagementStructure2InitialInvestment',
+      label: 'Other Manure Management Structure 2 Initial Investment($)'
     },
     {
-      name: 'otherManureManagemen2YearsOfUsefulLife',
-      label: 'Other Manure Management 2 Years of Useful Life(years)'
+      name: 'otherManureManagementStructure2YearsOfUsefulLife',
+      label: 'Other Manure Management Structure 2 Years of Useful Life(years)'
     },
 
     // Land Fixed Costs

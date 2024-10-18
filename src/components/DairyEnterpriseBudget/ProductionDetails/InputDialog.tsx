@@ -161,7 +161,7 @@ const InputDialog: React.FC<InputDialogProps> = ({
       name: 'expectedPercentMaleWithConventional',
       label: 'Expected Percent Male With Conventional(%)'
     },
-    { name: 'beefCrossPercent', label: 'Beef Cross Percent(%)' },
+    { name: 'beefCrossPercent', label: 'Excess Calf Beef Cross Percent(%)' },
     { name: 'beefCrossDeathRate', label: 'Beef Cross Death Rate(%)' }
   ]
 
