@@ -182,14 +182,14 @@ const FixedCosts = () => {
             userInputs.manureSpreaderInitialInvestment,
           manureSpreaderYearsOfUsefulLife:
             userInputs.manureSpreaderYearsOfUsefulLife,
-          otherManureManagement1InitialInvestment:
-            userInputs.otherManureManagement1InitialInvestment,
-          otherManureManagement1YearsOfUsefulLife:
-            userInputs.otherManureManagement1YearsOfUsefulLife,
-          otherManureManagement2InitialInvestment:
-            userInputs.otherManureManagement2InitialInvestment,
-          otherManureManagement2YearsOfUsefulLife:
-            userInputs.otherManureManagement2YearsOfUsefulLife
+          otherManureManagementStructure1InitialInvestment:
+            userInputs.otherManureManagementStructure1InitialInvestment,
+          otherManureManagementStructure1YearsOfUsefulLife:
+            userInputs.otherManureManagementStructure1YearsOfUsefulLife,
+          otherManureManagementStructure2InitialInvestment:
+            userInputs.otherManureManagementStructure2InitialInvestment,
+          otherManureManagementStructure2YearsOfUsefulLife:
+            userInputs.otherManureManagementStructure2YearsOfUsefulLife
         },
         machineryFixedCosts: {
           machineryFixedCostTotalEstimate:

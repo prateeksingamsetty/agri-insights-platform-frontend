@@ -301,7 +301,7 @@ const InputDialog: React.FC<InputDialogProps> = ({
                         <TextField
                           margin='dense'
                           name='estimatedLabourCost'
-                          label='Estimated Labour Cost ($/Head)'
+                          label='Estimated Labour Cost ($)'
                           type='number'
                           fullWidth
                           required={!calculateLaborCost}
