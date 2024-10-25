@@ -25,17 +25,25 @@ ChartJS.register(
   Legend
 )
 
+interface ApiDairyPriceRecord {
+  _id: string
+  week_ending_date: string
+  report_year: number
+  report_month: string
+  class_2_Price: string
+  class_3_Price: string
+  class_4_Price: string
+  published_date: string
+}
+
 interface DairyPriceRecord {
   _id: string
-  report_month: string
   report_year: string
-  MarketingArea: string
-  order_no: string
+  report_month: string
   ClassIWhole: number
   ClassIIWhole: number
   ClassIIIWhole: number
   ClassIVWhole: number
-  market_type: string
   published_date: string
 }
 
@@ -51,6 +59,7 @@ const initialFilterState: FilterState = {
 
 const DairyPrices = () => {
   const [allData, setAllData] = useState<DairyPriceRecord[]>([])
+  const [loading, setLoading] = useState(true)
   const [filters, setFilters] = useState({
     ClassIWhole: { ...initialFilterState },
     ClassIIWhole: { ...initialFilterState },
@@ -61,12 +70,24 @@ const DairyPrices = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get<DairyPriceRecord[]>(
+        const response = await axios.get<ApiDairyPriceRecord[]>(
           `${process.env.NEXT_PUBLIC_BACKEND_URL}/dairyPrices/allPrices`
         )
-        setAllData(response.data)
+        const processedData = response.data.map(item => ({
+          _id: item._id,
+          report_year: item.report_year.toString(),
+          report_month: item.report_month,
+          ClassIWhole: 0, // You might need to calculate this or get it from another field
+          ClassIIWhole: parseFloat(item.class_2_Price),
+          ClassIIIWhole: parseFloat(item.class_3_Price),
+          ClassIVWhole: parseFloat(item.class_4_Price),
+          published_date: item.published_date
+        }))
+        setAllData(processedData)
       } catch (error) {
         console.error('Error fetching data: ', error)
+      } finally {
+        setLoading(false)
       }
     }
     fetchData()
@@ -113,7 +134,9 @@ const DairyPrices = () => {
           borderColor: 'rgba(255, 99, 132, 1)',
           backgroundColor: 'rgba(255, 99, 132, 0.2)',
           borderWidth: 2,
-          fill: true
+          fill: true,
+          pointRadius: 3,
+          pointHoverRadius: 5
         }
       ]
     }
@@ -137,6 +160,31 @@ const DairyPrices = () => {
   const years = Array.from(
     new Set(allData.map(record => record.report_year))
   ).sort((a, b) => parseInt(b) - parseInt(a))
+
+  const chartOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top' as const,
+      },
+      title: {
+        display: true,
+        text: 'Dairy Prices Chart',
+      },
+    },
+    scales: {
+      x: {
+        reverse: true,
+      },
+      y: {
+        beginAtZero: false,
+      }
+    }
+  }
+
+  if (loading) {
+    return <div>Loading data...</div>
+  }
 
   return (
     <div className='rounded-lg bg-gray-100 p-6 shadow-md'>
@@ -197,6 +245,7 @@ const DairyPrices = () => {
           <div className='rounded-lg bg-white p-4 shadow-sm'>
             <Line
               data={createChartData(allData, classType as keyof typeof filters)}
+              options={chartOptions}
             />
           </div>
         </div>
