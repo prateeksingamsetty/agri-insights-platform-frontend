@@ -27,12 +27,12 @@ ChartJS.register(
 
 interface ApiDairyPriceRecord {
   _id: string
-  week_ending_date: string
-  report_year: number
   report_month: string
-  class_2_Price: string
-  class_3_Price: string
-  class_4_Price: string
+  report_year: number
+  ClassIWhole: string
+  ClassIIWhole: string
+  ClassIIIWhole: string
+  ClassIVWhole: string
   published_date: string
 }
 
@@ -77,10 +77,10 @@ const DairyPrices = () => {
           _id: item._id,
           report_year: item.report_year.toString(),
           report_month: item.report_month,
-          ClassIWhole: 0, // You might need to calculate this or get it from another field
-          ClassIIWhole: parseFloat(item.class_2_Price),
-          ClassIIIWhole: parseFloat(item.class_3_Price),
-          ClassIVWhole: parseFloat(item.class_4_Price),
+          ClassIWhole: parseFloat(item.ClassIWhole),
+          ClassIIWhole: parseFloat(item.ClassIIWhole),
+          ClassIIIWhole: parseFloat(item.ClassIIIWhole),
+          ClassIVWhole: parseFloat(item.ClassIVWhole),
           published_date: item.published_date
         }))
         setAllData(processedData)
