@@ -17,6 +17,10 @@ export const myDetailedMachineryFixedCosts = [
     label: 'Articulated Loaders Dairy Hours of Use'
   },
   {
+    name: 'articulatedLoadersCroppingHoursOfUse',
+    label: 'Articulated Loaders Cropping Hours of Use'
+  },
+  {
     name: 'articulatedLoadersEquipmentAge',
     label: 'Articulated Loaders Equipment Age'
   },
@@ -30,7 +34,10 @@ export const myDetailedMachineryFixedCosts = [
     name: 'skidSteerLoadersInitialInvestmentPerUnit',
     label: 'Skid Steer Loaders Initial Investment Per Unit'
   },
-  { name: 'numberOfSkidSteerLoaders', label: 'Number of Skid Steer Loaders' },
+  {
+    name: 'numberOfSkidSteerLoaders',
+    label: 'Number of Skid Steer Loaders'
+  },
   {
     name: 'skidSteerLoadersTotalHoursOfUse',
     label: 'Skid Steer Loaders Total Hours of Use'
@@ -38,6 +45,10 @@ export const myDetailedMachineryFixedCosts = [
   {
     name: 'skidSteerLoadersDairyHoursOfUse',
     label: 'Skid Steer Loaders Dairy Hours of Use'
+  },
+  {
+    name: 'skidSteerLoadersCroppingHoursOfUse',
+    label: 'Skid Steer Loaders Cropping Hours of Use'
   },
   {
     name: 'skidSteerLoadersEquipmentAge',
@@ -66,6 +77,10 @@ export const myDetailedMachineryFixedCosts = [
     label: 'HP Tractor 130 MFW-D Dairy Hours of Use'
   },
   {
+    name: 'hpTractor130MfwDCroppingHoursOfUse',
+    label: 'HP Tractor 130 MFW-D Cropping Hours of Use'
+  },
+  {
     name: 'hpTractor130MfwDEquipmentAge',
     label: 'HP Tractor 130 MFW-D Equipment Age'
   },
@@ -79,7 +94,10 @@ export const myDetailedMachineryFixedCosts = [
     name: 'hpTractor75InitialInvestmentPerUnit',
     label: 'HP Tractor 75 Initial Investment Per Unit'
   },
-  { name: 'numberOfHpTractor75', label: 'Number of HP Tractor 75' },
+  {
+    name: 'numberOfHpTractor75',
+    label: 'Number of HP Tractor 75'
+  },
   {
     name: 'hpTractor75TotalHoursOfUse',
     label: 'HP Tractor 75 Total Hours of Use'
@@ -88,7 +106,14 @@ export const myDetailedMachineryFixedCosts = [
     name: 'hpTractor75DairyHoursOfUse',
     label: 'HP Tractor 75 Dairy Hours of Use'
   },
-  { name: 'hpTractor75EquipmentAge', label: 'HP Tractor 75 Equipment Age' },
+  {
+    name: 'hpTractor75CroppingHoursOfUse',
+    label: 'HP Tractor 75 Cropping Hours of Use'
+  },
+  {
+    name: 'hpTractor75EquipmentAge',
+    label: 'HP Tractor 75 Equipment Age'
+  },
   {
     name: 'hpTractor75YearsOfUsefulLife',
     label: 'HP Tractor 75 Years of Useful Life'
@@ -99,7 +124,10 @@ export const myDetailedMachineryFixedCosts = [
     name: 'hpTractor50InitialInvestmentPerUnit',
     label: 'HP Tractor 50 Initial Investment Per Unit'
   },
-  { name: 'numberOfHpTractor50', label: 'Number of HP Tractor 50' },
+  {
+    name: 'numberOfHpTractor50',
+    label: 'Number of HP Tractor 50'
+  },
   {
     name: 'hpTractor50TotalHoursOfUse',
     label: 'HP Tractor 50 Total Hours of Use'
@@ -108,7 +136,14 @@ export const myDetailedMachineryFixedCosts = [
     name: 'hpTractor50DairyHoursOfUse',
     label: 'HP Tractor 50 Dairy Hours of Use'
   },
-  { name: 'hpTractor50EquipmentAge', label: 'HP Tractor 50 Equipment Age' },
+  {
+    name: 'hpTractor50CroppingHoursOfUse',
+    label: 'HP Tractor 50 Cropping Hours of Use'
+  },
+  {
+    name: 'hpTractor50EquipmentAge',
+    label: 'HP Tractor 50 Equipment Age'
+  },
   {
     name: 'hpTractor50YearsOfUsefulLife',
     label: 'HP Tractor 50 Years of Useful Life'
@@ -119,7 +154,10 @@ export const myDetailedMachineryFixedCosts = [
     name: 'mixerWagon650InitialInvestmentPerUnit',
     label: 'Mixer Wagon 650 Initial Investment Per Unit'
   },
-  { name: 'numberOfMixerWagon650', label: 'Number of Mixer Wagon 650' },
+  {
+    name: 'numberOfMixerWagon650',
+    label: 'Number of Mixer Wagon 650'
+  },
   {
     name: 'mixerWagon650TotalHoursOfUse',
     label: 'Mixer Wagon 650 Total Hours of Use'
@@ -127,6 +165,10 @@ export const myDetailedMachineryFixedCosts = [
   {
     name: 'mixerWagon650DairyHoursOfUse',
     label: 'Mixer Wagon 650 Dairy Hours of Use'
+  },
+  {
+    name: 'mixerWagon650CroppingHoursOfUse',
+    label: 'Mixer Wagon 650 Cropping Hours of Use'
   },
   {
     name: 'mixerWagon650EquipmentAge',
@@ -155,6 +197,10 @@ export const myDetailedMachineryFixedCosts = [
     label: 'Three Quarter Ton Pickup Dairy Hours of Use'
   },
   {
+    name: 'threeQuarterTonPickupCroppingHoursOfUse',
+    label: 'Three Quarter Ton Pickup Cropping Hours of Use'
+  },
+  {
     name: 'threeQuarterTonPickupEquipmentAge',
     label: 'Three Quarter Ton Pickup Equipment Age'
   },
@@ -168,7 +214,10 @@ export const myDetailedMachineryFixedCosts = [
     name: 'halfTonPickupInitialInvestmentPerUnit',
     label: 'Half Ton Pickup Initial Investment Per Unit'
   },
-  { name: 'numberOfHalfTonPickup', label: 'Number of Half Ton Pickup' },
+  {
+    name: 'numberOfHalfTonPickup',
+    label: 'Number of Half Ton Pickup'
+  },
   {
     name: 'halfTonPickupTotalHoursOfUse',
     label: 'Half Ton Pickup Total Hours of Use'
@@ -176,6 +225,10 @@ export const myDetailedMachineryFixedCosts = [
   {
     name: 'halfTonPickupDairyHoursOfUse',
     label: 'Half Ton Pickup Dairy Hours of Use'
+  },
+  {
+    name: 'halfTonPickupCroppingHoursOfUse',
+    label: 'Half Ton Pickup Cropping Hours of Use'
   },
   {
     name: 'halfTonPickupEquipmentAge',
@@ -191,21 +244,40 @@ export const myDetailedMachineryFixedCosts = [
     name: 'jdGatorInitialInvestmentPerUnit',
     label: 'JD Gator Initial Investment Per Unit'
   },
-  { name: 'numberOfJdGator', label: 'Number of JD Gator' },
-  { name: 'jdGatorTotalHoursOfUse', label: 'JD Gator Total Hours of Use' },
-  { name: 'jdGatorDairyHoursOfUse', label: 'JD Gator Dairy Hours of Use' },
-  { name: 'jdGatorEquipmentAge', label: 'JD Gator Equipment Age' },
+  {
+    name: 'numberOfJdGator',
+    label: 'Number of JD Gator'
+  },
+  {
+    name: 'jdGatorTotalHoursOfUse',
+    label: 'JD Gator Total Hours of Use'
+  },
+  {
+    name: 'jdGatorDairyHoursOfUse',
+    label: 'JD Gator Dairy Hours of Use'
+  },
+  {
+    name: 'jdGatorCroppingHoursOfUse',
+    label: 'JD Gator Cropping Hours of Use'
+  },
+  {
+    name: 'jdGatorEquipmentAge',
+    label: 'JD Gator Equipment Age'
+  },
   {
     name: 'jdGatorYearsOfUsefulLife',
     label: 'JD Gator Years of Useful Life'
   },
 
-  //Sand Spreader
+  // Sand Spreader
   {
     name: 'sandSpreaderInitialInvestmentPerUnit',
     label: 'Sand Spreader Initial Investment Per Unit'
   },
-  { name: 'numberOfSandSpreader', label: 'Number of Sand Spreader' },
+  {
+    name: 'numberOfSandSpreader',
+    label: 'Number of Sand Spreader'
+  },
   {
     name: 'sandSpreaderTotalHoursOfUse',
     label: 'Sand Spreader Total Hours of Use'
@@ -214,13 +286,20 @@ export const myDetailedMachineryFixedCosts = [
     name: 'sandSpreaderDairyHoursOfUse',
     label: 'Sand Spreader Dairy Hours of Use'
   },
-  { name: 'sandSpreaderEquipmentAge', label: 'Sand Spreader Equipment Age' },
+  {
+    name: 'sandSpreaderCroppingHoursOfUse',
+    label: 'Sand Spreader Cropping Hours of Use'
+  },
+  {
+    name: 'sandSpreaderEquipmentAge',
+    label: 'Sand Spreader Equipment Age'
+  },
   {
     name: 'sandSpreaderYearsOfUsefulLife',
     label: 'Sand Spreader Years of Useful Life'
   },
 
-  //hp Tractor 300
+  // HP Tractor 300 MFW-D
   {
     name: 'hpTractor300MfwDInitialInvestmentPerUnit',
     label: 'HP Tractor 300 MFW-D Initial Investment Per Unit'
@@ -238,6 +317,10 @@ export const myDetailedMachineryFixedCosts = [
     label: 'HP Tractor 300 MFW-D Dairy Hours of Use'
   },
   {
+    name: 'hpTractor300MfwDCroppingHoursOfUse',
+    label: 'HP Tractor 300 MFW-D Cropping Hours of Use'
+  },
+  {
     name: 'hpTractor300MfwDEquipmentAge',
     label: 'HP Tractor 300 MFW-D Equipment Age'
   },
@@ -246,7 +329,7 @@ export const myDetailedMachineryFixedCosts = [
     label: 'HP Tractor 300 MFW-D Years of Useful Life'
   },
 
-  //hp Tractor 200
+  // HP Tractor 200 MFW-D
   {
     name: 'hpTractor200MfwDInitialInvestmentPerUnit',
     label: 'HP Tractor 200 MFW-D Initial Investment Per Unit'
@@ -264,6 +347,10 @@ export const myDetailedMachineryFixedCosts = [
     label: 'HP Tractor 200 MFW-D Dairy Hours of Use'
   },
   {
+    name: 'hpTractor200MfwDCroppingHoursOfUse',
+    label: 'HP Tractor 200 MFW-D Cropping Hours of Use'
+  },
+  {
     name: 'hpTractor200MfwDEquipmentAge',
     label: 'HP Tractor 200 MFW-D Equipment Age'
   },
@@ -272,12 +359,15 @@ export const myDetailedMachineryFixedCosts = [
     label: 'HP Tractor 200 MFW-D Years of Useful Life'
   },
 
-  //Disk Harrow 24
+  // Disk Harrow 24
   {
     name: 'diskHarrow24InitialInvestmentPerUnit',
     label: 'Disk Harrow 24 Initial Investment Per Unit'
   },
-  { name: 'numberOfDiskHarrow24', label: 'Number of Disk Harrow 24' },
+  {
+    name: 'numberOfDiskHarrow24',
+    label: 'Number of Disk Harrow 24'
+  },
   {
     name: 'diskHarrow24TotalHoursOfUse',
     label: 'Disk Harrow 24 Total Hours of Use'
@@ -286,7 +376,14 @@ export const myDetailedMachineryFixedCosts = [
     name: 'diskHarrow24DairyHoursOfUse',
     label: 'Disk Harrow 24 Dairy Hours of Use'
   },
-  { name: 'diskHarrow24EquipmentAge', label: 'Disk Harrow 24 Equipment Age' },
+  {
+    name: 'diskHarrow24CroppingHoursOfUse',
+    label: 'Disk Harrow 24 Cropping Hours of Use'
+  },
+  {
+    name: 'diskHarrow24EquipmentAge',
+    label: 'Disk Harrow 24 Equipment Age'
+  },
   {
     name: 'diskHarrow24YearsOfUsefulLife',
     label: 'Disk Harrow 24 Years of Useful Life'
@@ -310,6 +407,10 @@ export const myDetailedMachineryFixedCosts = [
     label: 'Strip-Till Planter 8 Row Dairy Hours of Use'
   },
   {
+    name: 'stripTillPlanter8RowCroppingHoursOfUse',
+    label: 'Strip-Till Planter 8 Row Cropping Hours of Use'
+  },
+  {
     name: 'stripTillPlanter8RowEquipmentAge',
     label: 'Strip-Till Planter 8 Row Equipment Age'
   },
@@ -323,7 +424,10 @@ export const myDetailedMachineryFixedCosts = [
     name: 'foldingSprayer40InitialInvestmentPerUnit',
     label: 'Folding Sprayer 40 Initial Investment Per Unit'
   },
-  { name: 'numberOfFoldingSprayer40', label: 'Number of Folding Sprayer 40' },
+  {
+    name: 'numberOfFoldingSprayer40',
+    label: 'Number of Folding Sprayer 40'
+  },
   {
     name: 'foldingSprayer40TotalHoursOfUse',
     label: 'Folding Sprayer 40 Total Hours of Use'
@@ -331,6 +435,10 @@ export const myDetailedMachineryFixedCosts = [
   {
     name: 'foldingSprayer40DairyHoursOfUse',
     label: 'Folding Sprayer 40 Dairy Hours of Use'
+  },
+  {
+    name: 'foldingSprayer40CroppingHoursOfUse',
+    label: 'Folding Sprayer 40 Cropping Hours of Use'
   },
   {
     name: 'foldingSprayer40EquipmentAge',
@@ -346,7 +454,10 @@ export const myDetailedMachineryFixedCosts = [
     name: 'fieldCultivatorInitialInvestmentPerUnit',
     label: 'Field Cultivator Initial Investment Per Unit'
   },
-  { name: 'numberOfFieldCultivator', label: 'Number of Field Cultivator' },
+  {
+    name: 'numberOfFieldCultivator',
+    label: 'Number of Field Cultivator'
+  },
   {
     name: 'fieldCultivatorTotalHoursOfUse',
     label: 'Field Cultivator Total Hours of Use'
@@ -354,6 +465,10 @@ export const myDetailedMachineryFixedCosts = [
   {
     name: 'fieldCultivatorDairyHoursOfUse',
     label: 'Field Cultivator Dairy Hours of Use'
+  },
+  {
+    name: 'fieldCultivatorCroppingHoursOfUse',
+    label: 'Field Cultivator Cropping Hours of Use'
   },
   {
     name: 'fieldCultivatorEquipmentAge',
@@ -382,6 +497,10 @@ export const myDetailedMachineryFixedCosts = [
     label: 'Grain Drill 15’ No-Till Dairy Hours of Use'
   },
   {
+    name: 'grainDrill15NoTillCroppingHoursOfUse',
+    label: 'Grain Drill 15’ No-Till Cropping Hours of Use'
+  },
+  {
     name: 'grainDrill15NoTillEquipmentAge',
     label: 'Grain Drill 15’ No-Till Equipment Age'
   },
@@ -408,6 +527,10 @@ export const myDetailedMachineryFixedCosts = [
     label: 'Mower Conditioner (Self-Propelled) Dairy Hours of Use'
   },
   {
+    name: 'mowerConditionerSelfPropelledCroppingHoursOfUse',
+    label: 'Mower Conditioner (Self-Propelled) Cropping Hours of Use'
+  },
+  {
     name: 'mowerConditionerSelfPropelledEquipmentAge',
     label: 'Mower Conditioner (Self-Propelled) Equipment Age'
   },
@@ -421,18 +544,40 @@ export const myDetailedMachineryFixedCosts = [
     name: 'tedderInitialInvestmentPerUnit',
     label: 'Tedder Initial Investment Per Unit'
   },
-  { name: 'numberOfTedder', label: 'Number of Tedder' },
-  { name: 'tedderTotalHoursOfUse', label: 'Tedder Total Hours of Use' },
-  { name: 'tedderDairyHoursOfUse', label: 'Tedder Dairy Hours of Use' },
-  { name: 'tedderEquipmentAge', label: 'Tedder Equipment Age' },
-  { name: 'tedderYearsOfUsefulLife', label: 'Tedder Years of Useful Life' },
+  {
+    name: 'numberOfTedder',
+    label: 'Number of Tedder'
+  },
+  {
+    name: 'tedderTotalHoursOfUse',
+    label: 'Tedder Total Hours of Use'
+  },
+  {
+    name: 'tedderDairyHoursOfUse',
+    label: 'Tedder Dairy Hours of Use'
+  },
+  {
+    name: 'tedderCroppingHoursOfUse',
+    label: 'Tedder Cropping Hours of Use'
+  },
+  {
+    name: 'tedderEquipmentAge',
+    label: 'Tedder Equipment Age'
+  },
+  {
+    name: 'tedderYearsOfUsefulLife',
+    label: 'Tedder Years of Useful Life'
+  },
 
   // Power Rake
   {
     name: 'powerRakeInitialInvestmentPerUnit',
     label: 'Power Rake Initial Investment Per Unit'
   },
-  { name: 'numberOfPowerRake', label: 'Number of Power Rake' },
+  {
+    name: 'numberOfPowerRake',
+    label: 'Number of Power Rake'
+  },
   {
     name: 'powerRakeTotalHoursOfUse',
     label: 'Power Rake Total Hours of Use'
@@ -441,7 +586,14 @@ export const myDetailedMachineryFixedCosts = [
     name: 'powerRakeDairyHoursOfUse',
     label: 'Power Rake Dairy Hours of Use'
   },
-  { name: 'powerRakeEquipmentAge', label: 'Power Rake Equipment Age' },
+  {
+    name: 'powerRakeCroppingHoursOfUse',
+    label: 'Power Rake Cropping Hours of Use'
+  },
+  {
+    name: 'powerRakeEquipmentAge',
+    label: 'Power Rake Equipment Age'
+  },
   {
     name: 'powerRakeYearsOfUsefulLife',
     label: 'Power Rake Years of Useful Life'
@@ -465,6 +617,10 @@ export const myDetailedMachineryFixedCosts = [
     label: '15’ Folding Rotary Mower Dairy Hours of Use'
   },
   {
+    name: 'foldingRotaryMower15CroppingHoursOfUse',
+    label: '15’ Folding Rotary Mower Cropping Hours of Use'
+  },
+  {
     name: 'foldingRotaryMower15EquipmentAge',
     label: '15’ Folding Rotary Mower Equipment Age'
   },
@@ -478,7 +634,10 @@ export const myDetailedMachineryFixedCosts = [
     name: 'deepRipperInitialInvestmentPerUnit',
     label: 'Deep-Ripper Initial Investment Per Unit'
   },
-  { name: 'numberOfDeepRipper', label: 'Number of Deep-Ripper' },
+  {
+    name: 'numberOfDeepRipper',
+    label: 'Number of Deep-Ripper'
+  },
   {
     name: 'deepRipperTotalHoursOfUse',
     label: 'Deep-Ripper Total Hours of Use'
@@ -487,7 +646,14 @@ export const myDetailedMachineryFixedCosts = [
     name: 'deepRipperDairyHoursOfUse',
     label: 'Deep-Ripper Dairy Hours of Use'
   },
-  { name: 'deepRipperEquipmentAge', label: 'Deep-Ripper Equipment Age' },
+  {
+    name: 'deepRipperCroppingHoursOfUse',
+    label: 'Deep-Ripper Cropping Hours of Use'
+  },
+  {
+    name: 'deepRipperEquipmentAge',
+    label: 'Deep-Ripper Equipment Age'
+  },
   {
     name: 'deepRipperYearsOfUsefulLife',
     label: 'Deep-Ripper Years of Useful Life'
@@ -511,6 +677,10 @@ export const myDetailedMachineryFixedCosts = [
     label: '24’ Livestock Trailer Dairy Hours of Use'
   },
   {
+    name: 'livestockTrailer24CroppingHoursOfUse',
+    label: '24’ Livestock Trailer Cropping Hours of Use'
+  },
+  {
     name: 'livestockTrailer24EquipmentAge',
     label: '24’ Livestock Trailer Equipment Age'
   },
@@ -524,7 +694,10 @@ export const myDetailedMachineryFixedCosts = [
     name: 'roundBalerInitialInvestmentPerUnit',
     label: 'Round Baler Initial Investment Per Unit'
   },
-  { name: 'numberOfRoundBaler', label: 'Number of Round Baler' },
+  {
+    name: 'numberOfRoundBaler',
+    label: 'Number of Round Baler'
+  },
   {
     name: 'roundBalerTotalHoursOfUse',
     label: 'Round Baler Total Hours of Use'
@@ -533,7 +706,14 @@ export const myDetailedMachineryFixedCosts = [
     name: 'roundBalerDairyHoursOfUse',
     label: 'Round Baler Dairy Hours of Use'
   },
-  { name: 'roundBalerEquipmentAge', label: 'Round Baler Equipment Age' },
+  {
+    name: 'roundBalerCroppingHoursOfUse',
+    label: 'Round Baler Cropping Hours of Use'
+  },
+  {
+    name: 'roundBalerEquipmentAge',
+    label: 'Round Baler Equipment Age'
+  },
   {
     name: 'roundBalerYearsOfUsefulLife',
     label: 'Round Baler Years of Useful Life'
@@ -544,7 +724,10 @@ export const myDetailedMachineryFixedCosts = [
     name: 'tubGrinderInitialInvestmentPerUnit',
     label: 'Tub Grinder Initial Investment Per Unit'
   },
-  { name: 'numberOfTubGrinder', label: 'Number of Tub Grinder' },
+  {
+    name: 'numberOfTubGrinder',
+    label: 'Number of Tub Grinder'
+  },
   {
     name: 'tubGrinderTotalHoursOfUse',
     label: 'Tub Grinder Total Hours of Use'
@@ -553,7 +736,14 @@ export const myDetailedMachineryFixedCosts = [
     name: 'tubGrinderDairyHoursOfUse',
     label: 'Tub Grinder Dairy Hours of Use'
   },
-  { name: 'tubGrinderEquipmentAge', label: 'Tub Grinder Equipment Age' },
+  {
+    name: 'tubGrinderCroppingHoursOfUse',
+    label: 'Tub Grinder Cropping Hours of Use'
+  },
+  {
+    name: 'tubGrinderEquipmentAge',
+    label: 'Tub Grinder Equipment Age'
+  },
   {
     name: 'tubGrinderYearsOfUsefulLife',
     label: 'Tub Grinder Years of Useful Life'
@@ -575,6 +765,10 @@ export const myDetailedMachineryFixedCosts = [
   {
     name: 'miscellaneousEquipmentDairyHoursOfUse',
     label: 'Miscellaneous Equipment Dairy Hours of Use'
+  },
+  {
+    name: 'miscellaneousEquipmentCroppingHoursOfUse',
+    label: 'Miscellaneous Equipment Cropping Hours of Use'
   },
   {
     name: 'miscellaneousEquipmentEquipmentAge',
@@ -603,6 +797,10 @@ export const myDetailedMachineryFixedCosts = [
     label: 'Other Machinery Equipment 1 Dairy Hours of Use'
   },
   {
+    name: 'otherMachineryEquipment1CroppingHoursOfUse',
+    label: 'Other Machinery Equipment 1 Cropping Hours of Use'
+  },
+  {
     name: 'otherMachineryEquipment1EquipmentAge',
     label: 'Other Machinery Equipment 1 Equipment Age'
   },
@@ -627,6 +825,10 @@ export const myDetailedMachineryFixedCosts = [
   {
     name: 'otherMachineryEquipment2DairyHoursOfUse',
     label: 'Other Machinery Equipment 2 Dairy Hours of Use'
+  },
+  {
+    name: 'otherMachineryEquipment2CroppingHoursOfUse',
+    label: 'Other Machinery Equipment 2 Cropping Hours of Use'
   },
   {
     name: 'otherMachineryEquipment2EquipmentAge',
@@ -697,35 +899,35 @@ export const machineryFields = [
   'otherMachineryEquipment2YearsOfUsefulLife'
 ]
 
-export const facilitiesAndBuildingsFields = [
-  'farmShopAndGeneralRoadsInitialInvestment',
-  'farmShopAndGeneralRoadsYearsOfUsefulLife',
-  'milkingParlorAndEquipmentInitialInvestment',
-  'milkingParlorAndEquipmentYearsOfUsefulLife',
-  'feedingEquipmentInitialInvestment',
-  'feedingEquipmentYearsOfUsefulLife',
-  'freestallHousingAndLanesInitialInvestment',
-  'freestallHousingAndLanesYearsOfUsefulLife',
-  'threePhasePowerSupplyInitialInvestment',
-  'threePhasePowerSupplyYearsOfUsefulLife',
-  'waterSystemInitialInvestment',
-  'waterSystemYearsOfUsefulLife',
-  'hayShedInitialInvestment',
-  'hayShedYearsOfUsefulLife',
-  'trenchSilosInitialInvestment',
-  'trenchSilosYearsOfUsefulLife',
-  'fencesInitialInvestment',
-  'fencesYearsOfUsefulLife',
-  'commodityBarnInitialInvestment',
-  'commodityBarnYearsOfUsefulLife',
-  'calfOrHeiferBarnInitialInvestment',
-  'calfOrHeiferBarnYearsOfUsefulLife',
-  'tiltTableInitialInvestment',
-  'tiltTableYearsOfUsefulLife',
-  'cattleHandlingFacilitiesInitialInvestment',
-  'cattleHandlingFacilitiesYearsOfUsefulLife',
-  'otherFacilitiesAndBuildings1InitialInvestment',
-  'otherFacilitiesAndBuildings1YearsOfUsefulLife',
-  'otherFacilitiesAndBuildings2InitialInvestment',
-  'otherFacilitiesAndBuildings2YearsOfUsefulLife'
-]
+// export const facilitiesAndBuildingsFields = [
+//   'farmShopAndGeneralRoadsInitialInvestment',
+//   'farmShopAndGeneralRoadsYearsOfUsefulLife',
+//   'milkingParlorAndEquipmentInitialInvestment',
+//   'milkingParlorAndEquipmentYearsOfUsefulLife',
+//   'feedingEquipmentInitialInvestment',
+//   'feedingEquipmentYearsOfUsefulLife',
+//   'freestallHousingAndLanesInitialInvestment',
+//   'freestallHousingAndLanesYearsOfUsefulLife',
+//   'threePhasePowerSupplyInitialInvestment',
+//   'threePhasePowerSupplyYearsOfUsefulLife',
+//   'waterSystemInitialInvestment',
+//   'waterSystemYearsOfUsefulLife',
+//   'hayShedInitialInvestment',
+//   'hayShedYearsOfUsefulLife',
+//   'trenchSilosInitialInvestment',
+//   'trenchSilosYearsOfUsefulLife',
+//   'fencesInitialInvestment',
+//   'fencesYearsOfUsefulLife',
+//   'commodityBarnInitialInvestment',
+//   'commodityBarnYearsOfUsefulLife',
+//   'calfOrHeiferBarnInitialInvestment',
+//   'calfOrHeiferBarnYearsOfUsefulLife',
+//   'tiltTableInitialInvestment',
+//   'tiltTableYearsOfUsefulLife',
+//   'cattleHandlingFacilitiesInitialInvestment',
+//   'cattleHandlingFacilitiesYearsOfUsefulLife',
+//   'otherFacilitiesAndBuildings1InitialInvestment',
+//   'otherFacilitiesAndBuildings1YearsOfUsefulLife',
+//   'otherFacilitiesAndBuildings2InitialInvestment',
+//   'otherFacilitiesAndBuildings2YearsOfUsefulLife'
+// ]
