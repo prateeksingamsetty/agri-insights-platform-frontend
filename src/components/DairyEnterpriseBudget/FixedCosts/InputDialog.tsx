@@ -12,7 +12,7 @@ import {
 import { useEffect, useState } from 'react'
 import { useAuth } from 'src/context/AuthContext'
 import {
-  facilitiesAndBuildingsFields,
+  // facilitiesAndBuildingsFields,
   machineryFields,
   myDetailedMachineryFixedCosts
 } from './FixedCostsVariables'
@@ -767,7 +767,7 @@ const InputDialog: React.FC<InputDialogProps> = ({
 
   const detailedMachineryFixedCostsFields = machineryFields
   const detailedMachineryFixedCosts = myDetailedMachineryFixedCosts
-  const facilitiesAndBuildingsFixedCostFields = facilitiesAndBuildingsFields
+  // const facilitiesAndBuildingsFixedCostFields = facilitiesAndBuildingsFields
 
   return (
     <Dialog open={open} onClose={handleClose} maxWidth='sm' fullWidth>
