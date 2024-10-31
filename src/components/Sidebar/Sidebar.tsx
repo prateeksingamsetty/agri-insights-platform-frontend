@@ -34,6 +34,7 @@ const Sidebar: React.FC = () => {
             Dairy Enterprise Budget
           </SidebarLink>
         )}
+        <SidebarLink href='/dairyFeedModel'>Dairy Feed Model</SidebarLink>
         <SidebarLink href='/resources'>Resources</SidebarLink>
       </ul>
     </div>
