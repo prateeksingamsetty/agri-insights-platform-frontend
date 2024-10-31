@@ -163,7 +163,7 @@ const ReceiptsAtExpectedOutputLevels = () => {
         }
 
         response = await axios.post(
-          `${BASE_URL}/receipts/calculateReciptsOutput`,
+          `${BASE_URL}/receipts/calculateReceiptsOutput`,
           {
             inputs: transformedInputs,
             productionDetails: productionDetailTransformedInput
