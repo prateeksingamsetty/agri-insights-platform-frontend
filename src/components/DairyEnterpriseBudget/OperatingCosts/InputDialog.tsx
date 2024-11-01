@@ -16,7 +16,6 @@ import {
   Collapse
 } from '@mui/material'
 import InfoIcon from '@mui/icons-material/Info'
-
 import axios from 'axios'
 import { useAuth } from 'src/context/AuthContext'
 import InputLabourDialog from '../LabourCosts/InputLabourDialog'
@@ -130,9 +129,7 @@ const InputDialog: React.FC<InputDialogProps> = ({
     })
   }
 
-  const handleLaborCostCheckbox = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleLaborCostCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCalculateLaborCost(event.target.checked)
     if (event.target.checked) {
       setOpenLaborDialog(true)
@@ -165,9 +162,7 @@ const InputDialog: React.FC<InputDialogProps> = ({
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     if (!isLaborInputValid) {
-      alert(
-        'Please either provide an estimated labor cost or complete the labor cost form.'
-      )
+      alert('Please either provide an estimated labor cost or complete the labor cost form.')
       return
     }
     handleSubmit(userInputs, calculateLaborCost)
@@ -179,103 +174,60 @@ const InputDialog: React.FC<InputDialogProps> = ({
     { name: 'organizationalFees', label: 'Organizational Fees', unit: '$/CWT' },
     { name: 'dhiaFees', label: 'DHIA Fees', unit: '$/Head' },
     { name: 'vetExpenses', label: 'Vet Expenses', unit: '$/Head' },
-    {
-      name: 'insurance',
-      label: 'Insurance (Liability, Dairy Margin, etc.)',
-      unit: '$/Farm'
-    },
+    { name: 'insurance', label: 'Insurance (Liability, Dairy Margin, etc.)', unit: '$/Farm' },
     { name: 'utilities', label: 'Utilities', unit: '$/Head' },
-    {
-      name: 'inseminationSexedFees',
-      label: 'Insemination Fees (Sexed Semen)',
-      unit: '$/Straw'
-    },
-    {
-      name: 'inseminationConventionalFees',
-      label: 'Insemination Fees (Conventional Semen)',
-      unit: '$/Straw'
-    },
-    {
-      name: 'inseminationConventionalBeefFees',
-      label: 'Insemination Fees (Beef Conventional Semen)',
-      unit: '$/Straw'
-    },
+    { name: 'inseminationSexedFees', label: 'Insemination Fees (Sexed Semen)', unit: '$/Straw' },
+    { name: 'inseminationConventionalFees', label: 'Insemination Fees (Conventional Semen)', unit: '$/Straw' },
+    { name: 'inseminationConventionalBeefFees', label: 'Insemination Fees (Beef Conventional Semen)', unit: '$/Straw' },
     { name: 'wasteManagement', label: 'Waste Management', unit: '$/Head' },
     { name: 'bedding', label: 'Bedding', unit: '$/Head' },
     { name: 'raisedForageCost', label: 'Raised Forage Cost', unit: '$/Head' },
     { name: 'purchasedFeedCost', label: 'Purchased Feed Cost', unit: '$/Head' },
-    {
-      name: 'additionalManagementCostsPercentage',
-      label: 'Additional Management Costs',
-      unit: '% of Production Value'
-    }
+    { name: 'additionalManagementCostsPercentage', label: 'Additional Management Costs', unit: '% of Production Value' }
   ]
 
-  // Function to open the labor input dialog
   const openLaborDialogHandler = () => {
     setOpenLaborDialog(true)
   }
 
   return (
-    <Dialog
-      open={open}
-      onClose={handleClose}
-      aria-labelledby='form-dialog-title'
-      maxWidth='md'
-      fullWidth
-    >
-      <DialogTitle
-        id='form-dialog-title'
-        sx={{ bgcolor: '#c8102e', color: 'white' }}
+    <>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby='form-dialog-title'
+        maxWidth='sm'
+        fullWidth
       >
-        Enter Your Inputs
-      </DialogTitle>
-      <DialogContent>
-        {previoudDetailsFound ? (
-          <>
-            <DialogContentText sx={{ mb: 2 }}>
-              Please enter your expense inputs for the Dairy Enterprise Budget
-              Model.
-            </DialogContentText>
-            <form
-              onSubmit={onSubmit}
-              style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}
-            >
-              <Typography variant='h6' sx={{ mt: 2, mb: 1 }}>
-                Expense Inputs
-              </Typography>
-              <Grid container spacing={2}>
+        <DialogTitle id='form-dialog-title' sx={{ bgcolor: '#c8102e', color: 'white' }}>
+          Enter Your Inputs
+        </DialogTitle>
+        <DialogContent>
+          {previoudDetailsFound ? (
+            <>
+              <DialogContentText sx={{ mb: 2 }}>
+                Please enter your expense inputs for the Dairy Enterprise Budget Model.
+              </DialogContentText>
+              <form onSubmit={onSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                <Typography variant='h6' sx={{ mt: 2, mb: 1 }}>
+                  Expense Inputs
+                </Typography>
                 {inputFields.map(field => (
-                  <Grid item xs={12} sm={6} key={field.name}>
-                    <Grid container spacing={1}>
-                      <Grid item xs={8}>
-                        <TextField
-                          margin='dense'
-                          name={field.name}
-                          label={`${field.label} (${field.unit})`}
-                          type='number'
-                          fullWidth
-                          required
-                          value={userInputs[field.name as keyof UserInputs]}
-                          onChange={handleChange}
-                        />
-                      </Grid>
-                      <Grid item xs={4}>
-                        <TextField
-                          margin='dense'
-                          label='Default'
-                          type='number'
-                          fullWidth
-                          value={defaultInputs[field.name as keyof UserInputs]}
-                          InputProps={{
-                            readOnly: true
-                          }}
-                        />
-                      </Grid>
-                    </Grid>
-                  </Grid>
+                  <TextField
+                    key={field.name}
+                    margin='dense'
+                    name={field.name}
+                    label={`${field.label} (${field.unit})`}
+                    type='number'
+                    fullWidth
+                    required
+                    value={userInputs[field.name as keyof UserInputs]}
+                    onChange={handleChange}
+                    defaultValue={defaultInputs[field.name as keyof UserInputs]}
+                  />
                 ))}
-                <Grid item xs={12}>
+                
+                <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
                   <FormControlLabel
                     control={
                       <Checkbox
@@ -293,64 +245,48 @@ const InputDialog: React.FC<InputDialogProps> = ({
                   >
                     Open Labor Input Dialog
                   </Button>
-                </Grid>
-                <Grid item xs={12}>
-                  <Collapse in={!calculateLaborCost}>
-                    <Grid container alignItems='center'>
-                      <Grid item xs={11}>
-                        <TextField
-                          margin='dense'
-                          name='estimatedLabourCost'
-                          label='Estimated Labour Cost ($)'
-                          type='number'
-                          fullWidth
-                          required={!calculateLaborCost}
-                          value={userInputs.estimatedLabourCost}
-                          onChange={handleChange}
-                          disabled={calculateLaborCost}
-                        />
-                      </Grid>
-                      <Grid item xs={1}>
-                        <Tooltip
-                          title='Please provide an Estimated Labour cost Input or calculate detailed Labour cost'
-                          arrow
-                        >
-                          <IconButton>
-                            <InfoIcon />
-                          </IconButton>
-                        </Tooltip>
-                      </Grid>
-                    </Grid>
-                  </Collapse>
-                </Grid>
-              </Grid>
-              <DialogActions>
-                <Button onClick={handleClose} sx={{ color: '#c8102e' }}>
-                  Cancel
-                </Button>
-                <Button
-                  type='submit'
-                  sx={{ color: '#c8102e' }}
-                  disabled={!isLaborInputValid}
-                >
-                  Submit
-                </Button>
-              </DialogActions>
-            </form>
-          </>
-        ) : (
-          <DialogContentText sx={{ mb: 2, color: 'red' }}>
-            Please fill in the previous details to proceed.
-          </DialogContentText>
-        )}
-      </DialogContent>
+                </div>
+
+                <Collapse in={!calculateLaborCost}>
+                  <TextField
+                    margin='dense'
+                    name='estimatedLabourCost'
+                    label='Estimated Labour Cost ($)'
+                    type='number'
+                    fullWidth
+                    required={!calculateLaborCost}
+                    value={userInputs.estimatedLabourCost}
+                    onChange={handleChange}
+                    disabled={calculateLaborCost}
+                    defaultValue={defaultInputs.estimatedLabourCost}
+                  />
+                </Collapse>
+
+                <DialogActions>
+                  <Button onClick={handleClose} sx={{ color: '#c8102e' }}>
+                    Cancel
+                  </Button>
+                  <Button type='submit' sx={{ color: '#c8102e' }} disabled={!isLaborInputValid}>
+                    Submit
+                  </Button>
+                </DialogActions>
+              </form>
+            </>
+          ) : (
+            <DialogContentText sx={{ mb: 2, color: 'red' }}>
+              Please fill in the previous details to proceed.
+            </DialogContentText>
+          )}
+        </DialogContent>
+      </Dialog>
+
       <InputLabourDialog
         open={openLaborDialog}
         handleClose={handleLaborDialogClose}
         handleSubmit={handleLaborInputsSubmit}
-        initialInputs={null} // Adjust this as needed based on your requirements
+        initialInputs={null}
       />
-    </Dialog>
+    </>
   )
 }
 
