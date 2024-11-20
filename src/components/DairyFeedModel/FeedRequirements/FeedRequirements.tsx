@@ -12,6 +12,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useAuth } from 'src/context/AuthContext'
 import InputDialog from './InputDialog'
+import CombinedInputDialog from './CombinedInputDialog'
 
 interface FeedRequirementsType {
   // Corn Silage
@@ -68,6 +69,122 @@ interface FeedRequirementsType {
 
   // Custom Mineral Mix
   customMineralMixTonsRequired: number
+}
+
+
+
+interface RaisedForageType {
+  // Variable Costs
+  cornSilageTVC: number
+  cornSilageTVCPerTon: number
+  sorghumSilageTVC: number
+  sorghumSilageTVCPerTon: number
+  smallGrainSilageTVC: number
+  smallGrainSilageTVCPerTon: number
+  grassHayTVC: number
+  grassHayTVCPerTon: number
+  alfalfaHayEstablishmentTVC: number
+  alfalfaHayEstablishmentTVCPerTon: number
+  alfalfaHayStandTVC: number
+  alfalfaHayStandTVCPerTon: number
+
+  // Raised Forage Fixed Cost
+  cornSilageFixedCostAllocation: number
+  cornSilageFixedCostPerTon: number
+  sorghumSilageFixedCostAllocation: number
+  sorghumSilageFixedCostPerTon: number
+  smallGrainSilageFixedCostAllocation: number
+  smallGrainSilageFixedCostPerTon: number
+  grassHayFixedCostAllocation: number
+  grassHayFixedCostPerTon: number
+  alfalfaHayEstablishmentFixedCostAllocation: number
+  alfalfaHayEstablishmentFixedCostPerTon: number
+  alfalfaHayStandFixedCostAllocation: number
+  alfalfaHayStandFixedCostPerTon: number
+
+  // Raised Forage Total Cost
+  cornSilageTotalCost: number
+  cornSilageTotalCostPerTon: number
+  sorghumSilageTotalCost: number
+  sorghumSilageTotalCostPerTon: number
+  smallGrainSilageTotalCost: number
+  smallGrainSilageTotalCostPerTon: number
+  grassHayTotalCost: number
+  grassHayTotalCostPerTon: number
+  alfalfaHayEstablishmentTotalCost: number
+  alfalfaHayEstablishmentTotalCostPerTon: number
+  alfalfaHayStandTotalCost: number
+  alfalfaHayStandTotalCostPerTon: number
+
+  // Purchased Feed Expenses
+  cornSilageTonsToBePurchased: number
+  cornSilageCostOfCommodity: number
+  cornSilageCostOfTrucking: number
+  purchasedCornSilageTotalCost: number
+  sorghumSilageTonsToBePurchased: number
+  sorghumSilageCostOfCommodity: number
+  sorghumSilageCostOfTrucking: number
+  purchasedSorghumSilageTotalCost: number
+  smallGrainSilageTonsToBePurchased: number
+  smallGrainSilageCostOfCommodity: number
+  smallGrainSilageCostOfTrucking: number
+  purchasedSmallGrainSilageTotalCost: number
+  grassHayTonsToBePurchased: number
+  grassHayCostOfCommodity: number
+  grassHayCostOfTrucking: number
+  purchasedGrassHayTotalCost: number
+  alfalfaLegumeHayTonsToBePurchased: number
+  alfalfaLegumeHayCostOfCommodity: number
+  alfalfaLegumeHayCostOfTrucking: number
+  purchasedAlfalfaLegumeHayTotalCost: number
+  peanutHullsTonsToBePurchased: number
+  peanutHullsCostOfCommodity: number
+  peanutHullsCostOfTrucking: number
+  purchasedPeanutHullsTotalCost: number
+  applePomaceNoHullsTonsToBePurchased: number
+  applePomaceNoHullsCostOfCommodity: number
+  applePomaceNoHullsCostOfTrucking: number
+  purchasedApplePomaceNoHullsTotalCost: number
+  brewersGrainWetTonsToBePurchased: number
+  brewersGrainWetCostOfCommodity: number
+  brewersGrainWetCostOfTrucking: number
+  purchasedBrewersGrainWetTotalCost: number
+  citrusPulpDryTonsToBePurchased: number
+  citrusPulpDryCostOfCommodity: number
+  citrusPulpDryCostOfTrucking: number
+  purchasedCitrusPulpDryTotalCost: number
+  cornGlutenFeedTonsToBePurchased: number
+  cornGlutenFeedCostOfCommodity: number
+  cornGlutenFeedCostOfTrucking: number
+  purchasedCornGlutenFeedTotalCost: number
+  wholeCottonseedTonsToBePurchased: number
+  wholeCottonseedCostOfCommodity: number
+  wholeCottonseedCostOfTrucking: number
+  purchasedWholeCottonseedTotalCost: number
+  cottonseedHullsTonsToBePurchased: number
+  cottonseedHullsCostOfCommodity: number
+  cottonseedHullsCostOfTrucking: number
+  purchasedCottonseedHullsTotalCost: number
+  soybeanMeal48TonsToBePurchased: number
+  soybeanMeal48CostOfCommodity: number
+  soybeanMeal48CostOfTrucking: number
+  purchasedSoybeanMeal48TotalCost: number
+  customFeedMixTonsToBePurchased: number
+  customFeedMixCostOfCommodity: number
+  customFeedMixCostOfTrucking: number
+  purchasedCustomFeedMixTotalCost: number
+  customMineralMixTonsToBePurchased: number
+  customMineralMixCostOfCommodity: number
+  customMineralMixCostOfTrucking: number
+  purchasedCustomMineralMixTotalCost: number
+
+  // Grown Forage Trucking Cost
+  cornSilageGrownForageTruckingCost: number
+  sorghumSilageGrownForageTruckingCost: number
+  smallGrainSilageGrownForageTruckingCost: number
+  grassHayGrownForageTruckingCost: number
+  alfalfaHayEstablishmentGrownForageTruckingCost: number
+  alfalfaHayStandGrownForageTruckingCost: number
 }
 
 const FeedRequirements = () => {
@@ -129,7 +246,127 @@ const FeedRequirements = () => {
 
     // Custom Mineral Mix
     customMineralMixTonsRequired: 0
+
+    
   })
+
+  const [detailsforage, setDetailsforage] = useState<RaisedForageType>({
+    // Corn Silage
+      // Raised Forage Variable Costs
+  
+    cornSilageTVC: 0,
+    cornSilageTVCPerTon: 0,
+    sorghumSilageTVC: 0,
+    sorghumSilageTVCPerTon: 0,
+    smallGrainSilageTVC: 0,
+    smallGrainSilageTVCPerTon: 0,
+    grassHayTVC: 0,
+    grassHayTVCPerTon: 0,
+    alfalfaHayEstablishmentTVC: 0,
+    alfalfaHayEstablishmentTVCPerTon: 0,
+    alfalfaHayStandTVC: 0,
+    alfalfaHayStandTVCPerTon: 0,
+
+    // Raised Forage Fixed Cost
+    cornSilageFixedCostAllocation: 0,
+    cornSilageFixedCostPerTon: 0,
+    sorghumSilageFixedCostAllocation: 0,
+    sorghumSilageFixedCostPerTon: 0,
+    smallGrainSilageFixedCostAllocation: 0,
+    smallGrainSilageFixedCostPerTon: 0,
+    grassHayFixedCostAllocation: 0,
+    grassHayFixedCostPerTon: 0,
+    alfalfaHayEstablishmentFixedCostAllocation: 0,
+    alfalfaHayEstablishmentFixedCostPerTon: 0,
+    alfalfaHayStandFixedCostAllocation: 0,
+    alfalfaHayStandFixedCostPerTon: 0,
+
+    // Raised Forage Total Cost
+    cornSilageTotalCost: 0,
+    cornSilageTotalCostPerTon: 0,
+    sorghumSilageTotalCost: 0,
+    sorghumSilageTotalCostPerTon: 0,
+    smallGrainSilageTotalCost: 0,
+    smallGrainSilageTotalCostPerTon: 0,
+    grassHayTotalCost: 0,
+    grassHayTotalCostPerTon: 0,
+    alfalfaHayEstablishmentTotalCost: 0,
+    alfalfaHayEstablishmentTotalCostPerTon: 0,
+    alfalfaHayStandTotalCost: 0,
+    alfalfaHayStandTotalCostPerTon: 0,
+
+    // Purchased Feed Expenses
+    cornSilageTonsToBePurchased: 0,
+    cornSilageCostOfCommodity: 0,
+    cornSilageCostOfTrucking: 0,
+    purchasedCornSilageTotalCost: 0,
+    sorghumSilageTonsToBePurchased: 0,
+    sorghumSilageCostOfCommodity: 0,
+    sorghumSilageCostOfTrucking: 0,
+    purchasedSorghumSilageTotalCost: 0,
+    smallGrainSilageTonsToBePurchased: 0,
+    smallGrainSilageCostOfCommodity: 0,
+    smallGrainSilageCostOfTrucking: 0,
+    purchasedSmallGrainSilageTotalCost: 0,
+    grassHayTonsToBePurchased: 0,
+    grassHayCostOfCommodity: 0,
+    grassHayCostOfTrucking: 0,
+    purchasedGrassHayTotalCost: 0,
+    alfalfaLegumeHayTonsToBePurchased: 0,
+    alfalfaLegumeHayCostOfCommodity: 0,
+    alfalfaLegumeHayCostOfTrucking: 0,
+    purchasedAlfalfaLegumeHayTotalCost: 0,
+    peanutHullsTonsToBePurchased: 0,
+    peanutHullsCostOfCommodity: 0,
+    peanutHullsCostOfTrucking: 0,
+    purchasedPeanutHullsTotalCost: 0,
+    applePomaceNoHullsTonsToBePurchased: 0,
+    applePomaceNoHullsCostOfCommodity: 0,
+    applePomaceNoHullsCostOfTrucking: 0,
+    purchasedApplePomaceNoHullsTotalCost: 0,
+    brewersGrainWetTonsToBePurchased: 0,
+    brewersGrainWetCostOfCommodity: 0,
+    brewersGrainWetCostOfTrucking: 0,
+    purchasedBrewersGrainWetTotalCost: 0,
+    citrusPulpDryTonsToBePurchased: 0,
+    citrusPulpDryCostOfCommodity: 0,
+    citrusPulpDryCostOfTrucking: 0,
+    purchasedCitrusPulpDryTotalCost: 0,
+    cornGlutenFeedTonsToBePurchased: 0,
+    cornGlutenFeedCostOfCommodity: 0,
+    cornGlutenFeedCostOfTrucking: 0,
+    purchasedCornGlutenFeedTotalCost: 0,
+    wholeCottonseedTonsToBePurchased: 0,
+    wholeCottonseedCostOfCommodity: 0,
+    wholeCottonseedCostOfTrucking: 0,
+    purchasedWholeCottonseedTotalCost: 0,
+    cottonseedHullsTonsToBePurchased: 0,
+    cottonseedHullsCostOfCommodity: 0,
+    cottonseedHullsCostOfTrucking: 0,
+    purchasedCottonseedHullsTotalCost: 0,
+    soybeanMeal48TonsToBePurchased: 0,
+    soybeanMeal48CostOfCommodity: 0,
+    soybeanMeal48CostOfTrucking: 0,
+    purchasedSoybeanMeal48TotalCost: 0,
+    customFeedMixTonsToBePurchased: 0,
+    customFeedMixCostOfCommodity: 0,
+    customFeedMixCostOfTrucking: 0,
+    purchasedCustomFeedMixTotalCost: 0,
+    customMineralMixTonsToBePurchased: 0,
+    customMineralMixCostOfCommodity: 0,
+    customMineralMixCostOfTrucking: 0,
+    purchasedCustomMineralMixTotalCost: 0,
+
+    // Grown Forage Trucking Cost
+    cornSilageGrownForageTruckingCost: 0,
+    sorghumSilageGrownForageTruckingCost: 0,
+    smallGrainSilageGrownForageTruckingCost: 0,
+    grassHayGrownForageTruckingCost: 0,
+    alfalfaHayEstablishmentGrownForageTruckingCost: 0,
+    alfalfaHayStandGrownForageTruckingCost: 0
+  })
+
+
 
   const [open, setOpen] = useState(false)
 
@@ -146,12 +383,12 @@ const FeedRequirements = () => {
       fetchUserOutputRecord()
     } else {
       console.log('User not logged in')
-      const storedInputs = localStorage.getItem('productionInputs')
-      if (storedInputs) {
-        console.log('Stored inputs true')
-        const parsedInputs = JSON.parse(storedInputs)
-        handleSubmit(parsedInputs)
-      }
+      // const storedInputs = localStorage.getItem('productionInputs')
+      // if (storedInputs) {
+      //   console.log('Stored inputs true')
+      //   const parsedInputs = JSON.parse(storedInputs)
+      //   handleSubmit(parsedInputs)
+      // }
     }
   }, [loggedIn, email])
 
@@ -231,6 +468,216 @@ const FeedRequirements = () => {
           customMineralMixTonsRequired:
             response.data.customMineralMixTonsRequired || 0
         })
+
+
+        setDetailsforage({
+          // Raised Forage Variable Costs
+          cornSilageTVC: response.data.cornSilageTVC || 0,
+          cornSilageTVCPerTon: response.data.cornSilageTVCPerTon || 0,
+          sorghumSilageTVC: response.data.sorghumSilageTVC || 0,
+          sorghumSilageTVCPerTon: response.data.sorghumSilageTVCPerTon || 0,
+          smallGrainSilageTVC: response.data.smallGrainSilageTVC || 0,
+          smallGrainSilageTVCPerTon:
+            response.data.smallGrainSilageTVCPerTon || 0,
+          grassHayTVC: response.data.grassHayTVC || 0,
+          grassHayTVCPerTon: response.data.grassHayTVCPerTon || 0,
+          alfalfaHayEstablishmentTVC:
+            response.data.alfalfaHayEstablishmentTVC || 0,
+          alfalfaHayEstablishmentTVCPerTon:
+            response.data.alfalfaHayEstablishmentTVCPerTon || 0,
+          alfalfaHayStandTVC: response.data.alfalfaHayStandTVC || 0,
+          alfalfaHayStandTVCPerTon: response.data.alfalfaHayStandTVCPerTon || 0,
+
+          // Raised Forage Fixed Cost
+          cornSilageFixedCostAllocation:
+            response.data.cornSilageFixedCostAllocation || 0,
+          cornSilageFixedCostPerTon:
+            response.data.cornSilageFixedCostPerTon || 0,
+          sorghumSilageFixedCostAllocation:
+            response.data.sorghumSilageFixedCostAllocation || 0,
+          sorghumSilageFixedCostPerTon:
+            response.data.sorghumSilageFixedCostPerTon || 0,
+          smallGrainSilageFixedCostAllocation:
+            response.data.smallGrainSilageFixedCostAllocation || 0,
+          smallGrainSilageFixedCostPerTon:
+            response.data.smallGrainSilageFixedCostPerTon || 0,
+          grassHayFixedCostAllocation:
+            response.data.grassHayFixedCostAllocation || 0,
+          grassHayFixedCostPerTon: response.data.grassHayFixedCostPerTon || 0,
+          alfalfaHayEstablishmentFixedCostAllocation:
+            response.data.alfalfaHayEstablishmentFixedCostAllocation || 0,
+          alfalfaHayEstablishmentFixedCostPerTon:
+            response.data.alfalfaHayEstablishmentFixedCostPerTon || 0,
+          alfalfaHayStandFixedCostAllocation:
+            response.data.alfalfaHayStandFixedCostAllocation || 0,
+          alfalfaHayStandFixedCostPerTon:
+            response.data.alfalfaHayStandFixedCostPerTon || 0,
+
+          // Raised Forage Total Cost
+          cornSilageTotalCost: response.data.cornSilageTotalCost || 0,
+          cornSilageTotalCostPerTon:
+            response.data.cornSilageTotalCostPerTon || 0,
+          sorghumSilageTotalCost: response.data.sorghumSilageTotalCost || 0,
+          sorghumSilageTotalCostPerTon:
+            response.data.sorghumSilageTotalCostPerTon || 0,
+          smallGrainSilageTotalCost:
+            response.data.smallGrainSilageTotalCost || 0,
+          smallGrainSilageTotalCostPerTon:
+            response.data.smallGrainSilageTotalCostPerTon || 0,
+          grassHayTotalCost: response.data.grassHayTotalCost || 0,
+          grassHayTotalCostPerTon: response.data.grassHayTotalCostPerTon || 0,
+          alfalfaHayEstablishmentTotalCost:
+            response.data.alfalfaHayEstablishmentTotalCost || 0,
+          alfalfaHayEstablishmentTotalCostPerTon:
+            response.data.alfalfaHayEstablishmentTotalCostPerTon || 0,
+          alfalfaHayStandTotalCost: response.data.alfalfaHayStandTotalCost || 0,
+          alfalfaHayStandTotalCostPerTon:
+            response.data.alfalfaHayStandTotalCostPerTon || 0,
+
+          // Purchased Feed Expenses
+          cornSilageTonsToBePurchased:
+            response.data.cornSilageTonsToBePurchased || 0,
+          cornSilageCostOfCommodity:
+            response.data.cornSilageCostOfCommodity || 0,
+          cornSilageCostOfTrucking: response.data.cornSilageCostOfTrucking || 0,
+          purchasedCornSilageTotalCost:
+            response.data.purchasedCornSilageTotalCost || 0,
+          sorghumSilageTonsToBePurchased:
+            response.data.sorghumSilageTonsToBePurchased || 0,
+          sorghumSilageCostOfCommodity:
+            response.data.sorghumSilageCostOfCommodity || 0,
+          sorghumSilageCostOfTrucking:
+            response.data.sorghumSilageCostOfTrucking || 0,
+          purchasedSorghumSilageTotalCost:
+            response.data.purchasedSorghumSilageTotalCost || 0,
+          smallGrainSilageTonsToBePurchased:
+            response.data.smallGrainSilageTonsToBePurchased || 0,
+          smallGrainSilageCostOfCommodity:
+            response.data.smallGrainSilageCostOfCommodity || 0,
+          smallGrainSilageCostOfTrucking:
+            response.data.smallGrainSilageCostOfTrucking || 0,
+          purchasedSmallGrainSilageTotalCost:
+            response.data.purchasedSmallGrainSilageTotalCost || 0,
+          grassHayTonsToBePurchased:
+            response.data.grassHayTonsToBePurchased || 0,
+          grassHayCostOfCommodity: response.data.grassHayCostOfCommodity || 0,
+          grassHayCostOfTrucking: response.data.grassHayCostOfTrucking || 0,
+          purchasedGrassHayTotalCost:
+            response.data.purchasedGrassHayTotalCost || 0,
+          alfalfaLegumeHayTonsToBePurchased:
+            response.data.alfalfaLegumeHayTonsToBePurchased || 0,
+          alfalfaLegumeHayCostOfCommodity:
+            response.data.alfalfaLegumeHayCostOfCommodity || 0,
+          alfalfaLegumeHayCostOfTrucking:
+            response.data.alfalfaLegumeHayCostOfTrucking || 0,
+          purchasedAlfalfaLegumeHayTotalCost:
+            response.data.purchasedAlfalfaLegumeHayTotalCost || 0,
+          peanutHullsTonsToBePurchased:
+            response.data.peanutHullsTonsToBePurchased || 0,
+          peanutHullsCostOfCommodity:
+            response.data.peanutHullsCostOfCommodity || 0,
+          peanutHullsCostOfTrucking:
+            response.data.peanutHullsCostOfTrucking || 0,
+          purchasedPeanutHullsTotalCost:
+            response.data.purchasedPeanutHullsTotalCost || 0,
+          applePomaceNoHullsTonsToBePurchased:
+            response.data.applePomaceNoHullsTonsToBePurchased || 0,
+          applePomaceNoHullsCostOfCommodity:
+            response.data.applePomaceNoHullsCostOfCommodity || 0,
+          applePomaceNoHullsCostOfTrucking:
+            response.data.applePomaceNoHullsCostOfTrucking || 0,
+          purchasedApplePomaceNoHullsTotalCost:
+            response.data.purchasedApplePomaceNoHullsTotalCost || 0,
+          brewersGrainWetTonsToBePurchased:
+            response.data.brewersGrainWetTonsToBePurchased || 0,
+          brewersGrainWetCostOfCommodity:
+            response.data.brewersGrainWetCostOfCommodity || 0,
+          brewersGrainWetCostOfTrucking:
+            response.data.brewersGrainWetCostOfTrucking || 0,
+          purchasedBrewersGrainWetTotalCost:
+            response.data.purchasedBrewersGrainWetTotalCost || 0,
+          citrusPulpDryTonsToBePurchased:
+            response.data.citrusPulpDryTonsToBePurchased || 0,
+          citrusPulpDryCostOfCommodity:
+            response.data.citrusPulpDryCostOfCommodity || 0,
+          citrusPulpDryCostOfTrucking:
+            response.data.citrusPulpDryCostOfTrucking || 0,
+          purchasedCitrusPulpDryTotalCost:
+            response.data.purchasedCitrusPulpDryTotalCost || 0,
+          cornGlutenFeedTonsToBePurchased:
+            response.data.cornGlutenFeedTonsToBePurchased || 0,
+          cornGlutenFeedCostOfCommodity:
+            response.data.cornGlutenFeedCostOfCommodity || 0,
+          cornGlutenFeedCostOfTrucking:
+            response.data.cornGlutenFeedCostOfTrucking || 0,
+          purchasedCornGlutenFeedTotalCost:
+            response.data.purchasedCornGlutenFeedTotalCost || 0,
+          wholeCottonseedTonsToBePurchased:
+            response.data.wholeCottonseedTonsToBePurchased || 0,
+          wholeCottonseedCostOfCommodity:
+            response.data.wholeCottonseedCostOfCommodity || 0,
+          wholeCottonseedCostOfTrucking:
+            response.data.wholeCottonseedCostOfTrucking || 0,
+          purchasedWholeCottonseedTotalCost:
+            response.data.purchasedWholeCottonseedTotalCost || 0,
+          cottonseedHullsTonsToBePurchased:
+            response.data.cottonseedHullsTonsToBePurchased || 0,
+          cottonseedHullsCostOfCommodity:
+            response.data.cottonseedHullsCostOfCommodity || 0,
+          cottonseedHullsCostOfTrucking:
+            response.data.cottonseedHullsCostOfTrucking || 0,
+          purchasedCottonseedHullsTotalCost:
+            response.data.purchasedCottonseedHullsTotalCost || 0,
+          soybeanMeal48TonsToBePurchased:
+            response.data.soybeanMeal48TonsToBePurchased || 0,
+          soybeanMeal48CostOfCommodity:
+            response.data.soybeanMeal48CostOfCommodity || 0,
+          soybeanMeal48CostOfTrucking:
+            response.data.soybeanMeal48CostOfTrucking || 0,
+          purchasedSoybeanMeal48TotalCost:
+            response.data.purchasedSoybeanMeal48TotalCost || 0,
+          customFeedMixTonsToBePurchased:
+            response.data.customFeedMixTonsToBePurchased || 0,
+          customFeedMixCostOfCommodity:
+            response.data.customFeedMixCostOfCommodity || 0,
+          customFeedMixCostOfTrucking:
+            response.data.customFeedMixCostOfTrucking || 0,
+          purchasedCustomFeedMixTotalCost:
+            response.data.purchasedCustomFeedMixTotalCost || 0,
+          customMineralMixTonsToBePurchased:
+            response.data.customMineralMixTonsToBePurchased || 0,
+          customMineralMixCostOfCommodity:
+            response.data.customMineralMixCostOfCommodity || 0,
+          customMineralMixCostOfTrucking:
+            response.data.customMineralMixCostOfTrucking || 0,
+          purchasedCustomMineralMixTotalCost:
+            response.data.purchasedCustomMineralMixTotalCost || 0,
+
+          // Grown Forage Trucking Cost
+          cornSilageGrownForageTruckingCost:
+            response.data.cornSilageGrownForageTruckingCost || 0,
+          sorghumSilageGrownForageTruckingCost:
+            response.data.sorghumSilageGrownForageTruckingCost || 0,
+          smallGrainSilageGrownForageTruckingCost:
+            response.data.smallGrainSilageGrownForageTruckingCost || 0,
+          grassHayGrownForageTruckingCost:
+            response.data.grassHayGrownForageTruckingCost || 0,
+          alfalfaHayEstablishmentGrownForageTruckingCost:
+            response.data.alfalfaHayEstablishmentGrownForageTruckingCost || 0,
+          alfalfaHayStandGrownForageTruckingCost:
+            response.data.alfalfaHayStandGrownForageTruckingCost || 0
+        })
+
+
+
+
+
+
+
+
+
+
+
       }
     } catch (error: any) {
       if (error.response?.status === 404) {
@@ -239,6 +686,7 @@ const FeedRequirements = () => {
         console.error('Error fetching user output record:', error)
       }
     }
+
   }
 
   const handleDialogOpen = () => setOpen(true)
@@ -520,24 +968,60 @@ const FeedRequirements = () => {
             userInputs.calvesCalfStarterFeedLbsAsFedPerDay,
           calvesCalfStarterFeedDaysOnFeed:
             userInputs.calvesCalfStarterFeedDaysOnFeed
+        },
+        cornSilage: {
+          cornSilageExpectedYieldTonsPerAcre: userInputs.cornSilageExpectedYieldTonsPerAcre,
+          cornSilageHarvestedAcres: userInputs.cornSilageHarvestedAcres,
+          cornSilageEstimatedTotalOperatingCost: userInputs.cornSilageEstimatedTotalOperatingCost,
+          cornSilagePercentOfForageFixedCostAllocated: userInputs.cornSilagePercentOfForageFixedCostAllocated,
+          cornSilageShrinkLossPercentage: userInputs.cornSilageShrinkLossPercentage
+        },
+        sorghumSilage: {
+          sorghumSilageExpectedYieldTonsPerAcre: userInputs.sorghumSilageExpectedYieldTonsPerAcre,
+          sorghumSilageHarvestedAcres: userInputs.sorghumSilageHarvestedAcres,
+          sorghumSilageEstimatedTotalOperatingCost: userInputs.sorghumSilageEstimatedTotalOperatingCost,
+          sorghumSilagePercentOfForageFixedCostAllocated: userInputs.sorghumSilagePercentOfForageFixedCostAllocated,
+          sorghumSilageShrinkLossPercentage: userInputs.sorghumSilageShrinkLossPercentage
+        },
+        smallGrainSilage: {
+          smallGrainSilageExpectedYieldTonsPerAcre: userInputs.smallGrainSilageExpectedYieldTonsPerAcre,
+          smallGrainSilageHarvestedAcres: userInputs.smallGrainSilageHarvestedAcres,
+          smallGrainSilageEstimatedTotalOperatingCost: userInputs.smallGrainSilageEstimatedTotalOperatingCost,
+          smallGrainSilagePercentOfForageFixedCostAllocated: userInputs.smallGrainSilagePercentOfForageFixedCostAllocated,
+          smallGrainSilageShrinkLossPercentage: userInputs.smallGrainSilageShrinkLossPercentage
+        },
+        grassHay: {
+          grassHayExpectedYieldTonsPerAcre: userInputs.grassHayExpectedYieldTonsPerAcre,
+          grassHayHarvestedAcres: userInputs.grassHayHarvestedAcres,
+          grassHayEstimatedTotalOperatingCost: userInputs.grassHayEstimatedTotalOperatingCost,
+          grassHayPercentOfForageFixedCostAllocated: userInputs.grassHayPercentOfForageFixedCostAllocated,
+          grassHayShrinkLossPercentage: userInputs.grassHayShrinkLossPercentage
+        },
+        alfalfaHayEstablishment: {
+          alfalfaHayEstablishmentExpectedYieldTonsPerAcre: userInputs.alfalfaHayEstablishmentExpectedYieldTonsPerAcre,
+          alfalfaHayEstablishmentHarvestedAcres: userInputs.alfalfaHayEstablishmentHarvestedAcres,
+          alfalfaHayEstablishmentEstimatedTotalOperatingCost: userInputs.alfalfaHayEstablishmentEstimatedTotalOperatingCost,
+          alfalfaHayEstablishmentPercentOfForageFixedCostAllocated: userInputs.alfalfaHayEstablishmentPercentOfForageFixedCostAllocated
+        },
+        alfalfaHayStand: {
+          alfalfaHayStandExpectedYieldTonsPerAcre: userInputs.alfalfaHayStandExpectedYieldTonsPerAcre,
+          alfalfaHayStandHarvestedAcres: userInputs.alfalfaHayStandHarvestedAcres,
+          alfalfaHayStandEstimatedTotalOperatingCost: userInputs.alfalfaHayStandEstimatedTotalOperatingCost,
+          alfalfaHayStandPercentOfForageFixedCostAllocated: userInputs.alfalfaHayStandPercentOfForageFixedCostAllocated,
+        },
+        alfalfaHayShrinkLoss: {
+          alfalfaHayShrinkLossPercentage: userInputs.alfalfaHayShrinkLossPercentage
         }
-        // Add additional sections for `bredHeifers`, `youngHeifers`, and `calves` following the same structure...
       }
 
       let response
       if (loggedIn && email) {
         console.log('Entered this too')
-
+        console.log(transformedInputs)
         response = await axios.patch(
           `${BASE_URL}/feed-details/updateInput/${email}`,
           transformedInputs
         )
-      } else {
-        response = await axios.post(
-          `${BASE_URL}/production-details/calculateProductionDetails`,
-          transformedInputs
-        )
-        localStorage.setItem('productionInputs', JSON.stringify(userInputs))
       }
 
       if (response && response.data) {
@@ -611,10 +1095,457 @@ const FeedRequirements = () => {
           customMineralMixTonsRequired:
             response.data.customMineralMixTonsRequired || 0
         })
+
+        setDetailsforage({
+          // Raised Forage Variable Costs
+          cornSilageTVC: response.data.cornSilageTVC || 0,
+          cornSilageTVCPerTon: response.data.cornSilageTVCPerTon || 0,
+          sorghumSilageTVC: response.data.sorghumSilageTVC || 0,
+          sorghumSilageTVCPerTon: response.data.sorghumSilageTVCPerTon || 0,
+          smallGrainSilageTVC: response.data.smallGrainSilageTVC || 0,
+          smallGrainSilageTVCPerTon:
+            response.data.smallGrainSilageTVCPerTon || 0,
+          grassHayTVC: response.data.grassHayTVC || 0,
+          grassHayTVCPerTon: response.data.grassHayTVCPerTon || 0,
+          alfalfaHayEstablishmentTVC:
+            response.data.alfalfaHayEstablishmentTVC || 0,
+          alfalfaHayEstablishmentTVCPerTon:
+            response.data.alfalfaHayEstablishmentTVCPerTon || 0,
+          alfalfaHayStandTVC: response.data.alfalfaHayStandTVC || 0,
+          alfalfaHayStandTVCPerTon: response.data.alfalfaHayStandTVCPerTon || 0,
+
+          // Raised Forage Fixed Cost
+          cornSilageFixedCostAllocation:
+            response.data.cornSilageFixedCostAllocation || 0,
+          cornSilageFixedCostPerTon:
+            response.data.cornSilageFixedCostPerTon || 0,
+          sorghumSilageFixedCostAllocation:
+            response.data.sorghumSilageFixedCostAllocation || 0,
+          sorghumSilageFixedCostPerTon:
+            response.data.sorghumSilageFixedCostPerTon || 0,
+          smallGrainSilageFixedCostAllocation:
+            response.data.smallGrainSilageFixedCostAllocation || 0,
+          smallGrainSilageFixedCostPerTon:
+            response.data.smallGrainSilageFixedCostPerTon || 0,
+          grassHayFixedCostAllocation:
+            response.data.grassHayFixedCostAllocation || 0,
+          grassHayFixedCostPerTon: response.data.grassHayFixedCostPerTon || 0,
+          alfalfaHayEstablishmentFixedCostAllocation:
+            response.data.alfalfaHayEstablishmentFixedCostAllocation || 0,
+          alfalfaHayEstablishmentFixedCostPerTon:
+            response.data.alfalfaHayEstablishmentFixedCostPerTon || 0,
+          alfalfaHayStandFixedCostAllocation:
+            response.data.alfalfaHayStandFixedCostAllocation || 0,
+          alfalfaHayStandFixedCostPerTon:
+            response.data.alfalfaHayStandFixedCostPerTon || 0,
+
+          // Raised Forage Total Cost
+          cornSilageTotalCost: response.data.cornSilageTotalCost || 0,
+          cornSilageTotalCostPerTon:
+            response.data.cornSilageTotalCostPerTon || 0,
+          sorghumSilageTotalCost: response.data.sorghumSilageTotalCost || 0,
+          sorghumSilageTotalCostPerTon:
+            response.data.sorghumSilageTotalCostPerTon || 0,
+          smallGrainSilageTotalCost:
+            response.data.smallGrainSilageTotalCost || 0,
+          smallGrainSilageTotalCostPerTon:
+            response.data.smallGrainSilageTotalCostPerTon || 0,
+          grassHayTotalCost: response.data.grassHayTotalCost || 0,
+          grassHayTotalCostPerTon: response.data.grassHayTotalCostPerTon || 0,
+          alfalfaHayEstablishmentTotalCost:
+            response.data.alfalfaHayEstablishmentTotalCost || 0,
+          alfalfaHayEstablishmentTotalCostPerTon:
+            response.data.alfalfaHayEstablishmentTotalCostPerTon || 0,
+          alfalfaHayStandTotalCost: response.data.alfalfaHayStandTotalCost || 0,
+          alfalfaHayStandTotalCostPerTon:
+            response.data.alfalfaHayStandTotalCostPerTon || 0,
+
+          // Purchased Feed Expenses
+          cornSilageTonsToBePurchased:
+            response.data.cornSilageTonsToBePurchased || 0,
+          cornSilageCostOfCommodity:
+            response.data.cornSilageCostOfCommodity || 0,
+          cornSilageCostOfTrucking: response.data.cornSilageCostOfTrucking || 0,
+          purchasedCornSilageTotalCost:
+            response.data.purchasedCornSilageTotalCost || 0,
+          sorghumSilageTonsToBePurchased:
+            response.data.sorghumSilageTonsToBePurchased || 0,
+          sorghumSilageCostOfCommodity:
+            response.data.sorghumSilageCostOfCommodity || 0,
+          sorghumSilageCostOfTrucking:
+            response.data.sorghumSilageCostOfTrucking || 0,
+          purchasedSorghumSilageTotalCost:
+            response.data.purchasedSorghumSilageTotalCost || 0,
+          smallGrainSilageTonsToBePurchased:
+            response.data.smallGrainSilageTonsToBePurchased || 0,
+          smallGrainSilageCostOfCommodity:
+            response.data.smallGrainSilageCostOfCommodity || 0,
+          smallGrainSilageCostOfTrucking:
+            response.data.smallGrainSilageCostOfTrucking || 0,
+          purchasedSmallGrainSilageTotalCost:
+            response.data.purchasedSmallGrainSilageTotalCost || 0,
+          grassHayTonsToBePurchased:
+            response.data.grassHayTonsToBePurchased || 0,
+          grassHayCostOfCommodity: response.data.grassHayCostOfCommodity || 0,
+          grassHayCostOfTrucking: response.data.grassHayCostOfTrucking || 0,
+          purchasedGrassHayTotalCost:
+            response.data.purchasedGrassHayTotalCost || 0,
+          alfalfaLegumeHayTonsToBePurchased:
+            response.data.alfalfaLegumeHayTonsToBePurchased || 0,
+          alfalfaLegumeHayCostOfCommodity:
+            response.data.alfalfaLegumeHayCostOfCommodity || 0,
+          alfalfaLegumeHayCostOfTrucking:
+            response.data.alfalfaLegumeHayCostOfTrucking || 0,
+          purchasedAlfalfaLegumeHayTotalCost:
+            response.data.purchasedAlfalfaLegumeHayTotalCost || 0,
+          peanutHullsTonsToBePurchased:
+            response.data.peanutHullsTonsToBePurchased || 0,
+          peanutHullsCostOfCommodity:
+            response.data.peanutHullsCostOfCommodity || 0,
+          peanutHullsCostOfTrucking:
+            response.data.peanutHullsCostOfTrucking || 0,
+          purchasedPeanutHullsTotalCost:
+            response.data.purchasedPeanutHullsTotalCost || 0,
+          applePomaceNoHullsTonsToBePurchased:
+            response.data.applePomaceNoHullsTonsToBePurchased || 0,
+          applePomaceNoHullsCostOfCommodity:
+            response.data.applePomaceNoHullsCostOfCommodity || 0,
+          applePomaceNoHullsCostOfTrucking:
+            response.data.applePomaceNoHullsCostOfTrucking || 0,
+          purchasedApplePomaceNoHullsTotalCost:
+            response.data.purchasedApplePomaceNoHullsTotalCost || 0,
+          brewersGrainWetTonsToBePurchased:
+            response.data.brewersGrainWetTonsToBePurchased || 0,
+          brewersGrainWetCostOfCommodity:
+            response.data.brewersGrainWetCostOfCommodity || 0,
+          brewersGrainWetCostOfTrucking:
+            response.data.brewersGrainWetCostOfTrucking || 0,
+          purchasedBrewersGrainWetTotalCost:
+            response.data.purchasedBrewersGrainWetTotalCost || 0,
+          citrusPulpDryTonsToBePurchased:
+            response.data.citrusPulpDryTonsToBePurchased || 0,
+          citrusPulpDryCostOfCommodity:
+            response.data.citrusPulpDryCostOfCommodity || 0,
+          citrusPulpDryCostOfTrucking:
+            response.data.citrusPulpDryCostOfTrucking || 0,
+          purchasedCitrusPulpDryTotalCost:
+            response.data.purchasedCitrusPulpDryTotalCost || 0,
+          cornGlutenFeedTonsToBePurchased:
+            response.data.cornGlutenFeedTonsToBePurchased || 0,
+          cornGlutenFeedCostOfCommodity:
+            response.data.cornGlutenFeedCostOfCommodity || 0,
+          cornGlutenFeedCostOfTrucking:
+            response.data.cornGlutenFeedCostOfTrucking || 0,
+          purchasedCornGlutenFeedTotalCost:
+            response.data.purchasedCornGlutenFeedTotalCost || 0,
+          wholeCottonseedTonsToBePurchased:
+            response.data.wholeCottonseedTonsToBePurchased || 0,
+          wholeCottonseedCostOfCommodity:
+            response.data.wholeCottonseedCostOfCommodity || 0,
+          wholeCottonseedCostOfTrucking:
+            response.data.wholeCottonseedCostOfTrucking || 0,
+          purchasedWholeCottonseedTotalCost:
+            response.data.purchasedWholeCottonseedTotalCost || 0,
+          cottonseedHullsTonsToBePurchased:
+            response.data.cottonseedHullsTonsToBePurchased || 0,
+          cottonseedHullsCostOfCommodity:
+            response.data.cottonseedHullsCostOfCommodity || 0,
+          cottonseedHullsCostOfTrucking:
+            response.data.cottonseedHullsCostOfTrucking || 0,
+          purchasedCottonseedHullsTotalCost:
+            response.data.purchasedCottonseedHullsTotalCost || 0,
+          soybeanMeal48TonsToBePurchased:
+            response.data.soybeanMeal48TonsToBePurchased || 0,
+          soybeanMeal48CostOfCommodity:
+            response.data.soybeanMeal48CostOfCommodity || 0,
+          soybeanMeal48CostOfTrucking:
+            response.data.soybeanMeal48CostOfTrucking || 0,
+          purchasedSoybeanMeal48TotalCost:
+            response.data.purchasedSoybeanMeal48TotalCost || 0,
+          customFeedMixTonsToBePurchased:
+            response.data.customFeedMixTonsToBePurchased || 0,
+          customFeedMixCostOfCommodity:
+            response.data.customFeedMixCostOfCommodity || 0,
+          customFeedMixCostOfTrucking:
+            response.data.customFeedMixCostOfTrucking || 0,
+          purchasedCustomFeedMixTotalCost:
+            response.data.purchasedCustomFeedMixTotalCost || 0,
+          customMineralMixTonsToBePurchased:
+            response.data.customMineralMixTonsToBePurchased || 0,
+          customMineralMixCostOfCommodity:
+            response.data.customMineralMixCostOfCommodity || 0,
+          customMineralMixCostOfTrucking:
+            response.data.customMineralMixCostOfTrucking || 0,
+          purchasedCustomMineralMixTotalCost:
+            response.data.purchasedCustomMineralMixTotalCost || 0,
+
+          // Grown Forage Trucking Cost
+          cornSilageGrownForageTruckingCost:
+            response.data.cornSilageGrownForageTruckingCost || 0,
+          sorghumSilageGrownForageTruckingCost:
+            response.data.sorghumSilageGrownForageTruckingCost || 0,
+          smallGrainSilageGrownForageTruckingCost:
+            response.data.smallGrainSilageGrownForageTruckingCost || 0,
+          grassHayGrownForageTruckingCost:
+            response.data.grassHayGrownForageTruckingCost || 0,
+          alfalfaHayEstablishmentGrownForageTruckingCost:
+            response.data.alfalfaHayEstablishmentGrownForageTruckingCost || 0,
+          alfalfaHayStandGrownForageTruckingCost:
+            response.data.alfalfaHayStandGrownForageTruckingCost || 0
+        })
+
+
+
       }
     } catch (error) {
       console.error('Error updating user inputs:', error)
     }
+
+    // try {
+    //   const transformedInputsforage = {
+    //     milkProduction: {
+    //       totalNumberOfCows: userInputs.totalNumberOfCows,
+    //       expectedMilkPrice: userInputs.expectedMilkPrice,
+    //       calvingInterval: userInputs.calvingInterval,
+    //       expectedMilkProduction: userInputs.expectedMilkProduction
+    //     },
+    //     heiferProduction: {
+    //       cullingRate: userInputs.cullingRate,
+    //       cowDeathLossRate: userInputs.cowDeathLossRate,
+    //       heiferRaisingDeathLossRate: userInputs.heiferRaisingDeathLossRate,
+    //       numberOfHeifersRaised: userInputs.numberOfHeifersRaised,
+    //       bullCalfDeath: userInputs.bullCalfDeath,
+    //       expectedPercentMaleWithSexedSemen:
+    //         userInputs.expectedPercentMaleWithSexedSemen,
+    //       expectedPercentMaleWithConventional:
+    //         userInputs.expectedPercentMaleWithConventional
+    //     },
+    //     beefCrossDetails: {
+    //       beefCrossPercent: userInputs.beefCrossPercent,
+    //       beefCrossDeathRate: userInputs.beefCrossDeathRate
+    //     }
+    //   }
+
+    //   let response
+    //   if (loggedIn && email) {
+    //     response = await axios.patch(
+    //       `${BASE_URL}/production-details/updateInput/${email}`,
+    //       transformedInputsforage
+    //     )
+    //   }
+    //   // } else {
+    //   //   response = await axios.post(
+    //   //     `${BASE_URL}/production-details/calculateProductionDetails`,
+    //   //     transformedInputsforage
+    //   //   )
+    //   //   localStorage.setItem('productionInputs', JSON.stringify(userInputs))
+    //   // }
+
+    //   if (response && response.data) {
+    //     setDetailsforage({
+    //       // Raised Forage Variable Costs
+    //       cornSilageTVC: response.data.cornSilageTVC || 0,
+    //       cornSilageTVCPerTon: response.data.cornSilageTVCPerTon || 0,
+    //       sorghumSilageTVC: response.data.sorghumSilageTVC || 0,
+    //       sorghumSilageTVCPerTon: response.data.sorghumSilageTVCPerTon || 0,
+    //       smallGrainSilageTVC: response.data.smallGrainSilageTVC || 0,
+    //       smallGrainSilageTVCPerTon:
+    //         response.data.smallGrainSilageTVCPerTon || 0,
+    //       grassHayTVC: response.data.grassHayTVC || 0,
+    //       grassHayTVCPerTon: response.data.grassHayTVCPerTon || 0,
+    //       alfalfaHayEstablishmentTVC:
+    //         response.data.alfalfaHayEstablishmentTVC || 0,
+    //       alfalfaHayEstablishmentTVCPerTon:
+    //         response.data.alfalfaHayEstablishmentTVCPerTon || 0,
+    //       alfalfaHayStandTVC: response.data.alfalfaHayStandTVC || 0,
+    //       alfalfaHayStandTVCPerTon: response.data.alfalfaHayStandTVCPerTon || 0,
+
+    //       // Raised Forage Fixed Cost
+    //       cornSilageFixedCostAllocation:
+    //         response.data.cornSilageFixedCostAllocation || 0,
+    //       cornSilageFixedCostPerTon:
+    //         response.data.cornSilageFixedCostPerTon || 0,
+    //       sorghumSilageFixedCostAllocation:
+    //         response.data.sorghumSilageFixedCostAllocation || 0,
+    //       sorghumSilageFixedCostPerTon:
+    //         response.data.sorghumSilageFixedCostPerTon || 0,
+    //       smallGrainSilageFixedCostAllocation:
+    //         response.data.smallGrainSilageFixedCostAllocation || 0,
+    //       smallGrainSilageFixedCostPerTon:
+    //         response.data.smallGrainSilageFixedCostPerTon || 0,
+    //       grassHayFixedCostAllocation:
+    //         response.data.grassHayFixedCostAllocation || 0,
+    //       grassHayFixedCostPerTon: response.data.grassHayFixedCostPerTon || 0,
+    //       alfalfaHayEstablishmentFixedCostAllocation:
+    //         response.data.alfalfaHayEstablishmentFixedCostAllocation || 0,
+    //       alfalfaHayEstablishmentFixedCostPerTon:
+    //         response.data.alfalfaHayEstablishmentFixedCostPerTon || 0,
+    //       alfalfaHayStandFixedCostAllocation:
+    //         response.data.alfalfaHayStandFixedCostAllocation || 0,
+    //       alfalfaHayStandFixedCostPerTon:
+    //         response.data.alfalfaHayStandFixedCostPerTon || 0,
+
+    //       // Raised Forage Total Cost
+    //       cornSilageTotalCost: response.data.cornSilageTotalCost || 0,
+    //       cornSilageTotalCostPerTon:
+    //         response.data.cornSilageTotalCostPerTon || 0,
+    //       sorghumSilageTotalCost: response.data.sorghumSilageTotalCost || 0,
+    //       sorghumSilageTotalCostPerTon:
+    //         response.data.sorghumSilageTotalCostPerTon || 0,
+    //       smallGrainSilageTotalCost:
+    //         response.data.smallGrainSilageTotalCost || 0,
+    //       smallGrainSilageTotalCostPerTon:
+    //         response.data.smallGrainSilageTotalCostPerTon || 0,
+    //       grassHayTotalCost: response.data.grassHayTotalCost || 0,
+    //       grassHayTotalCostPerTon: response.data.grassHayTotalCostPerTon || 0,
+    //       alfalfaHayEstablishmentTotalCost:
+    //         response.data.alfalfaHayEstablishmentTotalCost || 0,
+    //       alfalfaHayEstablishmentTotalCostPerTon:
+    //         response.data.alfalfaHayEstablishmentTotalCostPerTon || 0,
+    //       alfalfaHayStandTotalCost: response.data.alfalfaHayStandTotalCost || 0,
+    //       alfalfaHayStandTotalCostPerTon:
+    //         response.data.alfalfaHayStandTotalCostPerTon || 0,
+
+    //       // Purchased Feed Expenses
+    //       cornSilageTonsToBePurchased:
+    //         response.data.cornSilageTonsToBePurchased || 0,
+    //       cornSilageCostOfCommodity:
+    //         response.data.cornSilageCostOfCommodity || 0,
+    //       cornSilageCostOfTrucking: response.data.cornSilageCostOfTrucking || 0,
+    //       purchasedCornSilageTotalCost:
+    //         response.data.purchasedCornSilageTotalCost || 0,
+    //       sorghumSilageTonsToBePurchased:
+    //         response.data.sorghumSilageTonsToBePurchased || 0,
+    //       sorghumSilageCostOfCommodity:
+    //         response.data.sorghumSilageCostOfCommodity || 0,
+    //       sorghumSilageCostOfTrucking:
+    //         response.data.sorghumSilageCostOfTrucking || 0,
+    //       purchasedSorghumSilageTotalCost:
+    //         response.data.purchasedSorghumSilageTotalCost || 0,
+    //       smallGrainSilageTonsToBePurchased:
+    //         response.data.smallGrainSilageTonsToBePurchased || 0,
+    //       smallGrainSilageCostOfCommodity:
+    //         response.data.smallGrainSilageCostOfCommodity || 0,
+    //       smallGrainSilageCostOfTrucking:
+    //         response.data.smallGrainSilageCostOfTrucking || 0,
+    //       purchasedSmallGrainSilageTotalCost:
+    //         response.data.purchasedSmallGrainSilageTotalCost || 0,
+    //       grassHayTonsToBePurchased:
+    //         response.data.grassHayTonsToBePurchased || 0,
+    //       grassHayCostOfCommodity: response.data.grassHayCostOfCommodity || 0,
+    //       grassHayCostOfTrucking: response.data.grassHayCostOfTrucking || 0,
+    //       purchasedGrassHayTotalCost:
+    //         response.data.purchasedGrassHayTotalCost || 0,
+    //       alfalfaLegumeHayTonsToBePurchased:
+    //         response.data.alfalfaLegumeHayTonsToBePurchased || 0,
+    //       alfalfaLegumeHayCostOfCommodity:
+    //         response.data.alfalfaLegumeHayCostOfCommodity || 0,
+    //       alfalfaLegumeHayCostOfTrucking:
+    //         response.data.alfalfaLegumeHayCostOfTrucking || 0,
+    //       purchasedAlfalfaLegumeHayTotalCost:
+    //         response.data.purchasedAlfalfaLegumeHayTotalCost || 0,
+    //       peanutHullsTonsToBePurchased:
+    //         response.data.peanutHullsTonsToBePurchased || 0,
+    //       peanutHullsCostOfCommodity:
+    //         response.data.peanutHullsCostOfCommodity || 0,
+    //       peanutHullsCostOfTrucking:
+    //         response.data.peanutHullsCostOfTrucking || 0,
+    //       purchasedPeanutHullsTotalCost:
+    //         response.data.purchasedPeanutHullsTotalCost || 0,
+    //       applePomaceNoHullsTonsToBePurchased:
+    //         response.data.applePomaceNoHullsTonsToBePurchased || 0,
+    //       applePomaceNoHullsCostOfCommodity:
+    //         response.data.applePomaceNoHullsCostOfCommodity || 0,
+    //       applePomaceNoHullsCostOfTrucking:
+    //         response.data.applePomaceNoHullsCostOfTrucking || 0,
+    //       purchasedApplePomaceNoHullsTotalCost:
+    //         response.data.purchasedApplePomaceNoHullsTotalCost || 0,
+    //       brewersGrainWetTonsToBePurchased:
+    //         response.data.brewersGrainWetTonsToBePurchased || 0,
+    //       brewersGrainWetCostOfCommodity:
+    //         response.data.brewersGrainWetCostOfCommodity || 0,
+    //       brewersGrainWetCostOfTrucking:
+    //         response.data.brewersGrainWetCostOfTrucking || 0,
+    //       purchasedBrewersGrainWetTotalCost:
+    //         response.data.purchasedBrewersGrainWetTotalCost || 0,
+    //       citrusPulpDryTonsToBePurchased:
+    //         response.data.citrusPulpDryTonsToBePurchased || 0,
+    //       citrusPulpDryCostOfCommodity:
+    //         response.data.citrusPulpDryCostOfCommodity || 0,
+    //       citrusPulpDryCostOfTrucking:
+    //         response.data.citrusPulpDryCostOfTrucking || 0,
+    //       purchasedCitrusPulpDryTotalCost:
+    //         response.data.purchasedCitrusPulpDryTotalCost || 0,
+    //       cornGlutenFeedTonsToBePurchased:
+    //         response.data.cornGlutenFeedTonsToBePurchased || 0,
+    //       cornGlutenFeedCostOfCommodity:
+    //         response.data.cornGlutenFeedCostOfCommodity || 0,
+    //       cornGlutenFeedCostOfTrucking:
+    //         response.data.cornGlutenFeedCostOfTrucking || 0,
+    //       purchasedCornGlutenFeedTotalCost:
+    //         response.data.purchasedCornGlutenFeedTotalCost || 0,
+    //       wholeCottonseedTonsToBePurchased:
+    //         response.data.wholeCottonseedTonsToBePurchased || 0,
+    //       wholeCottonseedCostOfCommodity:
+    //         response.data.wholeCottonseedCostOfCommodity || 0,
+    //       wholeCottonseedCostOfTrucking:
+    //         response.data.wholeCottonseedCostOfTrucking || 0,
+    //       purchasedWholeCottonseedTotalCost:
+    //         response.data.purchasedWholeCottonseedTotalCost || 0,
+    //       cottonseedHullsTonsToBePurchased:
+    //         response.data.cottonseedHullsTonsToBePurchased || 0,
+    //       cottonseedHullsCostOfCommodity:
+    //         response.data.cottonseedHullsCostOfCommodity || 0,
+    //       cottonseedHullsCostOfTrucking:
+    //         response.data.cottonseedHullsCostOfTrucking || 0,
+    //       purchasedCottonseedHullsTotalCost:
+    //         response.data.purchasedCottonseedHullsTotalCost || 0,
+    //       soybeanMeal48TonsToBePurchased:
+    //         response.data.soybeanMeal48TonsToBePurchased || 0,
+    //       soybeanMeal48CostOfCommodity:
+    //         response.data.soybeanMeal48CostOfCommodity || 0,
+    //       soybeanMeal48CostOfTrucking:
+    //         response.data.soybeanMeal48CostOfTrucking || 0,
+    //       purchasedSoybeanMeal48TotalCost:
+    //         response.data.purchasedSoybeanMeal48TotalCost || 0,
+    //       customFeedMixTonsToBePurchased:
+    //         response.data.customFeedMixTonsToBePurchased || 0,
+    //       customFeedMixCostOfCommodity:
+    //         response.data.customFeedMixCostOfCommodity || 0,
+    //       customFeedMixCostOfTrucking:
+    //         response.data.customFeedMixCostOfTrucking || 0,
+    //       purchasedCustomFeedMixTotalCost:
+    //         response.data.purchasedCustomFeedMixTotalCost || 0,
+    //       customMineralMixTonsToBePurchased:
+    //         response.data.customMineralMixTonsToBePurchased || 0,
+    //       customMineralMixCostOfCommodity:
+    //         response.data.customMineralMixCostOfCommodity || 0,
+    //       customMineralMixCostOfTrucking:
+    //         response.data.customMineralMixCostOfTrucking || 0,
+    //       purchasedCustomMineralMixTotalCost:
+    //         response.data.purchasedCustomMineralMixTotalCost || 0,
+
+    //       // Grown Forage Trucking Cost
+    //       cornSilageGrownForageTruckingCost:
+    //         response.data.cornSilageGrownForageTruckingCost || 0,
+    //       sorghumSilageGrownForageTruckingCost:
+    //         response.data.sorghumSilageGrownForageTruckingCost || 0,
+    //       smallGrainSilageGrownForageTruckingCost:
+    //         response.data.smallGrainSilageGrownForageTruckingCost || 0,
+    //       grassHayGrownForageTruckingCost:
+    //         response.data.grassHayGrownForageTruckingCost || 0,
+    //       alfalfaHayEstablishmentGrownForageTruckingCost:
+    //         response.data.alfalfaHayEstablishmentGrownForageTruckingCost || 0,
+    //       alfalfaHayStandGrownForageTruckingCost:
+    //         response.data.alfalfaHayStandGrownForageTruckingCost || 0
+    //     })
+    //   }
+    // } catch (error) {
+    //   console.error('Error updating user inputs:', error)
+    // }
+
+
+
   }
 
   const textFields = [
@@ -770,76 +1701,688 @@ const FeedRequirements = () => {
         value: details.customMineralMixTonsRequired
       }
     ]
-    // Additional groups for other feeds (Brewer's Grain, Citrus Pulp, etc.) can follow the same format.
+    
   ]
+
+
+  const textFieldsforage = {
+    // Variable Costs Section
+    variableCosts: [
+      {
+        headers: ['Forage', 'TVC', 'TVC/Ton'],
+        rows: [
+          [
+            { label: 'Corn Silage', value: detailsforage.cornSilageTVC, valuePerTon: detailsforage.cornSilageTVCPerTon }
+          ],
+          [
+            { label: 'Sorghum Silage', value: detailsforage.sorghumSilageTVC, valuePerTon: detailsforage.sorghumSilageTVCPerTon }
+          ],
+          [
+            { label: 'Small Grain Silage', value: detailsforage.smallGrainSilageTVC, valuePerTon: detailsforage.smallGrainSilageTVCPerTon }
+          ],
+          [
+            { label: 'Grass Hay', value: detailsforage.grassHayTVC, valuePerTon: detailsforage.grassHayTVCPerTon }
+          ],
+          [
+            { label: 'Alfalfa Hay Establishment', value: detailsforage.alfalfaHayEstablishmentTVC, valuePerTon: detailsforage.alfalfaHayEstablishmentTVCPerTon }
+          ],
+          [
+            { label: 'Alfalfa Hay Stand', value: detailsforage.alfalfaHayStandTVC, valuePerTon: detailsforage.alfalfaHayStandTVCPerTon }
+          ]
+        ]
+      }
+    ],
+  
+    // Fixed Costs Section
+    fixedCosts: [
+      {
+        headers: ['Forage', 'Fixed Cost Allocation', 'Fixed Cost/Ton'],
+        rows: [
+          [
+            { label: 'Corn Silage', allocation: detailsforage.cornSilageFixedCostAllocation, costPerTon: detailsforage.cornSilageFixedCostPerTon }
+          ],
+          [
+            { label: 'Sorghum Silage', allocation: detailsforage.sorghumSilageFixedCostAllocation, costPerTon: detailsforage.sorghumSilageFixedCostPerTon }
+          ],
+          [
+            { label: 'Small Grain Silage', allocation: detailsforage.smallGrainSilageFixedCostAllocation, costPerTon: detailsforage.smallGrainSilageFixedCostPerTon }
+          ],
+          [
+            { label: 'Grass Hay', allocation: detailsforage.grassHayFixedCostAllocation, costPerTon: detailsforage.grassHayFixedCostPerTon }
+          ],
+          [
+            { label: 'Alfalfa Hay Establishment', allocation: detailsforage.alfalfaHayEstablishmentFixedCostAllocation, costPerTon: detailsforage.alfalfaHayEstablishmentFixedCostPerTon }
+          ],
+          [
+            { label: 'Alfalfa Hay Stand', allocation: detailsforage.alfalfaHayStandFixedCostAllocation, costPerTon: detailsforage.alfalfaHayStandFixedCostPerTon }
+          ]
+        ]
+      }
+    ],
+  
+    // Total Costs Section
+    totalCosts: [
+      {
+        headers: ['Forage', 'Total Cost', 'Total Cost/Ton'],
+        rows: [
+          [
+            { label: 'Corn Silage', totalCost: detailsforage.cornSilageTotalCost, totalCostPerTon: detailsforage.cornSilageTotalCostPerTon }
+          ],
+          [
+            { label: 'Sorghum Silage', totalCost: detailsforage.sorghumSilageTotalCost, totalCostPerTon: detailsforage.sorghumSilageTotalCostPerTon }
+          ],
+          [
+            { label: 'Small Grain Silage', totalCost: detailsforage.smallGrainSilageTotalCost, totalCostPerTon: detailsforage.smallGrainSilageTotalCostPerTon }
+          ],
+          [
+            { label: 'Grass Hay', totalCost: detailsforage.grassHayTotalCost, totalCostPerTon: detailsforage.grassHayTotalCostPerTon }
+          ],
+          [
+            { label: 'Alfalfa Hay Establishment', totalCost: detailsforage.alfalfaHayEstablishmentTotalCost, totalCostPerTon: detailsforage.alfalfaHayEstablishmentTotalCostPerTon }
+          ],
+          [
+            { label: 'Alfalfa Hay Stand', totalCost: detailsforage.alfalfaHayStandTotalCost, totalCostPerTon: detailsforage.alfalfaHayStandTotalCostPerTon }
+          ]
+        ]
+      }
+    ]
+
+  }
+
+
+  const purchasedFeedFields = {
+    purchasedFeed: [
+      {
+        headers: ['Feed/Forage', 'Tons to Purchase', 'Cost of Commodity', 'Cost of Trucking', 'Total Cost'],
+        rows: [
+          [
+            {
+              label: 'Corn Silage',
+              tonsToPurchase: detailsforage.cornSilageTonsToBePurchased,
+              costOfCommodity: detailsforage.cornSilageCostOfCommodity,
+              costOfTrucking: detailsforage.cornSilageCostOfTrucking,
+              totalCost: detailsforage.purchasedCornSilageTotalCost
+            }
+          ],
+          [
+            {
+              label: 'Sorghum Silage',
+              tonsToPurchase: detailsforage.sorghumSilageTonsToBePurchased,
+              costOfCommodity: detailsforage.sorghumSilageCostOfCommodity,
+              costOfTrucking: detailsforage.sorghumSilageCostOfTrucking,
+              totalCost: detailsforage.purchasedSorghumSilageTotalCost
+            }
+          ],
+          [
+            {
+              label: 'Small Grain Silage',
+              tonsToPurchase: detailsforage.smallGrainSilageTonsToBePurchased,
+              costOfCommodity: detailsforage.smallGrainSilageCostOfCommodity,
+              costOfTrucking: detailsforage.smallGrainSilageCostOfTrucking,
+              totalCost: detailsforage.purchasedSmallGrainSilageTotalCost
+            }
+          ],
+          [
+            {
+              label: 'Grass Hay',
+              tonsToPurchase: detailsforage.grassHayTonsToBePurchased,
+              costOfCommodity: detailsforage.grassHayCostOfCommodity,
+              costOfTrucking: detailsforage.grassHayCostOfTrucking,
+              totalCost: detailsforage.purchasedGrassHayTotalCost
+            }
+          ],
+          [
+            {
+              label: 'Alfalfa/Legume Hay',
+              tonsToPurchase: detailsforage.alfalfaLegumeHayTonsToBePurchased,
+              costOfCommodity: detailsforage.alfalfaLegumeHayCostOfCommodity,
+              costOfTrucking: detailsforage.alfalfaLegumeHayCostOfTrucking,
+              totalCost: detailsforage.purchasedAlfalfaLegumeHayTotalCost
+            }
+          ],
+          [
+            {
+              label: 'Peanut Hulls',
+              tonsToPurchase: detailsforage.peanutHullsTonsToBePurchased,
+              costOfCommodity: detailsforage.peanutHullsCostOfCommodity,
+              costOfTrucking: detailsforage.peanutHullsCostOfTrucking,
+              totalCost: detailsforage.purchasedPeanutHullsTotalCost
+            }
+          ],
+          [
+            {
+              label: 'Apple Pomace (No Hulls)',
+              tonsToPurchase: detailsforage.applePomaceNoHullsTonsToBePurchased,
+              costOfCommodity: detailsforage.applePomaceNoHullsCostOfCommodity,
+              costOfTrucking: detailsforage.applePomaceNoHullsCostOfTrucking,
+              totalCost: detailsforage.purchasedApplePomaceNoHullsTotalCost
+            }
+          ],
+          [
+            {
+              label: "Brewer's Grain (Wet)",
+              tonsToPurchase: detailsforage.brewersGrainWetTonsToBePurchased,
+              costOfCommodity: detailsforage.brewersGrainWetCostOfCommodity,
+              costOfTrucking: detailsforage.brewersGrainWetCostOfTrucking,
+              totalCost: detailsforage.purchasedBrewersGrainWetTotalCost
+            }
+          ],
+          [
+            {
+              label: 'Citrus Pulp (Dry)',
+              tonsToPurchase: detailsforage.citrusPulpDryTonsToBePurchased,
+              costOfCommodity: detailsforage.citrusPulpDryCostOfCommodity,
+              costOfTrucking: detailsforage.citrusPulpDryCostOfTrucking,
+              totalCost: detailsforage.purchasedCitrusPulpDryTotalCost
+            }
+          ],
+          [
+            {
+              label: 'Corn Gluten (Feed)',
+              tonsToPurchase: detailsforage.cornGlutenFeedTonsToBePurchased,
+              costOfCommodity: detailsforage.cornGlutenFeedCostOfCommodity,
+              costOfTrucking: detailsforage.cornGlutenFeedCostOfTrucking,
+              totalCost: detailsforage.purchasedCornGlutenFeedTotalCost
+            }
+          ],
+          [
+            {
+              label: 'Whole Cottonseed',
+              tonsToPurchase: detailsforage.wholeCottonseedTonsToBePurchased,
+              costOfCommodity: detailsforage.wholeCottonseedCostOfCommodity,
+              costOfTrucking: detailsforage.wholeCottonseedCostOfTrucking,
+              totalCost: detailsforage.purchasedWholeCottonseedTotalCost
+            }
+          ],
+          [
+            {
+              label: 'Cottonseed Hulls',
+              tonsToPurchase: detailsforage.cottonseedHullsTonsToBePurchased,
+              costOfCommodity: detailsforage.cottonseedHullsCostOfCommodity,
+              costOfTrucking: detailsforage.cottonseedHullsCostOfTrucking,
+              totalCost: detailsforage.purchasedCottonseedHullsTotalCost
+            }
+          ],
+          [
+            {
+              label: 'Soybean Meal 48',
+              tonsToPurchase: detailsforage.soybeanMeal48TonsToBePurchased,
+              costOfCommodity: detailsforage.soybeanMeal48CostOfCommodity,
+              costOfTrucking: detailsforage.soybeanMeal48CostOfTrucking,
+              totalCost: detailsforage.purchasedSoybeanMeal48TotalCost
+            }
+          ],
+          [
+            {
+              label: 'Custom Feed Mix',
+              tonsToPurchase: detailsforage.customFeedMixTonsToBePurchased,
+              costOfCommodity: detailsforage.customFeedMixCostOfCommodity,
+              costOfTrucking: detailsforage.customFeedMixCostOfTrucking,
+              totalCost: detailsforage.purchasedCustomFeedMixTotalCost
+            }
+          ],
+          [
+            {
+              label: 'Custom Mineral Mix',
+              tonsToPurchase: detailsforage.customMineralMixTonsToBePurchased,
+              costOfCommodity: detailsforage.customMineralMixCostOfCommodity,
+              costOfTrucking: detailsforage.customMineralMixCostOfTrucking,
+              totalCost: detailsforage.purchasedCustomMineralMixTotalCost
+            }
+          ]
+        ]
+      }
+    ],
+  
+    // Grown Forage Trucking Costs
+    grownForageTrucking: [
+      {
+        headers: ['Forage', 'Trucking Cost'],
+        rows: [
+          [
+            {
+              label: 'Corn Silage',
+              truckingCost: detailsforage.cornSilageGrownForageTruckingCost
+            }
+          ],
+          [
+            {
+              label: 'Sorghum Silage',
+              truckingCost: detailsforage.sorghumSilageGrownForageTruckingCost
+            }
+          ],
+          [
+            {
+              label: 'Small Grain Silage',
+              truckingCost: detailsforage.smallGrainSilageGrownForageTruckingCost
+            }
+          ],
+          [
+            {
+              label: 'Grass Hay',
+              truckingCost: detailsforage.grassHayGrownForageTruckingCost
+            }
+          ],
+          [
+            {
+              label: 'Alfalfa Hay Establishment',
+              truckingCost: detailsforage.alfalfaHayEstablishmentGrownForageTruckingCost
+            }
+          ],
+          [
+            {
+              label: 'Alfalfa Hay Stand',
+              truckingCost: detailsforage.alfalfaHayStandGrownForageTruckingCost
+            }
+          ]
+        ]
+      }
+    ]
+  }
+
+
+
+
+
 
   return (
     <div>
-      <Typography
-        className='mt-5 text-center'
-        variant='h4'
-        sx={{ color: '#c8102e', fontWeight: 'bold' }}
-      >
-        Feed Requirements
-      </Typography>
-      <Container maxWidth='sm' className='mb-10 mt-10'>
-        <Box
-          className='space-y-6'
-          sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
+      {/* Header Section with Input Button */}
+      <Box sx={{ 
+        backgroundColor: '#f8f9fa', 
+        padding: '2rem', 
+        textAlign: 'center',
+        borderBottom: '1px solid #e0e0e0'
+      }}>
+        <Typography variant='h4' sx={{ color: '#c8102e', fontWeight: 'bold', mb: 2 }}>
+          Feed Management Dashboard
+        </Typography>
+        <Typography variant='body1' sx={{ mb: 3, color: '#666' }}>
+          Please input your feed details to view the comprehensive analysis of feed requirements and costs
+        </Typography>
+        <Button
+          variant="contained"
+          onClick={() => setOpen(true)}
+          sx={{
+            backgroundColor: '#c8102e',
+            '&:hover': {
+              backgroundColor: '#a50d26'
+            },
+            mb: 2
+          }}
         >
+          Input Feed Details
+        </Button>
+      </Box>
+
+      <Container maxWidth='lg' className='mb-10 mt-10'>
+        {/* Feed Requirements Section */}
+        <Typography variant='h5' sx={{ mb: 3, fontWeight: 600 }}>
+          Feed Requirements
+        </Typography>
+        <Box sx={{ width: '100%', mb: 6 }}>
+          <Box sx={{ 
+            display: 'grid', 
+            gridTemplateColumns: '2fr 1fr 1fr 1fr',
+            gap: 2,
+            mb: 3,
+            pb: 2,
+            borderBottom: '2px solid #f0f0f0'
+          }}>
+            <Typography sx={{ fontWeight: 600, fontSize: '1rem' }}>Feed/Forage</Typography>
+            <Typography sx={{ fontWeight: 600, fontSize: '1rem' }}>Tons Required</Typography>
+            <Typography sx={{ fontWeight: 600, fontSize: '1rem' }}>Tons Produced</Typography>
+            <Typography sx={{ fontWeight: 600, fontSize: '1rem' }}>Balance to be purchased</Typography>
+          </Box>
+
           {textFields.map((row, rowIndex) => (
-            <Box
-              key={rowIndex}
-              sx={{
-                display: 'flex',
+            <Box 
+              key={row[0].label}
+              sx={{ 
+                display: 'grid',
+                gridTemplateColumns: '2fr 1fr 1fr 1fr',
                 gap: 2,
-                flexDirection: 'row',
-                justifyContent: 'flex-start'
+                mb: 2,
+                alignItems: 'center',
+                '&:hover': {
+                  backgroundColor: '#fafafa'
+                },
+                padding: '8px 0'
               }}
             >
-              {row.map(field => (
-                <Tooltip title={field.label} placement='top'>
+              <Typography sx={{ fontWeight: 500 }}>
+                {row[0].label.split(' Tons')[0]}
+              </Typography>
+              {row.map((field) => (
+                <Tooltip key={field.label} title={field.label} placement='top'>
                   <TextField
-                    key={field.label}
-                    label={field.label}
-                    variant='outlined'
+                    variant="outlined"
+                    size="small"
                     value={field.value}
                     InputProps={{
-                      readOnly: true
-                    }}
-                    InputLabelProps={{
-                      shrink: true
-                    }}
-                    sx={{
-                      flex: 1 // Make each TextField flexible in size to fill available space nicely
+                      readOnly: true,
+                      sx: { 
+                        backgroundColor: '#f5f5f5',
+                        '& .MuiOutlinedInput-notchedOutline': {
+                          borderColor: '#e0e0e0'
+                        }
+                      }
                     }}
                   />
                 </Tooltip>
               ))}
             </Box>
           ))}
-          <Button
-            variant='contained'
-            sx={{
-              bgcolor: '#c8102e',
-              '&:hover': { bgcolor: '#a50f2e' },
-              mt: 2,
-              py: 1.5
-            }}
-            onClick={handleDialogOpen}
-          >
-            Input Feed Requirements
-          </Button>
         </Box>
-      </Container>
 
-      <InputDialog
-        open={open}
-        handleClose={handleDialogClose}
-        handleSubmit={handleSubmit}
-      />
+        {/* Raised Forage Variable Cost Section */}
+        <Typography variant='h5' sx={{ mb: 3, fontWeight: 600 }}>
+          Raised Forage Variable Cost
+        </Typography>
+        <Box sx={{ width: '100%', mb: 6 }}>
+          {textFieldsforage.variableCosts.map((section, index) => (
+            <div key={index}>
+              <Box sx={{ 
+                display: 'grid', 
+                gridTemplateColumns: '2fr 1fr 1fr',
+                gap: 2,
+                mb: 3,
+                pb: 2,
+                borderBottom: '2px solid #f0f0f0'
+              }}>
+                {section.headers.map((header, headerIndex) => (
+                  <Typography key={headerIndex} sx={{ fontWeight: 600, fontSize: '1rem' }}>
+                    {header}
+                  </Typography>
+                ))}
+              </Box>
+              {section.rows.map((row, rowIndex) => (
+                <Box 
+                  key={rowIndex}
+                  sx={{ 
+                    display: 'grid',
+                    gridTemplateColumns: '2fr 1fr 1fr',
+                    gap: 2,
+                    mb: 2,
+                    backgroundColor: rowIndex % 2 === 0 ? '#f8f9fa' : 'white',
+                    padding: '8px'
+                  }}
+                >
+                  <Typography>{row[0].label}</Typography>
+                  <TextField
+                    variant="outlined"
+                    size="small"
+                    value={row[0].value}
+                    InputProps={{
+                      readOnly: true,
+                      sx: { backgroundColor: '#f5f5f5' }
+                    }}
+                  />
+                  <TextField
+                    variant="outlined"
+                    size="small"
+                    value={row[0].valuePerTon}
+                    InputProps={{
+                      readOnly: true,
+                      sx: { backgroundColor: '#f5f5f5' }
+                    }}
+                  />
+                </Box>
+              ))}
+            </div>
+          ))}
+        </Box>
+
+        {/* Fixed Costs Section */}
+        <Typography variant='h5' sx={{ mb: 3, fontWeight: 600 }}>
+          Raised Forage Fixed Cost
+        </Typography>
+        <Box sx={{ width: '100%', mb: 6 }}>
+          {textFieldsforage.fixedCosts.map((section, index) => (
+            <div key={index}>
+              <Box sx={{ 
+                display: 'grid', 
+                gridTemplateColumns: '2fr 1fr 1fr',
+                gap: 2,
+                mb: 3,
+                pb: 2,
+                borderBottom: '2px solid #f0f0f0'
+              }}>
+                {section.headers.map((header, headerIndex) => (
+                  <Typography key={headerIndex} sx={{ fontWeight: 600, fontSize: '1rem' }}>
+                    {header}
+                  </Typography>
+                ))}
+              </Box>
+              {section.rows.map((row, rowIndex) => (
+                <Box 
+                  key={rowIndex}
+                  sx={{ 
+                    display: 'grid',
+                    gridTemplateColumns: '2fr 1fr 1fr',
+                    gap: 2,
+                    mb: 2,
+                    backgroundColor: rowIndex % 2 === 0 ? '#f8f9fa' : 'white',
+                    padding: '8px'
+                  }}
+                >
+                  <Typography>{row[0].label}</Typography>
+                  <TextField
+                    variant="outlined"
+                    size="small"
+                    value={row[0].allocation}
+                    InputProps={{
+                      readOnly: true,
+                      sx: { backgroundColor: '#f5f5f5' }
+                    }}
+                  />
+                  <TextField
+                    variant="outlined"
+                    size="small"
+                    value={row[0].costPerTon}
+                    InputProps={{
+                      readOnly: true,
+                      sx: { backgroundColor: '#f5f5f5' }
+                    }}
+                  />
+                </Box>
+              ))}
+            </div>
+          ))}
+        </Box>
+
+        {/* Total Costs Section */}
+        <Typography variant='h5' sx={{ mb: 3, fontWeight: 600 }}>
+          Raised Forage Total Cost
+        </Typography>
+        <Box sx={{ width: '100%', mb: 6 }}>
+          {textFieldsforage.totalCosts.map((section, index) => (
+            <div key={index}>
+              <Box sx={{ 
+                display: 'grid', 
+                gridTemplateColumns: '2fr 1fr 1fr',
+                gap: 2,
+                mb: 3,
+                pb: 2,
+                borderBottom: '2px solid #f0f0f0'
+              }}>
+                {section.headers.map((header, headerIndex) => (
+                  <Typography key={headerIndex} sx={{ fontWeight: 600, fontSize: '1rem' }}>
+                    {header}
+                  </Typography>
+                ))}
+              </Box>
+              {section.rows.map((row, rowIndex) => (
+                <Box 
+                  key={rowIndex}
+                  sx={{ 
+                    display: 'grid',
+                    gridTemplateColumns: '2fr 1fr 1fr',
+                    gap: 2,
+                    mb: 2,
+                    backgroundColor: rowIndex % 2 === 0 ? '#f8f9fa' : 'white',
+                    padding: '8px'
+                  }}
+                >
+                  <Typography>{row[0].label}</Typography>
+                  <TextField
+                    variant="outlined"
+                    size="small"
+                    value={row[0].totalCost}
+                    InputProps={{
+                      readOnly: true,
+                      sx: { backgroundColor: '#f5f5f5' }
+                    }}
+                  />
+                  <TextField
+                    variant="outlined"
+                    size="small"
+                    value={row[0].totalCostPerTon}
+                    InputProps={{
+                      readOnly: true,
+                      sx: { backgroundColor: '#f5f5f5' }
+                    }}
+                  />
+                </Box>
+              ))}
+            </div>
+          ))}
+        </Box>
+
+        {/* Purchased Feed Expenses Section */}
+        <Typography variant='h5' sx={{ mb: 3, fontWeight: 600 }}>
+          Purchased Feed Expenses
+        </Typography>
+        <Box sx={{ width: '100%', mb: 6 }}>
+          {purchasedFeedFields.purchasedFeed.map((section, index) => (
+            <div key={index}>
+              <Box sx={{ 
+                display: 'grid', 
+                gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr',
+                gap: 2,
+                mb: 3,
+                pb: 2,
+                borderBottom: '2px solid #f0f0f0'
+              }}>
+                {section.headers.map((header, headerIndex) => (
+                  <Typography key={headerIndex} sx={{ fontWeight: 600, fontSize: '1rem' }}>
+                    {header}
+                  </Typography>
+                ))}
+              </Box>
+              {section.rows.map((row, rowIndex) => (
+                <Box 
+                  key={rowIndex}
+                  sx={{ 
+                    display: 'grid',
+                    gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr',
+                    gap: 2,
+                    mb: 2,
+                    backgroundColor: rowIndex % 2 === 0 ? '#f8f9fa' : 'white',
+                    padding: '8px'
+                  }}
+                >
+                  <Typography>{row[0].label}</Typography>
+                  <TextField
+                    variant="outlined"
+                    size="small"
+                    value={row[0].tonsToPurchase}
+                    InputProps={{
+                      readOnly: true,
+                      sx: { backgroundColor: '#f5f5f5' }
+                    }}
+                  />
+                  <TextField
+                    variant="outlined"
+                    size="small"
+                    value={row[0].costOfCommodity}
+                    InputProps={{
+                      readOnly: true,
+                      sx: { backgroundColor: '#f5f5f5' }
+                    }}
+                  />
+                  <TextField
+                    variant="outlined"
+                    size="small"
+                    value={row[0].costOfTrucking}
+                    InputProps={{
+                      readOnly: true,
+                      sx: { backgroundColor: '#f5f5f5' }
+                    }}
+                  />
+                  <TextField
+                    variant="outlined"
+                    size="small"
+                    value={row[0].totalCost}
+                    InputProps={{
+                      readOnly: true,
+                      sx: { backgroundColor: '#f5f5f5' }
+                    }}
+                  />
+                </Box>
+              ))}
+            </div>
+          ))}
+        </Box>
+
+        {/* Grown Forage Trucking Costs Section */}
+        <Typography variant='h5' sx={{ mb: 3, fontWeight: 600 }}>
+          Grown Forage Trucking Costs
+        </Typography>
+        <Box sx={{ width: '100%' }}>
+          {purchasedFeedFields.grownForageTrucking.map((section, index) => (
+            <div key={index}>
+              <Box sx={{ 
+                display: 'grid', 
+                gridTemplateColumns: '2fr 1fr',
+                gap: 2,
+                mb: 3,
+                pb: 2,
+                borderBottom: '2px solid #f0f0f0'
+              }}>
+                {section.headers.map((header, headerIndex) => (
+                  <Typography key={headerIndex} sx={{ fontWeight: 600, fontSize: '1rem' }}>
+                    {header}
+                  </Typography>
+                ))}
+              </Box>
+              {section.rows.map((row, rowIndex) => (
+                <Box 
+                  key={rowIndex}
+                  sx={{ 
+                    display: 'grid',
+                    gridTemplateColumns: '2fr 1fr',
+                    gap: 2,
+                    mb: 2,
+                    backgroundColor: rowIndex % 2 === 0 ? '#f8f9fa' : 'white',
+                    padding: '8px'
+                  }}
+                >
+                  <Typography>{row[0].label}</Typography>
+                  <TextField
+                    variant="outlined"
+                    size="small"
+                    value={row[0].truckingCost}
+                    InputProps={{
+                      readOnly: true,
+                      sx: { backgroundColor: '#f5f5f5' }
+                    }}
+                  />
+                </Box>
+              ))}
+            </div>
+          ))}
+        </Box>
+
+        <CombinedInputDialog 
+          open={open} 
+          handleClose={() => setOpen(false)} 
+          handleSubmit={handleSubmit} 
+        />
+      </Container>
     </div>
   )
 }
+
 
 export default FeedRequirements

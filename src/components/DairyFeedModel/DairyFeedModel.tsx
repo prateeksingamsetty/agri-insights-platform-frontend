@@ -13,7 +13,7 @@ const FeedModel = () => {
         Dairy Feed Model
       </Typography>
       <FeedRequirements />
-      <RaisedForage />
+      
     </div>
   )
 }
