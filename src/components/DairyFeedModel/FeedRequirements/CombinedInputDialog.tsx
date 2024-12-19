@@ -209,7 +209,89 @@ interface CombinedInputs {
   alfalfaHayStandEstimatedTotalOperatingCost: number;
   alfalfaHayStandPercentOfForageFixedCostAllocated: number;
   alfalfaHayShrinkLossPercentage: number;
+
+
+
+  // Commodity and Trucking Details
+averageCostOfTruckingPerTonMile: number;
+
+// Corn Silage
+cornSilageCostOfCommodityPerTon: number;
+cornSilageAvgPurchasedFeedMilesTruckedToDairy: number;
+cornSilageAvgGrownForageMilesTruckedToDairy: number;
+
+// Sorghum Silage
+sorghumSilageCostOfCommodityPerTon: number;
+sorghumSilageAvgPurchasedFeedMilesTruckedToDairy: number;
+sorghumSilageAvgGrownForageMilesTruckedToDairy: number;
+
+// Small Grain Silage
+smallGrainSilageCostOfCommodityPerTon: number;
+smallGrainSilageAvgPurchasedFeedMilesTruckedToDairy: number;
+smallGrainSilageAvgGrownForageMilesTruckedToDairy: number;
+
+// Grass Hay
+grassHayCostOfCommodityPerTon: number;
+grassHayAvgPurchasedFeedMilesTruckedToDairy: number;
+grassHayAvgGrownForageMilesTruckedToDairy: number;
+
+// Alfalfa Hay
+alfalfaHayCostOfCommodityPerTon: number;
+alfalfaHayAvgPurchasedFeedMilesTruckedToDairy: number;
+alfalfaHayAvgGrownForageMilesTruckedToDairy: number;
+
+// Peanut Hulls
+peanutHullsCostOfCommodityPerTon: number;
+peanutHullsAvgPurchasedFeedMilesTruckedToDairy: number;
+peanutHullsAvgGrownForageMilesTruckedToDairy: number;
+
+// Apple Pomace
+applePomaceCostOfCommodityPerTon: number;
+applePomaceAvgPurchasedFeedMilesTruckedToDairy: number;
+applePomaceAvgGrownForageMilesTruckedToDairy: number;
+
+// Brewers Grain
+brewersGrainCostOfCommodityPerTon: number;
+brewersGrainAvgPurchasedFeedMilesTruckedToDairy: number;
+brewersGrainAvgGrownForageMilesTruckedToDairy: number;
+
+// Citrus Pulp
+citrusPulpCostOfCommodityPerTon: number;
+citrusPulpAvgPurchasedFeedMilesTruckedToDairy: number;
+citrusPulpAvgGrownForageMilesTruckedToDairy: number;
+
+// Corn Gluten
+cornGlutenCostOfCommodityPerTon: number;
+cornGlutenAvgPurchasedFeedMilesTruckedToDairy: number;
+cornGlutenAvgGrownForageMilesTruckedToDairy: number;
+
+// Whole Cottonseed
+wholeCottonseedCostOfCommodityPerTon: number;
+wholeCottonseedAvgPurchasedFeedMilesTruckedToDairy: number;
+wholeCottonseedAvgGrownForageMilesTruckedToDairy: number;
+
+// Cottonseed Hulls
+cottonseedHullsCostOfCommodityPerTon: number;
+cottonseedHullsAvgPurchasedFeedMilesTruckedToDairy: number;
+cottonseedHullsAvgGrownForageMilesTruckedToDairy: number;
+
+// Soybean Meal
+soybeanMealCostOfCommodityPerTon: number;
+soybeanMealAvgPurchasedFeedMilesTruckedToDairy: number;
+soybeanMealAvgGrownForageMilesTruckedToDairy: number;
+
+// Custom Feed Mix
+customFeedMixCostOfCommodityPerTon: number;
+customFeedMixAvgPurchasedFeedMilesTruckedToDairy: number;
+customFeedMixAvgGrownForageMilesTruckedToDairy: number;
+
+// Custom Mineral Mix
+customMineralMixCostOfCommodityPerTon: number;
+customMineralMixAvgPurchasedFeedMilesTruckedToDairy: number;
+customMineralMixAvgGrownForageMilesTruckedToDairy: number;
+
 }
+
 
 interface InputDialogProps {
   open: boolean
@@ -408,6 +490,84 @@ interface InputDialogProps {
       alfalfaHayStandEstimatedTotalOperatingCost: 0,
       alfalfaHayStandPercentOfForageFixedCostAllocated: 0,
       alfalfaHayShrinkLossPercentage: 0,
+
+averageCostOfTruckingPerTonMile: 0,
+
+// Corn Silage
+cornSilageCostOfCommodityPerTon: 0,
+cornSilageAvgPurchasedFeedMilesTruckedToDairy: 0,
+cornSilageAvgGrownForageMilesTruckedToDairy: 0,
+
+// Sorghum Silage
+sorghumSilageCostOfCommodityPerTon: 0,
+sorghumSilageAvgPurchasedFeedMilesTruckedToDairy: 0,
+sorghumSilageAvgGrownForageMilesTruckedToDairy: 0,
+
+// Small Grain Silage
+smallGrainSilageCostOfCommodityPerTon: 0,
+smallGrainSilageAvgPurchasedFeedMilesTruckedToDairy: 0,
+smallGrainSilageAvgGrownForageMilesTruckedToDairy: 0,
+
+// Grass Hay
+grassHayCostOfCommodityPerTon: 0,
+grassHayAvgPurchasedFeedMilesTruckedToDairy: 0,
+grassHayAvgGrownForageMilesTruckedToDairy: 0,
+
+// Alfalfa Hay
+alfalfaHayCostOfCommodityPerTon: 0,
+alfalfaHayAvgPurchasedFeedMilesTruckedToDairy: 0,
+alfalfaHayAvgGrownForageMilesTruckedToDairy: 0,
+
+// Peanut Hulls
+peanutHullsCostOfCommodityPerTon: 0,
+peanutHullsAvgPurchasedFeedMilesTruckedToDairy: 0,
+peanutHullsAvgGrownForageMilesTruckedToDairy: 0,
+
+// Apple Pomace
+applePomaceCostOfCommodityPerTon: 0,
+applePomaceAvgPurchasedFeedMilesTruckedToDairy: 0,
+applePomaceAvgGrownForageMilesTruckedToDairy: 0,
+
+// Brewers Grain
+brewersGrainCostOfCommodityPerTon: 0,
+brewersGrainAvgPurchasedFeedMilesTruckedToDairy: 0,
+brewersGrainAvgGrownForageMilesTruckedToDairy: 0,
+
+// Citrus Pulp
+citrusPulpCostOfCommodityPerTon: 0,
+citrusPulpAvgPurchasedFeedMilesTruckedToDairy: 0,
+citrusPulpAvgGrownForageMilesTruckedToDairy: 0,
+
+// Corn Gluten
+cornGlutenCostOfCommodityPerTon: 0,
+cornGlutenAvgPurchasedFeedMilesTruckedToDairy: 0,
+cornGlutenAvgGrownForageMilesTruckedToDairy: 0,
+
+// Whole Cottonseed
+wholeCottonseedCostOfCommodityPerTon: 0,
+wholeCottonseedAvgPurchasedFeedMilesTruckedToDairy: 0,
+wholeCottonseedAvgGrownForageMilesTruckedToDairy: 0,
+
+// Cottonseed Hulls
+cottonseedHullsCostOfCommodityPerTon: 0,
+cottonseedHullsAvgPurchasedFeedMilesTruckedToDairy: 0,
+cottonseedHullsAvgGrownForageMilesTruckedToDairy: 0,
+
+// Soybean Meal
+soybeanMealCostOfCommodityPerTon: 0,
+soybeanMealAvgPurchasedFeedMilesTruckedToDairy: 0,
+soybeanMealAvgGrownForageMilesTruckedToDairy: 0,
+
+// Custom Feed Mix
+customFeedMixCostOfCommodityPerTon: 0,
+customFeedMixAvgPurchasedFeedMilesTruckedToDairy: 0,
+customFeedMixAvgGrownForageMilesTruckedToDairy: 0,
+
+// Custom Mineral Mix
+customMineralMixCostOfCommodityPerTon: 0,
+customMineralMixAvgPurchasedFeedMilesTruckedToDairy: 0,
+customMineralMixAvgGrownForageMilesTruckedToDairy: 0,
+
     };
 
     
@@ -658,6 +818,137 @@ interface InputDialogProps {
       }
     ];
 
+    const commodityAndTruckingSection = {
+      title: 'Commodity and Trucking Details',
+      fields: [
+        {
+          name: 'averageCostOfTruckingPerTonMile',
+          label: 'Average Cost of Trucking per Ton-Mile'
+        }
+      ],
+      commodities: [
+        {
+          title: 'Corn Silage',
+          fields: [
+            { name: 'cornSilageCostOfCommodityPerTon', label: 'Cost of Commodity Per Ton' },
+            { name: 'cornSilageAvgPurchasedFeedMilesTruckedToDairy', label: 'Avg Purchased Feed Miles Trucked to Dairy' },
+            { name: 'cornSilageAvgGrownForageMilesTruckedToDairy', label: 'Avg Grown Forage Miles Trucked to Dairy' }
+          ]
+        },
+        {
+          title: 'Sorghum Silage',
+          fields: [
+            { name: 'sorghumSilageCostOfCommodityPerTon', label: 'Cost of Commodity Per Ton' },
+            { name: 'sorghumSilageAvgPurchasedFeedMilesTruckedToDairy', label: 'Avg Purchased Feed Miles Trucked to Dairy' },
+            { name: 'sorghumSilageAvgGrownForageMilesTruckedToDairy', label: 'Avg Grown Forage Miles Trucked to Dairy' }
+          ]
+        },
+        {
+          title: 'Small Grain Silage',
+          fields: [
+            { name: 'smallGrainSilageCostOfCommodityPerTon', label: 'Cost of Commodity Per Ton' },
+            { name: 'smallGrainSilageAvgPurchasedFeedMilesTruckedToDairy', label: 'Avg Purchased Feed Miles Trucked to Dairy' },
+            { name: 'smallGrainSilageAvgGrownForageMilesTruckedToDairy', label: 'Avg Grown Forage Miles Trucked to Dairy' }
+          ]
+        },
+        {
+          title: 'Grass Hay',
+          fields: [
+            { name: 'grassHayCostOfCommodityPerTon', label: 'Cost of Commodity Per Ton' },
+            { name: 'grassHayAvgPurchasedFeedMilesTruckedToDairy', label: 'Avg Purchased Feed Miles Trucked to Dairy' },
+            { name: 'grassHayAvgGrownForageMilesTruckedToDairy', label: 'Avg Grown Forage Miles Trucked to Dairy' }
+          ]
+        },
+        {
+          title: 'Alfalfa Hay',
+          fields: [
+            { name: 'alfalfaHayCostOfCommodityPerTon', label: 'Cost of Commodity Per Ton' },
+            { name: 'alfalfaHayAvgPurchasedFeedMilesTruckedToDairy', label: 'Avg Purchased Feed Miles Trucked to Dairy' },
+            { name: 'alfalfaHayAvgGrownForageMilesTruckedToDairy', label: 'Avg Grown Forage Miles Trucked to Dairy' }
+          ]
+        },
+        {
+          title: 'Peanut Hulls',
+          fields: [
+            { name: 'peanutHullsCostOfCommodityPerTon', label: 'Cost of Commodity Per Ton' },
+            { name: 'peanutHullsAvgPurchasedFeedMilesTruckedToDairy', label: 'Avg Purchased Feed Miles Trucked to Dairy' },
+            { name: 'peanutHullsAvgGrownForageMilesTruckedToDairy', label: 'Avg Grown Forage Miles Trucked to Dairy' }
+          ]
+        },
+        {
+          title: 'Apple Pomace',
+          fields: [
+            { name: 'applePomaceCostOfCommodityPerTon', label: 'Cost of Commodity Per Ton' },
+            { name: 'applePomaceAvgPurchasedFeedMilesTruckedToDairy', label: 'Avg Purchased Feed Miles Trucked to Dairy' },
+            { name: 'applePomaceAvgGrownForageMilesTruckedToDairy', label: 'Avg Grown Forage Miles Trucked to Dairy' }
+          ]
+        },
+        {
+          title: "Brewers Grain",
+          fields: [
+            { name: 'brewersGrainCostOfCommodityPerTon', label: 'Cost of Commodity Per Ton' },
+            { name: 'brewersGrainAvgPurchasedFeedMilesTruckedToDairy', label: 'Avg Purchased Feed Miles Trucked to Dairy' },
+            { name: 'brewersGrainAvgGrownForageMilesTruckedToDairy', label: 'Avg Grown Forage Miles Trucked to Dairy' }
+          ]
+        },
+        {
+          title: 'Citrus Pulp',
+          fields: [
+            { name: 'citrusPulpCostOfCommodityPerTon', label: 'Cost of Commodity Per Ton' },
+            { name: 'citrusPulpAvgPurchasedFeedMilesTruckedToDairy', label: 'Avg Purchased Feed Miles Trucked to Dairy' },
+            { name: 'citrusPulpAvgGrownForageMilesTruckedToDairy', label: 'Avg Grown Forage Miles Trucked to Dairy' }
+          ]
+        },
+        {
+          title: 'Corn Gluten',
+          fields: [
+            { name: 'cornGlutenCostOfCommodityPerTon', label: 'Cost of Commodity Per Ton' },
+            { name: 'cornGlutenAvgPurchasedFeedMilesTruckedToDairy', label: 'Avg Purchased Feed Miles Trucked to Dairy' },
+            { name: 'cornGlutenAvgGrownForageMilesTruckedToDairy', label: 'Avg Grown Forage Miles Trucked to Dairy' }
+          ]
+        },
+        {
+          title: 'Whole Cottonseed',
+          fields: [
+            { name: 'wholeCottonseedCostOfCommodityPerTon', label: 'Cost of Commodity Per Ton' },
+            { name: 'wholeCottonseedAvgPurchasedFeedMilesTruckedToDairy', label: 'Avg Purchased Feed Miles Trucked to Dairy' },
+            { name: 'wholeCottonseedAvgGrownForageMilesTruckedToDairy', label: 'Avg Grown Forage Miles Trucked to Dairy' }
+          ]
+        },
+        {
+          title: 'Cottonseed Hulls',
+          fields: [
+            { name: 'cottonseedHullsCostOfCommodityPerTon', label: 'Cost of Commodity Per Ton' },
+            { name: 'cottonseedHullsAvgPurchasedFeedMilesTruckedToDairy', label: 'Avg Purchased Feed Miles Trucked to Dairy' },
+            { name: 'cottonseedHullsAvgGrownForageMilesTruckedToDairy', label: 'Avg Grown Forage Miles Trucked to Dairy' }
+          ]
+        },
+        {
+          title: 'Soybean Meal',
+          fields: [
+            { name: 'soybeanMealCostOfCommodityPerTon', label: 'Cost of Commodity Per Ton' },
+            { name: 'soybeanMealAvgPurchasedFeedMilesTruckedToDairy', label: 'Avg Purchased Feed Miles Trucked to Dairy' },
+            { name: 'soybeanMealAvgGrownForageMilesTruckedToDairy', label: 'Avg Grown Forage Miles Trucked to Dairy' }
+          ]
+        },
+        {
+          title: 'Custom Feed Mix',
+          fields: [
+            { name: 'customFeedMixCostOfCommodityPerTon', label: 'Cost of Commodity Per Ton' },
+            { name: 'customFeedMixAvgPurchasedFeedMilesTruckedToDairy', label: 'Avg Purchased Feed Miles Trucked to Dairy' },
+            { name: 'customFeedMixAvgGrownForageMilesTruckedToDairy', label: 'Avg Grown Forage Miles Trucked to Dairy' }
+          ]
+        },
+        {
+          title: 'Custom Mineral Mix',
+          fields: [
+            { name: 'customMineralMixCostOfCommodityPerTon', label: 'Cost of Commodity Per Ton' },
+            { name: 'customMineralMixAvgPurchasedFeedMilesTruckedToDairy', label: 'Avg Purchased Feed Miles Trucked to Dairy' },
+            { name: 'customMineralMixAvgGrownForageMilesTruckedToDairy', label: 'Avg Grown Forage Miles Trucked to Dairy' }
+          ]
+        }
+      ]
+    };
 
     useEffect(() => {
       if (!open) return
@@ -673,8 +964,6 @@ interface InputDialogProps {
         const response = await axios.get(
           `${process.env.NEXT_PUBLIC_BACKEND_URL}/feed-details/inputDetails/${email}`
         );
-
-        console.log(response)
     
         if (response.data) {
           const transformedData: CombinedInputs = {} as CombinedInputs;
@@ -689,8 +978,8 @@ interface InputDialogProps {
             }
           });
           
-          // Transform production data sections
-          const productionSections = [
+          // Transform raised forage data
+          const forageInputs = [
             'cornSilage',
             'sorghumSilage',
             'smallGrainSilage',
@@ -699,31 +988,66 @@ interface InputDialogProps {
             'alfalfaHayStand'
           ];
           
-          productionSections.forEach(section => {
+          forageInputs.forEach(section => {
             if (response.data[section]) {
               Object.entries(response.data[section]).forEach(([key, value]) => {
                 transformedData[key] = value as number;
               });
             }
           });
-          
-          // Handle special case for alfalfa hay shrink loss
+    
+          // Transform transport and cost inputs
+          transformedData.averageCostOfTruckingPerTonMile = response.data.averageCostOfTruckingPerTonMile;
+    
+          const transportAndCostSections = [
+            'cornSilageTransportAndCost',
+            'sorghumSilageTransportAndCost',
+            'smallGrainSilageTransportAndCost',
+            'grassHayTransportAndCost',
+            'alfalfaHayTransportAndCost',
+            'peanutHullsTransportAndCost',
+            'applePomaceTransportAndCost',
+            'brewersGrainTransportAndCost',
+            'citrusPulpTransportAndCost',
+            'cornGlutenTransportAndCost',
+            'wholeCottonseedTransportAndCost',
+            'cottonseedHullsTransportAndCost',
+            'soybeanMealTransportAndCost',
+            'customFeedMixTransportAndCost',
+            'customMineralMixTransportAndCost'
+          ];
+    
+          transportAndCostSections.forEach(section => {
+            if (response.data[section]) {
+              const {
+                costOfCommodityPerTon,
+                avgPurchasedFeedMilesTruckedToDairy,
+                avgGrownForageMilesTruckedToDairy
+              } = response.data[section];
+    
+              const baseKey = section.replace('TransportAndCost', '');
+              transformedData[`${baseKey}CostOfCommodityPerTon`] = costOfCommodityPerTon;
+              transformedData[`${baseKey}AvgPurchasedFeedMilesTruckedToDairy`] = avgPurchasedFeedMilesTruckedToDairy;
+              transformedData[`${baseKey}AvgGrownForageMilesTruckedToDairy`] = avgGrownForageMilesTruckedToDairy;
+            }
+          });
+    
+          // Handle alfalfa hay shrink loss
           if (response.data.alfalfaHayShrinkLoss) {
             transformedData.alfalfaHayShrinkLossPercentage = 
               response.data.alfalfaHayShrinkLoss.alfalfaHayShrinkLossPercentage;
           }
-         
-          
+          console.log(transformedData)
           setUserInputs((prev) => ({
-            ...defaultInputs, // Ensure all fields are initialized
-            ...prev,          // Preserve existing state
-            ...transformedData, // Add fetched inputs
+            ...defaultInputs,
+            ...prev,
+            ...transformedData,
           }));
         }
       } catch (error) {
         console.error('Error fetching user input records:', error);
       }
-    }
+    };
   
     const loadFromSessionStorage = () => {
       const storedInputs = localStorage.getItem('combinedInputs')
@@ -757,13 +1081,7 @@ interface InputDialogProps {
         localStorage.setItem('combinedInputs', JSON.stringify(updatedLocalStorage));
       }
     };
-    
-    
-    
-    
-    
-    
-    
+      
     
     const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
       setTabValue(newValue)
@@ -780,249 +1098,273 @@ interface InputDialogProps {
 
       
 
-      return (
-        <Dialog open={open} onClose={handleClose} maxWidth='lg' fullWidth>
-          <DialogTitle sx={{ bgcolor: '#c8102e', color: 'white' }}>
-            Enter Feed and Production Details
-          </DialogTitle>
+    return (
+      <Dialog open={open} onClose={handleClose} maxWidth='lg' fullWidth>
+        <DialogTitle sx={{ bgcolor: '#c8102e', color: 'white' }}>
+          Enter Feed and Production Details
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText sx={{ mb: 2 }}>
+            Please enter your inputs for the Dairy Enterprise Budget Model.
+          </DialogContentText>
           
-          <DialogContent>
-            <DialogContentText sx={{ mb: 2 }}>
-              Please enter your inputs for the Dairy Enterprise Budget Model.
-            </DialogContentText>
-            
-            <Tabs 
-              value={tabValue} 
-              onChange={handleTabChange}
-              sx={{ 
-                borderBottom: 1, 
-                borderColor: 'divider', 
-                mb: 2,
-                '& .MuiTab-root.Mui-selected': {
-                  color: '#c8102e'
-                },
-                '& .MuiTabs-indicator': {
-                  backgroundColor: '#c8102e'
-                }
-              }}
-            >
-              <Tab label="Feed Details" />
-              <Tab label="Production Details" />
-            </Tabs>
-      
-            <form onSubmit={onSubmit}>
-              <Box sx={{ maxHeight: '70vh', overflowY: 'auto', p: 2 }}>
-                {tabValue === 0 && (
-                  <Box>
-                    {Object.entries(feedSections).map(([sectionKey, section]) => (
-                      <Paper 
-                        key={sectionKey} 
-                        elevation={2} 
-                        sx={{ mb: 4, p: 3, borderRadius: 2 }}
-                      >
-                        <Typography variant="h6" sx={{ mb: 3, color: '#c8102e' }}>
-                          {section.title}
-                        </Typography>
-                        
-                        <Grid container>
-                          <Grid item xs={4}>
-                            <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 2 }}>
-                              Feed Type
-                            </Typography>
-                          </Grid>
-                          <Grid item xs={4}>
-                            <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 2 }}>
-                              Lbs. as fed per day
-                            </Typography>
-                          </Grid>
-                          <Grid item xs={4}>
-                            <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 2 }}>
-                              Days on feed
-                            </Typography>
-                          </Grid>
-      
-                          {section.feeds.map(feed => (
-                            <React.Fragment key={feed.name}>
-                              <Grid item xs={4}>
-                                <Typography sx={{ py: 2 }}>{feed.label}</Typography>
-                              </Grid>
-                              <Grid item xs={4}>
-                                <TextField
-                                  margin='dense'
-                                  name={`${sectionKey}${feed.name}LbsAsFedPerDay`}
-                                  type='number'
-                                  fullWidth
-                                  required
-                                  value={userInputs[`${sectionKey}${feed.name}LbsAsFedPerDay` as keyof CombinedInputs] || ''}
-                                  onChange={handleChange}
-                                  inputProps={{ step: 'any' }}
-                                  sx={{
-                                    '& .MuiOutlinedInput-root': {
-                                      '&.Mui-focused fieldset': {
-                                        borderColor: '#c8102e'
-                                      }
-                                    }
-                                  }}
-                                />
-                              </Grid>
-                              <Grid item xs={4}>
-                                <TextField
-                                  margin='dense'
-                                  name={`${sectionKey}${feed.name}DaysOnFeed`}
-                                  type='number'
-                                  fullWidth
-                                  required
-                                  value={userInputs[`${sectionKey}${feed.name}DaysOnFeed` as keyof CombinedInputs] || ''}
-                                  onChange={handleChange}
-                                  inputProps={{ step: 'any' }}
-                                  sx={{
-                                    '& .MuiOutlinedInput-root': {
-                                      '&.Mui-focused fieldset': {
-                                        borderColor: '#c8102e'
-                                      }
-                                    }
-                                  }}
-                                />
-                              </Grid>
-                            </React.Fragment>
-                          ))}
+          <Tabs 
+            value={tabValue} 
+            onChange={handleTabChange} 
+            sx={{ 
+              borderBottom: 1, 
+              borderColor: 'divider', 
+              mb: 2, 
+              '& .MuiTab-root.Mui-selected': { 
+                color: '#c8102e' 
+              }, 
+              '& .MuiTabs-indicator': { 
+                backgroundColor: '#c8102e' 
+              } 
+            }}
+          >
+            <Tab label="Feed Details" />
+            <Tab label="Production Details" />
+            <Tab label="Commodity and Trucking" />
+          </Tabs>
+    
+          <form onSubmit={onSubmit}>
+            <Box sx={{ maxHeight: '70vh', overflowY: 'auto', p: 2 }}>
+              {/* Feed Details Tab */}
+              {tabValue === 0 && (
+                <Box>
+                  {Object.entries(feedSections).map(([sectionKey, section]) => (
+                    <Paper key={sectionKey} elevation={2} sx={{ mb: 4, p: 3, borderRadius: 2 }}>
+                      <Typography variant="h6" sx={{ mb: 3, color: '#c8102e' }}>
+                        {section.title}
+                      </Typography>
+                      <Grid container>
+                        <Grid item xs={4}>
+                          <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 2 }}>
+                            Feed Type
+                          </Typography>
                         </Grid>
-                      </Paper>
-                    ))}
-      
-                    <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 3 }}>
+                        <Grid item xs={4}>
+                          <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 2 }}>
+                            Lbs. as fed per day
+                          </Typography>
+                        </Grid>
+                        <Grid item xs={4}>
+                          <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 2 }}>
+                            Days on feed
+                          </Typography>
+                        </Grid>
+                        {section.feeds.map(feed => (
+                          <React.Fragment key={feed.name}>
+                            <Grid item xs={4}>
+                              <Typography sx={{ py: 2 }}>{feed.label}</Typography>
+                            </Grid>
+                            <Grid item xs={4}>
+                              <TextField
+                                margin='dense'
+                                name={`${sectionKey}${feed.name}LbsAsFedPerDay`}
+                                type='number'
+                                fullWidth
+                                required
+                                value={userInputs[`${sectionKey}${feed.name}LbsAsFedPerDay` as keyof CombinedInputs] || ''}
+                                onChange={handleChange}
+                                inputProps={{ step: 'any' }}
+                                sx={{
+                                  '& .MuiOutlinedInput-root': {
+                                    '&.Mui-focused fieldset': {
+                                      borderColor: '#c8102e'
+                                    }
+                                  }
+                                }}
+                              />
+                            </Grid>
+                            <Grid item xs={4}>
+                              <TextField
+                                margin='dense'
+                                name={`${sectionKey}${feed.name}DaysOnFeed`}
+                                type='number'
+                                fullWidth
+                                required
+                                value={userInputs[`${sectionKey}${feed.name}DaysOnFeed` as keyof CombinedInputs] || ''}
+                                onChange={handleChange}
+                                inputProps={{ step: 'any' }}
+                                sx={{
+                                  '& .MuiOutlinedInput-root': {
+                                    '&.Mui-focused fieldset': {
+                                      borderColor: '#c8102e'
+                                    }
+                                  }
+                                }}
+                              />
+                            </Grid>
+                          </React.Fragment>
+                        ))}
+                      </Grid>
+                    </Paper>
+                  ))}
+                  <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 3 }}>
+                    <Button onClick={() => setTabValue(2)} variant="outlined" sx={{ color: '#c8102e', borderColor: '#c8102e' }}>
+                      ← Back to Commodity Details
+                    </Button>
+                    <Button onClick={() => setTabValue(1)} variant="contained" sx={{ backgroundColor: '#c8102e' }}>
+                      Next: Production Details →
+                    </Button>
+                  </Box>
+                </Box>
+              )}
+    
+              {/* Production Details Tab */}
+              {tabValue === 1 && (
+                <Box>
+                  <Typography variant="h6" sx={{ mb: 2, color: '#c8102e' }}>
+                    Forage Production Details
+                  </Typography>
+                  {productionSections.map((section, index) => (
+                    <Paper key={index} elevation={2} sx={{ mb: 4, p: 3, borderRadius: 2 }}>
+                      <Typography variant="subtitle1" sx={{ mb: 2, fontWeight: 'bold' }}>
+                        {section.title}
+                      </Typography>
+                      <Grid container spacing={3}>
+                        {section.fields.map(field => (
+                          <Grid item xs={12} sm={6} md={4} key={field.name}>
+                            <TextField
+                              margin='dense'
+                              name={field.name}
+                              label={field.label}
+                              type='number'
+                              fullWidth
+                              required
+                              value={userInputs[field.name as keyof CombinedInputs] || ''}
+                              onChange={handleChange}
+                              inputProps={{ step: 'any' }}
+                              sx={{
+                                '& .MuiOutlinedInput-root': {
+                                  '&.Mui-focused fieldset': {
+                                    borderColor: '#c8102e'
+                                  }
+                                },
+                                '& .MuiInputLabel-root.Mui-focused': {
+                                  color: '#c8102e'
+                                }
+                              }}
+                            />
+                          </Grid>
+                        ))}
+                      </Grid>
+                    </Paper>
+                  ))}
+                  <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 3 }}>
+                    <Button onClick={() => setTabValue(0)} variant="outlined" sx={{ color: '#c8102e', borderColor: '#c8102e' }}>
+                      ← Back to Feed Details
+                    </Button>
+                    <Button onClick={() => setTabValue(2)} variant="contained" sx={{ backgroundColor: '#c8102e' }}>
+                      Next: Commodity Details →
+                    </Button>
+                  </Box>
+                </Box>
+              )}
+    
+              {/* Commodity and Trucking Tab */}
+              {tabValue === 2 && (
+                <Box>
+                  <Typography variant="h6" sx={{ mb: 2, color: '#c8102e' }}>
+                    Commodity and Trucking Details
+                  </Typography>
+                  
+                  <Paper elevation={2} sx={{ mb: 4, p: 3, borderRadius: 2 }}>
+                    <TextField
+                      margin='dense'
+                      name="averageCostOfTruckingPerTonMile"
+                      label="Average Cost of Trucking per Ton-Mile"
+                      type='number'
+                      fullWidth
+                      required
+                      value={userInputs.averageCostOfTruckingPerTonMile || ''}
+                      onChange={handleChange}
+                      inputProps={{ step: 'any' }}
+                      sx={{
+                        '& .MuiOutlinedInput-root': {
+                          '&.Mui-focused fieldset': {
+                            borderColor: '#c8102e'
+                          }
+                        },
+                        '& .MuiInputLabel-root.Mui-focused': {
+                          color: '#c8102e'
+                        }
+                      }}
+                    />
+                  </Paper>
+    
+                  {commodityAndTruckingSection.commodities.map((commodity) => (
+                    <Paper key={commodity.title} elevation={2} sx={{ mb: 4, p: 3, borderRadius: 2 }}>
+                      <Typography variant="subtitle1" sx={{ mb: 2, fontWeight: 'bold' }}>
+                        {commodity.title}
+                      </Typography>
+                      <Grid container spacing={3}>
+                        {commodity.fields.map(field => (
+                          <Grid item xs={12} sm={6} md={4} key={field.name}>
+                            <TextField
+                              margin='dense'
+                              name={field.name}
+                              label={field.label}
+                              type='number'
+                              fullWidth
+                              required
+                              value={userInputs[field.name as keyof CombinedInputs] || ''}
+                              onChange={handleChange}
+                              inputProps={{ step: 'any' }}
+                              sx={{
+                                '& .MuiOutlinedInput-root': {
+                                  '&.Mui-focused fieldset': {
+                                    borderColor: '#c8102e'
+                                  }
+                                },
+                                '& .MuiInputLabel-root.Mui-focused': {
+                                  color: '#c8102e'
+                                }
+                              }}
+                            />
+                          </Grid>
+                        ))}
+                      </Grid>
+                    </Paper>
+                  ))}
+    
+                  <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 3 }}>
+                    <Button onClick={() => setTabValue(1)} variant="outlined" sx={{ color: '#c8102e', borderColor: '#c8102e' }}>
+                      ← Back to Production Details
+                    </Button>
+                    <Box>
                       <Button
                         onClick={handleClose}
                         variant="outlined"
                         sx={{
+                          mr: 2,
                           color: '#c8102e',
-                          borderColor: '#c8102e',
-                          '&:hover': {
-                            borderColor: '#a50d26',
-                            backgroundColor: 'rgba(200, 16, 46, 0.04)'
-                          }
+                          borderColor: '#c8102e'
                         }}
                       >
                         Cancel
                       </Button>
                       <Button
-                        onClick={() => setTabValue(1)}
+                        type="submit"
                         variant="contained"
                         sx={{
-                          backgroundColor: '#c8102e',
-                          '&:hover': {
-                            backgroundColor: '#a50d26'
-                          }
+                          backgroundColor: '#c8102e'
                         }}
                       >
-                        Next: Production Details →
+                        Submit All Details
                       </Button>
                     </Box>
                   </Box>
-                )}
-      
-                {tabValue === 1 && (
-                  <Box>
-                    <Typography variant="h6" sx={{ mb: 2, color: '#c8102e' }}>
-                      Forage Production Details
-                    </Typography>
-                    
-                    {productionSections.map((section, index) => (
-                      <Paper 
-                        key={index} 
-                        elevation={2} 
-                        sx={{ mb: 4, p: 3, borderRadius: 2 }}
-                      >
-                        <Typography variant="subtitle1" sx={{ mb: 2, fontWeight: 'bold' }}>
-                          {section.title}
-                        </Typography>
-                        
-                        <Grid container spacing={3}>
-                          {section.fields.map(field => (
-                            <Grid item xs={12} sm={6} md={4} key={field.name}>
-                              <Tooltip title={field.label} placement='top'>
-                                <TextField
-                                  margin='dense'
-                                  name={field.name}
-                                  label={field.label}
-                                  type='number'
-                                  fullWidth
-                                  required
-                                  value={userInputs[field.name as keyof CombinedInputs] || ''}
-                                  onChange={handleChange}
-                                  inputProps={{ step: 'any' }}
-                                  sx={{
-                                    '& .MuiOutlinedInput-root': {
-                                      '&.Mui-focused fieldset': {
-                                        borderColor: '#c8102e'
-                                      }
-                                    },
-                                    '& .MuiInputLabel-root.Mui-focused': {
-                                      color: '#c8102e'
-                                    }
-                                  }}
-                                />
-                              </Tooltip>
-                            </Grid>
-                          ))}
-                        </Grid>
-                      </Paper>
-                    ))}
-      
-                    <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 3 }}>
-                      <Button
-                        onClick={() => setTabValue(0)}
-                        variant="outlined"
-                        sx={{
-                          color: '#c8102e',
-                          borderColor: '#c8102e',
-                          '&:hover': {
-                            borderColor: '#a50d26',
-                            backgroundColor: 'rgba(200, 16, 46, 0.04)'
-                          }
-                        }}
-                      >
-                        ← Back to Feed Details
-                      </Button>
-                      <Box>
-                        <Button
-                          onClick={handleClose}
-                          variant="outlined"
-                          sx={{
-                            mr: 2,
-                            color: '#c8102e',
-                            borderColor: '#c8102e',
-                            '&:hover': {
-                              borderColor: '#a50d26',
-                              backgroundColor: 'rgba(200, 16, 46, 0.04)'
-                            }
-                          }}
-                        >
-                          Cancel
-                        </Button>
-                        <Button
-                          type="submit"
-                          variant="contained"
-                          sx={{
-                            backgroundColor: '#c8102e',
-                            '&:hover': {
-                              backgroundColor: '#a50d26'
-                            }
-                          }}
-                        >
-                          Submit All Details
-                        </Button>
-                      </Box>
-                    </Box>
-                  </Box>
-                )}
-              </Box>
-            </form>
-          </DialogContent>
-        </Dialog>
-      );
-
-    }
+                </Box>
+              )}
+            </Box>
+          </form>
+        </DialogContent>
+      </Dialog>
+    );
+  }
   
 export default CombinedInputDialog
     
