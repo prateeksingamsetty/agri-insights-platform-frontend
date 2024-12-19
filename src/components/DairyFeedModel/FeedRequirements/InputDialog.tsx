@@ -642,6 +642,8 @@ const InputDialog: React.FC<InputDialogProps> = ({
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log("Called Feed INput File");
+    
     const { name, value } = e.target
     setUserInputs(prev => {
       const newInputs = {

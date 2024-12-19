@@ -11,7 +11,6 @@ import {
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useAuth } from 'src/context/AuthContext'
-import InputDialog from './InputDialog'
 import CombinedInputDialog from './CombinedInputDialog'
 
 interface FeedRequirementsType {
@@ -2006,6 +2005,5 @@ customMineralMixTransportAndCost: {
     </div>
   )
 }
-
 
 export default FeedRequirements
