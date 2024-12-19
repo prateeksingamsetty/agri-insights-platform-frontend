@@ -22,7 +22,8 @@ import { ContactPageSharp } from '@mui/icons-material';
 interface CombinedInputs {
   // Production Details
   // Corn Silage
-  [key: string]: number;
+  // [key: string]: number;
+  [key: string]: number | string;
   
 
   // Feed Details - Milking Herd
@@ -491,82 +492,82 @@ interface InputDialogProps {
       alfalfaHayStandPercentOfForageFixedCostAllocated: 0,
       alfalfaHayShrinkLossPercentage: 0,
 
-averageCostOfTruckingPerTonMile: 0,
+      averageCostOfTruckingPerTonMile: 0,
 
-// Corn Silage
-cornSilageCostOfCommodityPerTon: 0,
-cornSilageAvgPurchasedFeedMilesTruckedToDairy: 0,
-cornSilageAvgGrownForageMilesTruckedToDairy: 0,
+      // Corn Silage
+      cornSilageCostOfCommodityPerTon: 0,
+      cornSilageAvgPurchasedFeedMilesTruckedToDairy: 0,
+      cornSilageAvgGrownForageMilesTruckedToDairy: 0,
 
-// Sorghum Silage
-sorghumSilageCostOfCommodityPerTon: 0,
-sorghumSilageAvgPurchasedFeedMilesTruckedToDairy: 0,
-sorghumSilageAvgGrownForageMilesTruckedToDairy: 0,
+      // Sorghum Silage
+      sorghumSilageCostOfCommodityPerTon: 0,
+      sorghumSilageAvgPurchasedFeedMilesTruckedToDairy: 0,
+      sorghumSilageAvgGrownForageMilesTruckedToDairy: 0,
 
-// Small Grain Silage
-smallGrainSilageCostOfCommodityPerTon: 0,
-smallGrainSilageAvgPurchasedFeedMilesTruckedToDairy: 0,
-smallGrainSilageAvgGrownForageMilesTruckedToDairy: 0,
+      // Small Grain Silage
+      smallGrainSilageCostOfCommodityPerTon: 0,
+      smallGrainSilageAvgPurchasedFeedMilesTruckedToDairy: 0,
+      smallGrainSilageAvgGrownForageMilesTruckedToDairy: 0,
 
-// Grass Hay
-grassHayCostOfCommodityPerTon: 0,
-grassHayAvgPurchasedFeedMilesTruckedToDairy: 0,
-grassHayAvgGrownForageMilesTruckedToDairy: 0,
+      // Grass Hay
+      grassHayCostOfCommodityPerTon: 0,
+      grassHayAvgPurchasedFeedMilesTruckedToDairy: 0,
+      grassHayAvgGrownForageMilesTruckedToDairy: 0,
 
-// Alfalfa Hay
-alfalfaHayCostOfCommodityPerTon: 0,
-alfalfaHayAvgPurchasedFeedMilesTruckedToDairy: 0,
-alfalfaHayAvgGrownForageMilesTruckedToDairy: 0,
+      // Alfalfa Hay
+      alfalfaHayCostOfCommodityPerTon: 0,
+      alfalfaHayAvgPurchasedFeedMilesTruckedToDairy: 0,
+      alfalfaHayAvgGrownForageMilesTruckedToDairy: 0,
 
-// Peanut Hulls
-peanutHullsCostOfCommodityPerTon: 0,
-peanutHullsAvgPurchasedFeedMilesTruckedToDairy: 0,
-peanutHullsAvgGrownForageMilesTruckedToDairy: 0,
+      // Peanut Hulls
+      peanutHullsCostOfCommodityPerTon: 0,
+      peanutHullsAvgPurchasedFeedMilesTruckedToDairy: 0,
+      peanutHullsAvgGrownForageMilesTruckedToDairy: 0,
 
-// Apple Pomace
-applePomaceCostOfCommodityPerTon: 0,
-applePomaceAvgPurchasedFeedMilesTruckedToDairy: 0,
-applePomaceAvgGrownForageMilesTruckedToDairy: 0,
+      // Apple Pomace
+      applePomaceCostOfCommodityPerTon: 0,
+      applePomaceAvgPurchasedFeedMilesTruckedToDairy: 0,
+      applePomaceAvgGrownForageMilesTruckedToDairy: 0,
 
-// Brewers Grain
-brewersGrainCostOfCommodityPerTon: 0,
-brewersGrainAvgPurchasedFeedMilesTruckedToDairy: 0,
-brewersGrainAvgGrownForageMilesTruckedToDairy: 0,
+      // Brewers Grain
+      brewersGrainCostOfCommodityPerTon: 0,
+      brewersGrainAvgPurchasedFeedMilesTruckedToDairy: 0,
+      brewersGrainAvgGrownForageMilesTruckedToDairy: 0,
 
-// Citrus Pulp
-citrusPulpCostOfCommodityPerTon: 0,
-citrusPulpAvgPurchasedFeedMilesTruckedToDairy: 0,
-citrusPulpAvgGrownForageMilesTruckedToDairy: 0,
+      // Citrus Pulp
+      citrusPulpCostOfCommodityPerTon: 0,
+      citrusPulpAvgPurchasedFeedMilesTruckedToDairy: 0,
+      citrusPulpAvgGrownForageMilesTruckedToDairy: 0,
 
-// Corn Gluten
-cornGlutenCostOfCommodityPerTon: 0,
-cornGlutenAvgPurchasedFeedMilesTruckedToDairy: 0,
-cornGlutenAvgGrownForageMilesTruckedToDairy: 0,
+      // Corn Gluten
+      cornGlutenCostOfCommodityPerTon: 0,
+      cornGlutenAvgPurchasedFeedMilesTruckedToDairy: 0,
+      cornGlutenAvgGrownForageMilesTruckedToDairy: 0,
 
-// Whole Cottonseed
-wholeCottonseedCostOfCommodityPerTon: 0,
-wholeCottonseedAvgPurchasedFeedMilesTruckedToDairy: 0,
-wholeCottonseedAvgGrownForageMilesTruckedToDairy: 0,
+      // Whole Cottonseed
+      wholeCottonseedCostOfCommodityPerTon: 0,
+      wholeCottonseedAvgPurchasedFeedMilesTruckedToDairy: 0,
+      wholeCottonseedAvgGrownForageMilesTruckedToDairy: 0,
 
-// Cottonseed Hulls
-cottonseedHullsCostOfCommodityPerTon: 0,
-cottonseedHullsAvgPurchasedFeedMilesTruckedToDairy: 0,
-cottonseedHullsAvgGrownForageMilesTruckedToDairy: 0,
+      // Cottonseed Hulls
+      cottonseedHullsCostOfCommodityPerTon: 0,
+      cottonseedHullsAvgPurchasedFeedMilesTruckedToDairy: 0,
+      cottonseedHullsAvgGrownForageMilesTruckedToDairy: 0,
 
-// Soybean Meal
-soybeanMealCostOfCommodityPerTon: 0,
-soybeanMealAvgPurchasedFeedMilesTruckedToDairy: 0,
-soybeanMealAvgGrownForageMilesTruckedToDairy: 0,
+      // Soybean Meal
+      soybeanMealCostOfCommodityPerTon: 0,
+      soybeanMealAvgPurchasedFeedMilesTruckedToDairy: 0,
+      soybeanMealAvgGrownForageMilesTruckedToDairy: 0,
 
-// Custom Feed Mix
-customFeedMixCostOfCommodityPerTon: 0,
-customFeedMixAvgPurchasedFeedMilesTruckedToDairy: 0,
-customFeedMixAvgGrownForageMilesTruckedToDairy: 0,
+      // Custom Feed Mix
+      customFeedMixCostOfCommodityPerTon: 0,
+      customFeedMixAvgPurchasedFeedMilesTruckedToDairy: 0,
+      customFeedMixAvgGrownForageMilesTruckedToDairy: 0,
 
-// Custom Mineral Mix
-customMineralMixCostOfCommodityPerTon: 0,
-customMineralMixAvgPurchasedFeedMilesTruckedToDairy: 0,
-customMineralMixAvgGrownForageMilesTruckedToDairy: 0,
+      // Custom Mineral Mix
+      customMineralMixCostOfCommodityPerTon: 0,
+      customMineralMixAvgPurchasedFeedMilesTruckedToDairy: 0,
+      customMineralMixAvgGrownForageMilesTruckedToDairy: 0,
 
     };
 
@@ -1058,17 +1059,14 @@ customMineralMixAvgGrownForageMilesTruckedToDairy: 0,
   
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const { name, value } = e.target;
-      const numValue = value === '' ? 0 : parseFloat(value);
+      // const numValue = value === '' ? 0 : parseFloat(value);
+      const numValue = value === '' ? '' : parseFloat(value)
     
       setUserInputs((prev) => {
         const updatedInputs = {
           ...prev, // Preserve existing inputs
           [name]: numValue, // Update the specific input dynamically
         };
-    
-        console.log('Updated Inputs:', updatedInputs);
-        console.log('here i am,')
-        console.log(updatedInputs.milkingHerdCornSilageLbsAsFedPerDay) // Debugging logs
         return updatedInputs;
       });
     
@@ -1094,9 +1092,7 @@ customMineralMixAvgGrownForageMilesTruckedToDairy: 0,
       handleSubmit(userInputs)
       handleClose()
     }
-  
-
-      
+    
 
     return (
       <Dialog open={open} onClose={handleClose} maxWidth='lg' fullWidth>
@@ -1105,7 +1101,7 @@ customMineralMixAvgGrownForageMilesTruckedToDairy: 0,
         </DialogTitle>
         <DialogContent>
           <DialogContentText sx={{ mb: 2 }}>
-            Please enter your inputs for the Dairy Enterprise Budget Model.
+            Please enter your inputs for the Dairy Feed Model.
           </DialogContentText>
           
           <Tabs 
@@ -1155,6 +1151,7 @@ customMineralMixAvgGrownForageMilesTruckedToDairy: 0,
                           </Typography>
                         </Grid>
                         {section.feeds.map(feed => (
+
                           <React.Fragment key={feed.name}>
                             <Grid item xs={4}>
                               <Typography sx={{ py: 2 }}>{feed.label}</Typography>
@@ -1166,7 +1163,7 @@ customMineralMixAvgGrownForageMilesTruckedToDairy: 0,
                                 type='number'
                                 fullWidth
                                 required
-                                value={userInputs[`${sectionKey}${feed.name}LbsAsFedPerDay` as keyof CombinedInputs] || ''}
+                                value={userInputs[`${sectionKey}${feed.name}LbsAsFedPerDay` as keyof CombinedInputs]}
                                 onChange={handleChange}
                                 inputProps={{ step: 'any' }}
                                 sx={{
@@ -1185,7 +1182,7 @@ customMineralMixAvgGrownForageMilesTruckedToDairy: 0,
                                 type='number'
                                 fullWidth
                                 required
-                                value={userInputs[`${sectionKey}${feed.name}DaysOnFeed` as keyof CombinedInputs] || ''}
+                                value={userInputs[`${sectionKey}${feed.name}DaysOnFeed` as keyof CombinedInputs]}
                                 onChange={handleChange}
                                 inputProps={{ step: 'any' }}
                                 sx={{
@@ -1234,7 +1231,7 @@ customMineralMixAvgGrownForageMilesTruckedToDairy: 0,
                               type='number'
                               fullWidth
                               required
-                              value={userInputs[field.name as keyof CombinedInputs] || ''}
+                              value={userInputs[field.name as keyof CombinedInputs]}
                               onChange={handleChange}
                               inputProps={{ step: 'any' }}
                               sx={{
@@ -1279,7 +1276,7 @@ customMineralMixAvgGrownForageMilesTruckedToDairy: 0,
                       type='number'
                       fullWidth
                       required
-                      value={userInputs.averageCostOfTruckingPerTonMile || ''}
+                      value={userInputs.averageCostOfTruckingPerTonMile}
                       onChange={handleChange}
                       inputProps={{ step: 'any' }}
                       sx={{
@@ -1310,7 +1307,7 @@ customMineralMixAvgGrownForageMilesTruckedToDairy: 0,
                               type='number'
                               fullWidth
                               required
-                              value={userInputs[field.name as keyof CombinedInputs] || ''}
+                              value={userInputs[field.name as keyof CombinedInputs]}
                               onChange={handleChange}
                               inputProps={{ step: 'any' }}
                               sx={{
