@@ -366,9 +366,9 @@ const InputDialog: React.FC<InputDialogProps> = ({
           milkingHerdPeanutHullsDaysOnFeed:
             response.data.feedDetails.milkingHerdPeanutHullsDaysOnFeed,
           milkingHerdApplePomaceNoHullsLbsAsFedPerDay:
-            response.data.feedDetails.milkingHerdApplePomaceLbsAsFedPerDay,
+            response.data.feedDetails.milkingHerdApplePomaceNoHullsLbsAsFedPerDay,
           milkingHerdApplePomaceNoHullsDaysOnFeed:
-            response.data.feedDetails.milkingHerdApplePomaceDaysOnFeed,
+            response.data.feedDetails.milkingHerdApplePomaceNoHullsDaysOnFeed,
           milkingHerdDistillersGrainWetLbsAsFedPerDay:
             response.data.feedDetails.milkingHerdDistillersGrainLbsAsFedPerDay,
           milkingHerdDistillersGrainWetDaysOnFeed:

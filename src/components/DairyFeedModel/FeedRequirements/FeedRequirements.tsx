@@ -667,8 +667,6 @@ const FeedRequirements = () => {
           alfalfaHayStandGrownForageTruckingCost:
             response.data.alfalfaHayStandGrownForageTruckingCost || 0
         })
-
-
       }
     } catch (error: any) {
       if (error.response?.status === 404) {
