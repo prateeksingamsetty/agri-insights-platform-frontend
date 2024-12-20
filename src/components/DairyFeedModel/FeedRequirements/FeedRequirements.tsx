@@ -132,10 +132,10 @@ interface RaisedForageType {
   grassHayCostOfCommodity: number
   grassHayCostOfTrucking: number
   purchasedGrassHayTotalCost: number
-  alfalfaLegumeHayTonsToBePurchased: number
-  alfalfaLegumeHayCostOfCommodity: number
-  alfalfaLegumeHayCostOfTrucking: number
-  purchasedAlfalfaLegumeHayTotalCost: number
+  alfalfaHayTonsToBePurchased: number
+  alfalfaHayCostOfCommodity: number
+  alfalfaHayCostOfTrucking: number
+  purchasedAlfalfaHayTotalCost: number
   peanutHullsTonsToBePurchased: number
   peanutHullsCostOfCommodity: number
   peanutHullsCostOfTrucking: number
@@ -144,6 +144,10 @@ interface RaisedForageType {
   applePomaceNoHullsCostOfCommodity: number
   applePomaceNoHullsCostOfTrucking: number
   purchasedApplePomaceNoHullsTotalCost: number
+  distillersGrainWetTonsToBePurchased: number
+  distillersGrainWetCostOfCommodity: number
+  distillersGrainWetCostOfTrucking: number
+  purchasedDistillersGrainWetTotalCost: number
   brewersGrainWetTonsToBePurchased: number
   brewersGrainWetCostOfCommodity: number
   brewersGrainWetCostOfTrucking: number
@@ -311,10 +315,10 @@ const FeedRequirements = () => {
     grassHayCostOfCommodity: 0,
     grassHayCostOfTrucking: 0,
     purchasedGrassHayTotalCost: 0,
-    alfalfaLegumeHayTonsToBePurchased: 0,
-    alfalfaLegumeHayCostOfCommodity: 0,
-    alfalfaLegumeHayCostOfTrucking: 0,
-    purchasedAlfalfaLegumeHayTotalCost: 0,
+    alfalfaHayTonsToBePurchased: 0,
+    alfalfaHayCostOfCommodity: 0,
+    alfalfaHayCostOfTrucking: 0,
+    purchasedAlfalfaHayTotalCost: 0,
     peanutHullsTonsToBePurchased: 0,
     peanutHullsCostOfCommodity: 0,
     peanutHullsCostOfTrucking: 0,
@@ -323,6 +327,10 @@ const FeedRequirements = () => {
     applePomaceNoHullsCostOfCommodity: 0,
     applePomaceNoHullsCostOfTrucking: 0,
     purchasedApplePomaceNoHullsTotalCost: 0,
+    distillersGrainWetTonsToBePurchased: 0,
+    distillersGrainWetCostOfCommodity: 0,
+    distillersGrainWetCostOfTrucking: 0,
+    purchasedDistillersGrainWetTotalCost: 0,
     brewersGrainWetTonsToBePurchased: 0,
     brewersGrainWetCostOfCommodity: 0,
     brewersGrainWetCostOfTrucking: 0,
@@ -382,12 +390,6 @@ const FeedRequirements = () => {
       fetchUserOutputRecord()
     } else {
       console.log('User not logged in')
-      // const storedInputs = localStorage.getItem('productionInputs')
-      // if (storedInputs) {
-      //   console.log('Stored inputs true')
-      //   const parsedInputs = JSON.parse(storedInputs)
-      //   handleSubmit(parsedInputs)
-      // }
     }
   }, [loggedIn, email])
 
@@ -563,14 +565,14 @@ const FeedRequirements = () => {
           grassHayCostOfTrucking: response.data.grassHayCostOfTrucking || 0,
           purchasedGrassHayTotalCost:
             response.data.purchasedGrassHayTotalCost || 0,
-          alfalfaLegumeHayTonsToBePurchased:
-            response.data.alfalfaLegumeHayTonsToBePurchased || 0,
-          alfalfaLegumeHayCostOfCommodity:
-            response.data.alfalfaLegumeHayCostOfCommodity || 0,
-          alfalfaLegumeHayCostOfTrucking:
-            response.data.alfalfaLegumeHayCostOfTrucking || 0,
-          purchasedAlfalfaLegumeHayTotalCost:
-            response.data.purchasedAlfalfaLegumeHayTotalCost || 0,
+          alfalfaHayTonsToBePurchased:
+            response.data.alfalfaHayTonsToBePurchased || 0,
+          alfalfaHayCostOfCommodity:
+            response.data.alfalfaHayCostOfCommodity || 0,
+          alfalfaHayCostOfTrucking:
+            response.data.alfalfaHayCostOfTrucking || 0,
+          purchasedAlfalfaHayTotalCost:
+            response.data.purchasedAlfalfaHayTotalCost || 0,
           peanutHullsTonsToBePurchased:
             response.data.peanutHullsTonsToBePurchased || 0,
           peanutHullsCostOfCommodity:
@@ -587,6 +589,14 @@ const FeedRequirements = () => {
             response.data.applePomaceNoHullsCostOfTrucking || 0,
           purchasedApplePomaceNoHullsTotalCost:
             response.data.purchasedApplePomaceNoHullsTotalCost || 0,
+          distillersGrainWetTonsToBePurchased:
+            response.data.brewersGrainWetTonsToBePurchased || 0,
+          distillersGrainWetCostOfCommodity:
+            response.data.brewersGrainWetCostOfCommodity || 0,
+          distillersGrainWetCostOfTrucking:
+            response.data.brewersGrainWetCostOfTrucking || 0,
+          purchasedDistillersGrainWetTotalCost:
+            response.data.purchasedBrewersGrainWetTotalCost || 0,
           brewersGrainWetTonsToBePurchased:
             response.data.brewersGrainWetTonsToBePurchased || 0,
           brewersGrainWetCostOfCommodity:
@@ -1456,10 +1466,10 @@ customMineralMixTransportAndCost: {
           [
             {
               label: 'Alfalfa/Legume Hay',
-              tonsToPurchase: detailsforage.alfalfaLegumeHayTonsToBePurchased,
-              costOfCommodity: detailsforage.alfalfaLegumeHayCostOfCommodity,
-              costOfTrucking: detailsforage.alfalfaLegumeHayCostOfTrucking,
-              totalCost: detailsforage.purchasedAlfalfaLegumeHayTotalCost
+              tonsToPurchase: detailsforage.alfalfaHayTonsToBePurchased,
+              costOfCommodity: detailsforage.alfalfaHayCostOfCommodity,
+              costOfTrucking: detailsforage.alfalfaHayCostOfTrucking,
+              totalCost: detailsforage.purchasedAlfalfaHayTotalCost
             }
           ],
           [
@@ -1478,6 +1488,15 @@ customMineralMixTransportAndCost: {
               costOfCommodity: detailsforage.applePomaceNoHullsCostOfCommodity,
               costOfTrucking: detailsforage.applePomaceNoHullsCostOfTrucking,
               totalCost: detailsforage.purchasedApplePomaceNoHullsTotalCost
+            }
+          ],
+          [
+            {
+              label: 'Distillers Grain (Wet)',
+              tonsToPurchase: detailsforage.distillersGrainWetTonsToBePurchased,
+              costOfCommodity: detailsforage.distillersGrainWetCostOfCommodity,
+              costOfTrucking: detailsforage.distillersGrainWetCostOfTrucking,
+              totalCost: detailsforage.purchasedDistillersGrainWetTotalCost
             }
           ],
           [
