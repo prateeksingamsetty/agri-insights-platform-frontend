@@ -427,42 +427,6 @@ const InputDialog: React.FC<InputDialogProps> = ({
     }))
   }
 
-  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const { name, value } = e.target
-  //   const numericValue = Number(value)
-  //   console.log('name ', name)
-
-  //   // Check if the field is part of the facilities and buildings
-  //   if (facilitiesAndBuildingsFixedCostFields.includes(name)) {
-  //     let error = ''
-
-  //     if (/YearsOfUsefulLife$/.test(name)) {
-  //       // Handle empty input separately
-  //       if (value === '') {
-  //         error = ''
-  //       } else if (numericValue < 1 || numericValue > 12) {
-  //         error = `${name.replace(/([A-Z])/g, ' $1')} must be between 1 and 12.`
-  //       }
-  //     }
-
-  //     // Update the errors state
-  //     setErrors(prevErrors => ({
-  //       ...prevErrors,
-  //       [name]: error
-  //     }))
-
-  //     // If there's an error, return early
-  //     if (error) {
-  //       return
-  //     }
-  //   }
-
-  //   // Update the userInputs state
-  //   setUserInputs(prev => ({
-  //     ...prev,
-  //     [name]: value === '' ? '' : parseFloat(value) // Ensure value is always a number, but allow empty string
-  //   }))
-  // }
 
   const handleDetailedChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
