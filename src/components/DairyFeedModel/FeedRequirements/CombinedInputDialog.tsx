@@ -239,52 +239,46 @@ interface CombinedInputs {
   // Peanut Hulls
   peanutHullsCostOfCommodityPerTon: number;
   peanutHullsAvgPurchasedFeedMilesTruckedToDairy: number;
-  peanutHullsAvgGrownForageMilesTruckedToDairy: number;
 
   // Apple Pomace
   applePomaceCostOfCommodityPerTon: number;
   applePomaceAvgPurchasedFeedMilesTruckedToDairy: number;
-  applePomaceAvgGrownForageMilesTruckedToDairy: number;
+
+  // Distillers Grain
+  distillersGrainCostOfCommodityPerTon: number;
+  distillersGrainAvgPurchasedFeedMilesTruckedToDairy: number;
 
   // Brewers Grain
   brewersGrainCostOfCommodityPerTon: number;
   brewersGrainAvgPurchasedFeedMilesTruckedToDairy: number;
-  brewersGrainAvgGrownForageMilesTruckedToDairy: number;
 
   // Citrus Pulp
   citrusPulpCostOfCommodityPerTon: number;
   citrusPulpAvgPurchasedFeedMilesTruckedToDairy: number;
-  citrusPulpAvgGrownForageMilesTruckedToDairy: number;
 
   // Corn Gluten
   cornGlutenCostOfCommodityPerTon: number;
   cornGlutenAvgPurchasedFeedMilesTruckedToDairy: number;
-  cornGlutenAvgGrownForageMilesTruckedToDairy: number;
 
   // Whole Cottonseed
   wholeCottonseedCostOfCommodityPerTon: number;
   wholeCottonseedAvgPurchasedFeedMilesTruckedToDairy: number;
-  wholeCottonseedAvgGrownForageMilesTruckedToDairy: number;
 
   // Cottonseed Hulls
   cottonseedHullsCostOfCommodityPerTon: number;
   cottonseedHullsAvgPurchasedFeedMilesTruckedToDairy: number;
-  cottonseedHullsAvgGrownForageMilesTruckedToDairy: number;
 
   // Soybean Meal
   soybeanMealCostOfCommodityPerTon: number;
   soybeanMealAvgPurchasedFeedMilesTruckedToDairy: number;
-  soybeanMealAvgGrownForageMilesTruckedToDairy: number;
 
   // Custom Feed Mix
   customFeedMixCostOfCommodityPerTon: number;
   customFeedMixAvgPurchasedFeedMilesTruckedToDairy: number;
-  customFeedMixAvgGrownForageMilesTruckedToDairy: number;
 
   // Custom Mineral Mix
   customMineralMixCostOfCommodityPerTon: number;
   customMineralMixAvgPurchasedFeedMilesTruckedToDairy: number;
-  customMineralMixAvgGrownForageMilesTruckedToDairy: number;
 
 }
 
@@ -514,52 +508,46 @@ const CombinedInputDialog: React.FC<InputDialogProps> = ({ open, handleClose, ha
     // Peanut Hulls
     peanutHullsCostOfCommodityPerTon: 0,
     peanutHullsAvgPurchasedFeedMilesTruckedToDairy: 0,
-    peanutHullsAvgGrownForageMilesTruckedToDairy: 0,
 
     // Apple Pomace
     applePomaceCostOfCommodityPerTon: 0,
     applePomaceAvgPurchasedFeedMilesTruckedToDairy: 0,
-    applePomaceAvgGrownForageMilesTruckedToDairy: 0,
+
+    // Distillers Grain
+    distillersGrainCostOfCommodityPerTon: 0,
+    distillersGrainAvgPurchasedFeedMilesTruckedToDairy: 0,
 
     // Brewers Grain
     brewersGrainCostOfCommodityPerTon: 0,
     brewersGrainAvgPurchasedFeedMilesTruckedToDairy: 0,
-    brewersGrainAvgGrownForageMilesTruckedToDairy: 0,
 
     // Citrus Pulp
     citrusPulpCostOfCommodityPerTon: 0,
     citrusPulpAvgPurchasedFeedMilesTruckedToDairy: 0,
-    citrusPulpAvgGrownForageMilesTruckedToDairy: 0,
 
     // Corn Gluten
     cornGlutenCostOfCommodityPerTon: 0,
     cornGlutenAvgPurchasedFeedMilesTruckedToDairy: 0,
-    cornGlutenAvgGrownForageMilesTruckedToDairy: 0,
 
     // Whole Cottonseed
     wholeCottonseedCostOfCommodityPerTon: 0,
     wholeCottonseedAvgPurchasedFeedMilesTruckedToDairy: 0,
-    wholeCottonseedAvgGrownForageMilesTruckedToDairy: 0,
 
     // Cottonseed Hulls
     cottonseedHullsCostOfCommodityPerTon: 0,
     cottonseedHullsAvgPurchasedFeedMilesTruckedToDairy: 0,
-    cottonseedHullsAvgGrownForageMilesTruckedToDairy: 0,
 
     // Soybean Meal
     soybeanMealCostOfCommodityPerTon: 0,
     soybeanMealAvgPurchasedFeedMilesTruckedToDairy: 0,
-    soybeanMealAvgGrownForageMilesTruckedToDairy: 0,
 
     // Custom Feed Mix
     customFeedMixCostOfCommodityPerTon: 0,
     customFeedMixAvgPurchasedFeedMilesTruckedToDairy: 0,
-    customFeedMixAvgGrownForageMilesTruckedToDairy: 0,
 
     // Custom Mineral Mix
     customMineralMixCostOfCommodityPerTon: 0,
     customMineralMixAvgPurchasedFeedMilesTruckedToDairy: 0,
-    customMineralMixAvgGrownForageMilesTruckedToDairy: 0,
 
   };
 
@@ -864,16 +852,21 @@ const CombinedInputDialog: React.FC<InputDialogProps> = ({ open, handleClose, ha
         title: 'Peanut Hulls',
         fields: [
           { name: 'peanutHullsCostOfCommodityPerTon', label: 'Cost of Commodity Per Ton' },
-          { name: 'peanutHullsAvgPurchasedFeedMilesTruckedToDairy', label: 'Avg Purchased Feed Miles Trucked to Dairy' },
-          { name: 'peanutHullsAvgGrownForageMilesTruckedToDairy', label: 'Avg Grown Forage Miles Trucked to Dairy' }
+          { name: 'peanutHullsAvgPurchasedFeedMilesTruckedToDairy', label: 'Avg Purchased Feed Miles Trucked to Dairy' }
         ]
       },
       {
         title: 'Apple Pomace',
         fields: [
           { name: 'applePomaceCostOfCommodityPerTon', label: 'Cost of Commodity Per Ton' },
-          { name: 'applePomaceAvgPurchasedFeedMilesTruckedToDairy', label: 'Avg Purchased Feed Miles Trucked to Dairy' },
-          { name: 'applePomaceAvgGrownForageMilesTruckedToDairy', label: 'Avg Grown Forage Miles Trucked to Dairy' }
+          { name: 'applePomaceAvgPurchasedFeedMilesTruckedToDairy', label: 'Avg Purchased Feed Miles Trucked to Dairy' }
+        ]
+      },
+      {
+        title: 'Distillers Grain',
+        fields: [
+          { name: 'distillersGrainCostOfCommodityPerTon', label: 'Cost of Commodity Per Ton' },
+          { name: 'distillersGrainAvgPurchasedFeedMilesTruckedToDairy', label: 'Avg Purchased Feed Miles Trucked to Dairy' },
         ]
       },
       {
@@ -881,7 +874,6 @@ const CombinedInputDialog: React.FC<InputDialogProps> = ({ open, handleClose, ha
         fields: [
           { name: 'brewersGrainCostOfCommodityPerTon', label: 'Cost of Commodity Per Ton' },
           { name: 'brewersGrainAvgPurchasedFeedMilesTruckedToDairy', label: 'Avg Purchased Feed Miles Trucked to Dairy' },
-          { name: 'brewersGrainAvgGrownForageMilesTruckedToDairy', label: 'Avg Grown Forage Miles Trucked to Dairy' }
         ]
       },
       {
@@ -889,23 +881,20 @@ const CombinedInputDialog: React.FC<InputDialogProps> = ({ open, handleClose, ha
         fields: [
           { name: 'citrusPulpCostOfCommodityPerTon', label: 'Cost of Commodity Per Ton' },
           { name: 'citrusPulpAvgPurchasedFeedMilesTruckedToDairy', label: 'Avg Purchased Feed Miles Trucked to Dairy' },
-          { name: 'citrusPulpAvgGrownForageMilesTruckedToDairy', label: 'Avg Grown Forage Miles Trucked to Dairy' }
         ]
       },
       {
         title: 'Corn Gluten',
         fields: [
           { name: 'cornGlutenCostOfCommodityPerTon', label: 'Cost of Commodity Per Ton' },
-          { name: 'cornGlutenAvgPurchasedFeedMilesTruckedToDairy', label: 'Avg Purchased Feed Miles Trucked to Dairy' },
-          { name: 'cornGlutenAvgGrownForageMilesTruckedToDairy', label: 'Avg Grown Forage Miles Trucked to Dairy' }
+          { name: 'cornGlutenAvgPurchasedFeedMilesTruckedToDairy', label: 'Avg Purchased Feed Miles Trucked to Dairy' }
         ]
       },
       {
         title: 'Whole Cottonseed',
         fields: [
           { name: 'wholeCottonseedCostOfCommodityPerTon', label: 'Cost of Commodity Per Ton' },
-          { name: 'wholeCottonseedAvgPurchasedFeedMilesTruckedToDairy', label: 'Avg Purchased Feed Miles Trucked to Dairy' },
-          { name: 'wholeCottonseedAvgGrownForageMilesTruckedToDairy', label: 'Avg Grown Forage Miles Trucked to Dairy' }
+          { name: 'wholeCottonseedAvgPurchasedFeedMilesTruckedToDairy', label: 'Avg Purchased Feed Miles Trucked to Dairy' }
         ]
       },
       {
@@ -913,7 +902,6 @@ const CombinedInputDialog: React.FC<InputDialogProps> = ({ open, handleClose, ha
         fields: [
           { name: 'cottonseedHullsCostOfCommodityPerTon', label: 'Cost of Commodity Per Ton' },
           { name: 'cottonseedHullsAvgPurchasedFeedMilesTruckedToDairy', label: 'Avg Purchased Feed Miles Trucked to Dairy' },
-          { name: 'cottonseedHullsAvgGrownForageMilesTruckedToDairy', label: 'Avg Grown Forage Miles Trucked to Dairy' }
         ]
       },
       {
@@ -921,23 +909,20 @@ const CombinedInputDialog: React.FC<InputDialogProps> = ({ open, handleClose, ha
         fields: [
           { name: 'soybeanMealCostOfCommodityPerTon', label: 'Cost of Commodity Per Ton' },
           { name: 'soybeanMealAvgPurchasedFeedMilesTruckedToDairy', label: 'Avg Purchased Feed Miles Trucked to Dairy' },
-          { name: 'soybeanMealAvgGrownForageMilesTruckedToDairy', label: 'Avg Grown Forage Miles Trucked to Dairy' }
         ]
       },
       {
         title: 'Custom Feed Mix',
         fields: [
           { name: 'customFeedMixCostOfCommodityPerTon', label: 'Cost of Commodity Per Ton' },
-          { name: 'customFeedMixAvgPurchasedFeedMilesTruckedToDairy', label: 'Avg Purchased Feed Miles Trucked to Dairy' },
-          { name: 'customFeedMixAvgGrownForageMilesTruckedToDairy', label: 'Avg Grown Forage Miles Trucked to Dairy' }
+          { name: 'customFeedMixAvgPurchasedFeedMilesTruckedToDairy', label: 'Avg Purchased Feed Miles Trucked to Dairy' }
         ]
       },
       {
         title: 'Custom Mineral Mix',
         fields: [
           { name: 'customMineralMixCostOfCommodityPerTon', label: 'Cost of Commodity Per Ton' },
-          { name: 'customMineralMixAvgPurchasedFeedMilesTruckedToDairy', label: 'Avg Purchased Feed Miles Trucked to Dairy' },
-          { name: 'customMineralMixAvgGrownForageMilesTruckedToDairy', label: 'Avg Grown Forage Miles Trucked to Dairy' }
+          { name: 'customMineralMixAvgPurchasedFeedMilesTruckedToDairy', label: 'Avg Purchased Feed Miles Trucked to Dairy' }
         ]
       }
     ]
@@ -1002,6 +987,7 @@ const CombinedInputDialog: React.FC<InputDialogProps> = ({ open, handleClose, ha
           'alfalfaHayTransportAndCost',
           'peanutHullsTransportAndCost',
           'applePomaceTransportAndCost',
+          'distillersGrainTransportAndCost',
           'brewersGrainTransportAndCost',
           'citrusPulpTransportAndCost',
           'cornGlutenTransportAndCost',
