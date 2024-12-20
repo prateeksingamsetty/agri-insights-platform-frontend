@@ -60,6 +60,9 @@ interface FeedRequirementsType {
   // Whole Cottonseed
   wholeCottonseedTonsRequired: number
 
+  // Cottonseed Hulls
+  cottonseedHullsTonsRequired: number
+
   // Soybean Meal 48
   soybeanMeal48TonsRequired: number
 
@@ -186,8 +189,7 @@ interface RaisedForageType {
   sorghumSilageGrownForageTruckingCost: number
   smallGrainSilageGrownForageTruckingCost: number
   grassHayGrownForageTruckingCost: number
-  alfalfaHayEstablishmentGrownForageTruckingCost: number
-  alfalfaHayStandGrownForageTruckingCost: number
+  alfalfaHayGrownForageTruckingCost: number
 }
 
 const FeedRequirements = () => {
@@ -240,6 +242,9 @@ const FeedRequirements = () => {
 
     // Whole Cottonseed
     wholeCottonseedTonsRequired: 0,
+
+    // Cottonseed Hulls
+    cottonseedHullsTonsRequired: 0,
 
     // Soybean Meal 48
     soybeanMeal48TonsRequired: 0,
@@ -369,8 +374,7 @@ const FeedRequirements = () => {
     sorghumSilageGrownForageTruckingCost: 0,
     smallGrainSilageGrownForageTruckingCost: 0,
     grassHayGrownForageTruckingCost: 0,
-    alfalfaHayEstablishmentGrownForageTruckingCost: 0,
-    alfalfaHayStandGrownForageTruckingCost: 0
+    alfalfaHayGrownForageTruckingCost: 0
   })
 
 
@@ -456,6 +460,10 @@ const FeedRequirements = () => {
           // Whole Cottonseed
           wholeCottonseedTonsRequired:
             response.data.wholeCottonseedTonsRequired || 0,
+
+          // Cottonseed Hulls
+          cottonseedHullsTonsRequired:
+            response.data.cottonseedHullsTonsRequired || 0,
 
           // Soybean Meal 48
           soybeanMeal48TonsRequired:
@@ -590,13 +598,13 @@ const FeedRequirements = () => {
           purchasedApplePomaceNoHullsTotalCost:
             response.data.purchasedApplePomaceNoHullsTotalCost || 0,
           distillersGrainWetTonsToBePurchased:
-            response.data.brewersGrainWetTonsToBePurchased || 0,
+            response.data.distillersGrainWetTonsToBePurchased || 0,
           distillersGrainWetCostOfCommodity:
-            response.data.brewersGrainWetCostOfCommodity || 0,
+            response.data.distillersGrainWetCostOfCommodity || 0,
           distillersGrainWetCostOfTrucking:
-            response.data.brewersGrainWetCostOfTrucking || 0,
+            response.data.distillersGrainWetCostOfTrucking || 0,
           purchasedDistillersGrainWetTotalCost:
-            response.data.purchasedBrewersGrainWetTotalCost || 0,
+            response.data.purchasedDistillersGrainWetTotalCost || 0,
           brewersGrainWetTonsToBePurchased:
             response.data.brewersGrainWetTonsToBePurchased || 0,
           brewersGrainWetCostOfCommodity:
@@ -671,10 +679,8 @@ const FeedRequirements = () => {
             response.data.smallGrainSilageGrownForageTruckingCost || 0,
           grassHayGrownForageTruckingCost:
             response.data.grassHayGrownForageTruckingCost || 0,
-          alfalfaHayEstablishmentGrownForageTruckingCost:
-            response.data.alfalfaHayEstablishmentGrownForageTruckingCost || 0,
-          alfalfaHayStandGrownForageTruckingCost:
-            response.data.alfalfaHayStandGrownForageTruckingCost || 0
+          alfalfaHayGrownForageTruckingCost:
+            response.data.alfalfaHayGrownForageTruckingCost || 0
         })
       }
     } catch (error: any) {
@@ -1048,6 +1054,11 @@ applePomaceTransportAndCost: {
   applePomaceAvgPurchasedFeedMilesTruckedToDairy: userInputs.applePomaceAvgPurchasedFeedMilesTruckedToDairy,
   applePomaceAvgGrownForageMilesTruckedToDairy: userInputs.applePomaceAvgGrownForageMilesTruckedToDairy
 },
+distillersGrainTransportAndCost: {
+  distillersGrainCostOfCommodityPerTon: userInputs.distillersGrainCostOfCommodityPerTon,
+  distillersGrainAvgPurchasedFeedMilesTruckedToDairy: userInputs.distillersGrainAvgPurchasedFeedMilesTruckedToDairy,
+  distillersGrainAvgGrownForageMilesTruckedToDairy: userInputs.distillersGrainAvgGrownForageMilesTruckedToDairy
+},
 brewersGrainTransportAndCost: {
   brewersGrainCostOfCommodityPerTon: userInputs.brewersGrainCostOfCommodityPerTon,
   brewersGrainAvgPurchasedFeedMilesTruckedToDairy: userInputs.brewersGrainAvgPurchasedFeedMilesTruckedToDairy,
@@ -1158,6 +1169,10 @@ customMineralMixTransportAndCost: {
           // Whole Cottonseed
           wholeCottonseedTonsRequired:
             response.data.wholeCottonseedTonsRequired || 0,
+
+          // Cottonseed Hulls
+          cottonseedHullsTonsRequired:
+            response.data.cottonseedHullsTonsRequired || 0,
 
           // Soybean Meal 48
           soybeanMeal48TonsRequired:
@@ -1309,7 +1324,13 @@ customMineralMixTransportAndCost: {
         value: details.wholeCottonseedTonsRequired
       }
     ],
-
+    // Cottonseed Hulls Group
+    [
+      {
+        label: 'Cottonseed Hulls Tons Required',
+        value: details.cottonseedHullsTonsRequired
+      }
+    ],
     // Soybean Meal 48 Group
     [
       {
@@ -1606,25 +1627,14 @@ customMineralMixTransportAndCost: {
           ],
           [
             {
-              label: 'Alfalfa Hay Establishment',
-              truckingCost: detailsforage.alfalfaHayEstablishmentGrownForageTruckingCost
-            }
-          ],
-          [
-            {
-              label: 'Alfalfa Hay Stand',
-              truckingCost: detailsforage.alfalfaHayStandGrownForageTruckingCost
+              label: 'Alfalfa Hay',
+              truckingCost: detailsforage.alfalfaHayGrownForageTruckingCost
             }
           ]
         ]
       }
     ]
   }
-
-
-
-
-
 
   return (
     <div>
