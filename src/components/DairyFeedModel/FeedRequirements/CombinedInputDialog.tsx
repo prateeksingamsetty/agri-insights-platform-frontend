@@ -165,6 +165,9 @@ interface CombinedInputs {
   calvesCalfStarterFeedLbsAsFedPerDay: number;
   calvesCalfStarterFeedDaysOnFeed: number;
 
+  // TotalCroppingAnnualEconomicCosts
+  totalCroppingAnnualEconomicCosts: number;
+  
   // Corn Silage
   cornSilageExpectedYieldTonsPerAcre: number;
   cornSilageHarvestedAcres: number;
@@ -206,7 +209,7 @@ interface CombinedInputs {
   alfalfaHayStandPercentOfForageFixedCostAllocated: number;
   alfalfaHayShrinkLossPercentage: number;
 
-  // Commodity and Trucking Details
+  // -------> Commodity and Trucking Details
 
   //Trucking cost
   averageCostOfTruckingPerTonMile: number;
@@ -291,6 +294,7 @@ interface InputDialogProps {
 const CombinedInputDialog: React.FC<InputDialogProps> = ({ open, handleClose, handleSubmit }) => {
   const { email, loggedIn } = useAuth()
   const [tabValue, setTabValue] = useState(0)
+  const [filledDetailedMachineryFixedCosts, setFilledDetailedMachineryFixedCosts] = useState(true); // Use state
 
   const defaultInputs: CombinedInputs = {
     // Milking Herd
@@ -436,6 +440,9 @@ const CombinedInputDialog: React.FC<InputDialogProps> = ({ open, handleClose, ha
     calvesRaisedMilkUsedForCalvesDaysOnFeed: 0,
     calvesCalfStarterFeedLbsAsFedPerDay: 0,
     calvesCalfStarterFeedDaysOnFeed: 0,
+
+    // TotalCroppingAnnualEconomicCosts
+    totalCroppingAnnualEconomicCosts: 0, // Initialize as undefined
   
     // Corn Silage
     cornSilageExpectedYieldTonsPerAcre: 0,
@@ -929,13 +936,32 @@ const CombinedInputDialog: React.FC<InputDialogProps> = ({ open, handleClose, ha
   };
 
   useEffect(() => {
-    if (!open) return
-    if (loggedIn) {
-      fetchUserInputRecords()
-    } else {
-      loadFromSessionStorage()
-    }
-  }, [email, open, loggedIn])
+    if (!open) return;
+  
+    const fetchData = async () => {
+      try {
+        if (loggedIn) {
+          console.log("Yes, logged in, inside useEffect");
+  
+          // Fetch the fixed costs input for the user
+          const fetchedValue = await fetchFixedCostsInputs();
+          setFilledDetailedMachineryFixedCosts(fetchedValue); // Update state here
+          console.log("Fetched value:", fetchedValue);
+  
+          // Fetch user input records
+          fetchUserInputRecords();
+        } else {
+          // Load data from session storage for non-logged-in users
+          loadFromSessionStorage();
+        }
+      } catch (error) {
+        console.error("Error in fetchData:", error);
+      }
+    };
+  
+    // Call the async function
+    fetchData();
+  }, [email, open, loggedIn]);
 
   const fetchUserInputRecords = async () => {
     try {
@@ -958,6 +984,10 @@ const CombinedInputDialog: React.FC<InputDialogProps> = ({ open, handleClose, ha
           }
         });
         
+        // if(response.data.totalCroppingAnnualEconomicCosts){
+          transformedData.totalCroppingAnnualEconomicCosts = response.data.totalCroppingAnnualEconomicCosts || 0
+        // }
+
         // Transform raised forage data
         const forageInputs = [
           'cornSilage',
@@ -1044,8 +1074,26 @@ const CombinedInputDialog: React.FC<InputDialogProps> = ({ open, handleClose, ha
     }
   }
 
+  const fetchFixedCostsInputs = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/fixed-costs/inputDetails/${email}`
+      );
+  
+      if (response.data && response.data.isDetailedMachineryCosts !== undefined) {
+        return response.data.isDetailedMachineryCosts; // Return value from backend
+      }
+  
+      return true; // Default to true if the value is missing
+    } catch (error) {
+      console.error("Error fetching fixed costs inputs:", error);
+      return true; // Default to true on error
+    }
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+    
     // const numValue = value === '' ? 0 : parseFloat(value);
     const numValue = value === '' ? '' : parseFloat(value)
   
@@ -1054,6 +1102,7 @@ const CombinedInputDialog: React.FC<InputDialogProps> = ({ open, handleClose, ha
         ...prev, // Preserve existing inputs
         [name]: numValue, // Update the specific input dynamically
       };
+      
       return updatedInputs;
     });
   
@@ -1198,7 +1247,8 @@ const CombinedInputDialog: React.FC<InputDialogProps> = ({ open, handleClose, ha
             )}
   
             {/* Production Details Tab */}
-            {tabValue === 1 && (
+
+            {/* {tabValue === 1 && (
               <Box>
                 <Typography variant="h6" sx={{ mb: 2, color: '#c8102e' }}>
                   Forage Production Details
@@ -1236,7 +1286,84 @@ const CombinedInputDialog: React.FC<InputDialogProps> = ({ open, handleClose, ha
                       ))}
                     </Grid>
                   </Paper>
-                ))}
+                ))} */}
+                {tabValue === 1 && (
+                <Box>
+                  {/* Check if filledDetailedMachineryFixedCosts is true */}
+                  {filledDetailedMachineryFixedCosts ? (
+                    <Typography variant="body2" sx={{ mb: 2, color: '#c8102e', fontStyle: 'italic' }}>
+                      Fetched the croppingEconomicCost from the fixed machinery costs section where you inputted detailed variables before.
+                    </Typography>
+                  ) : (
+                    <Box>
+                      {/* Header for the input box */}
+                      <Typography variant="subtitle1" sx={{ mb: 1, fontWeight: 'bold', color: '#c8102e' }}>
+                        Total Economic Cropping Cost
+                      </Typography>
+                      <TextField
+                        margin="dense"
+                        name="totalCroppingAnnualEconomicCosts"
+                        label="Enter Total Cropping Annual Economic Cost"
+                        type="number"
+                        fullWidth
+                        required
+                        value={userInputs.totalCroppingAnnualEconomicCosts || ''}
+                        onChange={handleChange}
+                        inputProps={{ step: 'any' }}
+                        sx={{
+                          mb: 2,
+                          '& .MuiOutlinedInput-root': {
+                            '&.Mui-focused fieldset': {
+                              borderColor: '#c8102e',
+                            },
+                          },
+                          '& .MuiInputLabel-root.Mui-focused': {
+                            color: '#c8102e',
+                          },
+                        }}
+                      />
+                    </Box>
+                  )}
+
+
+                  <Typography variant="h6" sx={{ mb: 2, color: '#c8102e' }}>
+                    Forage Production Details
+                  </Typography>
+
+                  {productionSections.map((section, index) => (
+                    <Paper key={index} elevation={2} sx={{ mb: 4, p: 3, borderRadius: 2 }}>
+                      <Typography variant="subtitle1" sx={{ mb: 2, fontWeight: 'bold' }}>
+                        {section.title}
+                      </Typography>
+                      <Grid container spacing={3}>
+                        {section.fields.map((field) => (
+                          <Grid item xs={12} sm={6} md={4} key={field.name}>
+                            <TextField
+                              margin="dense"
+                              name={field.name}
+                              label={field.label}
+                              type="number"
+                              fullWidth
+                              required
+                              value={userInputs[field.name as keyof CombinedInputs]}
+                              onChange={handleChange}
+                              inputProps={{ step: 'any' }}
+                              sx={{
+                                '& .MuiOutlinedInput-root': {
+                                  '&.Mui-focused fieldset': {
+                                    borderColor: '#c8102e',
+                                  },
+                                },
+                                '& .MuiInputLabel-root.Mui-focused': {
+                                  color: '#c8102e',
+                                },
+                              }}
+                            />
+                          </Grid>
+                        ))}
+                      </Grid>
+                    </Paper>
+                  ))}
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 3 }}>
                   <Button onClick={() => setTabValue(0)} variant="outlined" sx={{ color: '#c8102e', borderColor: '#c8102e' }}>
                     ← Back to Feed Details
