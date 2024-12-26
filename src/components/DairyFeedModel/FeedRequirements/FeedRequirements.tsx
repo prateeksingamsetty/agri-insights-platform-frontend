@@ -973,6 +973,7 @@ const FeedRequirements = () => {
           calvesCalfStarterFeedDaysOnFeed:
             userInputs.calvesCalfStarterFeedDaysOnFeed
         },
+        totalCroppingAnnualEconomicCosts: userInputs.totalCroppingAnnualEconomicCosts,
         cornSilage: {
           cornSilageExpectedYieldTonsPerAcre: userInputs.cornSilageExpectedYieldTonsPerAcre,
           cornSilageHarvestedAcres: userInputs.cornSilageHarvestedAcres,
@@ -1019,86 +1020,86 @@ const FeedRequirements = () => {
 
         averageCostOfTruckingPerTonMile: userInputs.averageCostOfTruckingPerTonMile,
 
-cornSilageTransportAndCost: {
-  cornSilageCostOfCommodityPerTon: userInputs.cornSilageCostOfCommodityPerTon,
-  cornSilageAvgPurchasedFeedMilesTruckedToDairy: userInputs.cornSilageAvgPurchasedFeedMilesTruckedToDairy,
-  cornSilageAvgGrownForageMilesTruckedToDairy: userInputs.cornSilageAvgGrownForageMilesTruckedToDairy
-},
-sorghumSilageTransportAndCost: {
-  sorghumSilageCostOfCommodityPerTon: userInputs.sorghumSilageCostOfCommodityPerTon,
-  sorghumSilageAvgPurchasedFeedMilesTruckedToDairy: userInputs.sorghumSilageAvgPurchasedFeedMilesTruckedToDairy,
-  sorghumSilageAvgGrownForageMilesTruckedToDairy: userInputs.sorghumSilageAvgGrownForageMilesTruckedToDairy
-},
-smallGrainSilageTransportAndCost: {
-  smallGrainSilageCostOfCommodityPerTon: userInputs.smallGrainSilageCostOfCommodityPerTon,
-  smallGrainSilageAvgPurchasedFeedMilesTruckedToDairy: userInputs.smallGrainSilageAvgPurchasedFeedMilesTruckedToDairy,
-  smallGrainSilageAvgGrownForageMilesTruckedToDairy: userInputs.smallGrainSilageAvgGrownForageMilesTruckedToDairy
-},
-grassHayTransportAndCost: {
-  grassHayCostOfCommodityPerTon: userInputs.grassHayCostOfCommodityPerTon,
-  grassHayAvgPurchasedFeedMilesTruckedToDairy: userInputs.grassHayAvgPurchasedFeedMilesTruckedToDairy,
-  grassHayAvgGrownForageMilesTruckedToDairy: userInputs.grassHayAvgGrownForageMilesTruckedToDairy
-},
-alfalfaHayTransportAndCost: {
-  alfalfaHayCostOfCommodityPerTon: userInputs.alfalfaHayCostOfCommodityPerTon,
-  alfalfaHayAvgPurchasedFeedMilesTruckedToDairy: userInputs.alfalfaHayAvgPurchasedFeedMilesTruckedToDairy,
-  alfalfaHayAvgGrownForageMilesTruckedToDairy: userInputs.alfalfaHayAvgGrownForageMilesTruckedToDairy
-},
-peanutHullsTransportAndCost: {
-  peanutHullsCostOfCommodityPerTon: userInputs.peanutHullsCostOfCommodityPerTon,
-  peanutHullsAvgPurchasedFeedMilesTruckedToDairy: userInputs.peanutHullsAvgPurchasedFeedMilesTruckedToDairy,
-  peanutHullsAvgGrownForageMilesTruckedToDairy: userInputs.peanutHullsAvgGrownForageMilesTruckedToDairy
-},
-applePomaceTransportAndCost: {
-  applePomaceCostOfCommodityPerTon: userInputs.applePomaceCostOfCommodityPerTon,
-  applePomaceAvgPurchasedFeedMilesTruckedToDairy: userInputs.applePomaceAvgPurchasedFeedMilesTruckedToDairy,
-  applePomaceAvgGrownForageMilesTruckedToDairy: userInputs.applePomaceAvgGrownForageMilesTruckedToDairy
-},
-distillersGrainTransportAndCost: {
-  distillersGrainCostOfCommodityPerTon: userInputs.distillersGrainCostOfCommodityPerTon,
-  distillersGrainAvgPurchasedFeedMilesTruckedToDairy: userInputs.distillersGrainAvgPurchasedFeedMilesTruckedToDairy,
-  distillersGrainAvgGrownForageMilesTruckedToDairy: userInputs.distillersGrainAvgGrownForageMilesTruckedToDairy
-},
-brewersGrainTransportAndCost: {
-  brewersGrainCostOfCommodityPerTon: userInputs.brewersGrainCostOfCommodityPerTon,
-  brewersGrainAvgPurchasedFeedMilesTruckedToDairy: userInputs.brewersGrainAvgPurchasedFeedMilesTruckedToDairy,
-  brewersGrainAvgGrownForageMilesTruckedToDairy: userInputs.brewersGrainAvgGrownForageMilesTruckedToDairy
-},
-citrusPulpTransportAndCost: {
-  citrusPulpCostOfCommodityPerTon: userInputs.citrusPulpCostOfCommodityPerTon,
-  citrusPulpAvgPurchasedFeedMilesTruckedToDairy: userInputs.citrusPulpAvgPurchasedFeedMilesTruckedToDairy,
-  citrusPulpAvgGrownForageMilesTruckedToDairy: userInputs.citrusPulpAvgGrownForageMilesTruckedToDairy
-},
-cornGlutenTransportAndCost: {
-  cornGlutenCostOfCommodityPerTon: userInputs.cornGlutenCostOfCommodityPerTon,
-  cornGlutenAvgPurchasedFeedMilesTruckedToDairy: userInputs.cornGlutenAvgPurchasedFeedMilesTruckedToDairy,
-  cornGlutenAvgGrownForageMilesTruckedToDairy: userInputs.cornGlutenAvgGrownForageMilesTruckedToDairy
-},
-wholeCottonseedTransportAndCost: {
-  wholeCottonseedCostOfCommodityPerTon: userInputs.wholeCottonseedCostOfCommodityPerTon,
-  wholeCottonseedAvgPurchasedFeedMilesTruckedToDairy: userInputs.wholeCottonseedAvgPurchasedFeedMilesTruckedToDairy,
-  wholeCottonseedAvgGrownForageMilesTruckedToDairy: userInputs.wholeCottonseedAvgGrownForageMilesTruckedToDairy
-},
-cottonseedHullsTransportAndCost: {
-  cottonseedHullsCostOfCommodityPerTon: userInputs.cottonseedHullsCostOfCommodityPerTon,
-  cottonseedHullsAvgPurchasedFeedMilesTruckedToDairy: userInputs.cottonseedHullsAvgPurchasedFeedMilesTruckedToDairy,
-  cottonseedHullsAvgGrownForageMilesTruckedToDairy: userInputs.cottonseedHullsAvgGrownForageMilesTruckedToDairy
-},
-soybeanMealTransportAndCost: {
-  soybeanMealCostOfCommodityPerTon: userInputs.soybeanMealCostOfCommodityPerTon,
-  soybeanMealAvgPurchasedFeedMilesTruckedToDairy: userInputs.soybeanMealAvgPurchasedFeedMilesTruckedToDairy,
-  soybeanMealAvgGrownForageMilesTruckedToDairy: userInputs.soybeanMealAvgGrownForageMilesTruckedToDairy
-},
-customFeedMixTransportAndCost: {
-  customFeedMixCostOfCommodityPerTon: userInputs.customFeedMixCostOfCommodityPerTon,
-  customFeedMixAvgPurchasedFeedMilesTruckedToDairy: userInputs.customFeedMixAvgPurchasedFeedMilesTruckedToDairy,
-  customFeedMixAvgGrownForageMilesTruckedToDairy: userInputs.customFeedMixAvgGrownForageMilesTruckedToDairy
-},
-customMineralMixTransportAndCost: {
-  customMineralMixCostOfCommodityPerTon: userInputs.customMineralMixCostOfCommodityPerTon,
-  customMineralMixAvgPurchasedFeedMilesTruckedToDairy: userInputs.customMineralMixAvgPurchasedFeedMilesTruckedToDairy,
-  customMineralMixAvgGrownForageMilesTruckedToDairy: userInputs.customMineralMixAvgGrownForageMilesTruckedToDairy
-}
+        cornSilageTransportAndCost: {
+          cornSilageCostOfCommodityPerTon: userInputs.cornSilageCostOfCommodityPerTon,
+          cornSilageAvgPurchasedFeedMilesTruckedToDairy: userInputs.cornSilageAvgPurchasedFeedMilesTruckedToDairy,
+          cornSilageAvgGrownForageMilesTruckedToDairy: userInputs.cornSilageAvgGrownForageMilesTruckedToDairy
+        },
+        sorghumSilageTransportAndCost: {
+          sorghumSilageCostOfCommodityPerTon: userInputs.sorghumSilageCostOfCommodityPerTon,
+          sorghumSilageAvgPurchasedFeedMilesTruckedToDairy: userInputs.sorghumSilageAvgPurchasedFeedMilesTruckedToDairy,
+          sorghumSilageAvgGrownForageMilesTruckedToDairy: userInputs.sorghumSilageAvgGrownForageMilesTruckedToDairy
+        },
+        smallGrainSilageTransportAndCost: {
+          smallGrainSilageCostOfCommodityPerTon: userInputs.smallGrainSilageCostOfCommodityPerTon,
+          smallGrainSilageAvgPurchasedFeedMilesTruckedToDairy: userInputs.smallGrainSilageAvgPurchasedFeedMilesTruckedToDairy,
+          smallGrainSilageAvgGrownForageMilesTruckedToDairy: userInputs.smallGrainSilageAvgGrownForageMilesTruckedToDairy
+        },
+        grassHayTransportAndCost: {
+          grassHayCostOfCommodityPerTon: userInputs.grassHayCostOfCommodityPerTon,
+          grassHayAvgPurchasedFeedMilesTruckedToDairy: userInputs.grassHayAvgPurchasedFeedMilesTruckedToDairy,
+          grassHayAvgGrownForageMilesTruckedToDairy: userInputs.grassHayAvgGrownForageMilesTruckedToDairy
+        },
+        alfalfaHayTransportAndCost: {
+          alfalfaHayCostOfCommodityPerTon: userInputs.alfalfaHayCostOfCommodityPerTon,
+          alfalfaHayAvgPurchasedFeedMilesTruckedToDairy: userInputs.alfalfaHayAvgPurchasedFeedMilesTruckedToDairy,
+          alfalfaHayAvgGrownForageMilesTruckedToDairy: userInputs.alfalfaHayAvgGrownForageMilesTruckedToDairy
+        },
+        peanutHullsTransportAndCost: {
+          peanutHullsCostOfCommodityPerTon: userInputs.peanutHullsCostOfCommodityPerTon,
+          peanutHullsAvgPurchasedFeedMilesTruckedToDairy: userInputs.peanutHullsAvgPurchasedFeedMilesTruckedToDairy,
+          peanutHullsAvgGrownForageMilesTruckedToDairy: userInputs.peanutHullsAvgGrownForageMilesTruckedToDairy
+        },
+        applePomaceTransportAndCost: {
+          applePomaceCostOfCommodityPerTon: userInputs.applePomaceCostOfCommodityPerTon,
+          applePomaceAvgPurchasedFeedMilesTruckedToDairy: userInputs.applePomaceAvgPurchasedFeedMilesTruckedToDairy,
+          applePomaceAvgGrownForageMilesTruckedToDairy: userInputs.applePomaceAvgGrownForageMilesTruckedToDairy
+        },
+        distillersGrainTransportAndCost: {
+          distillersGrainCostOfCommodityPerTon: userInputs.distillersGrainCostOfCommodityPerTon,
+          distillersGrainAvgPurchasedFeedMilesTruckedToDairy: userInputs.distillersGrainAvgPurchasedFeedMilesTruckedToDairy,
+          distillersGrainAvgGrownForageMilesTruckedToDairy: userInputs.distillersGrainAvgGrownForageMilesTruckedToDairy
+        },
+        brewersGrainTransportAndCost: {
+          brewersGrainCostOfCommodityPerTon: userInputs.brewersGrainCostOfCommodityPerTon,
+          brewersGrainAvgPurchasedFeedMilesTruckedToDairy: userInputs.brewersGrainAvgPurchasedFeedMilesTruckedToDairy,
+          brewersGrainAvgGrownForageMilesTruckedToDairy: userInputs.brewersGrainAvgGrownForageMilesTruckedToDairy
+        },
+        citrusPulpTransportAndCost: {
+          citrusPulpCostOfCommodityPerTon: userInputs.citrusPulpCostOfCommodityPerTon,
+          citrusPulpAvgPurchasedFeedMilesTruckedToDairy: userInputs.citrusPulpAvgPurchasedFeedMilesTruckedToDairy,
+          citrusPulpAvgGrownForageMilesTruckedToDairy: userInputs.citrusPulpAvgGrownForageMilesTruckedToDairy
+        },
+        cornGlutenTransportAndCost: {
+          cornGlutenCostOfCommodityPerTon: userInputs.cornGlutenCostOfCommodityPerTon,
+          cornGlutenAvgPurchasedFeedMilesTruckedToDairy: userInputs.cornGlutenAvgPurchasedFeedMilesTruckedToDairy,
+          cornGlutenAvgGrownForageMilesTruckedToDairy: userInputs.cornGlutenAvgGrownForageMilesTruckedToDairy
+        },
+        wholeCottonseedTransportAndCost: {
+          wholeCottonseedCostOfCommodityPerTon: userInputs.wholeCottonseedCostOfCommodityPerTon,
+          wholeCottonseedAvgPurchasedFeedMilesTruckedToDairy: userInputs.wholeCottonseedAvgPurchasedFeedMilesTruckedToDairy,
+          wholeCottonseedAvgGrownForageMilesTruckedToDairy: userInputs.wholeCottonseedAvgGrownForageMilesTruckedToDairy
+        },
+        cottonseedHullsTransportAndCost: {
+          cottonseedHullsCostOfCommodityPerTon: userInputs.cottonseedHullsCostOfCommodityPerTon,
+          cottonseedHullsAvgPurchasedFeedMilesTruckedToDairy: userInputs.cottonseedHullsAvgPurchasedFeedMilesTruckedToDairy,
+          cottonseedHullsAvgGrownForageMilesTruckedToDairy: userInputs.cottonseedHullsAvgGrownForageMilesTruckedToDairy
+        },
+        soybeanMealTransportAndCost: {
+          soybeanMealCostOfCommodityPerTon: userInputs.soybeanMealCostOfCommodityPerTon,
+          soybeanMealAvgPurchasedFeedMilesTruckedToDairy: userInputs.soybeanMealAvgPurchasedFeedMilesTruckedToDairy,
+          soybeanMealAvgGrownForageMilesTruckedToDairy: userInputs.soybeanMealAvgGrownForageMilesTruckedToDairy
+        },
+        customFeedMixTransportAndCost: {
+          customFeedMixCostOfCommodityPerTon: userInputs.customFeedMixCostOfCommodityPerTon,
+          customFeedMixAvgPurchasedFeedMilesTruckedToDairy: userInputs.customFeedMixAvgPurchasedFeedMilesTruckedToDairy,
+          customFeedMixAvgGrownForageMilesTruckedToDairy: userInputs.customFeedMixAvgGrownForageMilesTruckedToDairy
+        },
+        customMineralMixTransportAndCost: {
+          customMineralMixCostOfCommodityPerTon: userInputs.customMineralMixCostOfCommodityPerTon,
+          customMineralMixAvgPurchasedFeedMilesTruckedToDairy: userInputs.customMineralMixAvgPurchasedFeedMilesTruckedToDairy,
+          customMineralMixAvgGrownForageMilesTruckedToDairy: userInputs.customMineralMixAvgGrownForageMilesTruckedToDairy
+        }
 }
 
       let response
