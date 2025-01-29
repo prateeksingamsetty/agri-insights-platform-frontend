@@ -22,6 +22,12 @@ const Sidebar: React.FC = () => {
         <SidebarLink href='/prices/mailbox_appalachian'>
           Mailbox Appalachian Price Data
         </SidebarLink>
+        <SidebarLink href='/weather'>
+          Weather Data
+        </SidebarLink>
+        <SidebarLink href='/analysis'>
+          Analysis Data
+        </SidebarLink>
         {pathname === '/' && (
           <SidebarLink href='/tomato'>Tomato Landing Page</SidebarLink>
         )}
@@ -35,6 +41,7 @@ const Sidebar: React.FC = () => {
           </SidebarLink>
         )}
         <SidebarLink href='/dairyFeedModel'>Dairy Feed Model</SidebarLink>
+        <SidebarLink href='/ghgModel'>GHG Model</SidebarLink>
         <SidebarLink href='/resources'>Resources</SidebarLink>
       </ul>
     </div>
