@@ -28,6 +28,9 @@ const Sidebar: React.FC = () => {
         <SidebarLink href='/analysis'>
           Analysis Data
         </SidebarLink>
+        <SidebarLink href='/diseaseSeverity'>
+          Disease Severity
+        </SidebarLink>
         {pathname === '/' && (
           <SidebarLink href='/tomato'>Tomato Landing Page</SidebarLink>
         )}
