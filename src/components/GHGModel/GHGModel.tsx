@@ -50,16 +50,14 @@ const GHG = () => {
   const handleSubmitInputs = async (userInputs: any) => {
     try {
       const transformedInputs = {
-        feedComposition: {
-          totalFeedIntake: userInputs.totalFeedIntake,
-          proteinPercentage: userInputs.proteinPercentage,
-          fiberPercentage: userInputs.fiberPercentage,
-          fatPercentage: userInputs.fatPercentage
-        }
+        proteinPercentage: userInputs.proteinPercentage,
+        fatPercentage: userInputs.fatPercentage,
+        averageUSTruckingEmissions: 0.3567
       };
 
       let response;
       if (loggedIn && email) {
+        console.log("Entered this");
         response = await axios.patch(`${BASE_URL}/ghg-emissions/updateInput/${email}`, transformedInputs);
       } else {
         response = await axios.post(`${BASE_URL}/ghg-emissions/calculateEmissions`, transformedInputs);
