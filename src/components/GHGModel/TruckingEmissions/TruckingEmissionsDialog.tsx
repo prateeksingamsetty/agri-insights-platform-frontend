@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Dialog, DialogActions, DialogContent, DialogTitle, Button, Typography, Box } from "@mui/material";
+import { Dialog, DialogActions, DialogContent, DialogTitle, Button, Typography, Grid, TextField } from "@mui/material";
 import axios from "axios";
 import { useAuth } from "src/context/AuthContext";
 
@@ -28,10 +28,10 @@ const TruckingEmissionsDialog: React.FC<TruckingEmissionsDialogProps> = ({ open,
 
   const fetchTruckingEmissions = async () => {
     try {
-      const response = await axios.get(`${BASE_URL}/trucking-emissions/outputDetails/${email}`);
+      const response = await axios.get(`${BASE_URL}/ghg-emissions/outputDetails/${email}`);
       if (response.data) {
         setDetails({
-          truckingEmissions: response.data.truckingEmissions || {},
+          truckingEmissions: filterValidData(response.data.truckingEmissions),
         });
       }
     } catch (error) {
@@ -39,24 +39,34 @@ const TruckingEmissionsDialog: React.FC<TruckingEmissionsDialogProps> = ({ open,
     }
   };
 
+  // Remove `_id` and ensure only valid numeric values are displayed
+  const filterValidData = (data: Record<string, any>) => {
+    return Object.fromEntries(
+      Object.entries(data || {}).filter(([key]) => key !== "_id")
+    );
+  };
+
   const renderCategory = (title: string, data: Record<string, number | null>) => {
     return (
-      <Box sx={{ mb: 3 }}>
-        <Typography variant="h6" sx={{ fontWeight: "bold", color: "#c8102e", mb: 1 }}>
+      <>
+        <Typography variant="h6" sx={{ fontWeight: "bold", color: "#c8102e", mt: 2 }}>
           {title}
         </Typography>
-        {Object.keys(data).length > 0 ? (
-          Object.entries(data).map(([key, value]) => (
-            <Typography key={key} variant="body1" sx={{ mb: 0.5 }}>
-              <strong>{key}:</strong> {value !== null ? value.toLocaleString() + " lbs" : "Not Available"}
-            </Typography>
-          ))
-        ) : (
-          <Typography variant="body1" sx={{ fontStyle: "italic", color: "gray", mb: 1 }}>
-            {title} data is not yet available.
-          </Typography>
-        )}
-      </Box>
+        <Grid container spacing={2}>
+          {Object.entries(data).map(([key, value]) => (
+            <Grid item xs={6} key={key}>
+              <TextField
+                label={key.replace(/DMI/g, " DMI")}
+                value={value !== null ? value.toLocaleString() + " lbs" : "Not Available"}
+                fullWidth
+                InputProps={{ readOnly: true }}
+                variant="filled"
+                sx={{ bgcolor: "#f5f5f5", borderRadius: "5px" }} // Gray background for read-only fields
+              />
+            </Grid>
+          ))}
+        </Grid>
+      </>
     );
   };
 
@@ -67,7 +77,7 @@ const TruckingEmissionsDialog: React.FC<TruckingEmissionsDialogProps> = ({ open,
         {renderCategory("Trucking Emissions", details.truckingEmissions)}
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} sx={{ color: "#c8102e" }}>
+        <Button onClick={handleClose} sx={{ color: "#c8102e", fontWeight: "bold" }}>
           Close
         </Button>
       </DialogActions>
