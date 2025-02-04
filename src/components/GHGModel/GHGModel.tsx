@@ -6,10 +6,7 @@ import { useEffect, useState } from 'react';
 import InputDialog from './InputDialog';
 import FeedAndEnteric from './FeedAndEntericEmissions/FeedAndEnteric';
 import Trucking from './TruckingEmissions/Trucking';
-// import Energy from './EnergyEmissions/Energy';
-// import Manure from './ManureEmissions/Manure';
 import { useAuth } from 'src/context/AuthContext';
-
 
 const GHG = () => {
   const { email, loggedIn } = useAuth();
@@ -17,12 +14,14 @@ const GHG = () => {
 
   const [openInputDialog, setOpenInputDialog] = useState(false);
 
-  // State to hold all emission outputs
+  // State to hold only the required numeric values
   const [emissionData, setEmissionData] = useState({
-    feedAndEnteric: {},
-    trucking: {},
-    energy: {},
-    manure: {}
+    ghgFeedTotal: 0,
+    ghgFeedTotalPerFPCM: 0,
+    totalEntericEmissions: 0,
+    totalEntericEmissionsPerFPCM: 0,
+    ghgTruckingFootprint: 0,
+    totalTruckingEmissions: 0
   });
 
   useEffect(() => {
@@ -36,10 +35,12 @@ const GHG = () => {
       const response = await axios.get(`${BASE_URL}/ghg-emissions/outputDetails/${email}`);
       if (response.data) {
         setEmissionData({
-          feedAndEnteric: response.data.feedAndEnteric || {},
-          trucking: response.data.trucking || {},
-          energy: response.data.energy || {},
-          manure: response.data.manure || {}
+          ghgFeedTotal: response.data.ghgFeedTotal || 0,
+          ghgFeedTotalPerFPCM: response.data.ghgFeedTotalPerFPCM || 0,
+          totalEntericEmissions: response.data.totalEntericEmissions || 0,
+          totalEntericEmissionsPerFPCM: response.data.totalEntericEmissionsPerFPCM || 0,
+          ghgTruckingFootprint: response.data.ghgTruckingFootprint || 0,
+          totalTruckingEmissions: response.data.totalTruckingEmissions || 0,
         });
       }
     } catch (error) {
@@ -63,13 +64,16 @@ const GHG = () => {
         response = await axios.post(`${BASE_URL}/ghg-emissions/calculateEmissions`, transformedInputs);
         localStorage.setItem('ghgInputs', JSON.stringify(userInputs));
       }
+      console.log("response after i/p sub ", response.data);
 
       if (response.data) {
         setEmissionData({
-          feedAndEnteric: response.data.feedAndEnteric || {},
-          trucking: response.data.trucking || {},
-          energy: response.data.energy || {},
-          manure: response.data.manure || {}
+          ghgFeedTotal: response.data.ghgFeedTotal || 0,
+          ghgFeedTotalPerFPCM: response.data.ghgFeedTotalPerFPCM || 0,
+          totalEntericEmissions: response.data.totalEntericEmissions || 0,
+          totalEntericEmissionsPerFPCM: response.data.totalEntericEmissionsPerFPCM || 0,
+          ghgTruckingFootprint: response.data.ghgTruckingFootprint || 0,
+          totalTruckingEmissions: response.data.totalTruckingEmissions || 0,
         });
       }
     } catch (error) {
@@ -93,11 +97,19 @@ const GHG = () => {
             Input Fat and Protein Percentage
           </Button>
 
-          {/* Emission Components */}
-          <FeedAndEnteric data={emissionData.feedAndEnteric} />
-          <Trucking data={emissionData.trucking} />
-          {/* <Energy data={emissionData.energy} />
-          <Manure data={emissionData.manure} /> */}
+          {/* Emission Components - Passing only numeric data */}
+          <FeedAndEnteric data={{
+            ghgFeedTotal: emissionData.ghgFeedTotal,
+            ghgFeedTotalPerFPCM: emissionData.ghgFeedTotalPerFPCM,
+            totalEntericEmissions: emissionData.totalEntericEmissions,
+            totalEntericEmissionsPerFPCM: emissionData.totalEntericEmissionsPerFPCM
+          }} />
+
+          <Trucking data={{
+            ghgTruckingFootprint: emissionData.ghgTruckingFootprint,
+            totalTruckingEmissions: emissionData.totalTruckingEmissions
+          }} />
+
         </Box>
       </Container>
 

@@ -4,10 +4,10 @@ import { useState } from 'react';
 
 // Define the expected structure for the data prop
 interface FeedAndEntericData {
-  feedFootprintCO2?: number | null;
-  feedFootprintPerFPCM?: number | null;
-  entericFootprintCO2?: number | null;
-  entericFootprintPerFPCM?: number | null;
+  ghgFeedTotal?: number | null;
+  ghgFeedTotalPerFPCM?: number | null;
+  totalEntericEmissions?: number | null;
+  totalEntericEmissionsPerFPCM?: number | null;
 }
 
 interface FeedAndEntericProps {
@@ -25,30 +25,30 @@ const FeedAndEnteric: React.FC<FeedAndEntericProps> = ({ data }) => {
         </Typography>
 
         <TextField
-          label="Feed FootPrint lbs of CO2"
+          label="GHG Feed Total (lbs of CO2)"
           variant="outlined"
-          value={data.feedFootprintCO2 ?? 0}
+          value={data.ghgFeedTotal ?? 0}
           InputProps={{ readOnly: true }}
           fullWidth
         />
         <TextField
-          label="Feed Footprint lbs CO2/lbs FPCM"
+          label="GHG Feed Total Per FPCM (lbs CO2/lbs FPCM)"
           variant="outlined"
-          value={data.feedFootprintPerFPCM ?? 0}
+          value={data.ghgFeedTotalPerFPCM ?? 0}
           InputProps={{ readOnly: true }}
           fullWidth
         />
         <TextField
-          label="Enteric Footprint lbs of CO2"
+          label="Total Enteric Emissions (lbs of CO2)"
           variant="outlined"
-          value={data.entericFootprintCO2 ?? 0}
+          value={data.totalEntericEmissions ?? 0}
           InputProps={{ readOnly: true }}
           fullWidth
         />
         <TextField
-          label="Enteric Footprint lbs CO2/lbs FPCM"
+          label="Total Enteric Emissions Per FPCM (lbs CO2/lbs FPCM)"
           variant="outlined"
-          value={data.entericFootprintPerFPCM ?? 0}
+          value={data.totalEntericEmissionsPerFPCM ?? 0}
           InputProps={{ readOnly: true }}
           fullWidth
         />
