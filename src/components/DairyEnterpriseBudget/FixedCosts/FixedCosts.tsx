@@ -28,6 +28,8 @@ interface FixedCostsType {
 
 const FixedCosts = () => {
   const { email } = useAuth()
+  console.log("email ", email);
+  
 
   const [details, setDetails] = useState<FixedCostsType>({
     totalCattleFixedCost: 0,
@@ -42,6 +44,8 @@ const FixedCosts = () => {
 
   const [openFinancialAssumption, setOpenFinancialAssumption] = useState(false)
   useEffect(() => {
+    if(!email) return;
+
     const fetchUserOutputRecord = async () => {
       try {
         const response = await axios.get(
@@ -70,7 +74,7 @@ const FixedCosts = () => {
     }
 
     fetchUserOutputRecord()
-  }, [])
+  }, [email])
 
   const handleDialogOpen = () => setOpen(true)
   const handleDialogClose = () => setOpen(false)
