@@ -208,6 +208,9 @@ const FixedCosts = () => {
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/fixed-costs/updateInput/${email}`,
         transformedInputs
       )
+
+      if(!response) console.log("response ", response);
+      
       if (response && response.data) {
         setDetails({
           totalCattleFixedCost: response.data.totalCattleFixedCost || 0,
