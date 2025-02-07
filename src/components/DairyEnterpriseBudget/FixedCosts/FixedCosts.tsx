@@ -28,8 +28,6 @@ interface FixedCostsType {
 
 const FixedCosts = () => {
   const { email } = useAuth()
-  console.log("email ", email);
-  
 
   const [details, setDetails] = useState<FixedCostsType>({
     totalCattleFixedCost: 0,
@@ -205,8 +203,6 @@ const FixedCosts = () => {
         },
         isDetailedMachineryCosts: userInputs.isDetailedMachineryCosts
       }
-
-      console.log("transformedInputs ", transformedInputs);
 
       const response = await axios.patch(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/fixed-costs/updateInput/${email}`,
