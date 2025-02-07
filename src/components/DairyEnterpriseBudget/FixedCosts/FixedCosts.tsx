@@ -27,8 +27,7 @@ interface FixedCostsType {
 }
 
 const FixedCosts = () => {
-  //   const { email } = useAuth()
-  const email = 'prateek@gmail.com'
+  const { email } = useAuth()
 
   const [details, setDetails] = useState<FixedCostsType>({
     totalCattleFixedCost: 0,
