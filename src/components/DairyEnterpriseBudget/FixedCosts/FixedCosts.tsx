@@ -206,6 +206,8 @@ const FixedCosts = () => {
         isDetailedMachineryCosts: userInputs.isDetailedMachineryCosts
       }
 
+      console.log("transformedInputs ", transformedInputs);
+
       const response = await axios.patch(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/fixed-costs/updateInput/${email}`,
         transformedInputs
