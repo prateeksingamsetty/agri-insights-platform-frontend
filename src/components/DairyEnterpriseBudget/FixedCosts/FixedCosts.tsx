@@ -210,6 +210,8 @@ const FixedCosts = () => {
       )
 
       if(!response) console.log("response ", response);
+      else console.log("response ", response);
+      
       
       if (response && response.data) {
         setDetails({
