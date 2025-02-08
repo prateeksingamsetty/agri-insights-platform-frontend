@@ -23,7 +23,7 @@ interface AnalysisRecord {
   consecutive_hours_80: number | null;
 }
 
-const AnalysisData = () => {
+const RelativeHumidity = () => {
   const [analysisData, setAnalysisData] = useState<AnalysisRecord[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -31,22 +31,25 @@ const AnalysisData = () => {
     const fetchAnalysisData = async () => {
       try {
         const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/analysis/latestWeeks`);
-
+  
         let processedData = response.data
           .map((entry: any) => ({
             time: entry.timestamp,
-            consecutive_hours_90: entry.consecutive_hours ?? null, // Renamed for display
-            consecutive_hours_80: entry.continuous_uninterrupted_hours_80 ?? null, // Renamed for display
+            consecutive_hours_90: entry.consecutive_hours ?? null,
+            consecutive_hours_80: entry.continuous_uninterrupted_hours_80 ?? null,
           }))
           .filter((entry: AnalysisRecord) => {
-            const hour = new Date(entry.time).getHours();
-            return hour === 6 || hour === 12 || hour === 18; // Keep only 6AM, 12PM, and 6PM entries
-          });
-
-        processedData = processedData.sort((a: AnalysisRecord, b: AnalysisRecord) => new Date(a.time).getTime() - new Date(b.time).getTime()); // Ensure ascending order
-
-        console.log("Processed Analysis Data:", processedData);
-        setAnalysisData(processedData);
+            const dateObj = new Date(entry.time);
+            const hour = dateObj.getHours();
+            return hour === 0 || hour === 6 || hour === 12 || hour === 18; // Keep only 12AM, 6AM, 12PM, 6PM
+          })
+          .sort((a: AnalysisRecord, b: AnalysisRecord) => new Date(a.time).getTime() - new Date(b.time).getTime());
+  
+        // ✅ Ensure only the last 7 days are kept, assuming 4 points per day
+        const last7Days = processedData.slice(-4 * 7); 
+  
+        console.log("Filtered Analysis Data:", last7Days);
+        setAnalysisData(last7Days);
       } catch (error) {
         console.error("Error fetching analysis data:", error);
       } finally {
@@ -55,6 +58,7 @@ const AnalysisData = () => {
     };
     fetchAnalysisData();
   }, []);
+  
 
   const timestamps = analysisData.map(entry => entry.time.split(' ')[0]);
   const consecutiveHours_90 = analysisData.map(entry => entry.consecutive_hours_90);
@@ -88,7 +92,7 @@ const AnalysisData = () => {
       },
       title: {
         display: true,
-        text: 'Analysis Data - Last 2 Weeks (6AM, 12PM, 6PM)',
+        text: 'Relative Humidity - Last Week (12AM, 6AM, 12PM, 6PM)',
       },
     },
     scales: {
@@ -98,7 +102,7 @@ const AnalysisData = () => {
           text: 'Date',
         },
         ticks: {
-          maxTicksLimit: 14, // Limit x-axis labels
+          maxTicksLimit: 7, // Limit x-axis labels to 7 days
         }
       },
       y: {
@@ -111,13 +115,13 @@ const AnalysisData = () => {
   };
 
   if (loading) {
-    return <div>Loading analysis data...</div>;
+    return <div>Loading Relative Humidity...</div>;
   }
 
   return (
     <div className="rounded-lg bg-gray-100 p-6 shadow-md">
       <h1 className="mb-6 text-center text-2xl font-bold text-red-700">
-        Analysis Data - Consecutive Hours (90%) & (80%)
+      Relative Humidity - Consecutive Hours (90%) & (80%)
       </h1>
       <div className="rounded-lg bg-white p-4 shadow-sm">
         <Line data={chartData} options={chartOptions} />
@@ -126,4 +130,4 @@ const AnalysisData = () => {
   );
 };
 
-export default AnalysisData;
+export default RelativeHumidity;

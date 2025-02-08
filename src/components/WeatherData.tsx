@@ -40,7 +40,7 @@ const WeatherData = () => {
           }))
           .filter((entry: WeatherRecord) => {
             const hour = new Date(entry.time).getHours();
-            return hour === 6 || hour === 12 || hour === 18; // Keep only 6AM, 12PM, and 6PM entries
+            return hour === 0 || hour === 6 || hour === 12 || hour === 18; // Keep only 6AM, 12PM, and 6PM entries
           });
 
         processedData = processedData.sort((a: WeatherRecord, b: WeatherRecord) => new Date(a.time).getTime() - new Date(b.time).getTime()); // Ensure ascending order
@@ -90,7 +90,7 @@ const WeatherData = () => {
       },
       title: {
         display: true,
-        text: 'Weather Data - Last 2 Weeks (6AM, 12PM, 6PM)',
+        text: 'Weather Data - Last Week (12AM, 6AM, 12PM, 6PM)',
       },
     },
     scales: {
@@ -100,7 +100,7 @@ const WeatherData = () => {
           text: 'Date',
         },
         ticks: {
-          maxTicksLimit: 14, // Limits the number of labels on the x-axis
+          maxTicksLimit: 7, // Limits the number of labels on the x-axis
         }
       },
       'y-axis-temp': {

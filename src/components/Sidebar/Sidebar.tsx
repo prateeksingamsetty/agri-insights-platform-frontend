@@ -25,8 +25,8 @@ const Sidebar: React.FC = () => {
         <SidebarLink href='/weather'>
           Weather Data
         </SidebarLink>
-        <SidebarLink href='/analysis'>
-          Analysis Data
+        <SidebarLink href='/relativeHumidity'>
+          RelativeHumidity
         </SidebarLink>
         <SidebarLink href='/diseaseSeverity'>
           Disease Severity

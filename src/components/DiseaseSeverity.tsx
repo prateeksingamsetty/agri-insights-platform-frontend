@@ -130,7 +130,7 @@ const DiseaseSeverity = () => {
       },
       title: {
         display: true,
-        text: 'Disease Severity Data - Last 2 Weeks (6AM, 12PM, 6PM)',
+        text: 'Late Blight Growth Rate - Last 2 Weeks (6AM, 12PM, 6PM)',
       },
     },
     scales: {
@@ -153,13 +153,13 @@ const DiseaseSeverity = () => {
   };
 
   if (loading) {
-    return <div>Loading disease severity data...</div>;
+    return <div>Loading Late blight growth rate...</div>;
   }
 
   return (
     <div className="rounded-lg bg-gray-100 p-6 shadow-md">
       <h1 className="mb-6 text-center text-2xl font-bold text-red-700">
-        Disease Severity Data - Blight Units & Severity
+      Late blight Growth Rate
       </h1>
       <div className="rounded-lg bg-white p-4 shadow-sm">
         <Line data={chartData} options={chartOptions} />
