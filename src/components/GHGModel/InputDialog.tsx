@@ -76,19 +76,38 @@ const InputDialog: React.FC<InputDialogProps> = ({
     }
   }
 
+  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const { name, value } = e.target
+  //   setUserInputs(prev => {
+  //     const newInputs = {
+  //       ...prev,
+  //       [name]: value
+  //     }
+  //     if (!loggedIn) {
+  //       localStorage.setItem('fatProteinInputs', JSON.stringify(newInputs))
+  //     }
+  //     return newInputs
+  //   })
+  // }
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     setUserInputs(prev => {
+      // Make sure to convert the string to a number
+      const newValue = parseFloat(value)
       const newInputs = {
         ...prev,
-        [name]: value
+        [name]: newValue
       }
+  
+      // If logged out, also store numeric values in localStorage
       if (!loggedIn) {
         localStorage.setItem('fatProteinInputs', JSON.stringify(newInputs))
       }
+  
       return newInputs
     })
-  }
+  }  
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
