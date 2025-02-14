@@ -48,7 +48,7 @@ const DiseaseSeverity = () => {
           }))
           .filter((entry: DiseaseSeverityRecord) => {
             const hour = new Date(entry.time).getHours();
-            return hour === 6 || hour === 12 || hour === 18; // Keep only 6AM, 12PM, and 6PM entries
+            return hour === 0 || hour === 6 || hour === 12 || hour === 18; // Keep only 12AM, 6AM, 12PM, and 6PM entries
           });
 
         processedData = processedData.sort((a: DiseaseSeverityRecord, b: DiseaseSeverityRecord) => 
@@ -130,7 +130,7 @@ const DiseaseSeverity = () => {
       },
       title: {
         display: true,
-        text: 'Late Blight Growth Rate - Last 2 Weeks (6AM, 12PM, 6PM)',
+        text: 'Late Blight Growth Rate - Last Week (12AM, 6AM, 12PM, 6PM)',
       },
     },
     scales: {
@@ -140,7 +140,7 @@ const DiseaseSeverity = () => {
           text: 'Date',
         },
         ticks: {
-          maxTicksLimit: 14, // Limit x-axis labels
+          maxTicksLimit: 7, // Limit x-axis labels
         }
       },
       y: {

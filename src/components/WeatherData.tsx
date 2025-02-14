@@ -40,7 +40,7 @@ const WeatherData = () => {
           }))
           .filter((entry: WeatherRecord) => {
             const hour = new Date(entry.time).getHours();
-            return hour === 0 || hour === 6 || hour === 12 || hour === 18; // Keep only 6AM, 12PM, and 6PM entries
+            return hour === 0 || hour === 6 || hour === 12 || hour === 18; // Keep only 12AM, 6AM, 12PM, and 6PM entries
           });
 
         processedData = processedData.sort((a: WeatherRecord, b: WeatherRecord) => new Date(a.time).getTime() - new Date(b.time).getTime()); // Ensure ascending order
