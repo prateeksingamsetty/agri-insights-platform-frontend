@@ -22,20 +22,6 @@ const Sidebar: React.FC = () => {
           <SidebarLink href='/dairy'>Dairy Landing Page</SidebarLink>
         )}
 
-        {/* Dairy Prices Data (Restricted) */}
-        {loggedIn && (pathname === '/' ||
-          pathname === '/dairyEnterprise' ||
-          pathname === '/dairy' || pathname === '/dairyFeedModel' || pathname === '/ghgModel' ||
-          pathname === '/prices/mailbox_appalachian') && (
-          <SidebarLink href='/prices/dairy'>Dairy Price Data</SidebarLink>
-        )}
-
-        {/* Mailbox Prices (Restricted) */}
-        {loggedIn && (pathname === '/' || pathname === '/dairy' || pathname === '/dairyFeedModel' ||
-          pathname === '/ghgModel' || pathname === '/dairyEnterprise' || pathname === '/prices/dairy') && (
-          <SidebarLink href='/prices/mailbox_appalachian'> Mailbox Appalachian Price Data </SidebarLink>
-        )}
-
         {/* Weather Data (Restricted) */}
         {loggedIn && pathname === '/' && (
           <SidebarLink href='/weather'>Weather Data</SidebarLink>
@@ -56,11 +42,6 @@ const Sidebar: React.FC = () => {
           <SidebarLink href='/tomato'>Tomato Landing Page</SidebarLink>
         )}
 
-        {/* Tomato Price Data (Restricted) */}
-        {loggedIn && pathname === '/' && (
-          <SidebarLink href='/prices/tomato'>Tomato Price Data</SidebarLink>
-        )}
-
         {/* Dairy Enterprise Budget Model */}
         {(pathname === '/dairy' || pathname === '/prices/dairy' || pathname === '/dairyFeedModel' ||
           pathname === '/ghgModel' || pathname === '/prices/mailbox_appalachian') && (
@@ -75,8 +56,27 @@ const Sidebar: React.FC = () => {
 
         {/* Dairy GHG Model */}
         {(pathname === '/' || pathname === '/dairyEnterprise' || pathname === '/prices/dairy' ||
-          pathname === '/prices/mailbox_appalachian' || pathname === '/dairy') && (
+          pathname === '/prices/mailbox_appalachian' || pathname === '/dairy' || pathname === '/dairyFeedModel') && (
           <SidebarLink href='/ghgModel'>Dairy GHG Model</SidebarLink>
+        )}
+
+        {/* Dairy Prices Data (Restricted) */}
+        {loggedIn && (pathname === '/' ||
+          pathname === '/dairyEnterprise' ||
+          pathname === '/dairy' || pathname === '/dairyFeedModel' || pathname === '/ghgModel' ||
+          pathname === '/prices/mailbox_appalachian') && (
+          <SidebarLink href='/prices/dairy'>Dairy Price Data</SidebarLink>
+        )}
+
+        {/* Mailbox Prices (Restricted) */}
+        {loggedIn && (pathname === '/' || pathname === '/dairy' || pathname === '/dairyFeedModel' ||
+          pathname === '/ghgModel' || pathname === '/dairyEnterprise' || pathname === '/prices/dairy') && (
+          <SidebarLink href='/prices/mailbox_appalachian'> Mailbox Appalachian Price Data </SidebarLink>
+        )}
+
+        {/* Tomato Price Data (Restricted) */}
+        {loggedIn && pathname === '/' && (
+          <SidebarLink href='/prices/tomato'>Tomato Price Data</SidebarLink>
         )}
 
         {/* Always visible */}
