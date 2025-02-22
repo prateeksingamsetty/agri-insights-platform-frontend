@@ -19,6 +19,15 @@ import {
 import axios from 'axios'
 
 interface UserInputs {
+  // Financial Assumptions
+  shortTermInterestRate: number
+  propertyTaxRate: number
+  propertyInsuranceRate: number
+  buildingAndStructuresInsuranceCoverageRequired: number
+  longTermInterestRate: number
+  livestockInsuranceRate: number
+  machineryAndEquipmentInsuranceRate: number
+
   // Cattle Fixed Cost
   cowPurchaseValue: number
   overheadCostPerCow: number
@@ -117,6 +126,15 @@ const InputDialog: React.FC<InputDialogProps> = ({
   const [errors, setErrors] = useState<{ [key: string]: string }>({})
 
   const [userInputs, setUserInputs] = useState<UserInputs>({
+    // Financial Assumptions
+    shortTermInterestRate: 5.5,
+    propertyTaxRate: 0.7,
+    propertyInsuranceRate: 0.25,
+    buildingAndStructuresInsuranceCoverageRequired: 0,
+    longTermInterestRate: 4.5,
+    livestockInsuranceRate: 0.35,
+    machineryAndEquipmentInsuranceRate: 0.286,
+
     // Cattle Fixed Cost
     cowPurchaseValue: 2800,
     overheadCostPerCow: 0,
@@ -216,21 +234,22 @@ const InputDialog: React.FC<InputDialogProps> = ({
         )
         if (response && response.data) {
           setUserInputs({
+            shortTermInterestRate: response.data.financialAssumptions.shortTermInterestRate,
+            propertyTaxRate: response.data.financialAssumptions.propertyTaxRate,
+            propertyInsuranceRate: response.data.financialAssumptions.propertyInsuranceRate,
+            buildingAndStructuresInsuranceCoverageRequired: response.data.financialAssumptions.buildingAndStructuresInsuranceCoverageRequired,
+            longTermInterestRate: response.data.financialAssumptions.longTermInterestRate,
+            livestockInsuranceRate: response.data.financialAssumptions.livestockInsuranceRate,
+            machineryAndEquipmentInsuranceRate:response.data.financialAssumptions.machineryAndEquipmentInsuranceRate,
+
             cowPurchaseValue: response.data.cattleFixedCost.cowPurchaseValue,
-            overheadCostPerCow:
-              response.data.cattleFixedCost.overheadCostPerCow,
-            numberOfBredHeifers:
-              response.data.cattleFixedCost.numberOfBredHeifers,
-            bredHeiferPurchaseValue:
-              response.data.cattleFixedCost.bredHeiferPurchaseValue,
-            numberOfOneYearOldHeifers:
-              response.data.cattleFixedCost.numberOfOneYearOldHeifers,
-            OneYearOldHeiferPurchaseValue:
-              response.data.cattleFixedCost.oneYearOldHeiferPurchaseValue,
-            numberOfWeanedHeiferCalves:
-              response.data.cattleFixedCost.numberOfWeanedHeiferCalves,
-            weanedHeiferCalvesPurchaseValue:
-              response.data.cattleFixedCost.weanedHeiferCalvesPurchaseValue,
+            overheadCostPerCow: response.data.cattleFixedCost.overheadCostPerCow,
+            numberOfBredHeifers: response.data.cattleFixedCost.numberOfBredHeifers,
+            bredHeiferPurchaseValue: response.data.cattleFixedCost.bredHeiferPurchaseValue,
+            numberOfOneYearOldHeifers: response.data.cattleFixedCost.numberOfOneYearOldHeifers,
+            OneYearOldHeiferPurchaseValue: response.data.cattleFixedCost.oneYearOldHeiferPurchaseValue,
+            numberOfWeanedHeiferCalves:response.data.cattleFixedCost.numberOfWeanedHeiferCalves,
+            weanedHeiferCalvesPurchaseValue: response.data.cattleFixedCost.weanedHeiferCalvesPurchaseValue,
 
             farmShopAndGeneralRoadsInitialInvestment:
               response.data.facilitiesAndBuildingsFixedCost
@@ -479,6 +498,15 @@ const InputDialog: React.FC<InputDialogProps> = ({
   }
 
   const textFields = [
+    //Financial Assumptions
+    { name: 'shortTermInterestRate', label: 'Short Term Interest Rate(%)' },
+    { name: 'propertyTaxRate', label: 'Property Tax Rate(%)' },
+    { name: 'propertyInsuranceRate', label: 'Property Insurance Rate(%)' },
+    { name: 'buildingAndStructuresInsuranceCoverageRequired', label: 'Building And Structures Insurance Coverage Required(%)' },
+    { name: 'longTermInterestRate', label: 'Long Term Interest Rate(%)' },
+    { name: 'livestockInsuranceRate', label: 'Livestock Insurance Rate(%)' },
+    { name: 'machineryAndEquipmentInsuranceRate', label: 'Machinery and Equipment Insurance Rate(%)' },
+
     // Cattle Fixed Cost
     { name: 'cowPurchaseValue', label: 'Cow Purchase Value($/Head)' },
     { name: 'overheadCostPerCow', label: 'Overhead Cost Per Cow' },
@@ -731,33 +759,36 @@ const InputDialog: React.FC<InputDialogProps> = ({
 
   const detailedMachineryFixedCostsFields = machineryFields
   const detailedMachineryFixedCosts = myDetailedMachineryFixedCosts
-  // const facilitiesAndBuildingsFixedCostFields = facilitiesAndBuildingsFields
+
+  // First 7 fields are "financial assumptions"
+  const financialAssumptionsFields = textFields.slice(0, 7);
+
+  // The rest are "fixed cost" fields
+  const fixedCostFields = textFields.slice(7);
 
   return (
-    <Dialog open={open} onClose={handleClose} maxWidth='sm' fullWidth>
+    <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
       <DialogTitle>Enter Your Inputs</DialogTitle>
       <DialogContent>
-        <DialogContentText>
-          Please enter your inputs for the Dairy Enterprise Budget Model.
-        </DialogContentText>
-        <form
-          onSubmit={onSubmit}
-          style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}
-        >
-          {textFields.map(field => (
+        {/* Wrap everything in a form to keep onSubmit as before */}
+        <form onSubmit={onSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+  
+          {/* Section for Financial Assumptions */}
+          <DialogContentText style={{ color: 'red' }}>
+            <strong>Please enter the i/ps for financial assumptions</strong>
+          </DialogContentText>
+          {financialAssumptionsFields.map((field) => (
             <div key={field.name}>
-              {/* Display the error message if it exists */}
               {errors[field.name] && (
                 <div style={{ color: 'red', marginBottom: '4px' }}>
                   {errors[field.name]}
                 </div>
               )}
-
               <TextField
-                margin='dense'
+                margin="dense"
                 name={field.name}
                 label={field.label}
-                type='number'
+                type="number"
                 fullWidth
                 required
                 value={userInputs[field.name as keyof UserInputs]}
@@ -770,51 +801,80 @@ const InputDialog: React.FC<InputDialogProps> = ({
               />
             </div>
           ))}
-
+  
+          {/* Section for Fixed Costs */}
+          <DialogContentText style={{ color: 'red' }}>
+            <strong>Please enter your inputs for the Fixed Costs Sections.</strong>
+          </DialogContentText>
+          {fixedCostFields.map((field) => (
+            <div key={field.name}>
+              {errors[field.name] && (
+                <div style={{ color: 'red', marginBottom: '4px' }}>
+                  {errors[field.name]}
+                </div>
+              )}
+              <TextField
+                margin="dense"
+                name={field.name}
+                label={field.label}
+                type="number"
+                fullWidth
+                required
+                value={userInputs[field.name as keyof UserInputs]}
+                onChange={handleChange}
+                inputProps={
+                  detailedMachineryFixedCostsFields.includes(field.name)
+                    ? { min: 1, max: 12 }
+                    : {}
+                }
+              />
+            </div>
+          ))}
+  
+          {/* Machinery Estimate Checkbox & Additional Fields */}
           <FormControlLabel
             control={
               <Checkbox
                 checked={useTotalEstimate}
-                onChange={event => {
-                  const isChecked = event.target.checked
-                  setUseTotalEstimate(isChecked)
-                  setUserInputs(prevInputs => ({
+                onChange={(event) => {
+                  const isChecked = event.target.checked;
+                  setUseTotalEstimate(isChecked);
+                  setUserInputs((prevInputs) => ({
                     ...prevInputs,
-                    isDetailedMachineryCosts: !isChecked // Toggle based on checkbox
-                  }))
+                    isDetailedMachineryCosts: !isChecked,
+                  }));
                 }}
-                color='primary'
+                color="primary"
               />
             }
-            label='Use Total Machinery Fixed Costs Estimate'
+            label="Use Total Machinery Fixed Costs Estimate"
             style={{ alignSelf: 'center' }}
           />
-
+  
           {useTotalEstimate ? (
             <TextField
-              margin='dense'
-              name='machineryFixedCostTotalEstimate'
-              label='Machinery Fixed Cost Total Estimate'
-              type='number'
+              margin="dense"
+              name="machineryFixedCostTotalEstimate"
+              label="Machinery Fixed Cost Total Estimate"
+              type="number"
               fullWidth
               required
               value={userInputs.machineryFixedCostTotalEstimate}
               onChange={handleChange}
             />
           ) : (
-            detailedMachineryFixedCosts.map(field => (
+            detailedMachineryFixedCosts.map((field) => (
               <div key={field.name}>
                 {errors[field.name] && (
                   <div style={{ color: 'red', marginBottom: '4px' }}>
                     {errors[field.name]}
                   </div>
                 )}
-
                 <TextField
-                  margin='dense'
+                  margin="dense"
                   name={field.name}
                   label={field.label}
-                  type='number'
+                  type="number"
                   fullWidth
                   required
                   value={
@@ -825,15 +885,118 @@ const InputDialog: React.FC<InputDialogProps> = ({
               </div>
             ))
           )}
-
+  
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>
-            <Button type='submit'>Submit</Button>
+            {/* Keep type='submit' so the form triggers onSubmit */}
+            <Button type="submit">Submit</Button>
           </DialogActions>
         </form>
       </DialogContent>
     </Dialog>
-  )
+  );   
+
+  // return (
+  //   <Dialog open={open} onClose={handleClose} maxWidth='sm' fullWidth>
+  //     <DialogTitle>Enter Your Inputs</DialogTitle>
+  //     <DialogContent>
+  //       <DialogContentText>
+  //         Please enter your inputs for the Fixed Costs Sections.
+  //       </DialogContentText>
+  //       <form
+  //         onSubmit={onSubmit}
+  //         style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}
+  //       >
+  //         {textFields.map(field => (
+  //           <div key={field.name}>
+  //             {/* Display the error message if it exists */}
+  //             {errors[field.name] && (
+  //               <div style={{ color: 'red', marginBottom: '4px' }}>
+  //                 {errors[field.name]}
+  //               </div>
+  //             )}
+
+  //             <TextField
+  //               margin='dense'
+  //               name={field.name}
+  //               label={field.label}
+  //               type='number'
+  //               fullWidth
+  //               required
+  //               value={userInputs[field.name as keyof UserInputs]}
+  //               onChange={handleChange}
+  //               inputProps={
+  //                 detailedMachineryFixedCostsFields.includes(field.name)
+  //                   ? { min: 1, max: 12 }
+  //                   : {}
+  //               }
+  //             />
+  //           </div>
+  //         ))}
+
+  //         <FormControlLabel
+  //           control={
+  //             <Checkbox
+  //               checked={useTotalEstimate}
+  //               onChange={event => {
+  //                 const isChecked = event.target.checked
+  //                 setUseTotalEstimate(isChecked)
+  //                 setUserInputs(prevInputs => ({
+  //                   ...prevInputs,
+  //                   isDetailedMachineryCosts: !isChecked // Toggle based on checkbox
+  //                 }))
+  //               }}
+  //               color='primary'
+  //             />
+  //           }
+  //           label='Use Total Machinery Fixed Costs Estimate'
+  //           style={{ alignSelf: 'center' }}
+  //         />
+
+  //         {useTotalEstimate ? (
+  //           <TextField
+  //             margin='dense'
+  //             name='machineryFixedCostTotalEstimate'
+  //             label='Machinery Fixed Cost Total Estimate'
+  //             type='number'
+  //             fullWidth
+  //             required
+  //             value={userInputs.machineryFixedCostTotalEstimate}
+  //             onChange={handleChange}
+  //           />
+  //         ) : (
+  //           detailedMachineryFixedCosts.map(field => (
+  //             <div key={field.name}>
+  //               {errors[field.name] && (
+  //                 <div style={{ color: 'red', marginBottom: '4px' }}>
+  //                   {errors[field.name]}
+  //                 </div>
+  //               )}
+
+  //               <TextField
+  //                 margin='dense'
+  //                 name={field.name}
+  //                 label={field.label}
+  //                 type='number'
+  //                 fullWidth
+  //                 required
+  //                 value={
+  //                   userInputs.detailedMachineryFixedCosts?.[field.name] ?? ''
+  //                 }
+  //                 onChange={handleDetailedChange}
+  //               />
+  //             </div>
+  //           ))
+  //         )}
+
+  //         <DialogActions>
+  //           <Button onClick={handleClose}>Cancel</Button>
+  //           <Button type='submit'>Submit</Button>
+  //         </DialogActions>
+  //       </form>
+  //     </DialogContent>
+  //   </Dialog>
+  // )
 }
 
 export default InputDialog
