@@ -1,20 +1,9 @@
 import { Box, Button, Container, TextField, Typography } from '@mui/material'
 import InputDialog from './InputDialog'
-import InputFinancialAssumption from '../FinancialAssumptions/InputFinancialAssumption'
 
 import { useEffect, useState } from 'react'
 import { useAuth } from 'src/context/AuthContext'
 import axios from 'axios'
-
-interface FinancialAssumptionInputs {
-  shortTermInterestRate: number
-  longTermInterestRate: number
-  propertyTaxRate: number
-  livestockInsuranceRate: number
-  propertyInsuranceRate: number
-  machineryEquipmentInsuranceRate: number
-  buildingStructuresInsuranceCoverage: number
-}
 
 interface FixedCostsType {
   totalCattleFixedCost: number
@@ -40,7 +29,6 @@ const FixedCosts = () => {
   })
   const [open, setOpen] = useState(false)
 
-  const [openFinancialAssumption, setOpenFinancialAssumption] = useState(false)
   useEffect(() => {
     if(!email) return;
 
@@ -76,8 +64,6 @@ const FixedCosts = () => {
 
   const handleDialogOpen = () => setOpen(true)
   const handleDialogClose = () => setOpen(false)
-  const handleFinancialAssumptionOpen = () => setOpenFinancialAssumption(true)
-  const handleFinancialAssumptionClose = () => setOpenFinancialAssumption(false)
 
   const handleSubmit = async (userInputs: any) => {
     try {
@@ -86,6 +72,15 @@ const FixedCosts = () => {
         userInputs.detailedMachineryFixedCosts
       )
       const transformedInputs = {
+        financialAssumptions: {
+          shortTermInterestRate: userInputs.shortTermInterestRate,
+          propertyTaxRate: userInputs.propertyTaxRate,
+          propertyInsuranceRate: userInputs.propertyInsuranceRate,
+          buildingAndStructuresInsuranceCoverageRequired: userInputs.buildingAndStructuresInsuranceCoverageRequired,
+          longTermInterestRate: userInputs.longTermInterestRate,
+          livestockInsuranceRate: userInputs.livestockInsuranceRate,
+          machineryAndEquipmentInsuranceRate: userInputs.machineryAndEquipmentInsuranceRate,
+        },
         cattleFixedCost: {
           cowPurchaseValue: userInputs.cowPurchaseValue,
           overheadCostPerCow: userInputs.overheadCostPerCow,
@@ -151,22 +146,14 @@ const FixedCosts = () => {
             userInputs.otherFacilitiesAndBuildings2YearsOfUsefulLife
         },
         wasteManagementFixedCosts: {
-          wasteStoragePondInitialInvestment:
-            userInputs.wasteStoragePondInitialInvestment,
-          wasteStoragePondYearsOfUsefulLife:
-            userInputs.wasteStoragePondYearsOfUsefulLife,
-          compactClayLinerInitialInvestment:
-            userInputs.compactClayLinerInitialInvestment,
-          compactClayLinerYearsOfUsefulLife:
-            userInputs.compactClayLinerYearsOfUsefulLife,
-          monitoringWellsInitialInvestment:
-            userInputs.monitoringWellsInitialInvestment,
-          monitoringWellsYearsOfUsefulLife:
-            userInputs.monitoringWellsYearsOfUsefulLife,
-          solidsSeparatorInitialInvestment:
-            userInputs.solidsSeparatorInitialInvestment,
-          solidsSeparatorYearsOfUsefulLife:
-            userInputs.solidsSeparatorYearsOfUsefulLife,
+          wasteStoragePondInitialInvestment: userInputs.wasteStoragePondInitialInvestment,
+          wasteStoragePondYearsOfUsefulLife:userInputs.wasteStoragePondYearsOfUsefulLife,
+          compactClayLinerInitialInvestment: userInputs.compactClayLinerInitialInvestment,
+          compactClayLinerYearsOfUsefulLife: userInputs.compactClayLinerYearsOfUsefulLife,
+          monitoringWellsInitialInvestment: userInputs.monitoringWellsInitialInvestment,
+          monitoringWellsYearsOfUsefulLife: userInputs.monitoringWellsYearsOfUsefulLife,
+          solidsSeparatorInitialInvestment: userInputs.solidsSeparatorInitialInvestment,
+          solidsSeparatorYearsOfUsefulLife: userInputs.solidsSeparatorYearsOfUsefulLife,
           lagoonPumpInitialInvestment: userInputs.lagoonPumpInitialInvestment,
           lagoonPumpYearsOfUsefulLife: userInputs.lagoonPumpYearsOfUsefulLife,
           pipesInitialInvestment: userInputs.pipesInitialInvestment,
@@ -216,10 +203,8 @@ const FixedCosts = () => {
       if (response && response.data) {
         setDetails({
           totalCattleFixedCost: response.data.totalCattleFixedCost || 0,
-          totalFacilitiesAndBuildingsFixedCost:
-            response.data.totalFacilitiesAndBuildingsFixedCost || 0,
-          totalWasteManagementSystemsFixedCost:
-            response.data.totalWasteManagementSystemsFixedCost || 0,
+          totalFacilitiesAndBuildingsFixedCost: response.data.totalFacilitiesAndBuildingsFixedCost || 0,
+          totalWasteManagementSystemsFixedCost: response.data.totalWasteManagementSystemsFixedCost || 0,
           totalMachineryFixedCost: response.data.totalMachineryFixedCost || 0,
           totalLandFixedCost: response.data.totalLandFixedCost || 0,
           overheadCost: response.data.overheadCost || 0,
@@ -229,14 +214,6 @@ const FixedCosts = () => {
     } catch (error) {
       console.error('Error updating user inputs:', error)
     }
-  }
-
-  const handleFinancialAssumptionSubmit = (
-    inputs: FinancialAssumptionInputs
-  ) => {
-    // Handle the submission of financial assumption inputs here
-    console.log('Financial Assumption Inputs:', inputs)
-    handleFinancialAssumptionClose()
   }
 
   const textFields = [
@@ -303,33 +280,15 @@ const FixedCosts = () => {
             }}
             onClick={handleDialogOpen}
           >
-            Input Fixed Costs
+            Input Financial Assumptions and Fixed Costs
           </Button>
 
-          <Button
-            variant='contained'
-            sx={{
-              bgcolor: '#c8102e',
-              '&:hover': { bgcolor: '#a50f2e' },
-              mt: 2,
-              py: 1.5
-            }}
-            onClick={handleFinancialAssumptionOpen}
-          >
-            Input Financial Assumptions
-          </Button>
         </Box>
       </Container>
       <InputDialog
         open={open}
         handleClose={handleDialogClose}
         handleSubmit={handleSubmit}
-      />
-      <InputFinancialAssumption
-        open={openFinancialAssumption}
-        handleClose={handleFinancialAssumptionClose}
-        handleSubmit={handleFinancialAssumptionSubmit}
-        initialInputs={null}
       />
     </div>
   )
