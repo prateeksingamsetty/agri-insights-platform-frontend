@@ -12,8 +12,8 @@ const AboutPlatform: React.FC = () => {
           <div className='space-y-4 text-gray-700 md:w-1/2'>
             <p>
               This platform is designed to serve as a library of agricultural
-              enterprise models held in one place. Currently there are two
-              commodities on the platform, dairy and tomatoes.
+              enterprise models held in one place. Currently, there are two
+              commodities on the platform, such as dairy and tomatoes.
             </p>
             <p>
               The dairy model provides a basic enterprise budget, a feed
