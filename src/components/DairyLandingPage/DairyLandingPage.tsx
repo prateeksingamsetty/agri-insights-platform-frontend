@@ -27,7 +27,7 @@ const DairyLandingPage: React.FC = () => {
           description={`Unlock the secrets to optimal milk production. Our Feed Composition and Source section explores the science behind effective dairy nutrition. Discover the best feed combinations to ensure your cows receive the essential nutrients they need for peak performance. Explore diverse feed sources and their unique benefits, while optimizing costs and promoting animal welfare.`}
           buttonText='Feed Composition'
           imageSrc='/milkcan.jpg'
-          href='/dsairyFeedModel'
+          href='/dairyFeedModel'
         />
 
         <Section
