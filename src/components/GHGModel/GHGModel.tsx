@@ -7,6 +7,7 @@ import InputDialog from './InputDialog';
 import FeedAndEnteric from './FeedAndEntericEmissions/FeedAndEnteric';
 import Trucking from './TruckingEmissions/Trucking';
 import { useAuth } from 'src/context/AuthContext';
+import EnergyFootprint from './EnergyFootprint/EnergyFootprint';
 
 const GHG = () => {
   const { email, loggedIn } = useAuth();
@@ -104,6 +105,8 @@ const GHG = () => {
             totalEntericEmissions: emissionData.totalEntericEmissions,
             totalEntericEmissionsPerFPCM: emissionData.totalEntericEmissionsPerFPCM
           }} />
+
+          <EnergyFootprint/>
 
           <Trucking data={{
             ghgTruckingFootprint: emissionData.ghgTruckingFootprint,
