@@ -15,7 +15,7 @@ const DairyLandingPage: React.FC = () => {
       {/* Content Sections */}
       <div className='mx-auto max-w-6xl rounded-lg bg-gray-100 p-12 shadow-lg'>
         <Section
-          title='Enterprise Budget Model'
+          title='Enterprisee Budgett Modell'
           description={`Craft a data-driven roadmap for your dairy's success. Our Enterprise Budget Model empowers you to forecast costs, project revenue, and identify areas for optimization. Gain valuable insights into your operation's financial health and make informed decisions that maximize profitability.`}
           buttonText='Enterprise Budget'
           imageSrc='/enterprise.jpg'
