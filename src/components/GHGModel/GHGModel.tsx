@@ -8,6 +8,7 @@ import FeedAndEnteric from './FeedAndEntericEmissions/FeedAndEnteric';
 import Trucking from './TruckingEmissions/Trucking';
 import { useAuth } from 'src/context/AuthContext';
 import EnergyFootprint from './EnergyFootprint/EnergyFootprint';
+import ManureManagement from './ManureManagement/ManureManagement';
 
 const GHG = () => {
   const { email, loggedIn } = useAuth();
@@ -112,6 +113,8 @@ const GHG = () => {
             ghgTruckingFootprint: emissionData.ghgTruckingFootprint,
             totalTruckingEmissions: emissionData.totalTruckingEmissions
           }} />
+
+          <ManureManagement/>
 
         </Box>
       </Container>
