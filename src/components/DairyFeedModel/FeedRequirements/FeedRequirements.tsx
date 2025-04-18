@@ -66,11 +66,12 @@ interface FeedRequirementsType {
   // Soybean Meal 48
   soybeanMeal48TonsRequired: number
 
-  // Custom Feed Mix
-  customFeedMixTonsRequired: number
+  // Soy Hulls
+  soyHullsTonsRequired: number
 
-  // Custom Mineral Mix
-  customMineralMixTonsRequired: number
+  // Custom Grain Mix
+  customGrainMixTonsRequired: number
+
 }
 
 
@@ -175,14 +176,14 @@ interface RaisedForageType {
   soybeanMeal48CostOfCommodity: number
   soybeanMeal48CostOfTrucking: number
   purchasedSoybeanMeal48TotalCost: number
-  customFeedMixTonsToBePurchased: number
-  customFeedMixCostOfCommodity: number
-  customFeedMixCostOfTrucking: number
-  purchasedCustomFeedMixTotalCost: number
-  customMineralMixTonsToBePurchased: number
-  customMineralMixCostOfCommodity: number
-  customMineralMixCostOfTrucking: number
-  purchasedCustomMineralMixTotalCost: number
+  soyHullsTonsToBePurchased: number
+  soyHullsCostOfCommodity: number
+  soyHullsCostOfTrucking: number
+  purchasedSoyHullsTotalCost: number
+  customGrainMixTonsToBePurchased: number
+  customGrainMixCostOfCommodity: number
+  customGrainMixCostOfTrucking: number
+  purchasedCustomGrainMixTotalCost: number
 
   // Grown Forage Trucking Cost
   cornSilageGrownForageTruckingCost: number
@@ -249,13 +250,12 @@ const FeedRequirements = () => {
     // Soybean Meal 48
     soybeanMeal48TonsRequired: 0,
 
-    // Custom Feed Mix
-    customFeedMixTonsRequired: 0,
+    // Soy Hulls
+    soyHullsTonsRequired: 0,
 
-    // Custom Mineral Mix
-    customMineralMixTonsRequired: 0
+    // Custom Grain Mix
+    customGrainMixTonsRequired: 0,
 
-    
   })
 
   const [detailsforage, setDetailsforage] = useState<RaisedForageType>({
@@ -360,14 +360,14 @@ const FeedRequirements = () => {
     soybeanMeal48CostOfCommodity: 0,
     soybeanMeal48CostOfTrucking: 0,
     purchasedSoybeanMeal48TotalCost: 0,
-    customFeedMixTonsToBePurchased: 0,
-    customFeedMixCostOfCommodity: 0,
-    customFeedMixCostOfTrucking: 0,
-    purchasedCustomFeedMixTotalCost: 0,
-    customMineralMixTonsToBePurchased: 0,
-    customMineralMixCostOfCommodity: 0,
-    customMineralMixCostOfTrucking: 0,
-    purchasedCustomMineralMixTotalCost: 0,
+    soyHullsTonsToBePurchased: 0,
+    soyHullsCostOfCommodity: 0,
+    soyHullsCostOfTrucking: 0,
+    purchasedSoyHullsTotalCost: 0,
+    customGrainMixTonsToBePurchased: 0,
+    customGrainMixCostOfCommodity: 0,
+    customGrainMixCostOfTrucking: 0,
+    purchasedCustomGrainMixTotalCost: 0,
 
     // Grown Forage Trucking Cost
     cornSilageGrownForageTruckingCost: 0,
@@ -469,13 +469,14 @@ const FeedRequirements = () => {
           soybeanMeal48TonsRequired:
             response.data.soybeanMeal48TonsRequired || 0,
 
-          // Custom Feed Mix
-          customFeedMixTonsRequired:
-            response.data.customFeedMixTonsRequired || 0,
+          // Soy Hulls
+          soyHullsTonsRequired:
+          response.data.soyHullsTonsRequired || 0,
 
-          // Custom Mineral Mix
-          customMineralMixTonsRequired:
-            response.data.customMineralMixTonsRequired || 0
+          // Custom Grain Mix
+          customGrainMixTonsRequired:
+            response.data.customGrainMixTonsRequired || 0,
+
         })
 
 
@@ -653,22 +654,22 @@ const FeedRequirements = () => {
             response.data.soybeanMeal48CostOfTrucking || 0,
           purchasedSoybeanMeal48TotalCost:
             response.data.purchasedSoybeanMeal48TotalCost || 0,
-          customFeedMixTonsToBePurchased:
-            response.data.customFeedMixTonsToBePurchased || 0,
-          customFeedMixCostOfCommodity:
-            response.data.customFeedMixCostOfCommodity || 0,
-          customFeedMixCostOfTrucking:
-            response.data.customFeedMixCostOfTrucking || 0,
-          purchasedCustomFeedMixTotalCost:
-            response.data.purchasedCustomFeedMixTotalCost || 0,
-          customMineralMixTonsToBePurchased:
-            response.data.customMineralMixTonsToBePurchased || 0,
-          customMineralMixCostOfCommodity:
-            response.data.customMineralMixCostOfCommodity || 0,
-          customMineralMixCostOfTrucking:
-            response.data.customMineralMixCostOfTrucking || 0,
-          purchasedCustomMineralMixTotalCost:
-            response.data.purchasedCustomMineralMixTotalCost || 0,
+          soyHullsTonsToBePurchased:
+            response.data.soyHullsTonsToBePurchased || 0,
+          soyHullsCostOfCommodity:
+            response.data.soyHullsCostOfCommodity || 0,
+          soyHullsCostOfTrucking:
+            response.data.soyHullsCostOfTrucking || 0,
+          purchasedSoyHullsTotalCost:
+            response.data.purchasedSoyHullsTotalCost || 0,
+          customGrainMixTonsToBePurchased:
+            response.data.customGrainMixTonsToBePurchased || 0,
+          customGrainMixCostOfCommodity:
+            response.data.customGrainMixCostOfCommodity || 0,
+          customGrainMixCostOfTrucking:
+            response.data.customGrainMixCostOfTrucking || 0,
+          purchasedCustomGrainMixTotalCost:
+            response.data.purchasedCustomGrainMixTotalCost || 0,
 
           // Grown Forage Trucking Cost
           cornSilageGrownForageTruckingCost:
@@ -757,14 +758,14 @@ const FeedRequirements = () => {
             userInputs.milkingHerdSoybeanMeal48LbsAsFedPerDay,
           milkingHerdSoybeanMeal48DaysOnFeed:
             userInputs.milkingHerdSoybeanMeal48DaysOnFeed,
-          milkingHerdCustomFeedMixLbsAsFedPerDay:
-            userInputs.milkingHerdCustomFeedMixLbsAsFedPerDay,
-          milkingHerdCustomFeedMixDaysOnFeed:
-            userInputs.milkingHerdCustomFeedMixDaysOnFeed,
-          milkingHerdCustomMineralMixLbsAsFedPerDay:
-            userInputs.milkingHerdCustomMineralMixLbsAsFedPerDay,
-          milkingHerdCustomMineralMixDaysOnFeed:
-            userInputs.milkingHerdCustomMineralMixDaysOnFeed
+          milkingHerdSoyHullsLbsAsFedPerDay:
+            userInputs.milkingHerdSoyHullsLbsAsFedPerDay,
+          milkingHerdSoyHullsDaysOnFeed:
+            userInputs.milkingHerdSoyHullsDaysOnFeed,  
+          milkingHerdCustomGrainMixLbsAsFedPerDay:
+            userInputs.milkingHerdCustomGrainMixLbsAsFedPerDay,
+          milkingHerdCustomGrainMixDaysOnFeed:
+            userInputs.milkingHerdCustomGrainMixDaysOnFeed,
         },
         dryHerd: {
           dryHerdCornSilageLbsAsFedPerDay:
@@ -819,14 +820,14 @@ const FeedRequirements = () => {
             userInputs.dryHerdSoybeanMeal48LbsAsFedPerDay,
           dryHerdSoybeanMeal48DaysOnFeed:
             userInputs.dryHerdSoybeanMeal48DaysOnFeed,
-          dryHerdCustomFeedMixLbsAsFedPerDay:
-            userInputs.dryHerdCustomFeedMixLbsAsFedPerDay,
-          dryHerdCustomFeedMixDaysOnFeed:
-            userInputs.dryHerdCustomFeedMixDaysOnFeed,
-          dryHerdCustomMineralMixLbsAsFedPerDay:
-            userInputs.dryHerdCustomMineralMixLbsAsFedPerDay,
-          dryHerdCustomMineralMixDaysOnFeed:
-            userInputs.dryHerdCustomMineralMixDaysOnFeed
+          dryHerdSoyHullsLbsAsFedPerDay:
+            userInputs.dryHerdSoyHullsLbsAsFedPerDay,
+          dryHerdSoyHullsDaysOnFeed:
+            userInputs.dryHerdSoyHullsDaysOnFeed,
+          dryHerdCustomGrainMixLbsAsFedPerDay:
+            userInputs.dryHerdCustomGrainMixLbsAsFedPerDay,
+          dryHerdCustomGrainMixDaysOnFeed:
+            userInputs.dryHerdCustomGrainMixDaysOnFeed,
         },
         bredHeifers: {
           bredHeifersCornSilageLbsAsFedPerDay:
@@ -885,14 +886,14 @@ const FeedRequirements = () => {
             userInputs.bredHeifersSoybeanMeal48LbsAsFedPerDay,
           bredHeifersSoybeanMeal48DaysOnFeed:
             userInputs.bredHeifersSoybeanMeal48DaysOnFeed,
-          bredHeifersCustomFeedMixLbsAsFedPerDay:
-            userInputs.bredHeifersCustomFeedMixLbsAsFedPerDay,
-          bredHeifersCustomFeedMixDaysOnFeed:
-            userInputs.bredHeifersCustomFeedMixDaysOnFeed,
-          bredHeifersCustomMineralMixLbsAsFedPerDay:
-            userInputs.bredHeifersCustomMineralMixLbsAsFedPerDay,
-          bredHeifersCustomMineralMixDaysOnFeed:
-            userInputs.bredHeifersCustomMineralMixDaysOnFeed
+          bredHeifersSoyHullsLbsAsFedPerDay:
+            userInputs.bredHeifersSoyHullsLbsAsFedPerDay,
+          bredHeifersSoyHullsDaysOnFeed:
+            userInputs.bredHeifersSoyHullsDaysOnFeed,
+          bredHeifersCustomGrainMixLbsAsFedPerDay:
+            userInputs.bredHeifersCustomGrainMixLbsAsFedPerDay,
+          bredHeifersCustomGrainMixDaysOnFeed:
+            userInputs.bredHeifersCustomGrainMixDaysOnFeed,
         },
         youngHeifers: {
           youngHeifersCornSilageLbsAsFedPerDay:
@@ -951,14 +952,14 @@ const FeedRequirements = () => {
             userInputs.youngHeifersSoybeanMeal48LbsAsFedPerDay,
           youngHeifersSoybeanMeal48DaysOnFeed:
             userInputs.youngHeifersSoybeanMeal48DaysOnFeed,
-          youngHeifersCustomFeedMixLbsAsFedPerDay:
-            userInputs.youngHeifersCustomFeedMixLbsAsFedPerDay,
-          youngHeifersCustomFeedMixDaysOnFeed:
-            userInputs.youngHeifersCustomFeedMixDaysOnFeed,
-          youngHeifersCustomMineralMixLbsAsFedPerDay:
-            userInputs.youngHeifersCustomMineralMixLbsAsFedPerDay,
-          youngHeifersCustomMineralMixDaysOnFeed:
-            userInputs.youngHeifersCustomMineralMixDaysOnFeed
+          youngHeifersSoyHullsLbsAsFedPerDay:
+            userInputs.youngHeifersSoyHullsLbsAsFedPerDay,
+          youngHeifersSoyHullsDaysOnFeed:
+            userInputs.youngHeifersSoyHullsDaysOnFeed,
+          youngHeifersCustomGrainMixLbsAsFedPerDay:
+            userInputs.youngHeifersCustomGrainMixLbsAsFedPerDay,
+          youngHeifersCustomGrainMixDaysOnFeed:
+            userInputs.youngHeifersCustomGrainMixDaysOnFeed,
         },
         calves: {
           calvesMilkReplacerLbsAsFedPerDay:
@@ -1090,15 +1091,15 @@ const FeedRequirements = () => {
           soybeanMealAvgPurchasedFeedMilesTruckedToDairy: userInputs.soybeanMealAvgPurchasedFeedMilesTruckedToDairy,
           soybeanMealAvgGrownForageMilesTruckedToDairy: userInputs.soybeanMealAvgGrownForageMilesTruckedToDairy
         },
-        customFeedMixTransportAndCost: {
-          customFeedMixCostOfCommodityPerTon: userInputs.customFeedMixCostOfCommodityPerTon,
-          customFeedMixAvgPurchasedFeedMilesTruckedToDairy: userInputs.customFeedMixAvgPurchasedFeedMilesTruckedToDairy,
-          customFeedMixAvgGrownForageMilesTruckedToDairy: userInputs.customFeedMixAvgGrownForageMilesTruckedToDairy
+        soyHullsTransportAndCost: {
+          soyHullsCostOfCommodityPerTon: userInputs.soyHullsCostOfCommodityPerTon,
+          soyHullsAvgPurchasedFeedMilesTruckedToDairy: userInputs.soyHullsAvgPurchasedFeedMilesTruckedToDairy,
+          soyHullsAvgGrownForageMilesTruckedToDairy: userInputs.soyHullsAvgGrownForageMilesTruckedToDairy
         },
-        customMineralMixTransportAndCost: {
-          customMineralMixCostOfCommodityPerTon: userInputs.customMineralMixCostOfCommodityPerTon,
-          customMineralMixAvgPurchasedFeedMilesTruckedToDairy: userInputs.customMineralMixAvgPurchasedFeedMilesTruckedToDairy,
-          customMineralMixAvgGrownForageMilesTruckedToDairy: userInputs.customMineralMixAvgGrownForageMilesTruckedToDairy
+        customGrainMixTransportAndCost: {
+          customGrainMixCostOfCommodityPerTon: userInputs.customGrainMixCostOfCommodityPerTon,
+          customGrainMixAvgPurchasedFeedMilesTruckedToDairy: userInputs.customGrainMixAvgPurchasedFeedMilesTruckedToDairy,
+          customGrainMixAvgGrownForageMilesTruckedToDairy: userInputs.customGrainMixAvgGrownForageMilesTruckedToDairy
         }
 }
 
@@ -1179,13 +1180,14 @@ const FeedRequirements = () => {
           soybeanMeal48TonsRequired:
             response.data.soybeanMeal48TonsRequired || 0,
 
-          // Custom Feed Mix
-          customFeedMixTonsRequired:
-            response.data.customFeedMixTonsRequired || 0,
+          // Soy Hulls
+          soyHullsTonsRequired:
+            response.data.soyHullsTonsRequired || 0,
 
-          // Custom Mineral Mix
-          customMineralMixTonsRequired:
-            response.data.customMineralMixTonsRequired || 0
+          // Custom Grain Mix
+          customGrainMixTonsRequired:
+            response.data.customGrainMixTonsRequired || 0,
+
         })
 
         
@@ -1339,22 +1341,20 @@ const FeedRequirements = () => {
         value: details.soybeanMeal48TonsRequired
       }
     ],
-
-    // Custom Feed Mix Group
+    // Soy Hulls
     [
       {
-        label: 'Custom Feed Mix Tons Required',
-        value: details.customFeedMixTonsRequired
+        label: 'Soy Hulls Tons Required',
+        value: details.soyHullsTonsRequired
       }
     ],
-
-    // Custom Mineral Mix Group
+    // Custom Grain Mix Group
     [
       {
-        label: 'Custom Mineral Mix Tons Required',
-        value: details.customMineralMixTonsRequired
+        label: 'Custom Grain Mix Tons Required',
+        value: details.customGrainMixTonsRequired
       }
-    ]
+    ],
     
   ]
 
@@ -1577,22 +1577,22 @@ const FeedRequirements = () => {
           ],
           [
             {
-              label: 'Custom Feed Mix',
-              tonsToPurchase: detailsforage.customFeedMixTonsToBePurchased,
-              costOfCommodity: detailsforage.customFeedMixCostOfCommodity,
-              costOfTrucking: detailsforage.customFeedMixCostOfTrucking,
-              totalCost: detailsforage.purchasedCustomFeedMixTotalCost
+              label: 'Soy Hulls',
+              tonsToPurchase: detailsforage.soyHullsTonsToBePurchased,
+              costOfCommodity: detailsforage.soyHullsCostOfCommodity,
+              costOfTrucking: detailsforage.soyHullsCostOfTrucking,
+              totalCost: detailsforage.purchasedSoyHullsTotalCost
             }
           ],
           [
             {
-              label: 'Custom Mineral Mix',
-              tonsToPurchase: detailsforage.customMineralMixTonsToBePurchased,
-              costOfCommodity: detailsforage.customMineralMixCostOfCommodity,
-              costOfTrucking: detailsforage.customMineralMixCostOfTrucking,
-              totalCost: detailsforage.purchasedCustomMineralMixTotalCost
+              label: 'Custom Grain Mix',
+              tonsToPurchase: detailsforage.customGrainMixTonsToBePurchased,
+              costOfCommodity: detailsforage.customGrainMixCostOfCommodity,
+              costOfTrucking: detailsforage.customGrainMixCostOfTrucking,
+              totalCost: detailsforage.purchasedCustomGrainMixTotalCost
             }
-          ]
+          ],
         ]
       }
     ],

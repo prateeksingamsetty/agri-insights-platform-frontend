@@ -43,10 +43,10 @@ interface UserInputs {
   milkingHerdCottonseedHullsDaysOnFeed: number
   milkingHerdSoybeanMeal48LbsAsFedPerDay: number
   milkingHerdSoybeanMeal48DaysOnFeed: number
-  milkingHerdCustomFeedMixLbsAsFedPerDay: number
-  milkingHerdCustomFeedMixDaysOnFeed: number
-  milkingHerdCustomMineralMixLbsAsFedPerDay: number
-  milkingHerdCustomMineralMixDaysOnFeed: number
+  milkingHerdSoyHullsLbsAsFedPerDay: number
+  milkingHerdSoyHullsDaysOnFeed: number
+  milkingHerdCustomGrainMixLbsAsFedPerDay: number
+  milkingHerdCustomGrainMixDaysOnFeed: number
 
   // Dry Herd
   dryHerdCornSilageLbsAsFedPerDay: number
@@ -77,10 +77,10 @@ interface UserInputs {
   dryHerdCottonseedHullsDaysOnFeed: number
   dryHerdSoybeanMeal48LbsAsFedPerDay: number
   dryHerdSoybeanMeal48DaysOnFeed: number
-  dryHerdCustomFeedMixLbsAsFedPerDay: number
-  dryHerdCustomFeedMixDaysOnFeed: number
-  dryHerdCustomMineralMixLbsAsFedPerDay: number
-  dryHerdCustomMineralMixDaysOnFeed: number
+  dryHerdSoyHullsLbsAsFedPerDay: number
+  dryHerdSoyHullsDaysOnFeed: number
+  dryHerdCustomGrainMixLbsAsFedPerDay: number
+  dryHerdCustomGrainMixDaysOnFeed: number
 
   // Bred Heifers
   bredHeifersCornSilageLbsAsFedPerDay: number
@@ -111,10 +111,10 @@ interface UserInputs {
   bredHeifersCottonseedHullsDaysOnFeed: number
   bredHeifersSoybeanMeal48LbsAsFedPerDay: number
   bredHeifersSoybeanMeal48DaysOnFeed: number
-  bredHeifersCustomFeedMixLbsAsFedPerDay: number
-  bredHeifersCustomFeedMixDaysOnFeed: number
-  bredHeifersCustomMineralMixLbsAsFedPerDay: number
-  bredHeifersCustomMineralMixDaysOnFeed: number
+  bredHeifersSoyHullsLbsAsFedPerDay: number
+  bredHeifersSoyHullsDaysOnFeed: number
+  bredHeifersCustomGrainMixLbsAsFedPerDay: number
+  bredHeifersCustomGrainMixDaysOnFeed: number
 
   // Young Heifers
   youngHeifersCornSilageLbsAsFedPerDay: number
@@ -145,10 +145,10 @@ interface UserInputs {
   youngHeifersCottonseedHullsDaysOnFeed: number
   youngHeifersSoybeanMeal48LbsAsFedPerDay: number
   youngHeifersSoybeanMeal48DaysOnFeed: number
-  youngHeifersCustomFeedMixLbsAsFedPerDay: number
-  youngHeifersCustomFeedMixDaysOnFeed: number
-  youngHeifersCustomMineralMixLbsAsFedPerDay: number
-  youngHeifersCustomMineralMixDaysOnFeed: number
+  youngHeifersSoyHullsLbsAsFedPerDay: number
+  youngHeifersSoyHullsDaysOnFeed: number
+  youngHeifersCustomGrainMixLbsAsFedPerDay: number
+  youngHeifersCustomGrainMixDaysOnFeed: number
 
   // Calves
   calvesMilkReplacerLbsAsFedPerDay: number
@@ -202,10 +202,10 @@ const InputDialog: React.FC<InputDialogProps> = ({
     milkingHerdCottonseedHullsDaysOnFeed: 0,
     milkingHerdSoybeanMeal48LbsAsFedPerDay: 0,
     milkingHerdSoybeanMeal48DaysOnFeed: 0,
-    milkingHerdCustomFeedMixLbsAsFedPerDay: 0,
-    milkingHerdCustomFeedMixDaysOnFeed: 0,
-    milkingHerdCustomMineralMixLbsAsFedPerDay: 0,
-    milkingHerdCustomMineralMixDaysOnFeed: 0,
+    milkingHerdSoyHullsLbsAsFedPerDay: 0,
+    milkingHerdSoyHullsDaysOnFeed: 0,
+    milkingHerdCustomGrainMixLbsAsFedPerDay: 0,
+    milkingHerdCustomGrainMixDaysOnFeed: 0,
 
     // Dry Herd
     dryHerdCornSilageLbsAsFedPerDay: 0,
@@ -236,10 +236,10 @@ const InputDialog: React.FC<InputDialogProps> = ({
     dryHerdCottonseedHullsDaysOnFeed: 0,
     dryHerdSoybeanMeal48LbsAsFedPerDay: 0,
     dryHerdSoybeanMeal48DaysOnFeed: 0,
-    dryHerdCustomFeedMixLbsAsFedPerDay: 0,
-    dryHerdCustomFeedMixDaysOnFeed: 0,
-    dryHerdCustomMineralMixLbsAsFedPerDay: 0,
-    dryHerdCustomMineralMixDaysOnFeed: 0,
+    dryHerdSoyHullsLbsAsFedPerDay: 0,
+    dryHerdSoyHullsDaysOnFeed: 0,
+    dryHerdCustomGrainMixLbsAsFedPerDay: 0,
+    dryHerdCustomGrainMixDaysOnFeed: 0,
 
     // Bred Heifers
     bredHeifersCornSilageLbsAsFedPerDay: 0,
@@ -270,10 +270,10 @@ const InputDialog: React.FC<InputDialogProps> = ({
     bredHeifersCottonseedHullsDaysOnFeed: 0,
     bredHeifersSoybeanMeal48LbsAsFedPerDay: 0,
     bredHeifersSoybeanMeal48DaysOnFeed: 0,
-    bredHeifersCustomFeedMixLbsAsFedPerDay: 0,
-    bredHeifersCustomFeedMixDaysOnFeed: 0,
-    bredHeifersCustomMineralMixLbsAsFedPerDay: 0,
-    bredHeifersCustomMineralMixDaysOnFeed: 0,
+    bredHeifersSoyHullsLbsAsFedPerDay: 0,
+    bredHeifersSoyHullsDaysOnFeed: 0,
+    bredHeifersCustomGrainMixLbsAsFedPerDay: 0,
+    bredHeifersCustomGrainMixDaysOnFeed: 0,
 
     // Young Heifers
     youngHeifersCornSilageLbsAsFedPerDay: 0,
@@ -304,10 +304,10 @@ const InputDialog: React.FC<InputDialogProps> = ({
     youngHeifersCottonseedHullsDaysOnFeed: 0,
     youngHeifersSoybeanMeal48LbsAsFedPerDay: 0,
     youngHeifersSoybeanMeal48DaysOnFeed: 0,
-    youngHeifersCustomFeedMixLbsAsFedPerDay: 0,
-    youngHeifersCustomFeedMixDaysOnFeed: 0,
-    youngHeifersCustomMineralMixLbsAsFedPerDay: 0,
-    youngHeifersCustomMineralMixDaysOnFeed: 0,
+    youngHeifersSoyHullsLbsAsFedPerDay: 0,
+    youngHeifersSoyHullsDaysOnFeed: 0,
+    youngHeifersCustomGrainMixLbsAsFedPerDay: 0,
+    youngHeifersCustomGrainMixDaysOnFeed: 0,
 
     // Calves
     calvesMilkReplacerLbsAsFedPerDay: 0,
@@ -397,14 +397,14 @@ const InputDialog: React.FC<InputDialogProps> = ({
             response.data.feedDetails.milkingHerdSoybeanMeal48LbsAsFedPerDay,
           milkingHerdSoybeanMeal48DaysOnFeed:
             response.data.feedDetails.milkingHerdSoybeanMeal48DaysOnFeed,
-          milkingHerdCustomFeedMixLbsAsFedPerDay:
-            response.data.feedDetails.milkingHerdCustomFeedMixLbsAsFedPerDay,
-          milkingHerdCustomFeedMixDaysOnFeed:
-            response.data.feedDetails.milkingHerdCustomFeedMixDaysOnFeed,
-          milkingHerdCustomMineralMixLbsAsFedPerDay:
-            response.data.feedDetails.milkingHerdCustomMineralMixLbsAsFedPerDay,
-          milkingHerdCustomMineralMixDaysOnFeed:
-            response.data.feedDetails.milkingHerdCustomMineralMixDaysOnFeed,
+          milkingHerdSoyHullsLbsAsFedPerDay:
+            response.data.feedDetails.milkingHerdSoyHullsLbsAsFedPerDay,
+          milkingHerdSoyHullsDaysOnFeed:
+            response.data.feedDetails.milkingHerdSoyHullsDaysOnFeed,
+          milkingHerdCustomGrainMixLbsAsFedPerDay:
+            response.data.feedDetails.milkingHerdCustomGrainMixLbsAsFedPerDay,
+          milkingHerdCustomGrainMixDaysOnFeed:
+            response.data.feedDetails.milkingHerdCustomGrainMixDaysOnFeed,
 
           // Dry Herd Variables
           dryHerdCornSilageLbsAsFedPerDay:
@@ -463,14 +463,14 @@ const InputDialog: React.FC<InputDialogProps> = ({
             response.data.feedDetails.dryHerdSoybeanMeal48LbsAsFedPerDay,
           dryHerdSoybeanMeal48DaysOnFeed:
             response.data.feedDetails.dryHerdSoybeanMeal48DaysOnFeed,
-          dryHerdCustomFeedMixLbsAsFedPerDay:
-            response.data.feedDetails.dryHerdCustomFeedMixLbsAsFedPerDay,
-          dryHerdCustomFeedMixDaysOnFeed:
-            response.data.feedDetails.dryHerdCustomFeedMixDaysOnFeed,
-          dryHerdCustomMineralMixLbsAsFedPerDay:
-            response.data.feedDetails.dryHerdCustomMineralMixLbsAsFedPerDay,
-          dryHerdCustomMineralMixDaysOnFeed:
-            response.data.feedDetails.dryHerdCustomMineralMixDaysOnFeed,
+          dryHerdSoyHullsLbsAsFedPerDay:
+            response.data.feedDetails.dryHerdSoyHullsLbsAsFedPerDay,
+          dryHerdSoyHullsDaysOnFeed:
+            response.data.feedDetails.dryHerdSoyHullsDaysOnFeed,
+          dryHerdCustomGrainMixLbsAsFedPerDay:
+            response.data.feedDetails.dryHerdCustomGrainMixLbsAsFedPerDay,
+          dryHerdCustomGrainMixDaysOnFeed:
+            response.data.feedDetails.dryHerdCustomGrainMixDaysOnFeed,
 
           // Bred Heifers Variables
           bredHeifersCornSilageLbsAsFedPerDay:
@@ -529,14 +529,14 @@ const InputDialog: React.FC<InputDialogProps> = ({
             response.data.feedDetails.bredHeifersSoybeanMeal48LbsAsFedPerDay,
           bredHeifersSoybeanMeal48DaysOnFeed:
             response.data.feedDetails.bredHeifersSoybeanMeal48DaysOnFeed,
-          bredHeifersCustomFeedMixLbsAsFedPerDay:
-            response.data.feedDetails.bredHeifersCustomFeedMixLbsAsFedPerDay,
-          bredHeifersCustomFeedMixDaysOnFeed:
-            response.data.feedDetails.bredHeifersCustomFeedMixDaysOnFeed,
-          bredHeifersCustomMineralMixLbsAsFedPerDay:
-            response.data.feedDetails.bredHeifersCustomMineralMixLbsAsFedPerDay,
-          bredHeifersCustomMineralMixDaysOnFeed:
-            response.data.feedDetails.bredHeifersCustomMineralMixDaysOnFeed,
+          bredHeifersSoyHullsLbsAsFedPerDay:
+            response.data.feedDetails.bredHeifersSoyHullsLbsAsFedPerDay,
+          bredHeifersSoyHullsDaysOnFeed:
+            response.data.feedDetails.bredHeifersSoyHullsDaysOnFeed,
+          bredHeifersCustomGrainMixLbsAsFedPerDay:
+            response.data.feedDetails.bredHeifersCustomGrainMixLbsAsFedPerDay,
+          bredHeifersCustomGrainMixDaysOnFeed:
+            response.data.feedDetails.bredHeifersCustomGrainMixDaysOnFeed,
 
           // Young Heifers Variables
           youngHeifersCornSilageLbsAsFedPerDay:
@@ -596,15 +596,14 @@ const InputDialog: React.FC<InputDialogProps> = ({
             response.data.feedDetails.youngHeifersSoybeanMeal48LbsAsFedPerDay,
           youngHeifersSoybeanMeal48DaysOnFeed:
             response.data.feedDetails.youngHeifersSoybeanMeal48DaysOnFeed,
-          youngHeifersCustomFeedMixLbsAsFedPerDay:
-            response.data.feedDetails.youngHeifersCustomFeedMixLbsAsFedPerDay,
-          youngHeifersCustomFeedMixDaysOnFeed:
-            response.data.feedDetails.youngHeifersCustomFeedMixDaysOnFeed,
-          youngHeifersCustomMineralMixLbsAsFedPerDay:
-            response.data.feedDetails
-              .youngHeifersCustomMineralMixLbsAsFedPerDay,
-          youngHeifersCustomMineralMixDaysOnFeed:
-            response.data.feedDetails.youngHeifersCustomMineralMixDaysOnFeed,
+          youngHeifersSoyHullsLbsAsFedPerDay:
+            response.data.feedDetails.youngHeifersSoyHullsLbsAsFedPerDay,
+          youngHeifersSoyHullsDaysOnFeed:
+            response.data.feedDetails.youngHeifersSoyHullsDaysOnFeed,
+          youngHeifersCustomGrainMixLbsAsFedPerDay:
+            response.data.feedDetails.youngHeifersCustomGrainMixLbsAsFedPerDay,
+          youngHeifersCustomGrainMixDaysOnFeed:
+            response.data.feedDetails.youngHeifersCustomGrainMixDaysOnFeed,
 
           // Calves variables
           calvesMilkReplacerLbsAsFedPerDay:
@@ -807,22 +806,22 @@ const InputDialog: React.FC<InputDialogProps> = ({
     ],
     [
       {
-        name: 'milkingHerdCustomFeedMixLbsAsFedPerDay',
-        label: 'Milking Herd Custom Feed Mix Lbs. as-fed per day'
+        name: 'milkingHerdSoyHullsLbsAsFedPerDay',
+        label: 'Milking Herd Soy Hulls Lbs. as-fed per day'
       },
       {
-        name: 'milkingHerdCustomFeedMixDaysOnFeed',
-        label: 'Milking Herd Custom Feed Mix Days on Feed'
+        name: 'milkingHerdSoyHullsDaysOnFeed',
+        label: 'Milking Herd Soy Hulls Days on Feed'
       }
     ],
     [
       {
-        name: 'milkingHerdCustomMineralMixLbsAsFedPerDay',
-        label: 'Milking Herd Custom Mineral Mix Lbs. as-fed per day'
+        name: 'milkingHerdCustomGrainMixLbsAsFedPerDay',
+        label: 'Milking Herd Custom Grain Mix Lbs. as-fed per day'
       },
       {
-        name: 'milkingHerdCustomMineralMixDaysOnFeed',
-        label: 'Milking Herd Custom Mineral Mix Days on Feed'
+        name: 'milkingHerdCustomGrainMixDaysOnFeed',
+        label: 'Milking Herd Custom Grain Mix Days on Feed'
       }
     ],
 
@@ -969,22 +968,22 @@ const InputDialog: React.FC<InputDialogProps> = ({
     ],
     [
       {
-        name: 'dryHerdCustomFeedMixLbsAsFedPerDay',
-        label: 'Dry Herd Custom Feed Mix Lbs. as-fed per day'
+        name: 'dryHerdSoyHullsLbsAsFedPerDay',
+        label: 'Dry Herd Soy Hulls Lbs. as-fed per day'
       },
       {
-        name: 'dryHerdCustomFeedMixDaysOnFeed',
-        label: 'Dry Herd Custom Feed Mix Days on Feed'
+        name: 'dryHerdSoyHullsDaysOnFeed',
+        label: 'Dry Herd Soy Hulls Days on Feed'
       }
     ],
     [
       {
-        name: 'dryHerdCustomMineralMixLbsAsFedPerDay',
-        label: 'Dry Herd Custom Mineral Mix Lbs. as-fed per day'
+        name: 'dryHerdCustomGrainMixLbsAsFedPerDay',
+        label: 'Dry Herd Custom Grain Mix Lbs. as-fed per day'
       },
       {
-        name: 'dryHerdCustomMineralMixDaysOnFeed',
-        label: 'Dry Herd Custom Mineral Mix Days on Feed'
+        name: 'dryHerdCustomGrainMixDaysOnFeed',
+        label: 'Dry Herd Custom Grain Mix Days on Feed'
       }
     ],
 
@@ -1131,22 +1130,22 @@ const InputDialog: React.FC<InputDialogProps> = ({
     ],
     [
       {
-        name: 'bredHeifersCustomFeedMixLbsAsFedPerDay',
-        label: 'Bred Heifers Custom Feed Mix Lbs. as-fed per day'
+        name: 'bredHeifersSoyHullsLbsAsFedPerDay',
+        label: 'Bred Heifers Soy Hulls Lbs. as-fed per day'
       },
       {
-        name: 'bredHeifersCustomFeedMixDaysOnFeed',
-        label: 'Bred Heifers Custom Feed Mix Days on Feed'
+        name: 'bredHeifersSoyHullsDaysOnFeed',
+        label: 'Bred Heifers Soy Hulls Days on Feed'
       }
     ],
     [
       {
-        name: 'bredHeifersCustomMineralMixLbsAsFedPerDay',
-        label: 'Bred Heifers Custom Mineral Mix Lbs. as-fed per day'
+        name: 'bredHeifersCustomGrainMixLbsAsFedPerDay',
+        label: 'Bred Heifers Custom Grain Mix Lbs. as-fed per day'
       },
       {
-        name: 'bredHeifersCustomMineralMixDaysOnFeed',
-        label: 'Bred Heifers Custom Mineral Mix Days on Feed'
+        name: 'bredHeifersCustomGrainMixDaysOnFeed',
+        label: 'Bred Heifers Custom Grain Mix Days on Feed'
       }
     ],
 
@@ -1293,22 +1292,22 @@ const InputDialog: React.FC<InputDialogProps> = ({
     ],
     [
       {
-        name: 'youngHeifersCustomFeedMixLbsAsFedPerDay',
-        label: 'Young Heifers Custom Feed Mix Lbs. as-fed per day'
+        name: 'youngHeifersSoyHullsLbsAsFedPerDay',
+        label: 'Young Heifers Soy Hulls Lbs. as-fed per day'
       },
       {
-        name: 'youngHeifersCustomFeedMixDaysOnFeed',
-        label: 'Young Heifers Custom Feed Mix Days on Feed'
+        name: 'youngHeifersSoyHullsDaysOnFeed',
+        label: 'Young Heifers Soy Hulls Days on Feed'
       }
     ],
     [
       {
-        name: 'youngHeifersCustomMineralMixLbsAsFedPerDay',
-        label: 'Young Heifers Custom Mineral Mix Lbs. as-fed per day'
+        name: 'youngHeifersCustomGrainMixLbsAsFedPerDay',
+        label: 'Young Heifers Custom Grain Mix Lbs. as-fed per day'
       },
       {
-        name: 'youngHeifersCustomMineralMixDaysOnFeed',
-        label: 'Young Heifers Custom Mineral Mix Days on Feed'
+        name: 'youngHeifersCustomGrainMixDaysOnFeed',
+        label: 'Young Heifers Custom Grain Mix Days on Feed'
       }
     ],
 
