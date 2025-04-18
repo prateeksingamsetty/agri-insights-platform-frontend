@@ -50,10 +50,10 @@ interface CombinedInputs {
   milkingHerdCottonseedHullsDaysOnFeed: number;
   milkingHerdSoybeanMeal48LbsAsFedPerDay: number;
   milkingHerdSoybeanMeal48DaysOnFeed: number;
-  milkingHerdCustomFeedMixLbsAsFedPerDay: number;
-  milkingHerdCustomFeedMixDaysOnFeed: number;
-  milkingHerdCustomMineralMixLbsAsFedPerDay: number;
-  milkingHerdCustomMineralMixDaysOnFeed: number;
+  milkingHerdSoyHullsLbsAsFedPerDay: number;
+  milkingHerdSoyHullsDaysOnFeed: number;
+  milkingHerdCustomGrainMixLbsAsFedPerDay: number;
+  milkingHerdCustomGrainMixDaysOnFeed: number;
 
   // Feed Details - Dry Herd
   dryHerdCornSilageLbsAsFedPerDay: number;
@@ -84,10 +84,10 @@ interface CombinedInputs {
   dryHerdCottonseedHullsDaysOnFeed: number;
   dryHerdSoybeanMeal48LbsAsFedPerDay: number;
   dryHerdSoybeanMeal48DaysOnFeed: number;
-  dryHerdCustomFeedMixLbsAsFedPerDay: number;
-  dryHerdCustomFeedMixDaysOnFeed: number;
-  dryHerdCustomMineralMixLbsAsFedPerDay: number;
-  dryHerdCustomMineralMixDaysOnFeed: number;
+  dryHerdSoyHullsLbsAsFedPerDay: number;
+  dryHerdSoyHullsDaysOnFeed: number;
+  dryHerdCustomGrainMixLbsAsFedPerDay: number;
+  dryHerdCustomGrainMixDaysOnFeed: number;
 
   // Feed Details - Bred Heifers
   bredHeifersCornSilageLbsAsFedPerDay: number;
@@ -118,10 +118,10 @@ interface CombinedInputs {
   bredHeifersCottonseedHullsDaysOnFeed: number;
   bredHeifersSoybeanMeal48LbsAsFedPerDay: number;
   bredHeifersSoybeanMeal48DaysOnFeed: number;
-  bredHeifersCustomFeedMixLbsAsFedPerDay: number;
-  bredHeifersCustomFeedMixDaysOnFeed: number;
-  bredHeifersCustomMineralMixLbsAsFedPerDay: number;
-  bredHeifersCustomMineralMixDaysOnFeed: number;
+  bredHeifersSoyHullsLbsAsFedPerDay: number;
+  bredHeifersSoyHullsDaysOnFeed: number;
+  bredHeifersCustomGrainMixLbsAsFedPerDay: number;
+  bredHeifersCustomGrainMixDaysOnFeed: number;
 
   // Feed Details - Young Heifers
   youngHeifersCornSilageLbsAsFedPerDay: number;
@@ -152,10 +152,10 @@ interface CombinedInputs {
   youngHeifersCottonseedHullsDaysOnFeed: number;
   youngHeifersSoybeanMeal48LbsAsFedPerDay: number;
   youngHeifersSoybeanMeal48DaysOnFeed: number;
-  youngHeifersCustomFeedMixLbsAsFedPerDay: number;
-  youngHeifersCustomFeedMixDaysOnFeed: number;
-  youngHeifersCustomMineralMixLbsAsFedPerDay: number;
-  youngHeifersCustomMineralMixDaysOnFeed: number;
+  youngHeifersSoyHullsLbsAsFedPerDay: number;
+  youngHeifersSoyHullsDaysOnFeed: number;
+  youngHeifersCustomGrainMixLbsAsFedPerDay: number;
+  youngHeifersCustomGrainMixDaysOnFeed: number;
 
   // Feed Details - Calves
   calvesMilkReplacerLbsAsFedPerDay: number;
@@ -275,13 +275,13 @@ interface CombinedInputs {
   soybeanMealCostOfCommodityPerTon: number;
   soybeanMealAvgPurchasedFeedMilesTruckedToDairy: number;
 
-  // Custom Feed Mix
-  customFeedMixCostOfCommodityPerTon: number;
-  customFeedMixAvgPurchasedFeedMilesTruckedToDairy: number;
+  // Soy Hulls
+  soyHullsCostOfCommodityPerTon: number;
+  soyHullsAvgPurchasedFeedMilesTruckedToDairy: number;
 
-  // Custom Mineral Mix
-  customMineralMixCostOfCommodityPerTon: number;
-  customMineralMixAvgPurchasedFeedMilesTruckedToDairy: number;
+  // Custom Grain Mix
+  customGrainMixCostOfCommodityPerTon: number;
+  customGrainMixAvgPurchasedFeedMilesTruckedToDairy: number;
 
 }
 
@@ -326,11 +326,11 @@ const CombinedInputDialog: React.FC<InputDialogProps> = ({ open, handleClose, ha
     milkingHerdCottonseedHullsDaysOnFeed: 0,
     milkingHerdSoybeanMeal48LbsAsFedPerDay: 0,
     milkingHerdSoybeanMeal48DaysOnFeed: 0,
-    milkingHerdCustomFeedMixLbsAsFedPerDay: 0,
-    milkingHerdCustomFeedMixDaysOnFeed: 0,
-    milkingHerdCustomMineralMixLbsAsFedPerDay: 0,
-    milkingHerdCustomMineralMixDaysOnFeed: 0,
-  
+    milkingHerdSoyHullsLbsAsFedPerDay: 0,
+    milkingHerdSoyHullsDaysOnFeed: 0,
+    milkingHerdCustomGrainMixLbsAsFedPerDay: 0,
+    milkingHerdCustomGrainMixDaysOnFeed: 0,
+
     // Dry Herd
     dryHerdCornSilageLbsAsFedPerDay: 0,
     dryHerdCornSilageDaysOnFeed: 0,
@@ -360,11 +360,11 @@ const CombinedInputDialog: React.FC<InputDialogProps> = ({ open, handleClose, ha
     dryHerdCottonseedHullsDaysOnFeed: 0,
     dryHerdSoybeanMeal48LbsAsFedPerDay: 0,
     dryHerdSoybeanMeal48DaysOnFeed: 0,
-    dryHerdCustomFeedMixLbsAsFedPerDay: 0,
-    dryHerdCustomFeedMixDaysOnFeed: 0,
-    dryHerdCustomMineralMixLbsAsFedPerDay: 0,
-    dryHerdCustomMineralMixDaysOnFeed: 0,
-  
+    dryHerdSoyHullsLbsAsFedPerDay: 0,
+    dryHerdSoyHullsDaysOnFeed: 0,
+    dryHerdCustomGrainMixLbsAsFedPerDay: 0,
+    dryHerdCustomGrainMixDaysOnFeed: 0,
+
     // Bred Heifers
     bredHeifersCornSilageLbsAsFedPerDay: 0,
     bredHeifersCornSilageDaysOnFeed: 0,
@@ -394,11 +394,11 @@ const CombinedInputDialog: React.FC<InputDialogProps> = ({ open, handleClose, ha
     bredHeifersCottonseedHullsDaysOnFeed: 0,
     bredHeifersSoybeanMeal48LbsAsFedPerDay: 0,
     bredHeifersSoybeanMeal48DaysOnFeed: 0,
-    bredHeifersCustomFeedMixLbsAsFedPerDay: 0,
-    bredHeifersCustomFeedMixDaysOnFeed: 0,
-    bredHeifersCustomMineralMixLbsAsFedPerDay: 0,
-    bredHeifersCustomMineralMixDaysOnFeed: 0,
-  
+    bredHeifersSoyHullsLbsAsFedPerDay: 0,
+    bredHeifersSoyHullsDaysOnFeed: 0,
+    bredHeifersCustomGrainMixLbsAsFedPerDay: 0,
+    bredHeifersCustomGrainMixDaysOnFeed: 0,
+
     // Young Heifers
     youngHeifersCornSilageLbsAsFedPerDay: 0,
     youngHeifersCornSilageDaysOnFeed: 0,
@@ -428,11 +428,11 @@ const CombinedInputDialog: React.FC<InputDialogProps> = ({ open, handleClose, ha
     youngHeifersCottonseedHullsDaysOnFeed: 0,
     youngHeifersSoybeanMeal48LbsAsFedPerDay: 0,
     youngHeifersSoybeanMeal48DaysOnFeed: 0,
-    youngHeifersCustomFeedMixLbsAsFedPerDay: 0,
-    youngHeifersCustomFeedMixDaysOnFeed: 0,
-    youngHeifersCustomMineralMixLbsAsFedPerDay: 0,
-    youngHeifersCustomMineralMixDaysOnFeed: 0,
-  
+    youngHeifersSoyHullsLbsAsFedPerDay: 0,
+    youngHeifersSoyHullsDaysOnFeed: 0,
+    youngHeifersCustomGrainMixLbsAsFedPerDay: 0,
+    youngHeifersCustomGrainMixDaysOnFeed: 0,
+
     // Calves
     calvesMilkReplacerLbsAsFedPerDay: 0,
     calvesMilkReplacerDaysOnFeed: 0,
@@ -443,41 +443,42 @@ const CombinedInputDialog: React.FC<InputDialogProps> = ({ open, handleClose, ha
 
     // TotalCroppingAnnualEconomicCosts
     totalCroppingAnnualEconomicCosts: 0, // Initialize as undefined
-  
+
+
     // Corn Silage
     cornSilageExpectedYieldTonsPerAcre: 0,
     cornSilageHarvestedAcres: 0,
     cornSilageEstimatedTotalOperatingCost: 0,
     cornSilagePercentOfForageFixedCostAllocated: 0,
     cornSilageShrinkLossPercentage: 0,
-  
+
     // Sorghum Silage
     sorghumSilageExpectedYieldTonsPerAcre: 0,
     sorghumSilageHarvestedAcres: 0,
     sorghumSilageEstimatedTotalOperatingCost: 0,
     sorghumSilagePercentOfForageFixedCostAllocated: 0,
     sorghumSilageShrinkLossPercentage: 0,
-  
+
     // Small Grain Silage
     smallGrainSilageExpectedYieldTonsPerAcre: 0,
     smallGrainSilageHarvestedAcres: 0,
     smallGrainSilageEstimatedTotalOperatingCost: 0,
     smallGrainSilagePercentOfForageFixedCostAllocated: 0,
     smallGrainSilageShrinkLossPercentage: 0,
-  
+
     // Grass Hay
     grassHayExpectedYieldTonsPerAcre: 0,
     grassHayHarvestedAcres: 0,
     grassHayEstimatedTotalOperatingCost: 0,
     grassHayPercentOfForageFixedCostAllocated: 0,
     grassHayShrinkLossPercentage: 0,
-  
+
     // Alfalfa Hay Establishment
     alfalfaHayEstablishmentExpectedYieldTonsPerAcre: 0,
     alfalfaHayEstablishmentHarvestedAcres: 0,
     alfalfaHayEstablishmentEstimatedTotalOperatingCost: 0,
     alfalfaHayEstablishmentPercentOfForageFixedCostAllocated: 0,
-  
+
     // Alfalfa Hay Stand
     alfalfaHayStandExpectedYieldTonsPerAcre: 0,
     alfalfaHayStandHarvestedAcres: 0,
@@ -548,14 +549,13 @@ const CombinedInputDialog: React.FC<InputDialogProps> = ({ open, handleClose, ha
     soybeanMealCostOfCommodityPerTon: 0,
     soybeanMealAvgPurchasedFeedMilesTruckedToDairy: 0,
 
-    // Custom Feed Mix
-    customFeedMixCostOfCommodityPerTon: 0,
-    customFeedMixAvgPurchasedFeedMilesTruckedToDairy: 0,
+    // Soy Hulls
+    soyHullsCostOfCommodityPerTon: 0,
+    soyHullsAvgPurchasedFeedMilesTruckedToDairy: 0,
 
-    // Custom Mineral Mix
-    customMineralMixCostOfCommodityPerTon: 0,
-    customMineralMixAvgPurchasedFeedMilesTruckedToDairy: 0,
-
+    // Custom Grain Mix
+    customGrainMixCostOfCommodityPerTon: 0,
+    customGrainMixAvgPurchasedFeedMilesTruckedToDairy: 0,
   };
 
   
@@ -580,8 +580,8 @@ const CombinedInputDialog: React.FC<InputDialogProps> = ({ open, handleClose, ha
         { name: 'WholeCottonseed', label: 'Whole Cottonseed' },
         { name: 'CottonseedHulls', label: 'Cottonseed Hulls' },
         { name: 'SoybeanMeal48', label: 'Soybean Meal 48' },
-        { name: 'CustomFeedMix', label: 'Custom Feed Mix' },
-        { name: 'CustomMineralMix', label: 'Custom Mineral Mix' }
+        { name: 'SoyHulls', label: 'Soy Hulls' },
+        { name: 'CustomGrainMix', label: 'Custom Grain Mix' },
       ]
     },
     dryHerd: {
@@ -601,8 +601,8 @@ const CombinedInputDialog: React.FC<InputDialogProps> = ({ open, handleClose, ha
         { name: 'WholeCottonseed', label: 'Whole Cottonseed' },
         { name: 'CottonseedHulls', label: 'Cottonseed Hulls' },
         { name: 'SoybeanMeal48', label: 'Soybean Meal 48' },
-        { name: 'CustomFeedMix', label: 'Custom Feed Mix' },
-        { name: 'CustomMineralMix', label: 'Custom Mineral Mix' }
+        { name: 'SoyHulls', label: 'Soy Hulls' },
+        { name: 'CustomGrainMix', label: 'Custom Grain Mix' },
       ]
     },
     bredHeifers: {
@@ -622,8 +622,8 @@ const CombinedInputDialog: React.FC<InputDialogProps> = ({ open, handleClose, ha
         { name: 'WholeCottonseed', label: 'Whole Cottonseed' },
         { name: 'CottonseedHulls', label: 'Cottonseed Hulls' },
         { name: 'SoybeanMeal48', label: 'Soybean Meal 48' },
-        { name: 'CustomFeedMix', label: 'Custom Feed Mix' },
-        { name: 'CustomMineralMix', label: 'Custom Mineral Mix' }
+        { name: 'SoyHulls', label: 'Soy Hulls' },
+        { name: 'CustomGrainMix', label: 'Custom Grain Mix' },
       ]
     },
     youngHeifers: {
@@ -643,8 +643,8 @@ const CombinedInputDialog: React.FC<InputDialogProps> = ({ open, handleClose, ha
         { name: 'WholeCottonseed', label: 'Whole Cottonseed' },
         { name: 'CottonseedHulls', label: 'Cottonseed Hulls' },
         { name: 'SoybeanMeal48', label: 'Soybean Meal 48' },
-        { name: 'CustomFeedMix', label: 'Custom Feed Mix' },
-        { name: 'CustomMineralMix', label: 'Custom Mineral Mix' }
+        { name: 'SoyHulls', label: 'Soy Hulls' },
+        { name: 'CustomGrainMix', label: 'Custom Grain Mix' },
       ]
     },
     calves: {
@@ -919,19 +919,19 @@ const CombinedInputDialog: React.FC<InputDialogProps> = ({ open, handleClose, ha
         ]
       },
       {
-        title: 'Custom Feed Mix',
+        title: 'Soy Hulls',
         fields: [
-          { name: 'customFeedMixCostOfCommodityPerTon', label: 'Cost of Commodity Per Ton' },
-          { name: 'customFeedMixAvgPurchasedFeedMilesTruckedToDairy', label: 'Avg Purchased Feed Miles Trucked to Dairy' }
+          { name: 'soyHullsCostOfCommodityPerTon', label: 'Cost of Commodity Per Ton' },
+          { name: 'soyHullsAvgPurchasedFeedMilesTruckedToDairy', label: 'Avg Purchased Feed Miles Trucked to Dairy' },
         ]
       },
       {
-        title: 'Custom Mineral Mix',
+        title: 'Custom Grain Mix',
         fields: [
-          { name: 'customMineralMixCostOfCommodityPerTon', label: 'Cost of Commodity Per Ton' },
-          { name: 'customMineralMixAvgPurchasedFeedMilesTruckedToDairy', label: 'Avg Purchased Feed Miles Trucked to Dairy' }
+          { name: 'customGrainMixCostOfCommodityPerTon', label: 'Cost of Commodity Per Ton' },
+          { name: 'customGrainMixAvgPurchasedFeedMilesTruckedToDairy', label: 'Avg Purchased Feed Miles Trucked to Dairy' }
         ]
-      }
+      },
     ]
   };
 
@@ -1024,8 +1024,8 @@ const CombinedInputDialog: React.FC<InputDialogProps> = ({ open, handleClose, ha
           'wholeCottonseedTransportAndCost',
           'cottonseedHullsTransportAndCost',
           'soybeanMealTransportAndCost',
-          'customFeedMixTransportAndCost',
-          'customMineralMixTransportAndCost'
+          'soyHullsTransportAndCost',
+          'customGrainMixTransportAndCost',
         ];
   
         transportAndCostSections.forEach(section => {
