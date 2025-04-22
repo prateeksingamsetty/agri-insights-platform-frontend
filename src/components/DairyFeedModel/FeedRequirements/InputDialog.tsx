@@ -1334,6 +1334,10 @@ const InputDialog: React.FC<InputDialogProps> = ({
       {
         name: 'weanedHeifersCustomGrainMixDaysOnFeed',
         label: 'Weaned Heifers Custom Grain Mix Days on Feed'
+      },
+      {
+        name: 'youngHeifersCustomGrainMixDaysOnFeed',
+        label: 'Young Heifers Custom Grain Mix Days on Feed'
       }
     ],
 
