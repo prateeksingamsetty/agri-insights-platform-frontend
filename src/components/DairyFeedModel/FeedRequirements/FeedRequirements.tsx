@@ -961,6 +961,12 @@ const FeedRequirements = () => {
           youngHeifersCustomGrainMixDaysOnFeed:
             userInputs.youngHeifersCustomGrainMixDaysOnFeed,
         },
+        weanedHeifers: {
+          weanedHeifersCustomGrainMixLbsAsFedPerDay:
+            userInputs.weanedHeifersCustomGrainMixLbsAsFedPerDay,
+          weanedHeifersCustomGrainMixDaysOnFeed:
+            userInputs.weanedHeifersCustomGrainMixDaysOnFeed,
+        },
         calves: {
           calvesMilkReplacerLbsAsFedPerDay:
             userInputs.calvesMilkReplacerLbsAsFedPerDay,
