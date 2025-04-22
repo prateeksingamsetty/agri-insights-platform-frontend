@@ -157,6 +157,10 @@ interface CombinedInputs {
   youngHeifersCustomGrainMixLbsAsFedPerDay: number;
   youngHeifersCustomGrainMixDaysOnFeed: number;
 
+  // Feed Details - Weaned Heifers
+  weanedHeifersCustomGrainMixLbsAsFedPerDay: number;
+  weanedHeifersCustomGrainMixDaysOnFeed: number;
+
   // Feed Details - Calves
   calvesMilkReplacerLbsAsFedPerDay: number;
   calvesMilkReplacerDaysOnFeed: number;
@@ -433,6 +437,10 @@ const CombinedInputDialog: React.FC<InputDialogProps> = ({ open, handleClose, ha
     youngHeifersCustomGrainMixLbsAsFedPerDay: 0,
     youngHeifersCustomGrainMixDaysOnFeed: 0,
 
+    // Weaned Heifers
+    weanedHeifersCustomGrainMixLbsAsFedPerDay: 0,
+    weanedHeifersCustomGrainMixDaysOnFeed: 0,
+
     // Calves
     calvesMilkReplacerLbsAsFedPerDay: 0,
     calvesMilkReplacerDaysOnFeed: 0,
@@ -627,7 +635,7 @@ const CombinedInputDialog: React.FC<InputDialogProps> = ({ open, handleClose, ha
       ]
     },
     youngHeifers: {
-      title: 'Young Heifers (3-12 Months)',
+      title: 'Young Heifers (6-12 Months)',
       feeds: [
         { name: 'CornSilage', label: 'Corn Silage' },
         { name: 'SorghumSilage', label: 'Sorghum Silage' },
@@ -644,6 +652,12 @@ const CombinedInputDialog: React.FC<InputDialogProps> = ({ open, handleClose, ha
         { name: 'CottonseedHulls', label: 'Cottonseed Hulls' },
         { name: 'SoybeanMeal48', label: 'Soybean Meal 48' },
         { name: 'SoyHulls', label: 'Soy Hulls' },
+        { name: 'CustomGrainMix', label: 'Custom Grain Mix' },
+      ]
+    },
+    weanedHeifers: {
+      title: 'Weaned Heifers (3-6 Months)',
+      feeds: [
         { name: 'CustomGrainMix', label: 'Custom Grain Mix' },
       ]
     },
@@ -975,7 +989,7 @@ const CombinedInputDialog: React.FC<InputDialogProps> = ({ open, handleClose, ha
         const transformedData: CombinedInputs = {} as CombinedInputs;
         
         // Transform herd data
-        const herds = ['milkingHerd', 'dryHerd', 'bredHeifers', 'youngHeifers', 'calves'];
+        const herds = ['milkingHerd', 'dryHerd', 'bredHeifers', 'youngHeifers', 'weanedHeifers', 'calves'];
         herds.forEach(herd => {
           if (response.data[herd]) {
             Object.entries(response.data[herd]).forEach(([key, value]) => {

@@ -150,6 +150,10 @@ interface UserInputs {
   youngHeifersCustomGrainMixLbsAsFedPerDay: number
   youngHeifersCustomGrainMixDaysOnFeed: number
 
+  // Weaned Heifers
+  weanedHeifersCustomGrainMixLbsAsFedPerDay: number
+  weanedHeifersCustomGrainMixDaysOnFeed: number
+
   // Calves
   calvesMilkReplacerLbsAsFedPerDay: number
   calvesMilkReplacerDaysOnFeed: number
@@ -308,6 +312,10 @@ const InputDialog: React.FC<InputDialogProps> = ({
     youngHeifersSoyHullsDaysOnFeed: 0,
     youngHeifersCustomGrainMixLbsAsFedPerDay: 0,
     youngHeifersCustomGrainMixDaysOnFeed: 0,
+
+    // Weaned Heifers
+    weanedHeifersCustomGrainMixLbsAsFedPerDay: 0,
+    weanedHeifersCustomGrainMixDaysOnFeed: 0,
 
     // Calves
     calvesMilkReplacerLbsAsFedPerDay: 0,
@@ -604,6 +612,12 @@ const InputDialog: React.FC<InputDialogProps> = ({
             response.data.feedDetails.youngHeifersCustomGrainMixLbsAsFedPerDay,
           youngHeifersCustomGrainMixDaysOnFeed:
             response.data.feedDetails.youngHeifersCustomGrainMixDaysOnFeed,
+
+          // Weaned Heifers
+          weanedHeifersCustomGrainMixLbsAsFedPerDay:
+            response.data.feedDetails.weanedHeifersCustomGrainMixLbsAsFedPerDay,
+          weanedHeifersCustomGrainMixDaysOnFeed:
+            response.data.feedDetails.weanedHeifersCustomGrainMixDaysOnFeed,
 
           // Calves variables
           calvesMilkReplacerLbsAsFedPerDay:
@@ -1308,6 +1322,18 @@ const InputDialog: React.FC<InputDialogProps> = ({
       {
         name: 'youngHeifersCustomGrainMixDaysOnFeed',
         label: 'Young Heifers Custom Grain Mix Days on Feed'
+      }
+    ],
+
+    //Weaned Heifers
+    [
+      {
+        name: 'weanedHeifersCustomGrainMixLbsAsFedPerDay',
+        label: 'Weaned Heifers Custom Grain Mix Lbs. as-fed per day'
+      },
+      {
+        name: 'weanedHeifersCustomGrainMixDaysOnFeed',
+        label: 'Weaned Heifers Custom Grain Mix Days on Feed'
       }
     ],
 
