@@ -283,10 +283,17 @@ const OperatingCosts = () => {
                 expectedPercentMaleWithSexedSemen:
                   productionDetails.expectedPercentMaleWithSexedSemen,
                 expectedPercentMaleWithConventional:
-                  productionDetails.expectedPercentMaleWithConventional
+                  productionDetails.expectedPercentMaleWithConventional,
+                heifersBredConventionalPercent:
+                  productionDetails.heifersBredConventionalPercent,
+                heifersBredSexedPercent:
+                  productionDetails.heifersBredSexedPercent,
+                avgAgeofFirstCalving:
+                  productionDetails.avgAgeofFirstCalving,
               },
               beefCrossDetails: {
-                beefCrossPercent: productionDetails.beefCrossPercent,
+                heifersBredBeefCrossPercent: productionDetails.heifersBredBeefCrossPercent,
+                expectedPercentMaleWithBeef: productionDetails.expectedPercentMaleWithBeef,
                 beefCrossDeathRate: productionDetails.beefCrossDeathRate
               }
             }

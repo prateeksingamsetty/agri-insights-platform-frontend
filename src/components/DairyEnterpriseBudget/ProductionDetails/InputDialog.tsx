@@ -23,7 +23,11 @@ interface UserInputs {
   bullCalfDeath: number
   expectedPercentMaleWithSexedSemen: number
   expectedPercentMaleWithConventional: number
-  beefCrossPercent: number
+  heifersBredConventionalPercent: number
+  heifersBredSexedPercent: number
+  avgAgeofFirstCalving: number
+  heifersBredBeefCrossPercent: number
+  expectedPercentMaleWithBeef: number
   beefCrossDeathRate: number
 }
 
@@ -52,7 +56,11 @@ const InputDialog: React.FC<InputDialogProps> = ({
     bullCalfDeath: 5,
     expectedPercentMaleWithSexedSemen: 90,
     expectedPercentMaleWithConventional: 50,
-    beefCrossPercent: 90,
+    heifersBredConventionalPercent: 30,
+    heifersBredSexedPercent: 60,
+    avgAgeofFirstCalving: 24,
+    heifersBredBeefCrossPercent: 10,
+    expectedPercentMaleWithBeef: 50,
     beefCrossDeathRate: 8.5
   }
 
@@ -94,7 +102,17 @@ const InputDialog: React.FC<InputDialogProps> = ({
             response.data.heiferProduction.expectedPercentMaleWithSexedSemen,
           expectedPercentMaleWithConventional:
             response.data.heiferProduction.expectedPercentMaleWithConventional,
-          beefCrossPercent: response.data.beefCrossDetails.beefCrossPercent,
+
+          heifersBredConventionalPercent:
+            response.data.heiferProduction.heifersBredConventionalPercent,
+          heifersBredSexedPercent:
+            response.data.heiferProduction.heifersBredSexedPercent,
+          avgAgeofFirstCalving:
+            response.data.heiferProduction.avgAgeofFirstCalving,
+          heifersBredBeefCrossPercent:
+            response.data.beefCrossDetails.heifersBredBeefCrossPercent,
+          expectedPercentMaleWithBeef:
+            response.data.beefCrossDetails.expectedPercentMaleWithBeef,
           beefCrossDeathRate: response.data.beefCrossDetails.beefCrossDeathRate
         })
       }
@@ -161,7 +179,27 @@ const InputDialog: React.FC<InputDialogProps> = ({
       name: 'expectedPercentMaleWithConventional',
       label: 'Expected Percent Male With Conventional(%)'
     },
-    { name: 'beefCrossPercent', label: 'Excess Calf Beef Cross Percent(%)' },
+    {
+      name: 'heifersBredConventionalPercent',
+      label: 'Heifers Bred Conventional Percent(%)'
+    },
+    {
+      name: 'heifersBredSexedPercent',
+      label: 'Heifers Bred Sexed Percent(%)'
+    },
+    {
+      name: 'avgAgeofFirstCalving',
+      label: 'Avg Age of First Calving'
+    },
+    {
+      name: 'heifersBredBeefCrossPercent',
+      label: 'Heifers Bred Beef Cross Percent(%)'
+    },
+    {
+      name: 'expectedPercentMaleWithBeef',
+      label: 'Expected Percent Male With Beef(%)'
+    },
+
     { name: 'beefCrossDeathRate', label: 'Beef Cross Death Rate(%)' }
   ]
 

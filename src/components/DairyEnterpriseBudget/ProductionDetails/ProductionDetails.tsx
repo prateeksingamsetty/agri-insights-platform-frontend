@@ -95,10 +95,18 @@ const ProductionDetails = () => {
           expectedPercentMaleWithSexedSemen:
             userInputs.expectedPercentMaleWithSexedSemen,
           expectedPercentMaleWithConventional:
-            userInputs.expectedPercentMaleWithConventional
+            userInputs.expectedPercentMaleWithConventional,
+          heifersBredConventionalPercent:
+            userInputs.heifersBredConventionalPercent,
+          heifersBredSexedPercent:
+            userInputs.heifersBredSexedPercent,
+          avgAgeofFirstCalving:
+            userInputs.avgAgeofFirstCalving,
+          
         },
         beefCrossDetails: {
-          beefCrossPercent: userInputs.beefCrossPercent,
+          heifersBredBeefCrossPercent: userInputs.heifersBredBeefCrossPercent,
+          expectedPercentMaleWithBeef: userInputs.expectedPercentMaleWithBeef,
           beefCrossDeathRate: userInputs.beefCrossDeathRate
         }
       }
